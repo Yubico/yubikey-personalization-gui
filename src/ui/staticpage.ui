@@ -1,0 +1,2407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StaticPage</class>
+ <widget class="QStackedWidget" name="StaticPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>730</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>730</width>
+    <height>650</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>StackedWidget</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font: 11px &quot;Verdana&quot;;
+color: rgb(0, 0, 0);</string>
+  </property>
+  <property name="currentIndex">
+   <number>1</number>
+  </property>
+  <widget class="QWidget" name="basePage">
+   <widget class="QLabel" name="baseHeadingLbl">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>710</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 18px &quot;Verdana&quot;;
+font-weight: bold;
+color: rgb(122, 171, 32);</string>
+    </property>
+    <property name="text">
+     <string>Program in Static Password mode</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="baseActionsBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>710</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <widget class="QPushButton" name="quickBtn">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>110</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Scan Code</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advBtn">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>110</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Advanced</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="quickDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>45</y>
+       <width>671</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Quicky program a YubiKey to emit your desired static password</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advancedDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>120</y>
+       <width>671</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Allows you to program one or more YubiKeys to emit long, &quot;hard to guess and remember&quot; static passwords</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="quickPage">
+   <widget class="QLabel" name="quickHeadingLbl">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>710</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 18px &quot;Verdana&quot;;
+font-weight: bold;
+color: rgb(122, 171, 32);</string>
+    </property>
+    <property name="text">
+     <string>Program in Static Password mode - Scan Code</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="quickConfigBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>711</width>
+      <height>72</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;</string>
+    </property>
+    <property name="title">
+     <string>Configuration Slot</string>
+    </property>
+    <widget class="QLabel" name="quickConfigDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>25</y>
+       <width>691</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108)</string>
+     </property>
+     <property name="text">
+      <string>Select the configuration slot to be programmed</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="quickConfigSlot1Radio">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>45</y>
+       <width>151</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Configuration Slot 1</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="quickConfigSlot2Radio">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>45</y>
+       <width>151</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Configuration Slot 2</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="quickConfigHelpBtn">
+     <property name="geometry">
+      <rect>
+       <x>685</x>
+       <y>45</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/res/images/question.png);
+color: lightgray;
+border-radius: 10px;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="quickKeyParamsBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>249</y>
+      <width>711</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;</string>
+    </property>
+    <property name="title">
+     <string>Password</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <widget class="QPushButton" name="quickStaticScanCodeHelpBtn">
+     <property name="geometry">
+      <rect>
+       <x>685</x>
+       <y>0</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/res/images/question.png);
+color: lightgray;
+border-radius: 10px;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="ScanEdit" name="quickStaticTxt">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>75</y>
+       <width>341</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="inputMask">
+      <string/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="maxLength">
+      <number>76</number>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Normal</enum>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="quickStaticLenLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>221</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>Password Length</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="quickStaticLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>75</y>
+       <width>221</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>Password</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="quickBkpStaticLbl">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>126</y>
+       <width>661</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;
+</string>
+     </property>
+     <property name="text">
+      <string>It is strongly recommended to create a backup YubiKey with same password in case original YubiKey is lost/broken</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="quickStaticLenDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>50</y>
+       <width>431</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108)</string>
+     </property>
+     <property name="text">
+      <string>(Max. 38 chars for YubiKey 2.2 and 16 chars for 2.0 and 2.1)</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="quickStaticBkpHelpBtn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>ArrowCursor</cursorShape>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/res/images/recommend.png);
+color: lightgray;
+border-radius: 1px;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="quickInsertTabBtn">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>100</y>
+       <width>111</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Insert Tab</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="quickStaticLenTxt">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>50</y>
+       <width>31</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="quickClearBtn">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>100</y>
+       <width>85</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Clear</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="quickHideParams">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>25</y>
+       <width>221</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Hide Password</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="quickActionsBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>420</y>
+      <width>711</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;</string>
+    </property>
+    <property name="title">
+     <string>Actions</string>
+    </property>
+    <widget class="QPushButton" name="quickWriteConfigBtn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>45</y>
+       <width>175</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Write Configuration</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="quickBackBtn">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>45</y>
+       <width>85</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Back</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="quickActionsDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>25</y>
+       <width>691</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108)
+</string>
+     </property>
+     <property name="text">
+      <string>Press Write Configuration button to program your YubiKey's selected configuration slot</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="quickResetBtn">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>45</y>
+       <width>85</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Reset</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="quickStopBtn">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>45</y>
+       <width>85</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Stop</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="quickConfigProtectionBox">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>132</y>
+      <width>350</width>
+      <height>107</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;
+</string>
+    </property>
+    <property name="title">
+     <string>Configuration Protection (6 bytes Hex)</string>
+    </property>
+    <widget class="QComboBox" name="quickConfigProtectionCombo">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>24</y>
+       <width>330</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>YubiKey(s) unprotected - Keep it that way</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>YubiKey(s) unprotected - Enable protection</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>YubiKey(s) protected - Disable protection</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>YubiKey(s) protected - Keep it that way</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>YubiKey(s) protected - Change access code</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLineEdit" name="quickCurrentAccessCodeTxt">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>52</y>
+       <width>170</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="inputMask">
+      <string>hh hh hh hh hh hh; </string>
+     </property>
+     <property name="text">
+      <string>     </string>
+     </property>
+     <property name="maxLength">
+      <number>17</number>
+     </property>
+     <property name="cursorPosition">
+      <number>17</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="quickCurrentAccessCodeLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>52</y>
+       <width>141</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>Current Access Code</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="quickNewAccessCodeLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>77</y>
+       <width>141</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>New Access Code</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="quickNewAccessCodeTxt">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>77</y>
+       <width>170</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="inputMask">
+      <string>hh hh hh hh hh hh; </string>
+     </property>
+     <property name="text">
+      <string>     </string>
+     </property>
+     <property name="maxLength">
+      <number>17</number>
+     </property>
+     <property name="cursorPosition">
+      <number>17</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="quickConfigProtectionHelpBtn">
+     <property name="geometry">
+      <rect>
+       <x>685</x>
+       <y>0</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/res/images/question.png);
+color: lightgray;
+border-radius: 10px;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="quickProgramMulKeysBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>132</y>
+      <width>350</width>
+      <height>107</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;
+</string>
+    </property>
+    <property name="title">
+     <string>Program Multiple YubiKeys</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <widget class="QCheckBox" name="quickAutoProgramKeysCheck">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>25</y>
+       <width>331</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Automatically program YubiKeys when inserted</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="quickResultsBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>510</y>
+      <width>711</width>
+      <height>130</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;</string>
+    </property>
+    <property name="title">
+     <string>Results</string>
+    </property>
+    <widget class="QTableWidget" name="quickResultsWidget">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>20</y>
+       <width>688</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 11px &quot;Verdana&quot;;
+color: rgb(0, 0, 0);</string>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="showGrid">
+      <bool>false</bool>
+     </property>
+     <property name="gridStyle">
+      <enum>Qt::SolidLine</enum>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <property name="columnCount">
+      <number>4</number>
+     </property>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>50</number>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>20</number>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>#</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Password Length</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Status</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Timestamp</string>
+      </property>
+     </column>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="advPage">
+   <widget class="QLabel" name="advHeadingLbl">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>710</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 18px &quot;Verdana&quot;;
+font-weight: bold;
+color: rgb(122, 171, 32);</string>
+    </property>
+    <property name="text">
+     <string>Program in Static Password mode - Advanced</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="advConfigBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>711</width>
+      <height>72</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;
+</string>
+    </property>
+    <property name="title">
+     <string>Configuration Slot</string>
+    </property>
+    <widget class="QLabel" name="advConfigDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>25</y>
+       <width>691</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108);</string>
+     </property>
+     <property name="text">
+      <string>Select the configuration slot to be programmed</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="advConfigSlot1Radio">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>45</y>
+       <width>151</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Configuration Slot 1</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="advConfigSlot2Radio">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>45</y>
+       <width>151</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Configuration Slot 2</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advConfigHelpBtn">
+     <property name="geometry">
+      <rect>
+       <x>685</x>
+       <y>45</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/res/images/question.png);
+color: lightgray;
+border-radius: 10px;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="advKeyParamsBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>249</y>
+      <width>711</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;
+</string>
+    </property>
+    <property name="title">
+     <string>Password Parameters</string>
+    </property>
+    <widget class="QPushButton" name="advSecretKeyHelpBtn">
+     <property name="geometry">
+      <rect>
+       <x>685</x>
+       <y>102</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/res/images/question.png);
+color: lightgray;
+border-radius: 10px;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="advSecretKeyTxt">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>100</y>
+       <width>330</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="inputMask">
+      <string>hh hh hh hh hh hh hh hh hh hh hh hh hh hh hh hh; </string>
+     </property>
+     <property name="text">
+      <string>00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</string>
+     </property>
+     <property name="maxLength">
+      <number>47</number>
+     </property>
+     <property name="cursorPosition">
+      <number>47</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advSecretKeyGenerateBtn">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>98</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Generate</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="advPubIdTxt">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>50</y>
+       <width>330</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="inputMask">
+      <string/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="maxLength">
+      <number>0</number>
+     </property>
+     <property name="cursorPosition">
+      <number>0</number>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="advPvtIdTxt">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>75</y>
+       <width>330</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="inputMask">
+      <string>hh hh hh hh hh hh; </string>
+     </property>
+     <property name="text">
+      <string>00 00 00 00 00 00</string>
+     </property>
+     <property name="maxLength">
+      <number>17</number>
+     </property>
+     <property name="cursorPosition">
+      <number>17</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advPubIdGenerateBtn">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>48</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Generate</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advPvtIdGenerateBtn">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>73</y>
+       <width>100</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Generate</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advPubIdHelpBtn">
+     <property name="geometry">
+      <rect>
+       <x>685</x>
+       <y>52</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/res/images/question.png);
+color: lightgray;
+border-radius: 10px;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advPvtIdHelpBtn">
+     <property name="geometry">
+      <rect>
+       <x>685</x>
+       <y>77</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/res/images/question.png);
+color: lightgray;
+border-radius: 10px;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advStaticLenLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>25</y>
+       <width>221</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>Password Length</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advSecretKeyLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>221</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>Secret Key (16 bytes Hex)</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advPubIdLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>221</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>Public Identity (1-16 bytes Modhex)</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advPvtIdLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>75</y>
+       <width>221</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>Private Identity (6 bytes Hex)</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="advStaticLenBox">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>23</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="buttonSymbols">
+      <enum>QAbstractSpinBox::UpDownArrows</enum>
+     </property>
+     <property name="correctionMode">
+      <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+     </property>
+     <property name="suffix">
+      <string/>
+     </property>
+     <property name="prefix">
+      <string/>
+     </property>
+     <property name="minimum">
+      <number>32</number>
+     </property>
+     <property name="maximum">
+      <number>64</number>
+     </property>
+     <property name="singleStep">
+      <number>2</number>
+     </property>
+     <property name="value">
+      <number>32</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advStrongPwLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>125</y>
+       <width>221</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>Strong Password Policy</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="advStrongPw1Check">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>130</y>
+       <width>147</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Upper and lower case</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="advStrongPw2Check">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>130</y>
+       <width>101</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Alphanumeric</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="advStrongPw3Check">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>130</y>
+       <width>157</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Send ! as prefix</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="advStaticLen16Radio">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>25</y>
+       <width>72</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>16 chars</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="advStaticLen32Radio">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>25</y>
+       <width>17</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advStaticCharsLbl">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>25</y>
+       <width>31</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>chars</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advStaticLenDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>25</y>
+       <width>251</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108)</string>
+     </property>
+     <property name="text">
+      <string>(16 chars for YubiKey 2.0 and above only)</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="advConfigProtectionBox">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>132</y>
+      <width>350</width>
+      <height>107</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;
+</string>
+    </property>
+    <property name="title">
+     <string>Configuration Protection (6 bytes Hex)</string>
+    </property>
+    <widget class="QComboBox" name="advConfigProtectionCombo">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>24</y>
+       <width>330</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>YubiKey(s) unprotected - Keep it that way</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>YubiKey(s) unprotected - Enable protection</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>YubiKey(s) protected - Disable protection</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>YubiKey(s) protected - Keep it that way</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>YubiKey(s) protected - Change access code</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLineEdit" name="advCurrentAccessCodeTxt">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>52</y>
+       <width>170</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="inputMask">
+      <string>hh hh hh hh hh hh; </string>
+     </property>
+     <property name="text">
+      <string>     </string>
+     </property>
+     <property name="maxLength">
+      <number>17</number>
+     </property>
+     <property name="cursorPosition">
+      <number>17</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advCurrentAccessCodeLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>52</y>
+       <width>141</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>Current Access Code</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advNewAccessCodeLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>77</y>
+       <width>141</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>New Access Code</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="advNewAccessCodeTxt">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>77</y>
+       <width>170</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="inputMask">
+      <string>hh hh hh hh hh hh; </string>
+     </property>
+     <property name="text">
+      <string>     </string>
+     </property>
+     <property name="maxLength">
+      <number>17</number>
+     </property>
+     <property name="cursorPosition">
+      <number>17</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advConfigProtectionHelpBtn">
+     <property name="geometry">
+      <rect>
+       <x>325</x>
+       <y>0</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/res/images/question.png);
+color: lightgray;
+border-radius: 10px;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="advActionsBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>421</y>
+      <width>711</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;</string>
+    </property>
+    <property name="title">
+     <string>Actions</string>
+    </property>
+    <widget class="QPushButton" name="advWriteConfigBtn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>45</y>
+       <width>175</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Write Configuration</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advStopBtn">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>45</y>
+       <width>85</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Stop</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advActionsDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>691</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108)
+</string>
+     </property>
+     <property name="text">
+      <string>Press Write Configuration button to program your YubiKey's selected configuration slot</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advBackBtn">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>45</y>
+       <width>85</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Back</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advResetBtn">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>45</y>
+       <width>85</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Reset</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="advProgramMulKeysBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>132</y>
+      <width>350</width>
+      <height>107</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;
+</string>
+    </property>
+    <property name="title">
+     <string>Program Multiple YubiKeys</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <widget class="QCheckBox" name="advAutoProgramKeysCheck">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>25</y>
+       <width>331</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Automatically program YubiKeys when inserted</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="advParamGenSchemeLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>52</y>
+       <width>191</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>Parameter Generation Scheme</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="advConfigParamsCombo">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>75</y>
+       <width>331</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Increment Identities; Randomize Secret</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Randomize all parameters</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Fixed parameters</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QPushButton" name="advParamGenSchemeHelpBtn">
+     <property name="geometry">
+      <rect>
+       <x>325</x>
+       <y>52</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/res/images/question.png);
+color: lightgray;
+border-radius: 10px;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="advResultsBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>511</y>
+      <width>711</width>
+      <height>130</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;</string>
+    </property>
+    <property name="title">
+     <string>Results</string>
+    </property>
+    <widget class="QTableWidget" name="advResultsWidget">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>20</y>
+       <width>688</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 11px &quot;Verdana&quot;;
+color: rgb(0, 0, 0);</string>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="showGrid">
+      <bool>false</bool>
+     </property>
+     <property name="gridStyle">
+      <enum>Qt::SolidLine</enum>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <property name="columnCount">
+      <number>5</number>
+     </property>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>50</number>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>20</number>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>#</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Password Length</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Public Identity (Modhex)</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Status</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Timestamp</string>
+      </property>
+     </column>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ScanEdit</class>
+   <extends>QLineEdit</extends>
+   <header>scanedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>quickBtn</tabstop>
+  <tabstop>advBtn</tabstop>
+  <tabstop>quickConfigSlot1Radio</tabstop>
+  <tabstop>quickConfigSlot2Radio</tabstop>
+  <tabstop>quickProgramMulKeysBox</tabstop>
+  <tabstop>quickAutoProgramKeysCheck</tabstop>
+  <tabstop>quickConfigProtectionCombo</tabstop>
+  <tabstop>quickCurrentAccessCodeTxt</tabstop>
+  <tabstop>quickNewAccessCodeTxt</tabstop>
+  <tabstop>quickHideParams</tabstop>
+  <tabstop>quickStaticTxt</tabstop>
+  <tabstop>quickInsertTabBtn</tabstop>
+  <tabstop>quickClearBtn</tabstop>
+  <tabstop>quickWriteConfigBtn</tabstop>
+  <tabstop>quickStopBtn</tabstop>
+  <tabstop>quickResetBtn</tabstop>
+  <tabstop>quickBackBtn</tabstop>
+  <tabstop>quickResultsWidget</tabstop>
+  <tabstop>quickConfigHelpBtn</tabstop>
+  <tabstop>quickStaticScanCodeHelpBtn</tabstop>
+  <tabstop>quickStaticBkpHelpBtn</tabstop>
+  <tabstop>advConfigSlot1Radio</tabstop>
+  <tabstop>advConfigSlot2Radio</tabstop>
+  <tabstop>advProgramMulKeysBox</tabstop>
+  <tabstop>advAutoProgramKeysCheck</tabstop>
+  <tabstop>advConfigParamsCombo</tabstop>
+  <tabstop>advConfigProtectionCombo</tabstop>
+  <tabstop>advCurrentAccessCodeTxt</tabstop>
+  <tabstop>advNewAccessCodeTxt</tabstop>
+  <tabstop>advStaticLen16Radio</tabstop>
+  <tabstop>advStaticLen32Radio</tabstop>
+  <tabstop>advStaticLenBox</tabstop>
+  <tabstop>advPubIdTxt</tabstop>
+  <tabstop>advPubIdGenerateBtn</tabstop>
+  <tabstop>advPvtIdTxt</tabstop>
+  <tabstop>advPvtIdGenerateBtn</tabstop>
+  <tabstop>advSecretKeyTxt</tabstop>
+  <tabstop>advSecretKeyGenerateBtn</tabstop>
+  <tabstop>advStrongPw1Check</tabstop>
+  <tabstop>advStrongPw2Check</tabstop>
+  <tabstop>advStrongPw3Check</tabstop>
+  <tabstop>advWriteConfigBtn</tabstop>
+  <tabstop>advStopBtn</tabstop>
+  <tabstop>advResetBtn</tabstop>
+  <tabstop>advBackBtn</tabstop>
+  <tabstop>advResultsWidget</tabstop>
+  <tabstop>advConfigHelpBtn</tabstop>
+  <tabstop>advParamGenSchemeHelpBtn</tabstop>
+  <tabstop>advConfigProtectionHelpBtn</tabstop>
+  <tabstop>advPubIdHelpBtn</tabstop>
+  <tabstop>advPvtIdHelpBtn</tabstop>
+  <tabstop>advSecretKeyHelpBtn</tabstop>
+  <tabstop>quickConfigProtectionHelpBtn</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

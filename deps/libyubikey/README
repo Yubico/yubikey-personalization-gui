@@ -1,0 +1,212 @@
+#summary Introduction to low-level Yubikey C library
+#labels Featured,Phase-Deploy
+
+= Introduction =
+
+This package make up the low-level C software development kit for the
+Yubico authentication device, the Yubikey.  In particular:
+
+* AUTHORS, COPYING, NEWS, README, THANKS: Meta-information about the project.
+
+* yubikey.h: Prototypes for library.
+
+* yktoken.c, ykmodhex.c, ykhex.c, ykcrc.c, ykaes.c: Library implementation.
+
+* selftest.c: Library self tests.
+
+* modhex.c: Command-line tool for modhex encoding/decoding.
+
+* ykgenerate.c: Command line tool to construct and encrypt an OTP.
+
+* ykparse.c: Command line tool to decrypt and parse an OTP.
+
+* simple.mk: Simple makefile to build the above parts.
+
+* configure.ac, Makefile.am: Autoconf/Automake files.
+
+* libyubikey.map: Linker version script.
+
+== Building from version controlled sources ==
+
+Skip to the next section if you are using an official packaged
+version, which is what we recommend.
+
+You may check out the sources using SVN with the following command:
+
+{{{
+  svn checkout http://yubico-c.googlecode.com/svn/trunk/ yubico-c
+}}}
+
+This will create a directory 'yubico-c'.  Enter the directory:
+
+{{{
+  cd yubico-c
+}}}
+
+You need to have autoconf, automake and libtool installed if you want
+to use the normal ./configure based approach.  Use simple.mk if you
+don't want this step.  Generate the build system using:
+
+{{{
+  autoreconf --install
+}}}
+
+= Building =
+
+To build using the Autoconf, automake and libtool infrastructure,
+which is recommend for more advanced purposes especially for
+cross-compilation and shared library support, build it as follows.
+
+{{{
+$ ./configure
+$ make check install
+}}}
+
+Another way to build the package is by running 'make -f simple.mk
+check'.  It will build each component, and also test it.  See below
+for sample session.  This is useful if you want to target a platform
+that doesn't support Autoconf/automake/libtool well.
+
+{{{
+$ make -f simple.mk check
+cc -I. -Wall -g   -c -o yktoken.o yktoken.c
+cc -I. -Wall -g   -c -o ykmodhex.o ykmodhex.c
+cc -I. -Wall -g   -c -o ykhex.o ykhex.c
+cc -I. -Wall -g   -c -o ykcrc.o ykcrc.c
+cc -I. -Wall -g   -c -o ykaes.o ykaes.c
+cc -I. -Wall -g    modhex.c yktoken.o ykmodhex.o ykhex.o ykcrc.o ykaes.o yubikey.h   -o modhex
+cc -I. -Wall -g    ykparse.c yktoken.o ykmodhex.o ykhex.o ykcrc.o ykaes.o yubikey.h   -o ykparse
+cc -I. -Wall -g    selftest.c yktoken.o ykmodhex.o ykhex.o ykcrc.o ykaes.o yubikey.h   -o selftest
+selftest.c: In function ‘main’:
+selftest.c:163: warning: pointer targets in passing argument 3 of ‘yubikey_generate’ differ in signedness
+./yubikey.h:76: note: expected ‘char *’ but argument is of type ‘uint8_t *’
+cc -I. -Wall -g    ykgenerate.c yktoken.o ykmodhex.o ykhex.o ykcrc.o ykaes.o yubikey.h   -o ykgenerate
+./selftest
+modhex-encode("test") = ifhgieif
+Modhex-1 success
+modhex-decode("ifhgieif") = test
+Modhex-2 success
+hex-p("cbdefghijklnrtuv") = 1
+Hex-3 success
+hex-p("0123Xabc") = 0
+Hex-3 success
+hex-encode("test") = 74657374
+Hex-1 success
+hex-decode("74657374") = test
+Hex-2 success
+hex-p("0123456789abcdef") = 1
+Hex-3 success
+hex-p("0123Xabc") = 0
+Hex-3 success
+aes-decrypt (data=0123456789abcdef, key=abcdef0123456789)
+ => 838a467f34639551755bd32a4a2f15e1
+AES-1 success
+AES-2 success
+OTP-1 success
+$ 
+}}}
+
+= Command-line tools =
+
+The "modhex" program converts data between modhex, normal hex, and
+binary form.
+
+The "ykparse" program decrypts and parses one OTP given the OTP and
+the AES key corresponding to that Yubikey.
+
+The "ykgenerate" program constructs and encrypts one OTP given AES key
+and internal data values.
+
+Example usage:
+
+{{{
+$ ./modhex test
+ifhgieif
+$ ./modhex -d ifhgieif; echo
+test
+$ ./modhex -h b565716f
+nghgibhv
+$ ./modhex -h -d nghgibhv
+b565716f
+$ ./ykparse ecde18dbe76fbd0c33330f1c354871db dteffujedcflcindvdbrblehecuitvjkjevvehjd
+warning: overlong token, ignoring prefix: dteffuje
+Input:
+  token: dcflcindvdbrblehecuitvjkjevvehjd
+          20 4a 07 b2 f2 1c 1a 36 30 e7 df 89 83 ff 36 82 
+  aeskey: ecde18dbe76fbd0c33330f1c354871db
+          ec de 18 db e7 6f bd 0c 33 33 0f 1c 35 48 71 db 
+Output:
+          87 92 eb fe 26 cc 13 00 a8 c0 00 10 b4 08 6f 5b 
+
+Struct:
+  uid: 87 92 eb fe 26 cc 
+  counter: 19 (0x0013)
+  timestamp (low): 49320 (0xc0a8)
+  timestamp (high): 0 (0x00)
+  session use: 16 (0x10)
+  random: 2228 (0x8b4)
+  crc: 23407 (0x5b6f)
+
+Derived:
+  cleaned counter: 19 (0x0013)
+  modhex uid: jikdunvudhrr
+  triggered by caps lock: no
+  crc: F0B8
+  crc check: ok
+$ ./ykparse ecde18dbe76fbd0c33330f1c354871db dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh
+warning: overlong token, ignoring prefix: dteffuje
+Input:
+  token: hknhfjbrjnlnldnhcujvddbikngjrtgh
+          69 b6 48 1c 8b ab a2 b6 0e 8f 22 17 9b 58 cd 56 
+  aeskey: ecde18dbe76fbd0c33330f1c354871db
+          ec de 18 db e7 6f bd 0c 33 33 0f 1c 35 48 71 db 
+Output:
+          87 92 eb fe 26 cc 13 00 30 c2 00 11 c8 9f 23 c8 
+
+Struct:
+  uid: 87 92 eb fe 26 cc 
+  counter: 19 (0x0013)
+  timestamp (low): 49712 (0xc230)
+  timestamp (high): 0 (0x00)
+  session use: 17 (0x11)
+  random: 40904 (0x9fc8)
+  crc: 51235 (0xc823)
+
+Derived:
+  cleaned counter: 19 (0x0013)
+  modhex uid: jikdunvudhrr
+  triggered by caps lock: no
+  crc: F0B8
+  crc check: ok
+$ ./ykgenerate ecde18dbe76fbd0c33330f1c354871db 8792ebfe26cc 0013 c0a8 00 10
+hcfktknicvbcnhbkvigcfhgddhhhrknc
+$ ./ykparse ecde18dbe76fbd0c33330f1c354871db `./ykgenerate ecde18dbe76fbd0c33330f1c354871db 8792ebfe26cc 0013 c0a8 00 10`
+Input:
+  token: lihggvrgffbjnrehcgnkvknjkvubeekr
+          a7 65 5f c5 44 18 bc 36 05 b9 f9 b8 9f e1 33 9c 
+  aeskey: ecde18dbe76fbd0c33330f1c354871db
+          ec de 18 db e7 6f bd 0c 33 33 0f 1c 35 48 71 db 
+Output:
+          87 92 eb fe 26 cc 13 00 a8 c0 00 10 95 44 ec e9 
+
+Struct:
+  uid: 87 92 eb fe 26 cc 
+  counter: 19 (0x0013)
+  timestamp (low): 49320 (0xc0a8)
+  timestamp (high): 0 (0x00)
+  session use: 16 (0x10)
+  random: 17557 (0x4495)
+  crc: 59884 (0xe9ec)
+
+Derived:
+  cleaned counter: 19 (0x0013)
+  modhex uid: jikdunvudhrr
+  triggered by caps lock: no
+  crc: F0B8
+  crc check: ok
+$
+}}}
+
+= Questions? =
+
+Talk to <simon@yubico.com>.

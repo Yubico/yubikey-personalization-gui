@@ -1,0 +1,188 @@
+Yubikey-personalize NEWS -- History of user-visible changes.     -*- outline -*-
+
+* Version 1.5.0 (released 2011-03-09)
+** An additional binary (ykchalresp) to perform challenge-response was added.
+
+** When generating keys from passphrase, generate 160 bit keys for modes
+that support it (OATH-HOTP and HMAC challenge response).
+
+** OATH-HOTP usability improvements.
+
+** Serial number of YubiKey (2.2+) is shown with `ykpersonalize -v'.
+
+** Make `configure' detect FreeBSD 8 libusb implementation.
+
+* Version 1.4.1 (released 2011-01-19)
+** Restore OATH-HOTP symbols for LIBYKPERS_1.0.
+Accidentally moved to LIBYKPERS_1.4 in 1.4.0.
+
+* Version 1.4.0 (released 2011-01-17)
+** Add support for new features in YubiKey 2.2.
+Most notably challenge-response, but also serial number retrieval.
+
+** Stricter argument parsing, to help user avoid configuration surprises.
+
+** Bugfixes :
+*** Ask kernel to detach USB HID driver with libusb 0.1 too.
+
+*** Properly reject keys (-a) with upper case hex, instead of just ignoring
+those bits.
+
+*** Really check Yubikey compatibility when setting options.
+
+*** Pretty-printer did not handle bit overloaded cfgflags.
+It is better now, but not perfect.
+
+* Version 1.3.5 (released 2010-11-25)
+
+** Fixes to make it work under Windows.
+Only tested with libusb-1.0 from trunk.  See doc/WindowsBuild.wiki.
+
+* Version 1.3.4 (released 2010-09-10)
+
+** Fix crash on Mac OS X.
+Reported by rosmiitto in Issue #6:
+<http://code.google.com/p/yubikey-personalization/issues/detail?id=6>.
+
+** Fix bug that prevented salting during AES key generation
+** from passwords from working.  Reported by Ben.
+
+** Add contrib/ sub-directory and contrib/programming.sh from David Dindorp.
+See contrib/README for more information.
+
+* Version 1.3.3 (released 2010-05-20)
+
+** Don't warn about upcoming YubiKey firmware 2.2.x, it is compatible.
+
+* Version 1.3.2 (released 2010-03-12)
+
+** Don't warn on YubiKey with firmware 0.9.9, they work fine.
+
+** Fix old firmware error message, it was missing a newline.
+
+* Version 1.3.1 (released 2010-01-30)
+
+** Fix build failure in some cases
+
+* Version 1.3 (released 2010-01-30)
+
+** libykpers-1: Give warning on unknown firmwares, but don't stop
+
+** OATH-HOTP support
+
+ykpersonalize now supports the OATH-HOTP flags.
+
+** Updated documentation
+
+The documentation has been updated to explain the flags a bit better
+and OATH-HOTP documentation has been added.
+
+* Version 1.2 (released 2010-01-22)
+
+** libykpers-1: Whitelist firmware version 2.1 too.
+
+* Version 1.1 (released 2009-10-03)
+
+** hex and modhex bugfixes
+Check of hex and modhex strings perfected.
+
+** Segfaults and improper error codes when asking for help
+Contributed by Tollef Fog Heen.
+
+* Version 1.0 (released 2009-09-18)
+
+** Stable release!
+
+* Version 0.999 (released 2009-09-17)
+
+** Fix build warnings.
+May fix decoding issues on some platforms (depending on whether
+returning a 'void' value is treated as true or false).
+
+* Version 0.99 (released 2009-09-12)
+
+** libykpers: Fix build error related to _ykp_errno_location on non-Linux.
+Reported by Patrick Neave <p.neave@gmail.com>.
+
+* Version 0.98 (released 2009-09-08)
+
+** ykpersonalize: Exit with non-0 return code when yubikey is not present.
+Reported by Greg Woods <woods@ucar.edu>.
+
+** ykpersonalize.1: Keep in sync with tool.
+By Tollef Fog Heen <tfheen@err.no>.
+
+* Version 0.97 (released 2009-09-03)
+
+** libykpers-1: Add linker version script.
+If linker scripts are not supported, fall back on Libtool
+-export-symbols-regex.  Suggested by Tollef Fog Heen <tfheen@err.no>.
+
+** ykpersonalize: Make -h work even if there is no yubikey present.
+Suggested by Peter Hultqvist <peter.h@nsf.scout.se>.
+
+** ykpersonalize.1: Link to reference manual for explanation of options.
+Suggested by Peter Hultqvist <peter.h@nsf.scout.se>.
+
+** Now requires libyubikey v1.5 or later.
+
+* Version 0.96 (released 2009-08-27)
+
+** Make all input numbers hex by default.
+It's still possible to give modhex numbers by preceding them with
+`m:'.
+
+** Make it possible to program the second configuration.
+Added the two flags -1 and -2 to ykpersonalize.  This is to support
+the YubiKey II.
+
+** Have ykpersonalize show the new configuration and prompt.
+This makes it possible for the user to prevent incorrect configurations.
+
+** Rename installed library to "libykpers-1" and place
+** installed header files in sub-directory ykpers-1/.
+From now on we promise to retain API and ABI under this name forever.
+The shared library will be installed as /usr/lib/libykpers-1.so and
+the header files into /usr/include/ykpers-1/.  If there is ever an
+incompatible API or ABI change in the future, it will be released as a
+a new library libykpers-2 with header files in ykpers-2/.
+
+** Add pkg-config script "ykpers-1".
+To learn which flags to build the applications that uses the library,
+use "pkg-config --cflags --libs ykpers-1".
+
+* Version 0.95 (released 2009-08-17)
+
+** Enable handling of programming access code.
+Includes modification of help (-h) text and manual.
+
+* Version 0.94 (released 2009-08-10)
+
+** Improve error handling for libusb-1.0 backend.
+Thanks to Tollef Fog Heen.
+
+** Added man page for ykpersonalize.
+Thanks to Tollef Fog Heen.
+
+* Version 0.93 (released 2009-08-07)
+
+** Support for libusb-1.0 through --with-backend=libusb-1.0.
+Thanks to Tollef Fog Heen.
+
+** Clarify -a parameter.
+Thanks to Alphonse R.M. Hoge.
+
+* Version 0.92 (released 2009-05-25)
+
+** Mac OS X build fixes.
+
+* Version 0.91 (released 2009-05-07)
+
+** Added Mac OS X backend.
+Contributed by Christer Kaivo-oja <christer.kaivooja@gmail.com>.
+
+** Added --with-backend parameter to chose backend.
+
+* Version 0.9 (released 2009-05-05)
+
+** Initial release candidate.

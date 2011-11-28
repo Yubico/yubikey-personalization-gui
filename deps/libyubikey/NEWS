@@ -1,0 +1,55 @@
+Libyubikey NEWS -- History of user-visible changes.             -*- outline -*-
+
+* Version 1.7 (released 2010-11-24)
+
+** yubikey.h: Possible to use from C++ using extern namespace scoping.
+Reported by Giampaolo Bellini <iw2lsi@gmail.com>.
+
+* Version 1.6 (released 2010-08-03)
+
+** New API to generate OTPs.
+The API is yubikey_generate.  An helper function yubikey_aes_encrypt
+was added too.  Added YUBIKEY_OTP_SIZE constant for OTP buffer size.
+
+** ykgenerate: New tool to generate OTPs.
+
+** ykdebug/ykparse: The old tool "ykdebug" has been renamed to "ykparse".
+
+* Version 1.5 (released 2008-09-31)
+
+** The library now use a linker version script.
+It falls back to using Libtool's -export-symbols-regex if linker
+version scripts are not supported.
+
+** Added new APIs to check validity of hex/modhex strings.
+The APIs are yubikey_modhex_p and yubikey_hex_p.
+
+* Version 1.4 (released 2009-04-30)
+
+** Improved instructions in README on how to build the package.
+
+** Add interfaces yubikey_hex_encode and yubikey_hex_decode.
+
+** The ykdebug tool now takes hex encoded AES keys instead of modhex encoded.
+
+* Version 1.3 (released 2009-03-25)
+
+** Add YUBIKEY_MODHEX_MAP.
+
+** Use char* instead of uint8_t* for modhex functions.
+
+* Version 1.2 (released 2009-01-13)
+
+** Don't link to libpam.
+
+** Add libtool -export-symbols-regex to restrict exported symbols.
+
+* Version 1.1 (released 2008-06-10)
+
+** Include simple.mk in distribution.
+
+* Version 1.0 (released 2008-06-10)
+
+** Uses autoconf, automake and libtool.
+
+** Renamed function namespace from pof_* to yubikey_*.

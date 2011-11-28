@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>images/cross.png</file>
+        <file>images/question.png</file>
+        <file>images/recommend.png</file>
+        <file>images/right.png</file>
+        <file>images/tick.png</file>
+        <file>images/yk.png</file>
+        <file>win/Yubico.ico</file>
+        <file>images/clipboard.png</file>
+        <file>images/blank.png</file>
+        <file>images/logo.png</file>
+    </qresource>
+</RCC>
