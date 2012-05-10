@@ -1,10 +1,7 @@
 Qt based Cross-Platform YubiKey Personalization Tool
 ====================================================
 
-Copyright (c) 2011, Yubico AB
-All rights reserved.
-
-See the file COPYING for complete copyright statement.
+See the file COPYING for copyright and license statement.
 
 ==================================
 Introduction
@@ -38,6 +35,11 @@ This will create a directory 'yubikey-personalization-gui'. Enter the directory:
 
 There are three files "YKPersonalization.pro.user.win", "YKPersonalization.pro.user.lin" and "YKPersonalization.pro.user.mac", one for each of Windows, Linux and MAC platforms that are supported by the tool. Depending upon your platform, rename the corresponding file to "YKPersonalization.pro.user".
 
+============
+Dependencies
+============
+
+sudo apt-get install libusb-1.0-0-dev qtcreator
 
 ==================================
 Opening the project in Qt designer
