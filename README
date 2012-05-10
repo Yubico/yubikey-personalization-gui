@@ -7,9 +7,18 @@ See the file COPYING for copyright and license statement.
 Introduction
 ==================================
 
-The YubiKey Personalization Tool is a Qt based Cross-Platform utility designed to facilitate re-configuration of YubiKeys on Windows, Linux and MAC platforms. The tool provides a same simple step-by-step approach to make configuration of YubiKeys easy to follow and understand, while still being powerful enough to exploit all  functionality both of the YubiKey 1 and YubiKey 2 generation of keys. The tool provides the same functionality and user interface on Windows, Linux and MAC platforms.
+The YubiKey Personalization Tool is a Qt based Cross-Platform utility
+designed to facilitate re-configuration of YubiKeys on Windows, Linux
+and MAC platforms. The tool provides a same simple step-by-step
+approach to make configuration of YubiKeys easy to follow and
+understand, while still being powerful enough to exploit all
+functionality both of the YubiKey 1 and YubiKey 2 generation of
+keys. The tool provides the same functionality and user interface on
+Windows, Linux and MAC platforms.
 
-The Cross-Platform YubiKey Personalization Tool provides the following main functions:
+The Cross-Platform YubiKey Personalization Tool provides the following
+main functions:
+
 	* Programming the YubiKey in "Yubico OTP" mode
 	* Programming the YubiKey in "OATH-HOTP" mode
 	* Programming the YubiKey in "Static Password" mode
@@ -27,43 +36,74 @@ You may check out the sources using Git with the following command:
   $ git clone git://github.com/Yubico/yubikey-personalization-gui.git
 -----------
 
-This will create a directory 'yubikey-personalization-gui'. Enter the directory:
+This will create a directory 'yubikey-personalization-gui'. Enter the
+directory:
 
 -----------
   $ cd yubikey-personalization-gui
 -----------
 
-There are three files "YKPersonalization.pro.user.win", "YKPersonalization.pro.user.lin" and "YKPersonalization.pro.user.mac", one for each of Windows, Linux and MAC platforms that are supported by the tool. Depending upon your platform, rename the corresponding file to "YKPersonalization.pro.user".
+There are three files "YKPersonalization.pro.user.win",
+"YKPersonalization.pro.user.lin" and "YKPersonalization.pro.user.mac",
+one for each of Windows, Linux and MAC platforms that are supported by
+the tool. Depending upon your platform, rename the corresponding file
+to "YKPersonalization.pro.user".  (The instructions in this paragraph
+appears to not be needed for command-line builds.)
 
 ============
 Dependencies
 ============
 
+You will need QT Creator and libusb-1.0 development files.
+
 sudo apt-get install libusb-1.0-0-dev qtcreator
+
+
+==================
+Command-line build
+==================
+
+Run these commands:
+
+qmake
+make
+
 
 ==================================
 Opening the project in Qt designer
 ==================================
 
-Locate the qtcreator executable file and click on it to open the Qt Designer.
+Locate the qtcreator executable file and click on it to open the Qt
+Designer.
 
-To open the project in Qt Designer, select "File" > "Open File or Project" from the tool bar, navigate to the project folder, select YKPersonalisation.pro file and click on the "Open" button.
+To open the project in Qt Designer, select "File" > "Open File or
+Project" from the tool bar, navigate to the project folder, select
+YKPersonalisation.pro file and click on the "Open" button.
 
-To set the path of the "Build" diractory select "Projects" > "Build Settings" Browse project folder path.
+To set the path of the "Build" diractory select "Projects" > "Build
+Settings" Browse project folder path.
 
 
 ==================================
 Building 
 ==================================
 
-To generate the build system, select "Build" > "Clean Project YKPersonalization" option from the tool bar. Then select "Build" > "Run qmake" option from the tool bar.
+To generate the build system, select "Build" > "Clean Project
+YKPersonalization" option from the tool bar. Then select "Build" >
+"Run qmake" option from the tool bar.
 
-To build the project, select "Build" > "Build Project YKPersonalization" option from the tool bar.
+To build the project, select "Build" > "Build Project
+YKPersonalization" option from the tool bar.
 
-Based on your platform, the successful build will create a "YubiKey Personalization Tool" executable file into the respective build folder. The build creates a "YKPersonalization.exe" file on Windows, "YubiKey Personalization Tool.sh" file on Linux and "YubiKey Personalization Tool.app" file on MAC.
+Based on your platform, the successful build will create a "YubiKey
+Personalization Tool" executable file into the respective build
+folder. The build creates a "YKPersonalization.exe" file on Windows,
+"YubiKey Personalization Tool.sh" file on Linux and "YubiKey
+Personalization Tool.app" file on MAC.
 
 Example on Linux:
-To run the YubiKey Personalization Tool, open the command shell and execute the following command:
+To run the YubiKey Personalization Tool, open the command shell and
+execute the following command:
 # sudo sh "Yubico/YubiKey\ Personalization\ Tool.sh"
 
 
