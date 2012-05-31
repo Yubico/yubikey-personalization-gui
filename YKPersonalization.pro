@@ -30,7 +30,7 @@ OBJECTS_DIR     = "$$TARGET_DIR/ObjFiles"
 DESTDIR         = "$$TARGET_DIR"
 
 DEPENDPATH     += . src src/ui
-INCLUDEPATH    += . src src/ui deps/libusb-1.0 deps/libykpers deps/libykpers/ykcore deps/libyubikey
+INCLUDEPATH    += . src src/ui
 
 FORMS += \
     src/ui/toolpage.ui \
@@ -45,18 +45,6 @@ FORMS += \
     src/ui/aboutpage.ui
 
 HEADERS += \
-    deps/libusb-1.0/libusb.h \
-    deps/libykpers/ykpers.h \
-    deps/libykpers/ykpbkdf2.h \
-    deps/libykpers/ykcore/yktsd.h \
-    deps/libykpers/ykcore/ykstatus.h \
-    deps/libykpers/ykcore/ykdef.h \
-    deps/libykpers/ykcore/ykcore_lcl.h \
-    deps/libykpers/ykcore/ykcore_backend.h \
-    deps/libykpers/ykcore/ykcore.h \
-    deps/libykpers/rfc4634/sha.h \
-    deps/libykpers/rfc4634/sha-private.h \
-    deps/libyubikey/yubikey.h \
     src/ui/toolpage.h \
     src/ui/staticpage.h \
     src/ui/settingpage.h \
@@ -103,6 +91,24 @@ OTHER_FILES += \
     resources/win/resources.rc \
     resources/mac/Yubico.icns \
     resources/mac/Info.plist.in
+
+!debian {
+  HEADERS += \
+      deps/libusb-1.0/libusb.h \
+      deps/libykpers/ykpers.h \
+      deps/libykpers/ykpbkdf2.h \
+      deps/libykpers/ykcore/yktsd.h \
+      deps/libykpers/ykcore/ykstatus.h \
+      deps/libykpers/ykcore/ykdef.h \
+      deps/libykpers/ykcore/ykcore_lcl.h \
+      deps/libykpers/ykcore/ykcore_backend.h \
+      deps/libykpers/ykcore/ykcore.h \
+      deps/libykpers/rfc4634/sha.h \
+      deps/libykpers/rfc4634/sha-private.h \
+      deps/libyubikey/yubikey.h
+
+  INCLUDEPATH    += . src src/ui deps/libusb-1.0 deps/libykpers deps/libykpers/ykcore deps/libyubikey
+}
 
 #
 # Windows specific configuration
@@ -161,7 +167,7 @@ win32 {
 #
 # Non-windows specific configuration
 #
-!win32 {
+!win32:!debian {
     SOURCES += \
         deps/libykpers/ykpers.c \
         deps/libykpers/ykpbkdf2.c \
@@ -183,6 +189,17 @@ win32 {
 # *nix specific configuration
 #
 unix:!macx {
+  debian {
+    message("Debian build")
+
+    TARGET = yubikey-personalization-gui
+
+    LIBS += -lyubikey
+
+    CONFIG += link_pkgconfig
+    PKGCONFIG += ykpers-1 libusb
+
+  } else {
     message("Linux build")
 
     SOURCES += deps/libykpers/ykcore/ykcore_libusb-1.0.c
@@ -218,6 +235,7 @@ unix:!macx {
         rm -rf "$${DESTDIR}/$${TARROOT}";
 
     QMAKE_EXTRA_TARGETS += tarball
+  }
 }
 
 #
