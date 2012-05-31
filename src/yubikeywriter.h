@@ -10,10 +10,10 @@
 #include <QObject>
 
 extern "C" {
-#include "deps/libykpers/ykcore/ykcore.h"
-#include "deps/libykpers/ykcore/ykdef.h"
-#include "deps/libykpers/ykpers.h"
-#include "deps/libyubikey/yubikey.h"
+#include <ykcore.h>
+#include <ykdef.h>
+#include <ykpers.h>
+#include <yubikey.h>
 }
 #include "common.h"
 #include "yubikeyconfig.h"
