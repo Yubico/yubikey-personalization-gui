@@ -199,6 +199,9 @@ unix:!macx {
     CONFIG += link_pkgconfig
     PKGCONFIG += ykpers-1 libusb
 
+    QMAKE_CXXFLAGS += $$(CXXFLAGS)
+    QMAKE_LFLAGS += $$(LDFLAGS)
+
   } else {
     message("Linux build")
 
