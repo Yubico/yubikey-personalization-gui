@@ -1,0 +1,10 @@
+yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
+
+* Version 3.0.4 (unreleased)
+
+  NEWS file, release scripting, drop libusb dependency.
+
+* Version 3.0.3 (released 2012-06-04)
+
+  Fixes to build system to allow building without bundled dependencies on
+  linux.
