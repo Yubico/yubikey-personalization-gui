@@ -197,7 +197,7 @@ unix:!macx {
     LIBS += -lyubikey
 
     CONFIG += link_pkgconfig
-    PKGCONFIG += ykpers-1 libusb
+    PKGCONFIG += ykpers-1
 
     QMAKE_CXXFLAGS += $$(CXXFLAGS)
     QMAKE_LFLAGS += $$(LDFLAGS)
