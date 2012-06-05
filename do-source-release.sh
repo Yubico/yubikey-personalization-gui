@@ -22,6 +22,7 @@ releasedir=${tmpdir}/${releasename}
 mkdir -p $releasedir
 git archive $releasename --format=tar | tar -xC $releasedir
 find $tmpdir -name '*.dll' -print0 | xargs -0 rm -f
+git2cl > $releasedir/ChangeLog
 tar -cz --directory=$tmpdir --file=${releasename}.tar.gz $releasename
 gpg --detach-sign --default-key $PGP_KEYID ${releasename}.tar.gz
 googlecode_upload.py -s "OpenPGP signature for ${releasename}." -p yubikey-personalization -u $USER ${releasename}.tar.gz.sig
