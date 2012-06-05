@@ -12,6 +12,11 @@ if [ "x$PGP_KEYID" = "x" ]; then
   exit
 fi
 
+if ! head -3 NEWS  | grep -q "Version $VERSION .released `date -I`"; then
+  echo "You need to update date/version in NEWS"
+  exit
+fi
+
 releasename=yubikey-personalization-gui-${VERSION}
 
 git push
