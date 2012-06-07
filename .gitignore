@@ -1,1 +1,4 @@
 YKPersonalization.pro.user
+Makefile
+src/ui/ui_*.h
+build/
