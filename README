@@ -54,6 +54,20 @@ appears to not be needed for command-line builds.)
 Dependencies
 ============
 
+When building on Windows you will need binary releases of libykpers
+and libyubikey, these can be downloaded from
+http://code.google.com/p/yubikey-personalization/, the dlls
+libykpers-1-1.dll and libyubikey-0.dll should then be placed in
+libs/win32 and libs/win64 respectively.
+
+When building on MAC or Linux you will need sourcecode from yubico-c
+and yubikey-personalization. This can be downloaded from
+http://code.google.com/p/yubikey-personalization/ and
+http://code.google.com/p/yubico-c/ and should be placed unpacked in
+deps/libyubikey and deps/libykpers. You also need libusb.h
+from http://sourceforge.net/projects/libusb/files/libusb-1.0/
+placed in deps/libusb-1.0.
+
 You will need QT Creator and libusb-1.0 development files.
 
 sudo apt-get install libusb-1.0-0-dev qtcreator
