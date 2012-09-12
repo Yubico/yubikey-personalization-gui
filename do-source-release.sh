@@ -17,6 +17,16 @@ if ! head -3 NEWS  | grep -q "Version $VERSION .released `date -I`"; then
   exit
 fi
 
+if ! head -5 YKPersonalization.pro | grep -q "VERSION.*= \"$VERSION\""; then
+  echo "You need to update version in YKPersonalization.pro"
+  exit
+fi
+
+if ! cat src/version.h | grep -q "#define VER_PRODUCTVERSION.*$VERSION"; then
+  echo "You need to update version in src/version.h"
+  exit
+fi
+
 releasename=yubikey-personalization-gui-${VERSION}
 
 git push
