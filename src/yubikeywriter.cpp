@@ -120,7 +120,7 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
 
     YK_KEY *yk = 0;
     YK_STATUS *ykst = ykds_alloc();
-    YKP_CONFIG *cfg = ykp_create_config();
+    YKP_CONFIG *cfg = ykp_alloc();
 
     bool error = false;
 
@@ -141,10 +141,13 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             throw 0;
         }
 
+        ykp_configure_version(cfg, ykst);
+
         qDebug() << "writer:configuration slot:" << ykConfig->configSlot();
 
         //Configuration slot...
-        if (!ykp_configure_for(cfg, ykConfig->configSlot(), ykst)) {
+        if (!ykp_configure_command(cfg,
+              ykConfig->configSlot() == 2 ? SLOT_CONFIG2 : SLOT_CONFIG)) {
             throw 0;
         }
 
@@ -379,9 +382,9 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
         qDebug() << "-------------------------";
 
         // Write configuration...
-        if (!yk_write_config(yk,
-                             ykp_core_config(cfg), ykp_config_num(cfg),
-                             useAccessCode ? accessCode : NULL)) {
+        if (!yk_write_command(yk,
+                              ykp_core_config(cfg), ykp_command(cfg),
+                              useAccessCode ? accessCode : NULL)) {
             qDebug() << "Failure";
             throw 0;
         }
