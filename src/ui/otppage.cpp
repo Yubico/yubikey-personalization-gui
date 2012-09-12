@@ -359,7 +359,6 @@ void OtpPage::writeQuickConfig() {
     //Write configuration
     ui->quickWriteConfigBtn->setEnabled(false);
     ui->quickUploadBtn->setEnabled(false);
-    ui->quickResetBtn->setEnabled(false);
     ui->quickBackBtn->setEnabled(false);
 
     if(m_ykConfig != 0) {
@@ -408,7 +407,6 @@ void OtpPage::quickConfigWritten(bool written, const QString &msg) {
                this, SLOT(quickConfigWritten(bool, const QString &)));
 
     ui->quickWriteConfigBtn->setEnabled(true);
-    ui->quickResetBtn->setEnabled(true);
     ui->quickBackBtn->setEnabled(true);
 
     if(written && m_ykConfig != 0) {
@@ -461,7 +459,6 @@ void OtpPage::resetAdvPage() {
     on_advSecretKeyTxt_editingFinished();
 
     ui->advStopBtn->setEnabled(false);
-    ui->advResetBtn->setEnabled(false);
 }
 
 void OtpPage::freezeAdvPage(bool freeze) {
@@ -473,7 +470,6 @@ void OtpPage::freezeAdvPage(bool freeze) {
 
     ui->advWriteConfigBtn->setEnabled(disable);
     ui->advStopBtn->setEnabled(!disable);
-    ui->advResetBtn->setEnabled(disable);
     ui->advBackBtn->setEnabled(disable);
 }
 
@@ -647,7 +643,6 @@ void OtpPage::stopAdvConfigWritting() {
     clearState();
 
     freezeAdvPage(false);
-    ui->advResetBtn->setEnabled(true);
 }
 
 void OtpPage::changeAdvConfigParams() {

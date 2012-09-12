@@ -1654,7 +1654,7 @@ font-weight: bold;</string>
     </widget>
     <widget class="QPushButton" name="advResetBtn">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
