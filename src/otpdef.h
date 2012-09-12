@@ -46,7 +46,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MAX_YUBICO_SERIAL                   0x00ffffffUL
 #define MAX_OATH_SERIAL                     99999UL
 
-#define YUBICO_OTP_CUSTOMER_PREFIX_CODE     0x28
 #define OATH_HOTP_CUSTOMER_PREFIX_START     190
 
 // openauthentication.org assigned manufacturer prefix

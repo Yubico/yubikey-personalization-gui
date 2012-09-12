@@ -235,10 +235,9 @@ void OtpPage::loadSettings() {
         QByteArray prefix;
 
         // As per old tool
-        prefix.resize(3);
-        prefix[0] = YUBICO_OTP_CUSTOMER_PREFIX_CODE;
-        prefix[1] = (unsigned char) (m_customerPrefix >> 8U);
-        prefix[2] = (unsigned char) m_customerPrefix;
+        prefix.resize(2);
+        prefix[0] = (unsigned char) (m_customerPrefix >> 8U);
+        prefix[1] = (unsigned char) m_customerPrefix;
 
         char pubIdPrefix[prefix.size() * 2 + 1];
         size_t pubIdPrefixLen = 0;
@@ -549,7 +548,7 @@ void OtpPage::on_advPubIdTxt_editingFinished() {
     YubiKeyUtil::qstrModhexClean(&txt, (size_t)len);
 
     if(m_customerPrefix > 0) {
-        txt.replace(0, 6, m_pubIdPrefix);
+        txt.replace(0, 4, m_pubIdPrefix);
     }
     ui->advPubIdTxt->setText(txt);
     len = txt.length();
