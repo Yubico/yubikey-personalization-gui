@@ -1817,6 +1817,11 @@ font-weight: bold;</string>
        <string>Randomize Secret</string>
       </property>
      </item>
+     <item>
+       <property name="text">
+         <string>Same Secret for all Keys</string>
+       </property>
+     </item>
     </widget>
    </widget>
    <widget class="QGroupBox" name="advKeyParamsBox">

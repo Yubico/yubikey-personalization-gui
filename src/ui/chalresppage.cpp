@@ -786,11 +786,15 @@ void ChalRespPage::stopAdvConfigWritting() {
 }
 
 void ChalRespPage::changeAdvConfigParams() {
-    //Secret Key...
-    QString secretKeyTxt = YubiKeyUtil::getNextHex(
+    int index = ui->advConfigParamsCombo->currentIndex();
+    // else we use a static secret.
+    if(index == SCHEME_INCR_ID_RAND_SECRET) {
+        //Secret Key...
+        QString secretKeyTxt = YubiKeyUtil::getNextHex(
             KEY_SIZE_OATH * 2,
             ui->advSecretKeyTxt->text(), GEN_SCHEME_RAND);
-    ui->advSecretKeyTxt->setText(secretKeyTxt);
+        ui->advSecretKeyTxt->setText(secretKeyTxt);
+    }
     on_advSecretKeyTxt_editingFinished();
     m_ready = true;
 }
