@@ -668,7 +668,7 @@ void OtpPage::stopAdvConfigWritting() {
 }
 
 void OtpPage::changeAdvConfigParams() {
-    qDebug() << "Changing adv configuration prams...";
+    qDebug() << "Changing adv configuration params...";
 
     int index = ui->advConfigParamsCombo->currentIndex();
     int idScheme = GEN_SCHEME_FIXED;
