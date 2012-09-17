@@ -107,6 +107,7 @@ private slots:
     void on_advCurrentAccessCodeTxt_editingFinished();
     void on_advNewAccessCodeTxt_editingFinished();
 
+    void set_advPubId_default();
     void on_advPubIdCheck_stateChanged(int state);
     void on_advPubIdTxt_editingFinished();
     void on_advPubIdGenerateBtn_clicked();

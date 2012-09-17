@@ -443,6 +443,7 @@ void OtpPage::resetAdvPage() {
 
     ui->advPubIdCheck->setChecked(true);
     ui->advPubIdTxt->clear();
+    set_advPubId_default();
     on_advPubIdTxt_editingFinished();
     ui->advPubIdLenBox->setValue(PUBLIC_ID_DEFAULT_SIZE);
     if(m_customerPrefix > 0) {
@@ -536,6 +537,27 @@ void OtpPage::on_advPubIdCheck_stateChanged(int state) {
     if(m_customerPrefix <= 0) {
         ui->advPubIdLenBox->setEnabled(disable);
     }
+}
+
+void OtpPage::set_advPubId_default() {
+    QString txt = "cccc";
+    unsigned int serial = YubiKeyFinder::getInstance()->serial();
+
+    //Convert serial number to modhex
+    unsigned char buf[16];
+    memset(buf, 0, sizeof(buf));
+    size_t bufLen = 0;
+
+    QString tmp = QString::number(serial, 16);
+    size_t len = tmp.length();
+    if(len % 2 != 0) {
+      len++;
+    }
+    YubiKeyUtil::qstrClean(&tmp, (size_t)len, true);
+    YubiKeyUtil::qstrHexDecode(buf, &bufLen, tmp);
+
+    txt.append(YubiKeyUtil::qstrModhexEncode(buf, bufLen));
+    ui->advPubIdTxt->setText(txt);
 }
 
 void OtpPage::on_advPubIdTxt_editingFinished() {
