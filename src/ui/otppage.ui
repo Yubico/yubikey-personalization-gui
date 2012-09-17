@@ -1770,6 +1770,11 @@ font-weight: bold;</string>
        <string>Randomize all parameters</string>
       </property>
      </item>
+     <item>
+       <property name="text">
+         <string>Identity from serial; Randomize Secrets</string>
+       </property>
+     </item>
     </widget>
     <widget class="QPushButton" name="advParamGenSchemeHelpBtn">
      <property name="geometry">

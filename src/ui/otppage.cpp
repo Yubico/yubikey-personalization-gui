@@ -435,7 +435,7 @@ void OtpPage::resetAdvPage() {
         ui->advConfigSlot2Radio->setChecked(true);
     }
 
-    ui->advConfigParamsCombo->setCurrentIndex(0);
+    ui->advConfigParamsCombo->setCurrentIndex(2);
     ui->advAutoProgramKeysCheck->setChecked(false);
     ui->advProgramMulKeysBox->setChecked(false);
 
@@ -540,7 +540,7 @@ void OtpPage::on_advPubIdCheck_stateChanged(int state) {
 }
 
 void OtpPage::set_advPubId_default() {
-    QString txt = "cccc";
+    QString txt = "cccccc";
     unsigned int serial = YubiKeyFinder::getInstance()->serial();
 
     //Convert serial number to modhex
@@ -687,16 +687,25 @@ void OtpPage::changeAdvConfigParams() {
         idScheme = GEN_SCHEME_RAND;
         secretScheme = GEN_SCHEME_RAND;
         break;
+
+    case SCHEME_ID_FROM_SERIAL_RAND_SECRET:
+        idScheme = GEN_SCHEME_SERIAL;
+        secretScheme = GEN_SCHEME_RAND;
+        break;
     }
 
     //Public ID...
     if(ui->advPubIdCheck->isChecked()) {
-        QString pubIdTxt = YubiKeyUtil::getNextModhex(
+        if(idScheme == GEN_SCHEME_SERIAL) {
+            set_advPubId_default();
+        } else {
+            QString pubIdTxt = YubiKeyUtil::getNextModhex(
                 ui->advPubIdLenBox->value() * 2,
                 ui->advPubIdTxt->text(), idScheme);
 
-        ui->advPubIdTxt->setText(pubIdTxt);
-        on_advPubIdTxt_editingFinished();
+            ui->advPubIdTxt->setText(pubIdTxt);
+            on_advPubIdTxt_editingFinished();
+        }
     }
 
     //Private ID...

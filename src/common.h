@@ -44,11 +44,13 @@ typedef std::vector<int>::size_type size_t;
 #define SCHEME_INCR_ID_RAND_SECRET  0
 #define SCHEME_RAND_SECRET          0
 #define SCHEME_RAND_ALL             1
+#define SCHEME_ID_FROM_SERIAL_RAND_SECRET 2
 #define SCHEME_FIXED                2
 
 #define GEN_SCHEME_FIXED            0
 #define GEN_SCHEME_INCR             1
 #define GEN_SCHEME_RAND             2
+#define GEN_SCHEME_SERIAL           3
 
 #define CONFIG_PROTECTION_DISABLED  0
 #define CONFIG_PROTECTION_ENABLE    1
