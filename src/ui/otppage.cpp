@@ -632,7 +632,7 @@ void OtpPage::on_advStopBtn_clicked() {
 }
 
 void OtpPage::stopAdvConfigWritting() {
-    qDebug() << "Stopping adv confgiuration writing...";
+    qDebug() << "Stopping adv configuration writing...";
 
     if(m_state >= State_Programming_Multiple) {
         ui->advStopBtn->setEnabled(true);
@@ -646,7 +646,7 @@ void OtpPage::stopAdvConfigWritting() {
 }
 
 void OtpPage::changeAdvConfigParams() {
-    qDebug() << "Changing adv confgiuration prams...";
+    qDebug() << "Changing adv configuration prams...";
 
     int index = ui->advConfigParamsCombo->currentIndex();
     int idScheme = GEN_SCHEME_FIXED;

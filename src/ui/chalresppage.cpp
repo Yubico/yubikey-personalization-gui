@@ -406,7 +406,7 @@ void ChalRespPage::on_quickStopBtn_clicked() {
 }
 
 void ChalRespPage::stopQuickConfigWritting() {
-    qDebug() << "Stopping quick confgiuration writing...";
+    qDebug() << "Stopping quick configuration writing...";
 
     if(m_state >= State_Programming_Multiple) {
         ui->quickStopBtn->setEnabled(true);
@@ -771,7 +771,7 @@ void ChalRespPage::on_advStopBtn_clicked() {
 }
 
 void ChalRespPage::stopAdvConfigWritting() {
-    qDebug() << "Stopping adv confgiuration writing...";
+    qDebug() << "Stopping adv configuration writing...";
 
     if(m_state >= State_Programming_Multiple) {
         ui->advStopBtn->setEnabled(true);

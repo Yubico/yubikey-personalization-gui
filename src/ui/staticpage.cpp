@@ -419,7 +419,7 @@ void StaticPage::on_quickStopBtn_clicked() {
 }
 
 void StaticPage::stopQuickConfigWritting() {
-    qDebug() << "Stopping quick confgiuration writing...";
+    qDebug() << "Stopping quick configuration writing...";
 
     if(m_state >= State_Programming_Multiple) {
         ui->quickStopBtn->setEnabled(true);
@@ -890,7 +890,7 @@ void StaticPage::on_advStopBtn_clicked() {
 }
 
 void StaticPage::stopAdvConfigWritting() {
-    qDebug() << "Stopping adv confgiuration writing...";
+    qDebug() << "Stopping adv configuration writing...";
 
     if(m_state >= State_Programming_Multiple) {
         ui->advStopBtn->setEnabled(true);

@@ -863,7 +863,7 @@ void OathPage::on_advStopBtn_clicked() {
 }
 
 void OathPage::stopAdvConfigWritting() {
-    qDebug() << "Stopping adv confgiuration writing...";
+    qDebug() << "Stopping adv configuration writing...";
 
     if(m_state >= State_Programming_Multiple) {
         ui->advStopBtn->setEnabled(true);
