@@ -681,7 +681,7 @@ void OtpPage::changeAdvConfigParams() {
     if(ui->advPvtIdCheck->isChecked()) {
         QString pvtIdTxt = YubiKeyUtil::getNextHex(
                 UID_SIZE * 2,
-                ui->advPvtIdTxt->text(), idScheme);
+                ui->advPvtIdTxt->text(), secretScheme);
         ui->advPvtIdTxt->setText(pvtIdTxt);
     }
 

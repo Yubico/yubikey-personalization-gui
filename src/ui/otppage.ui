@@ -1762,7 +1762,7 @@ font-weight: bold;</string>
      </property>
      <item>
       <property name="text">
-       <string>Increment Identities; Randomize Secret</string>
+       <string>Increment Identity; Randomize Secrets</string>
       </property>
      </item>
      <item>
