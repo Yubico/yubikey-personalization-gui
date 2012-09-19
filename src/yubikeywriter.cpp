@@ -183,8 +183,7 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             CFGFLAG(OATH_FIXED_MODHEX,  ykConfig->oathFixedModhex());
 
             //Moving Factor Seed...
-            ycfg->uid[4] = (unsigned char) (ykConfig->oathMovingFactorSeed() >> 8U);
-            ycfg->uid[5] = (unsigned char) ykConfig->oathMovingFactorSeed();
+            ykp_set_oath_imf(cfg, ykConfig->oathMovingFactorSeed());
 
             //For OATH-HOTP, 160 bits key is also valid
             longSecretKey = true;
