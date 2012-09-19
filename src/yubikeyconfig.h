@@ -184,9 +184,9 @@ public:
     bool oathHotp8() const
     {return m_oathHotp8;}
 
-    void setOathMovingFactorSeed(unsigned short oathMovingFactorSeed)
+    void setOathMovingFactorSeed(unsigned int oathMovingFactorSeed)
     {m_oathMovingFactorSeed = oathMovingFactorSeed;}
-    unsigned short oathMovingFactorSeed() const
+    unsigned int oathMovingFactorSeed() const
     {return m_oathMovingFactorSeed;}
 
     void setChalYubico(bool chalYubico)
@@ -260,7 +260,7 @@ private:
     bool m_oathFixedModhex2;
     bool m_oathFixedModhex;
     bool m_oathHotp8;
-    unsigned short m_oathMovingFactorSeed;
+    unsigned int m_oathMovingFactorSeed;
 
     bool m_chalYubico;
     bool m_chalHmac;

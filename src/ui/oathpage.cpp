@@ -797,9 +797,9 @@ void OathPage::on_advMovingFactorSeedCombo_currentIndexChanged(int index) {
         ui->advMovingFactorSeedTxt->setEnabled(true);
         break;
     case MOVING_FACTOR_RAND:
-        unsigned char tmp;
+        unsigned int tmp;
         YubiKeyUtil::generateRandom((unsigned char *) &tmp, sizeof(tmp));
-        ui->advMovingFactorSeedTxt->setText(QString::number((unsigned int)tmp));
+        ui->advMovingFactorSeedTxt->setText(QString::number(tmp));
         on_advMovingFactorSeedTxt_editingFinished();
         ui->advMovingFactorSeedTxt->setEnabled(true);
         break;
@@ -922,9 +922,9 @@ void OathPage::changeAdvConfigParams() {
 
     //HOTP Moving Factor Seed...
     if(ui->advMovingFactorSeedCombo->currentIndex() == MOVING_FACTOR_RAND) {
-        unsigned char tmp;
+        unsigned int tmp;
         YubiKeyUtil::generateRandom((unsigned char *) &tmp, sizeof(tmp));
-        ui->advMovingFactorSeedTxt->setText(QString::number((unsigned int)tmp));
+        ui->advMovingFactorSeedTxt->setText(QString::number(tmp));
         on_advMovingFactorSeedTxt_editingFinished();
     }
 
@@ -1036,7 +1036,7 @@ void OathPage::writeAdvConfig() {
             YubiKeyFinder::Feature_MovingFactor)) {
 
         m_ykConfig->setOathMovingFactorSeed(
-                ui->advMovingFactorSeedTxt->text().toUShort());
+                ui->advMovingFactorSeedTxt->text().toUInt());
     }
 
     //Secret Key...
