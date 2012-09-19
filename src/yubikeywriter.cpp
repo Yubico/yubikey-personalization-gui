@@ -151,13 +151,6 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             throw 0;
         }
 
-        struct config_st *ycfg = (struct config_st *) ykp_core_config(cfg);
-
-        //Reset the default flags (particularly for slot 2)
-        ycfg->tktFlags = 0;
-        ycfg->cfgFlags = 0;
-        ycfg->extFlags = 0;
-
         //Programming Mode...
         bool longSecretKey = false;
 
