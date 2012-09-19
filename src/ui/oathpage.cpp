@@ -67,6 +67,9 @@ OathPage::OathPage(QWidget *parent) :
     connect(ui->advResetBtn, SIGNAL(clicked()),
             this, SLOT(resetAdvPage()));
 
+    connect(ui->advMovingFactorSeedTxt, SIGNAL(editingFinished()),
+            this, SLOT(on_advMovingFactorSeedTxt_editingFinished()));
+
     //Load settings
     loadSettings();
 

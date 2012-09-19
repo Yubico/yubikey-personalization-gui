@@ -1377,7 +1377,7 @@ font-weight: bold;</string>
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="inputMask">
-      <string>99999999; </string>
+      <string>00000000; </string>
      </property>
      <property name="text">
       <string>0</string>
