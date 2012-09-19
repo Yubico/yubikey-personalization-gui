@@ -581,7 +581,6 @@ void OathPage::resetAdvPage() {
     on_advSecretKeyTxt_editingFinished();
 
     ui->advStopBtn->setEnabled(false);
-    ui->advResetBtn->setEnabled(false);
 }
 
 void OathPage::freezeAdvPage(bool freeze) {
