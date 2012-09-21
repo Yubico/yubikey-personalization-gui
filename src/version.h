@@ -39,5 +39,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VER_ORIGINALFILENAME_STR    "YKPersonalization.exe"
 #define VER_PRODUCTNAME_STR         "YKPersonalization"
 #define VER_COMPANYNAME_STR         "Yubico"
+#define VER_COMPANYDOMAIN_STR       "yubico.com"
 
 #endif // VERSION_H
