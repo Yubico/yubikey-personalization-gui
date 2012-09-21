@@ -419,3 +419,70 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
     qDebug() << "Stopping write config";
     qDebug() << "-------------------------";
 }
+
+void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &response, int slot, bool hmac) {
+    YubiKeyFinder::getInstance()->stop();
+
+    YK_KEY *yk = 0;
+    YK_STATUS *ykst = ykds_alloc();
+
+    bool error = false;
+    try {
+        int yk_cmd;
+        const unsigned char *chal = reinterpret_cast<const unsigned char*>(challenge.toAscii().constData());
+        unsigned char resp[64];
+        memset(resp, 0, sizeof(resp));
+        if (!yk_init()) {
+            throw 0;
+        } else if (!(yk = yk_open_first_key())) {
+            throw 0;
+        } else if (!yk_get_status(yk, ykst)) {
+            throw 0;
+        }
+
+        if (!(yk_check_firmware_version(yk))) {
+            throw 0;
+        }
+
+        switch(slot) {
+          case 1:
+            yk_cmd = (hmac == true) ? SLOT_CHAL_HMAC1 : SLOT_CHAL_OTP1;
+            break;
+          case 2:
+            yk_cmd = (hmac == true) ? SLOT_CHAL_HMAC2 : SLOT_CHAL_OTP2;
+            break;
+          default:
+            throw 0;
+            break;
+        }
+
+        if(! yk_challenge_response(yk, yk_cmd, 1, challenge.length(),
+              chal, sizeof(resp), resp)) {
+            throw 0;
+        }
+        // 20 (160 bits) for hmac-sha1 and 16 (128 bits) for yubico mode
+        if(hmac == true) {
+            response = YubiKeyUtil::qstrHexEncode(resp, 20);
+        } else {
+            response = YubiKeyUtil::qstrModhexEncode(resp, 16);
+        }
+    } catch(...) {
+        error = true;
+    }
+
+    if (yk && !yk_close_key(yk)) {
+        error = true;
+    }
+
+    if (!yk_release()) {
+        error = true;
+    }
+
+    YubiKeyFinder::getInstance()->start();
+
+
+    if(error) {
+        qDebug() << "Challenge response failed.";
+        QString errMsg = reportError();
+    }
+}
