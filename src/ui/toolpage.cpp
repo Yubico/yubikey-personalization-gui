@@ -54,6 +54,8 @@ ToolPage::ToolPage(QWidget *parent) :
     connect(ui->chalRespChallenge, SIGNAL(editingFinished()),
             this, SLOT(on_chalRespChallenge_editingFinished()));
 
+    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
+            this, SLOT(keyFound(bool, bool*)));
 }
 
 ToolPage::~ToolPage() {
@@ -285,4 +287,14 @@ void ToolPage::on_converterModhexCopyBtn_clicked() {
 
 void ToolPage::on_converterDecCopyBtn_clicked() {
     copyToClipboard(ui->converterDecTxt->text());
+}
+
+void ToolPage::keyFound(bool found, bool* featuresMatrix) {
+    if(found) {
+        if(featuresMatrix[YubiKeyFinder::Feature_ChallengeResponse]) {
+            ui->chalRespPerformBtn->setEnabled(true);
+        }
+    } else {
+        ui->chalRespPerformBtn->setEnabled(false);
+    }
 }

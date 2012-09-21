@@ -76,6 +76,8 @@ private slots:
     void resetChalRespPage();
     void performChallengeResponse();
     void on_chalRespChallenge_editingFinished();
+
+    void keyFound(bool found, bool* featuresMatrix);
 signals:
     void showStatusMessage(const QString &text, int status = 0);
 };
