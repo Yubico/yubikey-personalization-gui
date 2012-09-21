@@ -187,7 +187,7 @@ void YubiKeyFinder::findKey() {
         //Check pervious state
         if(m_state == State_Absent) {
 
-            m_state = State_Preset;
+            m_state = State_Present;
 
             //Get version
             m_versionMajor = ykds_version_major(ykst);

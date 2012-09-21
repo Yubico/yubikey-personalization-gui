@@ -49,7 +49,7 @@ public:
 
     enum State {
         State_Absent,
-        State_Preset,
+        State_Present,
         State_Processing
     };
 
