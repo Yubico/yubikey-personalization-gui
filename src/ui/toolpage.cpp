@@ -67,11 +67,11 @@ void ToolPage::connectPages() {
 
     //Connect the clicked signal with the QSignalMapper
     connect(ui->converterBtn, SIGNAL(clicked()), mapper, SLOT(map()));
-    //connect(ui->converterBackBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+    connect(ui->converterBackBtn, SIGNAL(clicked()), mapper, SLOT(map()));
 
     //Set a value for each button
     mapper->setMapping(ui->converterBtn, Page_Converter);
-    //mapper->setMapping(ui->converterBackBtn, Page_Base);
+    mapper->setMapping(ui->converterBackBtn, Page_Base);
 
     //Connect the mapper to the widget
     //The mapper will set a value to each button and
@@ -81,7 +81,7 @@ void ToolPage::connectPages() {
 
     //Set the current page
     m_currentPage = 0;
-    setCurrentIndex(Page_Converter);
+    setCurrentIndex(Page_Base);
 }
 
 void ToolPage::setCurrentPage(int pageIndex) {

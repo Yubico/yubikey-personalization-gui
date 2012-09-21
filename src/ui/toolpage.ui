@@ -518,6 +518,19 @@ font-weight: bold;</string>
       <bool>false</bool>
      </property>
     </widget>
+    <widget class="QPushButton" name="converterBackBtn">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>25</y>
+       <width>85</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Back</string>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>
