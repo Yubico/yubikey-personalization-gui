@@ -129,6 +129,7 @@ void YubiKeyFinder::start() {
     if(m_timer && !m_timer->isActive()) {
         m_timer->start(TIMEOUT_FINDER);
     }
+    yk_init();
 }
 
 void YubiKeyFinder::stop() {
@@ -136,7 +137,8 @@ void YubiKeyFinder::stop() {
     if(m_timer && m_timer->isActive()) {
         m_timer->stop();
     }
-    //closeKey();
+    closeKey();
+    yk_release();
 }
 
 bool YubiKeyFinder::openKey() {
@@ -144,10 +146,7 @@ bool YubiKeyFinder::openKey() {
     if(m_yk != 0) {
         closeKey();
     }
-
-    if (!yk_init()) {
-        flag = false;
-    } else if (!(m_yk = yk_open_first_key())) {
+    if (!(m_yk = yk_open_first_key())) {
         flag = false;
     }
 
@@ -158,9 +157,6 @@ bool YubiKeyFinder::closeKey() {
     bool flag = true;
     if(m_yk != 0) {
         if (!yk_close_key(m_yk)) {
-            flag = false;
-        }
-        if (!yk_release()) {
             flag = false;
         }
     }
