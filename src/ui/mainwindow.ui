@@ -111,7 +111,7 @@ background-color: rgb(255, 255, 255);</string>
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
-    <widget class="QLabel" name="deviceImg">
+    <widget class="QLabel" name="deviceImage">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -120,11 +120,8 @@ background-color: rgb(255, 255, 255);</string>
        <height>128</height>
       </rect>
      </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="../../resources/resources.qrc">:/res/images/yk.png</pixmap>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="versionLbl">

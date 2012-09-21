@@ -272,10 +272,29 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
     resetDeviceInfo();
 
     if(found) {
+        QString version = YubiKeyFinder::getInstance()->versionStr();
         ui->statusLbl->setText(KEY_FOUND);
         ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_SUCCESS));
 
-        ui->versionLbl->setText(YubiKeyFinder::getInstance()->versionStr());
+        ui->versionLbl->setText(version);
+        qDebug() << "version is" << version;
+
+        if(version.startsWith("1")) {
+            QPixmap pixmap(":/res/images/v1-3-not-animated.gif");
+            ui->deviceImage->setPixmap(pixmap);
+        } else if(version.startsWith("2")) {
+            QMovie *movie = new QMovie();
+            if(version.startsWith("2.0")) {
+                movie->setFileName(":/res/images/V2-0-Animated.gif");
+            } else if(version.startsWith("2.1")) {
+                movie->setFileName(":/res/images/v2-1-animated.gif");
+            } else if(version.startsWith("2.2") || version.startsWith("2.3")) {
+                movie->setFileName(":/res/images/v2-2-animated-2-loops-2.gif");
+            }
+            ui->deviceImage->setMovie(movie);
+            ui->deviceImage->setHidden(false);
+            movie->start();
+        }
 
         unsigned int serial = 0;
         if(featuresMatrix[YubiKeyFinder::Feature_SerialNumber]) {
@@ -371,6 +390,10 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
             ui->chalRespMenuBtn->setEnabled(false);
         }
     } else {
+        ui->deviceImage->setHidden(true);
+        if(ui->deviceImage->movie()) {
+            delete(ui->deviceImage->movie());
+        }
         ui->statusLbl->setText(NO_KEY_FOUND);
         ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_ERROR));
 
