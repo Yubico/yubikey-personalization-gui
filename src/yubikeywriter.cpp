@@ -424,7 +424,6 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
     YubiKeyFinder::getInstance()->stop();
 
     YK_KEY *yk = 0;
-    YK_STATUS *ykst = ykds_alloc();
 
     bool error = false;
 
@@ -438,8 +437,6 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
         if (!yk_init()) {
             throw 0;
         } else if (!(yk = yk_open_first_key())) {
-            throw 0;
-        } else if (!yk_get_status(yk, ykst)) {
             throw 0;
         }
 
