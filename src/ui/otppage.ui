@@ -45,7 +45,7 @@ color: rgb(0, 0, 0);</string>
     <property name="styleSheet">
      <string notr="true">font: 18px &quot;Verdana&quot;;
 font-weight: bold;
-color: rgb(122, 171, 32);</string>
+color: rgb(140, 192, 65);</string>
     </property>
     <property name="text">
      <string>Program in Yubico OTP mode</string>
@@ -180,7 +180,7 @@ font-weight: bold;</string>
     <property name="styleSheet">
      <string notr="true">font: 18px &quot;Verdana&quot;;
 font-weight: bold;
-color: rgb(122, 171, 32);</string>
+color: rgb(140, 192, 65);</string>
     </property>
     <property name="text">
      <string>Program in Yubico OTP mode - Quick</string>
@@ -772,7 +772,7 @@ font-weight: bold;</string>
     <property name="styleSheet">
      <string notr="true">font: 18px &quot;Verdana&quot;;
 font-weight: bold;
-color: rgb(122, 171, 32);</string>
+color: rgb(140, 192, 65);</string>
     </property>
     <property name="text">
      <string>Program in Yubico OTP mode - Advanced</string>
@@ -1914,7 +1914,7 @@ color: rgb(0, 0, 0);</string>
     <property name="styleSheet">
      <string notr="true">font: 18px &quot;Verdana&quot;;
 font-weight: bold;
-color: rgb(122, 171, 32);</string>
+color: rgb(140, 192, 65);</string>
     </property>
     <property name="text">
      <string>Upload to Yubico</string>

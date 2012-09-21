@@ -757,7 +757,7 @@ border-radius: 2px;</string>
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(122, 171, 32);</string>
+     <string notr="true">background-color: rgb(140, 192, 65);</string>
     </property>
     <property name="frameShadow">
      <enum>QFrame::Sunken</enum>
@@ -787,9 +787,9 @@ border-radius: 2px;</string>
     <property name="styleSheet">
      <string notr="true">font: 13px &quot;Verdana&quot;;
 font-weight: bold;
-color: rgb(122, 171, 32);
+color: rgb(140, 192, 65);
 background-color: rgb(255, 255, 255);
-border-color: rgb(122, 171, 32);
+border-color: rgb(140, 192, 65);
 selection-color: rgb(0, 0, 0);</string>
     </property>
     <widget class="QPushButton" name="otpMenuBtn">

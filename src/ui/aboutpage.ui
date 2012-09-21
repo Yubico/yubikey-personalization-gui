@@ -301,7 +301,7 @@ color: rgb(5, 67, 168);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(122, 171, 32);</string>
+     <string notr="true">background-color: rgb(140, 192, 65);</string>
     </property>
     <property name="lineWidth">
      <number>1</number>
@@ -322,7 +322,7 @@ color: rgb(5, 67, 168);</string>
     <property name="styleSheet">
      <string notr="true">font: 18px &quot;Verdana&quot;;
 font-weight: bold;
-color: rgb(122, 171, 32);</string>
+color: rgb(140, 192, 65);</string>
     </property>
     <property name="text">
      <string>The Swiss Army Knife for the YubiKey</string>
@@ -341,7 +341,7 @@ color: rgb(122, 171, 32);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(122, 171, 32);</string>
+     <string notr="true">background-color: rgb(140, 192, 65);</string>
     </property>
     <property name="lineWidth">
      <number>1</number>
