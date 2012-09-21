@@ -427,6 +427,9 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
     YK_STATUS *ykst = ykds_alloc();
 
     bool error = false;
+
+    qDebug() << "Challenge to slot " << slot << " with challenge: " << challenge;
+
     try {
         int yk_cmd;
         const unsigned char *chal = reinterpret_cast<const unsigned char*>(challenge.toAscii().constData());

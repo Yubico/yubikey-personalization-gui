@@ -47,6 +47,12 @@ ToolPage::ToolPage(QWidget *parent) :
     //Connect other signals and slots
     connect(ui->converterResetBtn, SIGNAL(clicked()),
             this, SLOT(resetConverterPage()));
+    connect(ui->chalRespResetBtn, SIGNAL(clicked()),
+            this, SLOT(resetChalRespPage()));
+    connect(ui->chalRespPerformBtn, SIGNAL(clicked()),
+            this, SLOT(performChallengeResponse()));
+    connect(ui->chalRespChallenge, SIGNAL(editingFinished()),
+            this, SLOT(on_chalRespChallenge_editingFinished()));
 
 }
 
@@ -69,9 +75,15 @@ void ToolPage::connectPages() {
     connect(ui->converterBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->converterBackBtn, SIGNAL(clicked()), mapper, SLOT(map()));
 
+    connect(ui->chalRespBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+    connect(ui->chalRespBackBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+
     //Set a value for each button
     mapper->setMapping(ui->converterBtn, Page_Converter);
     mapper->setMapping(ui->converterBackBtn, Page_Base);
+
+    mapper->setMapping(ui->chalRespBtn, Page_ChalResp);
+    mapper->setMapping(ui->chalRespBackBtn, Page_Base);
 
     //Connect the mapper to the widget
     //The mapper will set a value to each button and
@@ -107,6 +119,41 @@ void ToolPage::helpBtn_pressed(int helpIndex) {
     help.exec();
 }
 
+void ToolPage::resetChalRespPage() {
+    ui->chalRespChallenge->clear();
+    ui->chalRespResponse->clear();
+}
+
+void ToolPage::on_chalRespChallenge_editingFinished() {
+    QString challenge = ui->chalRespChallenge->text().trimmed();
+    ui->chalRespChallenge->setText(challenge);
+}
+
+void ToolPage::performChallengeResponse() {
+    QString challenge = ui->chalRespChallenge->text();
+    QString response = "";
+    bool hmac;
+    int slot;
+    if(ui->chalRespHmacRadio->isChecked()) {
+        hmac = true;
+    } else if(ui->chalRespYubicoRadio->isChecked()) {
+        hmac = false;
+    } else {
+      // error
+      return;
+    }
+    if(ui->chalRespSlot1Radio->isChecked()) {
+        slot = 1;
+    } else if(ui->chalRespSlot2Radio->isChecked()) {
+        slot = 2;
+    } else {
+      // error
+      return;
+    }
+    YubiKeyWriter::getInstance()->doChallengeResponse(challenge, response, slot, hmac);
+    qDebug() << "response was: " << response;
+    ui->chalRespResponse->setText(response);
+}
 /*
  Quick Page handling
 */

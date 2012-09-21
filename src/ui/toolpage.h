@@ -49,6 +49,7 @@ private:
     enum Page {
         Page_Base,
         Page_Converter,
+        Page_ChalResp,
     };
     int m_currentPage;
 
@@ -71,6 +72,10 @@ private slots:
     void on_converterModhexCopyBtn_clicked();
     void on_converterDecCopyBtn_clicked();
 
+    // Challenge Response Page
+    void resetChalRespPage();
+    void performChallengeResponse();
+    void on_chalRespChallenge_editingFinished();
 signals:
     void showStatusMessage(const QString &text, int status = 0);
 };
