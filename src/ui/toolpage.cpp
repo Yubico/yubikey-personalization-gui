@@ -139,7 +139,7 @@ void ToolPage::performChallengeResponse() {
     } else if(ui->chalRespYubicoRadio->isChecked()) {
         hmac = false;
     } else {
-      // error
+      emit showStatusMessage(ERR_CHAL_TYPE_NOT_SELECTED, 1);
       return;
     }
     if(ui->chalRespSlot1Radio->isChecked()) {
@@ -147,7 +147,7 @@ void ToolPage::performChallengeResponse() {
     } else if(ui->chalRespSlot2Radio->isChecked()) {
         slot = 2;
     } else {
-      // error
+      emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
       return;
     }
     YubiKeyWriter::getInstance()->doChallengeResponse(challenge, response, slot, hmac);
