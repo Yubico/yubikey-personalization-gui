@@ -108,7 +108,7 @@ void SettingPage::restoreDefaults() {
     settings.setValue(SG_PACING_20MS,           false);
 
     settings.setValue(SG_SR_BTN_VISIBLE,        true);
-    settings.setValue(SG_SR_USB_VISIBLE,        true);
+    settings.setValue(SG_SR_USB_VISIBLE,        false);
     settings.setValue(SG_SR_API_VISIBLE,        true);
 
     settings.setValue(SG_MAN_UPDATE,            false);
