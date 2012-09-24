@@ -42,6 +42,7 @@ public:
         Mode_OathHotp,
         Mode_ChalRespYubico,
         Mode_ChalRespHmac,
+        Mode_Update,
     };
 
     void setProgrammingMode(Mode mode)

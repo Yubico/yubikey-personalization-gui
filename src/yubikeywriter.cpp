@@ -150,16 +150,18 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
 
         qDebug() << "writer:configuration slot:" << ykConfig->configSlot();
 
-        //Configuration slot...
-        if (!ykp_configure_command(cfg,
-              ykConfig->configSlot() == 2 ? SLOT_CONFIG2 : SLOT_CONFIG)) {
-            throw 0;
-        }
 
         //Programming Mode...
         bool longSecretKey = false;
 
+        int command = ykConfig->configSlot() == 2 ? SLOT_CONFIG2 : SLOT_CONFIG;
+
         switch(ykConfig->programmingMode()) {
+        case YubiKeyConfig::Mode_Update:
+            // if we're doing an update it's other commands.
+            command = ykConfig->configSlot() == 2 ? SLOT_UPDATE2 : SLOT_UPDATE1;
+            break;
+
         case YubiKeyConfig::Mode_YubicoOtp:
             break;
 
@@ -206,6 +208,11 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             //For HMAC (not Yubico) challenge-response, 160 bits key is also valid
             longSecretKey = true;
             break;
+        }
+
+        //Configuration slot...
+        if (!ykp_configure_command(cfg, command)) {
+            throw 0;
         }
 
         //Public ID...
@@ -376,6 +383,7 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
         //Log configuration...
         qDebug() << "-------------------------";
         qDebug() << "Config data to be written to key configuration...";
+        qDebug() << "Command is: " << command;
 
         ykp_write_config(cfg, writer, stderr);
 
