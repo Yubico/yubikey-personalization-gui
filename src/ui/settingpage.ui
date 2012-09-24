@@ -754,8 +754,8 @@ border-radius: 10px;
    <widget class="QPushButton" name="srVisibilityHelpBtn">
     <property name="geometry">
      <rect>
-      <x>325</x>
-      <y>0</y>
+      <x>275</x>
+      <y>4</y>
       <width>16</width>
       <height>16</height>
      </rect>
@@ -847,7 +847,6 @@ border-radius: 10px;
   <tabstop>logFileTxt</tabstop>
   <tabstop>browseBtn</tabstop>
   <tabstop>saveBtn</tabstop>
-  <tabstop>cancelBtn</tabstop>
   <tabstop>restoreBtn</tabstop>
   <tabstop>outFormatHelpBtn</tabstop>
   <tabstop>outSpeedHelpBtn</tabstop>
