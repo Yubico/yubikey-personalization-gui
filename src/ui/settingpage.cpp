@@ -46,10 +46,21 @@ SettingPage::SettingPage(QWidget *parent) :
     //Connect other signals and slots
     connect(ui->saveBtn, SIGNAL(clicked()),
             this, SLOT(save()));
-    connect(ui->cancelBtn, SIGNAL(clicked()),
-            this, SLOT(load()));
     connect(ui->restoreBtn, SIGNAL(clicked()),
             this, SLOT(restore()));
+
+    connect(ui->custPrefixCheck, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->logOutputCheck, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->tabFirstBtn, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->appendTab1Btn, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->appendTab2Btn, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->appendCRBtn, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->appendDelay1Check, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->appendDelay2Check, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->srBtnVisibleCheck, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->srUsbVisibleCheck, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->srApiVisibleCheck, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->manUpdateCheck, SIGNAL(clicked()), this, SLOT(save()));
 }
 
 SettingPage::~SettingPage() {
@@ -302,6 +313,7 @@ void SettingPage::on_custPrefixCheck_stateChanged(int state) {
 void SettingPage::on_custPrefixTxt_editingFinished() {
     int custPrefix = ui->custPrefixTxt->text().toInt();
     ui->custPrefixTxt->setText(QString::number(custPrefix));
+    save();
 }
 
 void SettingPage::on_logOutputCheck_stateChanged(int state) {
@@ -322,5 +334,6 @@ void SettingPage::on_browseBtn_clicked() {
 
     if(!fileName.isEmpty()) {
         ui->logFileTxt->setText(fileName);
+        save();
     }
 }
