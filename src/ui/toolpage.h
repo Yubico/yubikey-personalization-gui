@@ -30,7 +30,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TOOLPAGE_H
 
 #include <QStackedWidget>
-#include "yubikeyconfig.h"
 
 namespace Ui {
     class ToolPage;
