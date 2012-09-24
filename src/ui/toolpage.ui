@@ -114,7 +114,7 @@ font-weight: bold;</string>
       </rect>
      </property>
      <property name="text">
-      <string>Allows you to convert between different number formats</string>
+      <string>Convert between different number formats</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -162,7 +162,7 @@ font-weight: bold;</string>
       </rect>
      </property>
      <property name="text">
-      <string>Allows you to test Challenge Response functionality.</string>
+      <string>Test Challenge-Response functionality of YubiKey</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
