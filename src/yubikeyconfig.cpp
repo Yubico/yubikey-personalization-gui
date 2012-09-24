@@ -39,18 +39,20 @@ YubiKeyConfig::YubiKeyConfig() {
     m_currentAccessCodeTxt.clear();
     m_newAccessCodeTxt.clear();
 
-    m_tabFirst = false;
-    m_appendTab1 = false;
-    m_appendTab2 = false;
-    m_appendCr = false;
-    m_appendDelay1 = false;
-    m_appendDelay2= false;
-    m_protectCfg2 = false;
+    QSettings settings;
+
+    m_tabFirst = settings.value(SG_TAB_FIRST).toBool();
+    m_appendTab1 = settings.value(SG_APPEND_TAB1).toBool();
+    m_appendTab2 = settings.value(SG_APPEND_TAB2).toBool();
+    m_appendCr = settings.value(SG_APPEND_CR).toBool();
+    m_appendDelay1 = settings.value(SG_APPEND_DELAY1).toBool();
+    m_appendDelay2= settings.value(SG_APPEND_DELAY2).toBool();
+    m_protectCfg2 = false; // XXX Not implemented
 
     m_sendRef = false;
     m_ticketFirst = false;
-    m_pacing10ms = false;
-    m_pacing20ms = false;
+    m_pacing10ms = settings.value(SG_PACING_10MS).toBool();
+    m_pacing20ms = settings.value(SG_PACING_20MS).toBool();
     m_allowHidtrig = false;
     m_staticTicket = false;
     m_shortTicket = false;
@@ -67,9 +69,9 @@ YubiKeyConfig::YubiKeyConfig() {
     m_chalYubico = false;
     m_chalHmac = false;
     m_chalBtnTrig = false;
-    m_serialBtnVisible = false;
-    m_serialUsbVisible = false;
-    m_serialApiVisible = false;
+    m_serialBtnVisible = settings.value(SG_SR_BTN_VISIBLE).toBool();
+    m_serialUsbVisible = settings.value(SG_SR_USB_VISIBLE).toBool();
+    m_serialApiVisible = settings.value(SG_SR_API_VISIBLE).toBool();
 }
 
 void YubiKeyConfig::setPubIdTxt(const QString &pubIdTxt) {

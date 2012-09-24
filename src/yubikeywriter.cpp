@@ -343,28 +343,25 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             ykp_set_access_code(cfg, accessCode, accessCodeLen);
         }
 
-        //Output parameters...
-        QSettings settings;
-
-        TKTFLAG(TAB_FIRST,          settings.value(SG_TAB_FIRST).toBool());
-        TKTFLAG(APPEND_TAB1,        settings.value(SG_APPEND_TAB1).toBool());
-        TKTFLAG(APPEND_TAB2,        settings.value(SG_APPEND_TAB2).toBool());
-        TKTFLAG(APPEND_CR,          settings.value(SG_APPEND_CR).toBool());
-        TKTFLAG(APPEND_DELAY1,      settings.value(SG_APPEND_DELAY1).toBool());
-        TKTFLAG(APPEND_DELAY2,      settings.value(SG_APPEND_DELAY2).toBool());
+        TKTFLAG(TAB_FIRST,          ykConfig->tabFirst());
+        TKTFLAG(APPEND_TAB1,        ykConfig->appendTab1());
+        TKTFLAG(APPEND_TAB2,        ykConfig->appendTab2());
+        TKTFLAG(APPEND_CR,          ykConfig->appendCr());
+        TKTFLAG(APPEND_DELAY1,      ykConfig->appendDelay1());
+        TKTFLAG(APPEND_DELAY2,      ykConfig->appendDelay2());
         //TKTFLAG(PROTECT_CFG2,     ykConfig->protectCfg2());
 
         //CFGFLAG(SEND_REF,         ykConfig->sendRef());
         //CFGFLAG(TICKET_FIRST,     ykConfig->ticketFirst());
-        CFGFLAG(PACING_10MS,        settings.value(SG_PACING_10MS).toBool());
-        CFGFLAG(PACING_20MS,        settings.value(SG_PACING_20MS).toBool());
+        CFGFLAG(PACING_10MS,        ykConfig->pacing10ms());
+        CFGFLAG(PACING_20MS,        ykConfig->pacing20ms());
         //CFGFLAG(ALLOW_HIDTRIG,    ykConfig->allowHidtrig());
 
         //Serial # visibility...
         if(flagSrNoSupport) {
-            EXTFLAG(SERIAL_BTN_VISIBLE, settings.value(SG_SR_BTN_VISIBLE).toBool());
-            EXTFLAG(SERIAL_USB_VISIBLE, settings.value(SG_SR_USB_VISIBLE).toBool());
-            EXTFLAG(SERIAL_API_VISIBLE, settings.value(SG_SR_API_VISIBLE).toBool());
+            EXTFLAG(SERIAL_BTN_VISIBLE, ykConfig->serialBtnVisible());
+            EXTFLAG(SERIAL_USB_VISIBLE, ykConfig->serialUsbVisible());
+            EXTFLAG(SERIAL_API_VISIBLE, ykConfig->serialApiVisible());
         }
 
         //Log configuration...
