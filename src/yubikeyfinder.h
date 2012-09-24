@@ -91,6 +91,7 @@ private:
 
     static YubiKeyFinder* _instance;
     static const unsigned int FEATURE_MATRIX[][2];
+    static const unsigned int FEATURE_MATRIX_EXCLUDE[][2];
 
     State m_state;
     YK_KEY *m_yk;

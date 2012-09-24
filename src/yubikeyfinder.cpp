@@ -42,11 +42,28 @@ const unsigned int YubiKeyFinder::FEATURE_MATRIX[][2] = {
     { YK_VERSION(2,0,0), 0 },   //Feature_StrongPwd
     { YK_VERSION(2,1,0), 0 },   //Feature_OathHotp
     { YK_VERSION(2,2,0), 0 },   //Feature_ChallengeResponse
-    { YK_VERSION(2,2,0), 0 },   //Feature_SerialNumber
+    { YK_VERSION(2,1,4), 0 },   //Feature_SerialNumber
     { YK_VERSION(2,2,0), 0 },   //Feature_MovingFactor
     { YK_VERSION(2,3,0), 0 },   //Feature_ChallengeResponseFixed
     { YK_VERSION(2,3,0), 0 },   //Feature_Updatable
-    { YK_VERSION(2,1,4), YK_VERSION(2,2,0)}, // Feature_Ndef
+    { YK_VERSION(2,1,4), YK_VERSION(2,2,0)}, //Feature_Ndef
+};
+
+// when a featureset should be excluded from versions (NEO, I'm looking at you.)
+const unsigned int YubiKeyFinder::FEATURE_MATRIX_EXCLUDE[][2] = {
+    { YK_VERSION(2,1,4), YK_VERSION(2,2,0) }, //Feature_MultipleConfigurations
+    { YK_VERSION(2,1,4), YK_VERSION(2,2,0) }, //Feature_ProtectConfiguration2
+    { YK_VERSION(2,1,4), YK_VERSION(2,1,8) }, //Feature_StaticPassword
+    { YK_VERSION(2,1,4), YK_VERSION(2,1,8) }, //Feature_ScanCodeMode
+    { 0, 0 },                                 //Feature_ShortTicket
+    { YK_VERSION(2,1,4), YK_VERSION(2,1,8) }, //Feature_StrongPwd
+    { YK_VERSION(2,1,4), YK_VERSION(2,2,0) }, //Feature_OathHotp
+    { 0, 0 },                                 //Feature_ChallengeResponse
+    { 0, 0 },                                 //Feature_SerialNumber
+    { 0, 0 },                                 //Feature_MovingFactor
+    { 0, 0 },                                 //Feature_ChallengeResponseFixed
+    { 0, 0 },                                 //Feature_Updatable
+    { 0, 0 },                                 //Feature_Ndef
 };
 
 YubiKeyFinder::YubiKeyFinder() {
@@ -109,12 +126,17 @@ void YubiKeyFinder::reportError() {
 bool YubiKeyFinder::checkFeatureSupport(Feature feature) {
     if(m_version > 0 &&
        (unsigned int) feature < sizeof(FEATURE_MATRIX)/sizeof(FEATURE_MATRIX[0])) {
-        return (
+        bool supported = (
                 m_version >= FEATURE_MATRIX[feature][0] &&
                 (FEATURE_MATRIX[feature][1] == 0 || m_version < FEATURE_MATRIX[feature][1])
                 );
+        if(supported)
+            if(FEATURE_MATRIX_EXCLUDE[feature][0] != 0)
+                if(m_version >= FEATURE_MATRIX_EXCLUDE[feature][0])
+                    if(m_version < FEATURE_MATRIX_EXCLUDE[feature][1])
+                        return false;
+        return supported;
     }
-
     return false;
 }
 
