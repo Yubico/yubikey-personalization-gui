@@ -40,6 +40,8 @@ SettingPage::SettingPage(QWidget *parent) :
     QSignalMapper *mapper = new QSignalMapper(this);
     ui->setupUi(this);
 
+    m_ykConfig = NULL;
+
     //Connect help buttons
     connectHelpButtons();
 
@@ -57,6 +59,7 @@ SettingPage::SettingPage(QWidget *parent) :
     connect(ui->restoreBtn, SIGNAL(clicked()),
             this, SLOT(restore()));
 
+    // autosave when changing settings
     connect(ui->custPrefixCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->logOutputCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->tabFirstBtn, SIGNAL(clicked()), this, SLOT(save()));
@@ -76,6 +79,9 @@ SettingPage::SettingPage(QWidget *parent) :
 }
 
 SettingPage::~SettingPage() {
+    if(m_ykConfig != NULL) {
+        delete m_ykConfig;
+    }
     delete ui;
 }
 
@@ -363,6 +369,53 @@ void SettingPage::on_browseBtn_clicked() {
         ui->logFileTxt->setText(fileName);
         save();
     }
+}
+
+void SettingPage::on_doUpdateBtn_clicked() {
+    bool dormant = false;
+    int slot;
+
+    if(ui->updateSlot1Radio->isChecked()) {
+        slot = 1;
+    } else if(ui->updateSlot2Radio->isChecked()) {
+        slot = 2;
+    } else {
+      emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+      return;
+    }
+
+    if(ui->updateDormantCheck->isChecked()) {
+        dormant = true;
+    }
+
+    if(m_ykConfig != NULL) {
+        delete m_ykConfig;
+    }
+    m_ykConfig = new YubiKeyConfig();
+
+    m_ykConfig->setProgrammingMode(YubiKeyConfig::Mode_Update);
+    m_ykConfig->setConfigSlot(slot);
+
+    //Write
+    connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+            this, SLOT(updateConfigWritten(bool, const QString &)));
+
+    YubiKeyWriter::getInstance()->writeConfig(m_ykConfig);
+}
+
+void SettingPage::updateConfigWritten(bool written, const QString &msg) {
+    QString message;
+    disconnect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+        this, SLOT(updateConfigWritten(bool, const QString &)));
+
+    if(written) {
+        qDebug() << "Configuration updated." << msg;
+    } else {
+        qDebug() << "Failed update.";
+        message = msg;
+    }
+
+    emit showStatusMessage(msg, 0);
 }
 
 void SettingPage::keyFound(bool found, bool* featuresMatrix) {

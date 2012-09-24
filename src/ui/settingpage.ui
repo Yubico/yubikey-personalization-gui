@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>0</number>
+   <number>1</number>
   </property>
   <widget class="QWidget" name="basePage">
    <property name="sizePolicy">
@@ -976,7 +976,7 @@ color: rgb(140, 192, 65);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>340</y>
+      <y>175</y>
       <width>711</width>
       <height>80</height>
      </rect>
@@ -1043,6 +1043,114 @@ font-weight: bold;</string>
      </property>
      <property name="flat">
       <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="slotWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>361</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="updateSlotLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>321</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108);</string>
+     </property>
+     <property name="text">
+      <string>Select the configuration slot to be updated</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="updateSlot1Radio">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>151</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Configuration Slot 1</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="updateSlot2Radio">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>30</y>
+       <width>151</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Configuration Slot 2</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="dormantWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>361</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="updateDormantLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>321</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108);</string>
+     </property>
+     <property name="text">
+      <string>Select to make the configuration dormant</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="updateDormantCheck">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>151</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Dormant</string>
      </property>
     </widget>
    </widget>

@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SETTINGPAGE_H
 
 #include <QStackedWidget>
+#include "yubikeyconfig.h"
 
 namespace Ui {
     class SettingPage;
@@ -52,6 +53,8 @@ private:
     };
     int m_currentPage;
 
+    YubiKeyConfig *m_ykConfig;
+
 private slots:
     void connectHelpButtons();
     void setCurrentPage(int pageIndex);
@@ -65,6 +68,9 @@ private slots:
     void on_custPrefixTxt_editingFinished();
     void on_logOutputCheck_stateChanged(int state);
     void on_browseBtn_clicked();
+
+    void on_doUpdateBtn_clicked();
+    void updateConfigWritten(bool written, const QString &msg);
 
     void keyFound(bool found, bool* featuresMatrix);
 signals:
