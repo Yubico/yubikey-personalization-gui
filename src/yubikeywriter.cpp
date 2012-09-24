@@ -382,7 +382,7 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
         }
 
         if(flagUpdateSupport) {
-            EXTFLAG(ALLOW_UPDATE, ykConfig->updatable());
+            EXTFLAG(ALLOW_UPDATE, ykConfig->allowUpdate());
             // XXX: let update support mean these as well..
             EXTFLAG(DORMANT, ykConfig->dormant());
             EXTFLAG(FAST_TRIG, ykConfig->fastTrig());

@@ -155,7 +155,7 @@ typedef std::vector<int>::size_type size_t;
 
 #define SG_MAN_UPDATE               "Flag/ManUpdate"
 
-#define SG_UPDATABLE                "Flag/Updatable"
+#define SG_ALLOW_UPDATE             "Flag/AllowUpdate"
 #define SG_FAST_TRIG                "Flag/FastTrig"
 #define SG_USE_NUMERIC_KEYPAD       "Flag/UseNumericKeypad"
 
@@ -197,7 +197,7 @@ typedef std::vector<int>::size_type size_t;
 
 #define HELP_CHALRESP_OPTION        tr("<p>If this option is selected, when a client-side interface software presents a Challenge to the YubiKey, the light starts flashing and the user has to touch the YubiKey button to acknowledge the challenge-response operation before the computed Response is sent back.</p>")
 
-#define HELP_UPDATABLE_OPTION       tr("<p>If this option is selected the YubiKey configuration will be updatable, without rewriting the aes-key, only non-security related settings are changeable with this.</p>")
+#define HELP_ALLOW_UPDATE_OPTION       tr("<p>If this option is selected the YubiKey configuration will be updatable, without rewriting the aes-key. Only non-security related settings are changeable with this.</p>")
 
-#define HELP_SWAP_OPTION            tr("<p>If both slots are updatable they can be swapped with this option. That is slot 1 and slot 2 will change places.</p>")
+#define HELP_SWAP_OPTION            tr("<p>If both slots are configured to allow updates they can be swapped with this option. That is slot 1 and slot 2 will change places.</p>")
 #endif // COMMON_H

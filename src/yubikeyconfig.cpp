@@ -73,10 +73,10 @@ YubiKeyConfig::YubiKeyConfig() {
     m_serialUsbVisible = settings.value(SG_SR_USB_VISIBLE).toBool();
     m_serialApiVisible = settings.value(SG_SR_API_VISIBLE).toBool();
 
-    if(settings.contains(SG_UPDATABLE)) {
-        m_updatable = settings.value(SG_UPDATABLE).toBool();
+    if(settings.contains(SG_ALLOW_UPDATE)) {
+        m_allowUpdate = settings.value(SG_ALLOW_UPDATE).toBool();
     } else {
-        m_updatable = true;
+        m_allowUpdate = true;
     }
 
     m_dormant = false;

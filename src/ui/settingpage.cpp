@@ -105,7 +105,7 @@ void SettingPage::connectHelpButtons() {
     mapper->setMapping(ui->outFormatHelpBtn, HelpBox::Help_OutputFormat);
     mapper->setMapping(ui->outSpeedHelpBtn, HelpBox::Help_OutputSpeed);
     mapper->setMapping(ui->srVisibilityHelpBtn, HelpBox::Help_SrNoVisibility);
-    mapper->setMapping(ui->updateHelpBtn, HelpBox::Help_Updatable);
+    mapper->setMapping(ui->updateHelpBtn, HelpBox::Help_AllowUpdate);
     mapper->setMapping(ui->configProtectionHelpBtn, HelpBox::Help_ConfigurationProtection);
     mapper->setMapping(ui->swapHelpBtn, HelpBox::Help_Swap);
 
@@ -152,7 +152,7 @@ void SettingPage::restoreDefaults() {
 
     settings.setValue(SG_MAN_UPDATE,            false);
 
-    settings.setValue(SG_UPDATABLE,             true);
+    settings.setValue(SG_ALLOW_UPDATE,          true);
     settings.setValue(SG_FAST_TRIG,             false);
     settings.setValue(SG_USE_NUMERIC_KEYPAD,    false);
 }
@@ -217,8 +217,8 @@ void SettingPage::load() {
     ui->manUpdateCheck->setChecked(settings.value(SG_MAN_UPDATE).toBool());
 
     //Updatable settings...
-    if(settings.contains(SG_UPDATABLE)) {
-        ui->updateCheck->setChecked(settings.value(SG_UPDATABLE).toBool());
+    if(settings.contains(SG_ALLOW_UPDATE)) {
+        ui->updateCheck->setChecked(settings.value(SG_ALLOW_UPDATE).toBool());
     } else {
         ui->updateCheck->setChecked(true);
     }
@@ -307,7 +307,7 @@ void SettingPage::save() {
     settings.setValue(SG_MAN_UPDATE,        ui->manUpdateCheck->isChecked());
 
     // Updatable settings...
-    settings.setValue(SG_UPDATABLE,         ui->updateCheck->isChecked());
+    settings.setValue(SG_ALLOW_UPDATE, ui->updateCheck->isChecked());
 
     // Extended settings
     settings.setValue(SG_FAST_TRIG, ui->fastTrigCheck->isChecked());

@@ -226,10 +226,10 @@ public:
     bool serialApiVisible() const
     {return m_serialApiVisible;}
 
-    void setUpdatable(bool updatable)
-    {m_updatable = updatable;}
-    bool updatable() const
-    {return m_updatable;}
+    void setAllowUpdate(bool allowUpdate)
+    {m_allowUpdate = allowUpdate;}
+    bool allowUpdate() const
+    {return m_allowUpdate;}
 
     void setDormant(bool dormant)
     {m_dormant = dormant;}
@@ -294,7 +294,7 @@ private:
     bool m_serialApiVisible;
 
     // v2.3 settings
-    bool m_updatable;
+    bool m_allowUpdate;
     bool m_dormant;
     bool m_fastTrig;
     bool m_useNumericKeypad;
