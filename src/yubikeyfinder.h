@@ -66,6 +66,7 @@ public:
         Feature_MovingFactor,
         Feature_ChallengeResponseFixed,
         Feature_Updatable,
+        Feature_Ndef,
     };
 
     State state() const

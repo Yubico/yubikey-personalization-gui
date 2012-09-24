@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 YubiKeyFinder* YubiKeyFinder::_instance = 0;
 
+// first version is inclusive, second is exclusive
 const unsigned int YubiKeyFinder::FEATURE_MATRIX[][2] = {
     { YK_VERSION(2,0,0), 0 },   //Feature_MultipleConfigurations
     { YK_VERSION(2,0,0), 0 },   //Feature_ProtectConfiguration2
@@ -45,6 +46,7 @@ const unsigned int YubiKeyFinder::FEATURE_MATRIX[][2] = {
     { YK_VERSION(2,2,0), 0 },   //Feature_MovingFactor
     { YK_VERSION(2,3,0), 0 },   //Feature_ChallengeResponseFixed
     { YK_VERSION(2,3,0), 0 },   //Feature_Updatable
+    { YK_VERSION(2,1,4), YK_VERSION(2,2,0)}, // Feature_Ndef
 };
 
 YubiKeyFinder::YubiKeyFinder() {
@@ -109,7 +111,7 @@ bool YubiKeyFinder::checkFeatureSupport(Feature feature) {
        (unsigned int) feature < sizeof(FEATURE_MATRIX)/sizeof(FEATURE_MATRIX[0])) {
         return (
                 m_version >= FEATURE_MATRIX[feature][0] &&
-                (FEATURE_MATRIX[feature][1] == 0 || m_version <= FEATURE_MATRIX[feature][1])
+                (FEATURE_MATRIX[feature][1] == 0 || m_version < FEATURE_MATRIX[feature][1])
                 );
     }
 

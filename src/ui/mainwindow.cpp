@@ -262,6 +262,8 @@ void MainWindow::resetDeviceInfo() {
     ui->chalRespSupportLbl->setText(NA);
     ui->updatableSupportLbl->setPixmap(NULL);
     ui->updatableSupportLbl->setText(NA);
+    ui->ndefSupportLbl->setPixmap(NULL);
+    ui->ndefSupportLbl->setText(NA);
 }
 
 void MainWindow::keyFound(bool found, bool* featuresMatrix) {
@@ -396,6 +398,12 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
             ui->updatableSupportLbl->setPixmap(TICKMAP);
         } else {
             ui->updatableSupportLbl->setPixmap(CROSSMAP);
+        }
+
+        if(featuresMatrix[YubiKeyFinder::Feature_Ndef]) {
+            ui->ndefSupportLbl->setPixmap(TICKMAP);
+        } else {
+            ui->ndefSupportLbl->setPixmap(CROSSMAP);
         }
     } else {
         ui->deviceImage->setHidden(true);
