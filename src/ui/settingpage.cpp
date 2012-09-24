@@ -34,13 +34,22 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "common.h"
 
 SettingPage::SettingPage(QWidget *parent) :
-        QWidget(parent),
+        QStackedWidget(parent),
         ui(new Ui::SettingPage)
 {
+    QSignalMapper *mapper = new QSignalMapper(this);
     ui->setupUi(this);
 
     //Connect help buttons
     connectHelpButtons();
+
+    connect(ui->updateBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+    connect(ui->updateBackBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+    mapper->setMapping(ui->updateBtn, Page_Update);
+    mapper->setMapping(ui->updateBackBtn, Page_Base);
+    connect(mapper, SIGNAL(mapped(int)), this, SLOT(setCurrentPage(int)));
+    m_currentPage = 0;
+    setCurrentIndex(Page_Base);
 
     //Connect other signals and slots
     connect(ui->saveBtn, SIGNAL(clicked()),
@@ -61,6 +70,9 @@ SettingPage::SettingPage(QWidget *parent) :
     connect(ui->srApiVisibleCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->manUpdateCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->updateCheck, SIGNAL(clicked()), this, SLOT(save()));
+
+    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
+            this, SLOT(keyFound(bool, bool*)));
 }
 
 SettingPage::~SettingPage() {
@@ -87,6 +99,11 @@ void SettingPage::connectHelpButtons() {
 
     //Connect the mapper
     connect(mapper, SIGNAL(mapped(int)), this, SLOT(helpBtn_pressed(int)));
+}
+
+void SettingPage::setCurrentPage(int pageIndex) {
+    m_currentPage = pageIndex;
+    setCurrentIndex(pageIndex);
 }
 
 void SettingPage::helpBtn_pressed(int helpIndex) {
@@ -345,5 +362,15 @@ void SettingPage::on_browseBtn_clicked() {
     if(!fileName.isEmpty()) {
         ui->logFileTxt->setText(fileName);
         save();
+    }
+}
+
+void SettingPage::keyFound(bool found, bool* featuresMatrix) {
+    if(found) {
+        if(featuresMatrix[YubiKeyFinder::Feature_Updatable]) {
+            ui->updateBtn->setEnabled(true);
+        }
+    } else {
+        ui->updateBtn->setEnabled(false);
     }
 }

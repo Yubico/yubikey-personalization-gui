@@ -29,13 +29,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef SETTINGPAGE_H
 #define SETTINGPAGE_H
 
-#include <QWidget>
+#include <QStackedWidget>
 
 namespace Ui {
     class SettingPage;
 }
 
-class SettingPage : public QWidget {
+class SettingPage : public QStackedWidget {
     Q_OBJECT
 
 public:
@@ -46,8 +46,15 @@ public:
 private:
     Ui::SettingPage *ui;
 
+    enum Page {
+        Page_Base,
+        Page_Update,
+    };
+    int m_currentPage;
+
 private slots:
     void connectHelpButtons();
+    void setCurrentPage(int pageIndex);
     void helpBtn_pressed(int helpIndex);
     void restoreDefaults();
     void load();
@@ -59,6 +66,7 @@ private slots:
     void on_logOutputCheck_stateChanged(int state);
     void on_browseBtn_clicked();
 
+    void keyFound(bool found, bool* featuresMatrix);
 signals:
     void settingsChanged();
     void showStatusMessage(const QString &text, int status = 0);
