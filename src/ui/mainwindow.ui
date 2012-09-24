@@ -1128,9 +1128,6 @@ border-radius: 5px;</string>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
-     <property name="buddy">
-      <cstring></cstring>
-     </property>
     </widget>
    </widget>
   </widget>
