@@ -162,6 +162,11 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             command = ykConfig->configSlot() == 2 ? SLOT_UPDATE2 : SLOT_UPDATE1;
             break;
 
+        case YubiKeyConfig::Mode_Swap:
+            // swap has it's own command
+            command = SLOT_SWAP;
+            break;
+
         case YubiKeyConfig::Mode_YubicoOtp:
             break;
 

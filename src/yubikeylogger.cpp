@@ -105,6 +105,10 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
     case YubiKeyConfig::Mode_Update:
         eventType = tr("Configuration Update");
         break;
+
+    case YubiKeyConfig::Mode_Swap:
+        eventType = tr("Configuration Swap");
+        break;
     }
     out << eventType;
 

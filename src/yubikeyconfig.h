@@ -43,6 +43,7 @@ public:
         Mode_ChalRespYubico,
         Mode_ChalRespHmac,
         Mode_Update,
+        Mode_Swap,
     };
 
     void setProgrammingMode(Mode mode)
