@@ -83,12 +83,14 @@ void AboutPage::connectButtons() {
     connect(ui->oathBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->staticBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->chalRespBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+    connect(ui->settingsBtn, SIGNAL(clicked()), mapper, SLOT(map()));
 
     //Set a value for each button
     mapper->setMapping(ui->otpBtn, MainWindow::Page_Otp);
     mapper->setMapping(ui->oathBtn, MainWindow::Page_Oath);
     mapper->setMapping(ui->staticBtn, MainWindow::Page_Static);
     mapper->setMapping(ui->chalRespBtn, MainWindow::Page_ChalResp);
+    mapper->setMapping(ui->settingsBtn, MainWindow::Page_Settings);
 
     //Connect the mapper
     connect(mapper, SIGNAL(mapped(int)), this, SLOT(btn_pressed(int)));
