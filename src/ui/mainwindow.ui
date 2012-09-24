@@ -177,7 +177,7 @@ color: rgb(221, 97, 99);
        <x>8</x>
        <y>380</y>
        <width>155</width>
-       <height>155</height>
+       <height>200</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -424,6 +424,44 @@ background-color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>Scan Code Mode</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="updatableSupportDescLbl">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>145</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-weight: normal;</string>
+      </property>
+      <property name="lineWidth">
+       <number>2</number>
+      </property>
+      <property name="text">
+       <string>Updatable</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="updatableSupportLbl">
+      <property name="geometry">
+       <rect>
+        <x>128</x>
+        <y>145</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-weight: normal;</string>
+      </property>
+      <property name="text">
+       <string>N/A</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
     </widget>

@@ -260,6 +260,8 @@ void MainWindow::resetDeviceInfo() {
     ui->scanCodeSupportLbl->setText(NA);
     ui->chalRespSupportLbl->setPixmap(NULL);
     ui->chalRespSupportLbl->setText(NA);
+    ui->updatableSupportLbl->setPixmap(NULL);
+    ui->updatableSupportLbl->setText(NA);
 }
 
 void MainWindow::keyFound(bool found, bool* featuresMatrix) {
@@ -388,6 +390,12 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
             ui->chalRespSupportLbl->setPixmap(CROSSMAP);
             ui->chalRespMenuBtn->setStyleSheet(disabledMenuBtnSS);
             ui->chalRespMenuBtn->setEnabled(false);
+        }
+
+        if(featuresMatrix[YubiKeyFinder::Feature_Updatable]) {
+            ui->updatableSupportLbl->setPixmap(TICKMAP);
+        } else {
+            ui->updatableSupportLbl->setPixmap(CROSSMAP);
         }
     } else {
         ui->deviceImage->setHidden(true);
