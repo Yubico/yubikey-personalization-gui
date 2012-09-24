@@ -89,7 +89,7 @@ typedef std::vector<int>::size_type size_t;
 #define SS_BLANK_BTN                "background-image: url(:/res/images/blank.png); border-radius: 2px;"
 
 #define SS_LINK_ENABLED             "font: 12px \"Verdana\"; text-decoration: underline; text-align: left; color: rgb(5, 67, 168);"
-#define SS_LINK_DISABLED            "font: 12px \"Verdana\"; text-decoration: underline; text_align: left; color: rgb(118,116,108);"
+#define SS_LINK_DISABLED            "font: 12px \"Verdana\"; text-decoration: underline; text-align: left; color: rgb(118,116,108);"
 
 
 //Messages
