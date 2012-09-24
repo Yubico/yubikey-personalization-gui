@@ -60,6 +60,7 @@ SettingPage::SettingPage(QWidget *parent) :
     connect(ui->srUsbVisibleCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->srApiVisibleCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->manUpdateCheck, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->updateCheck, SIGNAL(clicked()), this, SLOT(save()));
 }
 
 SettingPage::~SettingPage() {
@@ -76,11 +77,13 @@ void SettingPage::connectHelpButtons() {
     connect(ui->outFormatHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->outSpeedHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->srVisibilityHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+    connect(ui->updateHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
 
     //Set a value for each button
     mapper->setMapping(ui->outFormatHelpBtn, HelpBox::Help_OutputFormat);
     mapper->setMapping(ui->outSpeedHelpBtn, HelpBox::Help_OutputSpeed);
     mapper->setMapping(ui->srVisibilityHelpBtn, HelpBox::Help_SrNoVisibility);
+    mapper->setMapping(ui->updateHelpBtn, HelpBox::Help_Updatable);
 
     //Connect the mapper
     connect(mapper, SIGNAL(mapped(int)), this, SLOT(helpBtn_pressed(int)));
@@ -119,6 +122,8 @@ void SettingPage::restoreDefaults() {
     settings.setValue(SG_SR_API_VISIBLE,        true);
 
     settings.setValue(SG_MAN_UPDATE,            false);
+
+    settings.setValue(SG_UPDATABLE,             true);
 }
 
 void SettingPage::load() {
@@ -179,6 +184,13 @@ void SettingPage::load() {
 
     //Static Password settings...
     ui->manUpdateCheck->setChecked(settings.value(SG_MAN_UPDATE).toBool());
+
+    //Updatable settings...
+    if(settings.contains(SG_UPDATABLE)) {
+        ui->updateCheck->setChecked(settings.value(SG_UPDATABLE).toBool());
+    } else {
+        ui->updateCheck->setChecked(true);
+    }
 
     //Logging settings...
     if(logDisabled) {
@@ -258,6 +270,9 @@ void SettingPage::save() {
 
     //Static Password settings...
     settings.setValue(SG_MAN_UPDATE,        ui->manUpdateCheck->isChecked());
+
+    // Updatable settings...
+    settings.setValue(SG_UPDATABLE,         ui->updateCheck->isChecked());
 
     //Logging settings...
     if(ui->logOutputCheck->isChecked()) {

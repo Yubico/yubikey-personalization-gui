@@ -59,6 +59,7 @@ public:
         Help_ChalRespYubico,
         Help_ChalRespHmac,
         Help_ChalRespOption,
+        Help_Updatable,
     };
 
     void setHelpIndex(Help helpIndex);

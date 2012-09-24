@@ -224,6 +224,11 @@ public:
     bool serialApiVisible() const
     {return m_serialApiVisible;}
 
+    void setUpdatable(bool updatable)
+    {m_updatable = updatable;}
+    bool updatable() const
+    {return m_updatable;}
+
 private:
     Mode m_mode;
     int m_configSlot;
@@ -270,6 +275,8 @@ private:
     bool m_serialBtnVisible;
     bool m_serialUsbVisible;
     bool m_serialApiVisible;
+
+    bool m_updatable;
 };
 
 #endif // YUBIKEYCONFIG_H

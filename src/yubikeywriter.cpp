@@ -111,9 +111,14 @@ QString YubiKeyWriter::reportError() {
 void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
     // Check features support
     bool flagSrNoSupport = false;
+    bool flagUpdateSupport = false;
     if(YubiKeyFinder::getInstance()->checkFeatureSupport(
             YubiKeyFinder::Feature_SerialNumber)) {
         flagSrNoSupport = true;
+    }
+    if(YubiKeyFinder::getInstance()->checkFeatureSupport(
+          YubiKeyFinder::Feature_Updatable)) {
+        flagUpdateSupport = true;
     }
 
     YubiKeyFinder::getInstance()->stop();
@@ -362,6 +367,10 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             EXTFLAG(SERIAL_BTN_VISIBLE, ykConfig->serialBtnVisible());
             EXTFLAG(SERIAL_USB_VISIBLE, ykConfig->serialUsbVisible());
             EXTFLAG(SERIAL_API_VISIBLE, ykConfig->serialApiVisible());
+        }
+
+        if(flagUpdateSupport) {
+            EXTFLAG(ALLOW_UPDATE, ykConfig->updatable());
         }
 
         //Log configuration...

@@ -155,6 +155,8 @@ typedef std::vector<int>::size_type size_t;
 
 #define SG_MAN_UPDATE               "Flag/ManUpdate"
 
+#define SG_UPDATABLE                "Flag/Updatable"
+
 #define SG_OVERWRITE_CONF_SLOT1     "DontAsk/Slot1Overwriting"
 #define SG_DIFF_PUBLIC_ID_LEN       "DontAsk/PublicIdLen"
 #define SG_ENABLE_CONF_PROTECTION   "DontAsk/ConfProtection"
@@ -192,5 +194,7 @@ typedef std::vector<int>::size_type size_t;
 #define HELP_CHALRESP_HMAC          tr("<p>The Challenge-Response mode allows programmatic interaction between a client-side application and the YubiKey by support of a client-side interface software, such as the YubiKey Client API.</p><p>The challenge-response mode can either be Yubico OTP compatible mode or HMAC-SHA1.</p><p>The HMAC-SHA1 Challenge-Response mode takes a 0-64 byte challenge and creates a HMAC using HMAC-SHA1 algorithm in combination with a 20 byte secret key. In this mode, the YubiKey does not make use of any variable field and hence generates an identical response if the challenge is same.</p>")
 
 #define HELP_CHALRESP_OPTION        tr("<p>If this option is selected, when a client-side interface software presents a Challenge to the YubiKey, the light starts flashing and the user has to touch the YubiKey button to acknowledge the challenge-response operation before the computed Response is sent back.</p>")
+
+#define HELP_UPDATABLE_OPTION       tr("<p>If this option is selected the YubiKey configuration will be updatable, without rewriting the aes-key, only non-security related settings are changeable with this.</p>")
 
 #endif // COMMON_H

@@ -72,6 +72,12 @@ YubiKeyConfig::YubiKeyConfig() {
     m_serialBtnVisible = settings.value(SG_SR_BTN_VISIBLE).toBool();
     m_serialUsbVisible = settings.value(SG_SR_USB_VISIBLE).toBool();
     m_serialApiVisible = settings.value(SG_SR_API_VISIBLE).toBool();
+
+    if(settings.contains(SG_UPDATABLE)) {
+        m_updatable = settings.value(SG_UPDATABLE).toBool();
+    } else {
+        m_updatable = true;
+    }
 }
 
 void YubiKeyConfig::setPubIdTxt(const QString &pubIdTxt) {
