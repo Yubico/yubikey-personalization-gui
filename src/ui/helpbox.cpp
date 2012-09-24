@@ -115,6 +115,10 @@ void HelpBox::setHelpIndex(Help helpIndex) {
         title = tr("Updatable");
         helpMsg = HELP_UPDATABLE_OPTION;
         break;
+    case Help_Swap:
+        title = tr("Swap");
+        helpMsg = HELP_SWAP_OPTION;
+        break;
 
     default:
         helpMsg = tr("");

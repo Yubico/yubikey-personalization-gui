@@ -70,7 +70,9 @@ private slots:
     void on_browseBtn_clicked();
 
     void on_doUpdateBtn_clicked();
+    void on_swapBtn_clicked();
     void updateConfigWritten(bool written, const QString &msg);
+    void swapWritten(bool written, const QString &msg);
 
     void on_configProtectionCombo_currentIndexChanged(int index);
     void on_currentAccessCodeTxt_editingFinished();

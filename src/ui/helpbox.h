@@ -60,6 +60,7 @@ public:
         Help_ChalRespHmac,
         Help_ChalRespOption,
         Help_Updatable,
+        Help_Swap,
     };
 
     void setHelpIndex(Help helpIndex);

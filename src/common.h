@@ -197,4 +197,5 @@ typedef std::vector<int>::size_type size_t;
 
 #define HELP_UPDATABLE_OPTION       tr("<p>If this option is selected the YubiKey configuration will be updatable, without rewriting the aes-key, only non-security related settings are changeable with this.</p>")
 
+#define HELP_SWAP_OPTION            tr("<p>If both slots are updatable they can be swapped with this option. That is slot 1 and slot 2 will change places.</p>")
 #endif // COMMON_H
