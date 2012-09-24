@@ -73,6 +73,8 @@ SettingPage::SettingPage(QWidget *parent) :
     connect(ui->srApiVisibleCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->manUpdateCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->updateCheck, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->fastTrigCheck, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->useNumericKeypadCheck, SIGNAL(clicked()), this, SLOT(save()));
 
     connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
             this, SLOT(keyFound(bool, bool*)));
@@ -151,6 +153,8 @@ void SettingPage::restoreDefaults() {
     settings.setValue(SG_MAN_UPDATE,            false);
 
     settings.setValue(SG_UPDATABLE,             true);
+    settings.setValue(SG_FAST_TRIG,             false);
+    settings.setValue(SG_USE_NUMERIC_KEYPAD,    false);
 }
 
 void SettingPage::load() {
@@ -218,6 +222,10 @@ void SettingPage::load() {
     } else {
         ui->updateCheck->setChecked(true);
     }
+
+    // extended settings..
+    ui->fastTrigCheck->setChecked(settings.value(SG_FAST_TRIG).toBool());
+    ui->useNumericKeypadCheck->setChecked(settings.value(SG_USE_NUMERIC_KEYPAD).toBool());
 
     //Logging settings...
     if(logDisabled) {
@@ -300,6 +308,10 @@ void SettingPage::save() {
 
     // Updatable settings...
     settings.setValue(SG_UPDATABLE,         ui->updateCheck->isChecked());
+
+    // Extended settings
+    settings.setValue(SG_FAST_TRIG, ui->fastTrigCheck->isChecked());
+    settings.setValue(SG_USE_NUMERIC_KEYPAD, ui->useNumericKeypadCheck->isChecked());
 
     //Logging settings...
     if(ui->logOutputCheck->isChecked()) {

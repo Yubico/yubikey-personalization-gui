@@ -383,7 +383,10 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
 
         if(flagUpdateSupport) {
             EXTFLAG(ALLOW_UPDATE, ykConfig->updatable());
+            // XXX: let update support mean these as well..
             EXTFLAG(DORMANT, ykConfig->dormant());
+            EXTFLAG(FAST_TRIG, ykConfig->fastTrig());
+            EXTFLAG(USE_NUMERIC_KEYPAD, ykConfig->useNumericKeypad());
         }
 
         //Log configuration...

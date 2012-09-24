@@ -80,6 +80,8 @@ YubiKeyConfig::YubiKeyConfig() {
     }
 
     m_dormant = false;
+    m_fastTrig = settings.value(SG_FAST_TRIG).toBool();
+    m_useNumericKeypad = settings.value(SG_USE_NUMERIC_KEYPAD).toBool();
 }
 
 void YubiKeyConfig::setPubIdTxt(const QString &pubIdTxt) {

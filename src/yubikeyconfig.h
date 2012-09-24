@@ -236,6 +236,16 @@ public:
     bool dormant() const
     {return m_dormant;}
 
+    void setFastTrig(bool fastTrig)
+    {m_fastTrig = fastTrig;}
+    bool fastTrig() const
+    {return m_fastTrig;}
+
+    void setUseNumericKeypad(bool useNumericKeypad)
+    {m_useNumericKeypad = useNumericKeypad;}
+    bool useNumericKeypad() const
+    {return m_useNumericKeypad;}
+
 private:
     Mode m_mode;
     int m_configSlot;
@@ -283,9 +293,11 @@ private:
     bool m_serialUsbVisible;
     bool m_serialApiVisible;
 
+    // v2.3 settings
     bool m_updatable;
-
     bool m_dormant;
+    bool m_fastTrig;
+    bool m_useNumericKeypad;
 };
 
 #endif // YUBIKEYCONFIG_H
