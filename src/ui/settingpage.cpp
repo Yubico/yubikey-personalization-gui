@@ -403,18 +403,17 @@ void SettingPage::on_doUpdateBtn_clicked() {
 }
 
 void SettingPage::updateConfigWritten(bool written, const QString &msg) {
-    QString message;
     disconnect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
         this, SLOT(updateConfigWritten(bool, const QString &)));
 
     if(written) {
         qDebug() << "Configuration updated." << msg;
+        emit showStatusMessage(tr("Configuration successfully updated.", 0));
     } else {
         qDebug() << "Failed update.";
-        message = msg;
+        emit showStatusMessage(msg, 1);;
     }
 
-    emit showStatusMessage(msg, 0);
 }
 
 void SettingPage::keyFound(bool found, bool* featuresMatrix) {
