@@ -393,6 +393,10 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
         ui->deviceImage->setHidden(true);
         if(ui->deviceImage->movie()) {
             delete(ui->deviceImage->movie());
+            ui->deviceImage->setMovie(NULL);
+        }
+        if(ui->deviceImage->pixmap()) {
+            ui->deviceImage->setPixmap(NULL);
         }
         ui->statusLbl->setText(NO_KEY_FOUND);
         ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_ERROR));
