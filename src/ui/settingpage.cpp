@@ -96,12 +96,14 @@ void SettingPage::connectHelpButtons() {
     connect(ui->outSpeedHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->srVisibilityHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->updateHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+    connect(ui->configProtectionHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
 
     //Set a value for each button
     mapper->setMapping(ui->outFormatHelpBtn, HelpBox::Help_OutputFormat);
     mapper->setMapping(ui->outSpeedHelpBtn, HelpBox::Help_OutputSpeed);
     mapper->setMapping(ui->srVisibilityHelpBtn, HelpBox::Help_SrNoVisibility);
     mapper->setMapping(ui->updateHelpBtn, HelpBox::Help_Updatable);
+    mapper->setMapping(ui->configProtectionHelpBtn, HelpBox::Help_ConfigurationProtection);
 
     //Connect the mapper
     connect(mapper, SIGNAL(mapped(int)), this, SLOT(helpBtn_pressed(int)));
@@ -391,6 +393,15 @@ void SettingPage::on_doUpdateBtn_clicked() {
     m_ykConfig->setProgrammingMode(YubiKeyConfig::Mode_Update);
     m_ykConfig->setConfigSlot(slot);
 
+    // access code
+    m_ykConfig->setCurrentAccessCodeTxt(ui->currentAccessCodeTxt->text());
+    if(ui->configProtectionCombo->currentIndex() ==
+        CONFIG_PROTECTION_DISABLE) {
+        m_ykConfig->setNewAccessCodeTxt(ACCESS_CODE_DEFAULT);
+    } else {
+        m_ykConfig->setNewAccessCodeTxt(ui->newAccessCodeTxt->text());
+    }
+
     if(ui->updateDormantCheck->isChecked()) {
         m_ykConfig->setDormant(true);
     }
@@ -414,6 +425,53 @@ void SettingPage::updateConfigWritten(bool written, const QString &msg) {
         emit showStatusMessage(msg, 1);;
     }
 
+}
+
+
+void SettingPage::on_configProtectionCombo_currentIndexChanged(int index) {
+    switch(index) {
+    case CONFIG_PROTECTION_DISABLED:
+        ui->currentAccessCodeTxt->clear();
+        ui->currentAccessCodeTxt->setEnabled(false);
+
+        ui->newAccessCodeTxt->clear();
+        ui->newAccessCodeTxt->setEnabled(false);
+        break;
+    case CONFIG_PROTECTION_ENABLE:
+        ui->currentAccessCodeTxt->clear();
+        ui->currentAccessCodeTxt->setEnabled(false);
+
+        on_newAccessCodeTxt_editingFinished();
+        ui->newAccessCodeTxt->setEnabled(true);
+        break;
+    case CONFIG_PROTECTION_DISABLE:
+    case CONFIG_PROTECTION_ENABLED:
+        on_currentAccessCodeTxt_editingFinished();
+        ui->currentAccessCodeTxt->setEnabled(true);
+
+        ui->newAccessCodeTxt->clear();
+        ui->newAccessCodeTxt->setEnabled(false);
+        break;
+    case CONFIG_PROTECTION_CHANGE:
+        on_currentAccessCodeTxt_editingFinished();
+        ui->currentAccessCodeTxt->setEnabled(true);
+
+        on_newAccessCodeTxt_editingFinished();
+        ui->newAccessCodeTxt->setEnabled(true);
+        break;
+    }
+}
+
+void SettingPage::on_currentAccessCodeTxt_editingFinished() {
+    QString txt = ui->currentAccessCodeTxt->text();
+    YubiKeyUtil::qstrClean(&txt, (size_t)ACC_CODE_SIZE * 2);
+    ui->currentAccessCodeTxt->setText(txt);
+}
+
+void SettingPage::on_newAccessCodeTxt_editingFinished() {
+    QString txt = ui->newAccessCodeTxt->text();
+    YubiKeyUtil::qstrClean(&txt, (size_t)ACC_CODE_SIZE * 2);
+    ui->newAccessCodeTxt->setText(txt);
 }
 
 void SettingPage::keyFound(bool found, bool* featuresMatrix) {
