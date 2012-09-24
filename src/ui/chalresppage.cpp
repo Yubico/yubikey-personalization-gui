@@ -31,7 +31,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui/helpbox.h"
 #include "ui/confirmbox.h"
 
-#include <QDesktopServices>
 #include "common.h"
 
 ChalRespPage::ChalRespPage(QWidget *parent) :
