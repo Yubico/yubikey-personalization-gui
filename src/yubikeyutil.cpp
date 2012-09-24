@@ -211,14 +211,14 @@ int YubiKeyUtil::generateRandom(unsigned char *result, size_t resultLen) {
 
     bufLen = sizeof(buf);
 #else
-    char *random_places[] = {
+    const char *random_places[] = {
         "/dev/srandom",
         "/dev/urandom",
         "/dev/random",
         0
     };
 
-    char **random_place;
+    const char **random_place;
 
     for (random_place = random_places; *random_place; random_place++) {
         FILE *random_file = fopen(*random_place, "r");
