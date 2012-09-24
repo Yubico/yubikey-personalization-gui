@@ -32,7 +32,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QFile>
 
 #include "common.h"
-#include "version.h"
 
 SettingPage::SettingPage(QWidget *parent) :
         QWidget(parent),
@@ -94,10 +93,6 @@ void SettingPage::helpBtn_pressed(int helpIndex) {
 }
 
 void SettingPage::init() {
-    QCoreApplication::setOrganizationName(VER_COMPANYNAME_STR);
-    QCoreApplication::setOrganizationDomain(VER_COMPANYDOMAIN_STR);
-    QCoreApplication::setApplicationName(VER_PRODUCTNAME_STR);
-
     load();
 }
 

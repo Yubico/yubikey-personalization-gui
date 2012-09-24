@@ -28,9 +28,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <QtGui/QApplication>
 #include "ui/mainwindow.h"
+#include "version.h"
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
+    a.setOrganizationName(VER_COMPANYNAME_STR);
+    a.setOrganizationDomain(VER_COMPANYDOMAIN_STR);
+    a.setApplicationName(VER_PRODUCTNAME_STR);
     MainWindow w;
     w.show();
 
