@@ -188,6 +188,12 @@ void ChalRespPage::keyFound(bool found, bool* featuresMatrix) {
                 ui->quickConfigSlot2Radio->setEnabled(true);
                 ui->advConfigSlot2Radio->setEnabled(true);
             }
+            if(!featuresMatrix[YubiKeyFinder::Feature_ChallengeResponseFixed]) {
+                ui->advHmacFixedInputRadio->setEnabled(false);
+                ui->advHmacVarInputRadio->setChecked(true);
+            } else {
+                ui->advHmacFixedInputRadio->setEnabled(true);
+            }
 
             if(!featuresMatrix[YubiKeyFinder::Feature_ChallengeResponse]) {
                 this->setEnabled(false);
@@ -211,6 +217,7 @@ void ChalRespPage::keyFound(bool found, bool* featuresMatrix) {
     } else {
         ui->quickWriteConfigBtn->setEnabled(false);
         ui->advWriteConfigBtn->setEnabled(false);
+        ui->advHmacFixedInputRadio->setEnabled(true);
 
         if(m_state == State_Initial) {
             ui->quickConfigSlot2Radio->setEnabled(true);

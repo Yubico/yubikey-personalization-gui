@@ -42,7 +42,8 @@ const unsigned int YubiKeyFinder::FEATURE_MATRIX[][2] = {
     { YK_VERSION(2,1,0), 0 },   //Feature_OathHotp
     { YK_VERSION(2,2,0), 0 },   //Feature_ChallengeResponse
     { YK_VERSION(2,2,0), 0 },   //Feature_SerialNumber
-    { YK_VERSION(2,2,0), 0 }    //Feature_MovingFactor
+    { YK_VERSION(2,2,0), 0 },   //Feature_MovingFactor
+    { YK_VERSION(2,3,0), 0 },   //Feature_ChallengeResponseFixed
 };
 
 YubiKeyFinder::YubiKeyFinder() {

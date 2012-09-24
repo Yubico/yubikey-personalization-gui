@@ -64,6 +64,7 @@ public:
         Feature_ChallengeResponse,
         Feature_SerialNumber,
         Feature_MovingFactor,
+        Feature_ChallengeResponseFixed,
     };
 
     State state() const
