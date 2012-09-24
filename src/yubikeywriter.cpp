@@ -378,6 +378,7 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
 
         if(flagUpdateSupport) {
             EXTFLAG(ALLOW_UPDATE, ykConfig->updatable());
+            EXTFLAG(DORMANT, ykConfig->dormant());
         }
 
         //Log configuration...

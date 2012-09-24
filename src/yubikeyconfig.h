@@ -230,6 +230,11 @@ public:
     bool updatable() const
     {return m_updatable;}
 
+    void setDormant(bool dormant)
+    {m_dormant = dormant;}
+    bool dormant() const
+    {return m_dormant;}
+
 private:
     Mode m_mode;
     int m_configSlot;
@@ -278,6 +283,8 @@ private:
     bool m_serialApiVisible;
 
     bool m_updatable;
+
+    bool m_dormant;
 };
 
 #endif // YUBIKEYCONFIG_H

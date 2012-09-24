@@ -372,7 +372,6 @@ void SettingPage::on_browseBtn_clicked() {
 }
 
 void SettingPage::on_doUpdateBtn_clicked() {
-    bool dormant = false;
     int slot;
 
     if(ui->updateSlot1Radio->isChecked()) {
@@ -384,10 +383,6 @@ void SettingPage::on_doUpdateBtn_clicked() {
       return;
     }
 
-    if(ui->updateDormantCheck->isChecked()) {
-        dormant = true;
-    }
-
     if(m_ykConfig != NULL) {
         delete m_ykConfig;
     }
@@ -395,6 +390,10 @@ void SettingPage::on_doUpdateBtn_clicked() {
 
     m_ykConfig->setProgrammingMode(YubiKeyConfig::Mode_Update);
     m_ykConfig->setConfigSlot(slot);
+
+    if(ui->updateDormantCheck->isChecked()) {
+        m_ykConfig->setDormant(true);
+    }
 
     //Write
     connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),

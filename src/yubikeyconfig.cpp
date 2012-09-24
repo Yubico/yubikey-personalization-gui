@@ -78,6 +78,8 @@ YubiKeyConfig::YubiKeyConfig() {
     } else {
         m_updatable = true;
     }
+
+    m_dormant = false;
 }
 
 void YubiKeyConfig::setPubIdTxt(const QString &pubIdTxt) {
