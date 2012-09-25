@@ -298,7 +298,7 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
         } else if(version % 10 == 9){
             pixmap.load(":/res/images/yubikey_devel.png");
         } else {
-            movie->setFileName(":/res/images/v2-2-animated-2-loops-2.gif");
+            movie->setFileName(":/res/images/v2-2-animated.gif");
         }
         if(pixmap.isNull()) {
             ui->deviceImage->setMovie(movie);
