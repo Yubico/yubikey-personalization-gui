@@ -28,8 +28,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "yubikeyfinder.h"
 
-#define YK_VERSION(MAJOR, MINOR, BUILD) (MAJOR * 100 + MINOR * 10 + BUILD)
-
 YubiKeyFinder* YubiKeyFinder::_instance = 0;
 
 // first version is inclusive, second is exclusive

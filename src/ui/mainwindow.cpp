@@ -276,29 +276,38 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
     resetDeviceInfo();
 
     if(found) {
-        QString version = YubiKeyFinder::getInstance()->versionStr();
+        YubiKeyFinder *finder = YubiKeyFinder::getInstance();
+        unsigned int version = finder->version();
         ui->statusLbl->setText(KEY_FOUND);
         ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_SUCCESS));
 
-        ui->versionLbl->setText(version);
-        qDebug() << "version is" << version;
+        ui->versionLbl->setText(finder->versionStr());
+        qDebug() << "version is" << finder->versionStr();
 
-        if(version.startsWith("1")) {
-            QPixmap pixmap(":/res/images/v1-3-not-animated.gif");
-            ui->deviceImage->setPixmap(pixmap);
-        } else if(version.startsWith("2")) {
-            QMovie *movie = new QMovie();
-            if(version.startsWith("2.0")) {
-                movie->setFileName(":/res/images/V2-0-Animated.gif");
-            } else if(version.startsWith("2.1")) {
-                movie->setFileName(":/res/images/v2-1-animated.gif");
-            } else if(version.startsWith("2.2") || version.startsWith("2.3")) {
-                movie->setFileName(":/res/images/v2-2-animated-2-loops-2.gif");
-            }
-            ui->deviceImage->setMovie(movie);
-            ui->deviceImage->setHidden(false);
-            movie->start();
+        QPixmap pixmap;
+        QMovie *movie = new QMovie();
+        if(version < YK_VERSION(2,0,0)) {
+            pixmap.load(":/res/images/v1-3-not-animated.png");
+        } else if(version < YK_VERSION(2,1,0)) {
+            movie->setFileName(":/res/images/V2-0-Animated.gif");
+        } else if(version < YK_VERSION(2,1,4)) {
+            movie->setFileName(":/res/images/v2-1-animated.gif");
+        } else if(version < YK_VERSION(2,2,0)) {
+            // YubiKey NEO
+            pixmap.load(":/res/images/neo_transparent.png");
+        } else if(version % 10 == 9){
+            pixmap.load(":/res/images/yubikey_devel.png");
+        } else {
+            movie->setFileName(":/res/images/v2-2-animated-2-loops-2.gif");
         }
+        if(pixmap.isNull()) {
+            ui->deviceImage->setMovie(movie);
+            movie->start();
+        } else {
+            delete movie;
+            ui->deviceImage->setPixmap(pixmap);
+        }
+        ui->deviceImage->setHidden(false);
 
         unsigned int serial = 0;
         if(featuresMatrix[YubiKeyFinder::Feature_SerialNumber]) {

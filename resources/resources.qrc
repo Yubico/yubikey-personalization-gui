@@ -10,8 +10,10 @@
         <file>images/blank.png</file>
         <file>images/logo.png</file>
         <file>images/V2-0-Animated.gif</file>
-        <file>images/v1-3-not-animated.gif</file>
+        <file>images/v1-3-not-animated.png</file>
         <file>images/v2-1-animated.gif</file>
         <file>images/v2-2-animated-2-loops-2.gif</file>
+        <file>images/neo_transparent.png</file>
+        <file>images/yubikey_devel.png</file>
     </qresource>
 </RCC>
