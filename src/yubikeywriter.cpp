@@ -509,3 +509,71 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
         QString errMsg = reportError();
     }
 }
+
+void YubiKeyWriter::writeNdef(bool uri, const QString language, const QString payload) {
+    YubiKeyFinder::getInstance()->stop();
+
+    YK_KEY *yk = 0;
+    YK_NDEF *ndef = ykp_alloc_ndef();
+
+    bool error = false;
+
+    qDebug() << "Writing ndef " << payload << " of type " << uri;
+
+    try {
+        QByteArray payload_array = payload.toUtf8();
+        const char *ndef_payload = payload_array.constData();
+        qDebug() << "payload: " << ndef_payload;
+        if (!yk_init()) {
+            throw 0;
+        } else if (!(yk = yk_open_first_key())) {
+            throw 0;
+        }
+
+        if (!(yk_check_firmware_version(yk))) {
+            throw 0;
+        }
+
+        if(uri) {
+            if(!ykp_construct_ndef_uri(ndef, ndef_payload)) {
+                throw 0;
+            }
+        } else {
+            QByteArray lang_array = language.toUtf8();
+            const char *lang = lang_array.constData();
+            if(!ykp_construct_ndef_text(ndef, ndef_payload, lang, false)) {
+                throw 0;
+            }
+        }
+
+        qDebug() << "writing the ndef.";
+        if(! yk_write_ndef(yk, ndef)) {
+            throw 0;
+        }
+        emit configWritten(true, NULL);
+    } catch(...) {
+        error = true;
+    }
+
+    if(ndef && !ykp_free_ndef(ndef)) {
+        error = true;
+    }
+
+    if (yk && !yk_close_key(yk)) {
+        error = true;
+    }
+
+    if (!yk_release()) {
+        error = true;
+    }
+
+    YubiKeyFinder::getInstance()->start();
+
+
+    if(error) {
+        qDebug() << "Writing NDEF failed.";
+        QString errMsg = reportError();
+        emit configWritten(false, errMsg);
+    }
+}
+

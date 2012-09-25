@@ -49,6 +49,7 @@ private:
         Page_Base,
         Page_Converter,
         Page_ChalResp,
+        Page_Ndef,
     };
     int m_currentPage;
 
@@ -75,6 +76,12 @@ private slots:
     void resetChalRespPage();
     void performChallengeResponse();
     void on_chalRespChallenge_editingFinished();
+
+    // ndef page
+    void resetNdefPage();
+    void programNdef();
+    void on_ndefTextRadio_toggled(bool checked);
+    void ndefWritten(bool written, const QString &msg);
 
     void keyFound(bool found, bool* featuresMatrix);
 signals:
