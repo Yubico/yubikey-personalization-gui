@@ -41,7 +41,7 @@ const unsigned int YubiKeyFinder::FEATURE_MATRIX[][2] = {
     { YK_VERSION(2,1,0), 0 },   //Feature_OathHotp
     { YK_VERSION(2,2,0), 0 },   //Feature_ChallengeResponse
     { YK_VERSION(2,1,4), 0 },   //Feature_SerialNumber
-    { YK_VERSION(2,2,0), 0 },   //Feature_MovingFactor
+    { YK_VERSION(2,1,7), 0 },   //Feature_MovingFactor
     { YK_VERSION(2,3,0), 0 },   //Feature_ChallengeResponseFixed
     { YK_VERSION(2,3,0), 0 },   //Feature_Updatable
     { YK_VERSION(2,1,4), YK_VERSION(2,2,0)}, //Feature_Ndef
@@ -55,7 +55,7 @@ const unsigned int YubiKeyFinder::FEATURE_MATRIX_EXCLUDE[][2] = {
     { YK_VERSION(2,1,4), YK_VERSION(2,1,8) }, //Feature_ScanCodeMode
     { 0, 0 },                                 //Feature_ShortTicket
     { YK_VERSION(2,1,4), YK_VERSION(2,1,8) }, //Feature_StrongPwd
-    { YK_VERSION(2,1,4), YK_VERSION(2,2,0) }, //Feature_OathHotp
+    { 0, 0 },                                 //Feature_OathHotp
     { 0, 0 },                                 //Feature_ChallengeResponse
     { 0, 0 },                                 //Feature_SerialNumber
     { 0, 0 },                                 //Feature_MovingFactor
