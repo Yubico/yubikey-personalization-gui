@@ -77,9 +77,9 @@ color: rgb(140, 192, 65);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
+      <y>40</y>
       <width>711</width>
-      <height>60</height>
+      <height>55</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -130,7 +130,7 @@ color: rgb(140, 192, 65);</string>
       <number>5</number>
      </property>
      <property name="cursorPosition">
-      <number>0</number>
+      <number>5</number>
      </property>
     </widget>
    </widget>
@@ -352,9 +352,9 @@ font-weight: bold;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>120</y>
+      <y>105</y>
       <width>711</width>
-      <height>180</height>
+      <height>165</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -582,9 +582,9 @@ border-radius: 10px;
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>90</y>
+       <y>85</y>
        <width>691</width>
-       <height>77</height>
+       <height>70</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -730,9 +730,9 @@ border-radius: 10px;
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>310</y>
+      <y>275</y>
       <width>350</width>
-      <height>102</height>
+      <height>100</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -838,9 +838,9 @@ border-radius: 10px;
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>310</y>
+      <y>275</y>
       <width>350</width>
-      <height>102</height>
+      <height>50</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -871,9 +871,9 @@ border-radius: 10px;
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>360</y>
+      <y>380</y>
       <width>350</width>
-      <height>51</height>
+      <height>50</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -946,10 +946,10 @@ border-radius: 10px;
    <widget class="QGroupBox" name="ExtendedBox">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>410</y>
+      <x>10</x>
+      <y>380</y>
       <width>350</width>
-      <height>81</height>
+      <height>75</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1351,7 +1351,7 @@ color: rgb(118, 116, 108);</string>
       <number>17</number>
      </property>
      <property name="cursorPosition">
-      <number>0</number>
+      <number>17</number>
      </property>
     </widget>
     <widget class="QLabel" name="currentAccessCodeLbl">
@@ -1417,7 +1417,7 @@ color: rgb(118, 116, 108);</string>
       <number>17</number>
      </property>
      <property name="cursorPosition">
-      <number>0</number>
+      <number>17</number>
      </property>
     </widget>
     <widget class="QPushButton" name="configProtectionHelpBtn">

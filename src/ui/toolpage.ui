@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>3</number>
+   <number>2</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -879,9 +879,9 @@ color: rgb(118, 116, 108);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>250</y>
+      <y>275</y>
       <width>461</width>
-      <height>80</height>
+      <height>50</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -891,7 +891,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>10</y>
        <width>85</width>
        <height>25</height>
       </rect>
@@ -904,7 +904,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>210</x>
-       <y>30</y>
+       <y>10</y>
        <width>85</width>
        <height>25</height>
       </rect>
@@ -917,7 +917,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>30</y>
+       <y>10</y>
        <width>85</width>
        <height>25</height>
       </rect>
