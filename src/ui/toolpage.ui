@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>2</number>
+   <number>0</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -59,8 +59,8 @@ color: rgb(140, 192, 65);</string>
      <rect>
       <x>10</x>
       <y>50</y>
-      <width>710</width>
-      <height>500</height>
+      <width>711</width>
+      <height>240</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -124,7 +124,7 @@ font-weight: bold;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>80</y>
+       <y>100</y>
        <width>191</width>
        <height>25</height>
       </rect>
@@ -156,7 +156,7 @@ font-weight: bold;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>105</y>
+       <y>125</y>
        <width>671</width>
        <height>20</height>
       </rect>
@@ -172,7 +172,7 @@ font-weight: bold;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>140</y>
+       <y>180</y>
        <width>191</width>
        <height>25</height>
       </rect>
@@ -204,7 +204,7 @@ font-weight: bold;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>165</y>
+       <y>205</y>
        <width>671</width>
        <height>20</height>
       </rect>
@@ -656,8 +656,8 @@ color: rgb(140, 192, 65);</string>
      <rect>
       <x>10</x>
       <y>50</y>
-      <width>511</width>
-      <height>250</height>
+      <width>711</width>
+      <height>225</height>
      </rect>
     </property>
     <widget class="QWidget" name="typeWidget" native="true">
@@ -879,8 +879,8 @@ color: rgb(118, 116, 108);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>275</y>
-      <width>461</width>
+      <y>295</y>
+      <width>711</width>
       <height>50</height>
      </rect>
     </property>
@@ -954,9 +954,9 @@ color: rgb(140, 192, 65);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>200</y>
-      <width>461</width>
-      <height>80</height>
+      <y>250</y>
+      <width>711</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -966,7 +966,7 @@ color: rgb(140, 192, 65);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>10</y>
        <width>85</width>
        <height>25</height>
       </rect>
@@ -979,7 +979,7 @@ color: rgb(140, 192, 65);</string>
      <property name="geometry">
       <rect>
        <x>210</x>
-       <y>30</y>
+       <y>10</y>
        <width>85</width>
        <height>25</height>
       </rect>
@@ -992,7 +992,7 @@ color: rgb(140, 192, 65);</string>
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>30</y>
+       <y>10</y>
        <width>85</width>
        <height>25</height>
       </rect>
@@ -1002,20 +1002,20 @@ color: rgb(140, 192, 65);</string>
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="ndefTypeWidget" native="true">
+   <widget class="QGroupBox" name="ndefTypeGroupBox">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>30</y>
-      <width>551</width>
-      <height>181</height>
+      <y>50</y>
+      <width>711</width>
+      <height>180</height>
      </rect>
     </property>
     <widget class="QLabel" name="ndefTypeLabel">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>0</y>
+       <y>5</y>
        <width>321</width>
        <height>16</height>
       </rect>
@@ -1032,7 +1032,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
+       <y>25</y>
        <width>151</width>
        <height>17</height>
       </rect>
@@ -1054,7 +1054,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>40</y>
+       <y>45</y>
        <width>151</width>
        <height>17</height>
       </rect>
@@ -1086,7 +1086,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
+       <y>85</y>
        <width>113</width>
        <height>26</height>
       </rect>
@@ -1099,7 +1099,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>60</y>
+       <y>65</y>
        <width>321</width>
        <height>16</height>
       </rect>
