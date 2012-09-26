@@ -200,4 +200,6 @@ typedef std::vector<int>::size_type size_t;
 #define HELP_ALLOW_UPDATE_OPTION       tr("<p>If this option is selected the YubiKey configuration will be updatable, without rewriting the aes-key. Only non-security related settings are changeable with this.</p>")
 
 #define HELP_SWAP_OPTION            tr("<p>If both slots are configured to allow updates they can be swapped with this option. That is slot 1 and slot 2 will change places.</p>")
+
+#define HELP_MAN_UPDATE_OPTION      tr("<p>The manual update setting is to allow the static password in the YubiKey to be changed without reprogramming the key. If it is set it can be triggered by holding the button for 10 seconds, releasing and then tapping it again, the YubiKey will then generate a new static password.</p>")
 #endif // COMMON_H

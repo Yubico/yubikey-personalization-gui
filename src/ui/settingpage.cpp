@@ -108,6 +108,7 @@ void SettingPage::connectHelpButtons() {
     connect(ui->updateHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->configProtectionHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->swapHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+    connect(ui->manUpdateHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
 
     //Set a value for each button
     mapper->setMapping(ui->outFormatHelpBtn, HelpBox::Help_OutputFormat);
@@ -116,6 +117,7 @@ void SettingPage::connectHelpButtons() {
     mapper->setMapping(ui->updateHelpBtn, HelpBox::Help_AllowUpdate);
     mapper->setMapping(ui->configProtectionHelpBtn, HelpBox::Help_ConfigurationProtection);
     mapper->setMapping(ui->swapHelpBtn, HelpBox::Help_Swap);
+    mapper->setMapping(ui->manUpdateHelpBtn, HelpBox::Help_ManUpdate);
 
     //Connect the mapper
     connect(mapper, SIGNAL(mapped(int)), this, SLOT(helpBtn_pressed(int)));
