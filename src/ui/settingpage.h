@@ -65,7 +65,9 @@ private slots:
     void restore();
 
     void on_custPrefixCheck_stateChanged(int state);
-    void on_custPrefixTxt_editingFinished();
+    void on_custPrefixDecTxt_editingFinished();
+    void on_custPrefixModhexTxt_editingFinished();
+    void on_custPrefixHexTxt_editingFinished();
     void on_logOutputCheck_stateChanged(int state);
     void on_browseBtn_clicked();
 
@@ -79,6 +81,8 @@ private slots:
     void on_newAccessCodeTxt_editingFinished();
 
     void keyFound(bool found, bool* featuresMatrix);
+
+    void custPrefixChanged(int type, QString src);
 signals:
     void settingsChanged();
     void showStatusMessage(const QString &text, int status = 0);

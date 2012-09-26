@@ -33,6 +33,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "common.h"
 
+#define DECIMAL 0
+#define MODHEX 1
+#define HEX 2
+
 SettingPage::SettingPage(QWidget *parent) :
         QStackedWidget(parent),
         ui(new Ui::SettingPage)
@@ -78,9 +82,13 @@ SettingPage::SettingPage(QWidget *parent) :
 
     connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
             this, SLOT(keyFound(bool, bool*)));
+
+    QRegExp rx("^[cbdefghijklnrtuv]{0,4}$");
+    ui->custPrefixModhexTxt->setValidator(new QRegExpValidator(rx));
 }
 
 SettingPage::~SettingPage() {
+    delete ui->custPrefixModhexTxt->validator();
     if(m_ykConfig != NULL) {
         delete m_ykConfig;
     }
@@ -174,13 +182,21 @@ void SettingPage::load() {
         ui->custPrefixCheck->setChecked(true);
 
         int custPrefix = settings.value(SG_CUSTOMER_PREFIX).toInt();
-        ui->custPrefixTxt->setText(QString::number(custPrefix));
-        ui->custPrefixTxt->setEnabled(true);
+        if(custPrefix > 0) {
+            custPrefixChanged(DECIMAL, QString::number(custPrefix));
+            ui->custPrefixDecTxt->setEnabled(true);
+            ui->custPrefixModhexTxt->setEnabled(true);
+            ui->custPrefixHexTxt->setEnabled(true);
+        }
     } else {
         ui->custPrefixCheck->setChecked(false);
 
-        ui->custPrefixTxt->setText("0");
-        ui->custPrefixTxt->setEnabled(false);
+        ui->custPrefixDecTxt->clear();
+        ui->custPrefixDecTxt->setEnabled(false);
+        ui->custPrefixModhexTxt->clear();
+        ui->custPrefixModhexTxt->setEnabled(false);
+        ui->custPrefixHexTxt->clear();
+        ui->custPrefixHexTxt->setEnabled(false);
     }
 
 
@@ -264,7 +280,7 @@ void SettingPage::save() {
     int custPrefix = 0;
     if(ui->custPrefixCheck->isChecked()) {
         settings.setValue(SG_CUSTOMER_PREFIX_USED, true);
-        custPrefix = ui->custPrefixTxt->text().toInt();
+        custPrefix = ui->custPrefixDecTxt->text().toInt();
     } else {
         settings.setValue(SG_CUSTOMER_PREFIX_USED, false);
     }
@@ -352,16 +368,28 @@ void SettingPage::restore() {
 
 void SettingPage::on_custPrefixCheck_stateChanged(int state) {
     if(state == 0) {
-        ui->custPrefixTxt->setText("0");
-        ui->custPrefixTxt->setEnabled(false);
+        ui->custPrefixDecTxt->setEnabled(false);
+        ui->custPrefixModhexTxt->setEnabled(false);
+        ui->custPrefixHexTxt->setEnabled(false);
     } else {
-        ui->custPrefixTxt->setEnabled(true);
+        ui->custPrefixDecTxt->setEnabled(true);
+        ui->custPrefixModhexTxt->setEnabled(true);
+        ui->custPrefixHexTxt->setEnabled(true);
     }
 }
 
-void SettingPage::on_custPrefixTxt_editingFinished() {
-    int custPrefix = ui->custPrefixTxt->text().toInt();
-    ui->custPrefixTxt->setText(QString::number(custPrefix));
+void SettingPage::on_custPrefixDecTxt_editingFinished() {
+    custPrefixChanged(DECIMAL, ui->custPrefixDecTxt->text());
+    save();
+}
+
+void SettingPage::on_custPrefixModhexTxt_editingFinished() {
+    custPrefixChanged(MODHEX, ui->custPrefixModhexTxt->text());
+    save();
+}
+
+void SettingPage::on_custPrefixHexTxt_editingFinished() {
+    custPrefixChanged(HEX, ui->custPrefixHexTxt->text());
     save();
 }
 
@@ -532,5 +560,43 @@ void SettingPage::keyFound(bool found, bool* featuresMatrix) {
         }
     } else {
         ui->updateBtn->setEnabled(false);
+    }
+}
+
+void SettingPage::custPrefixChanged(int type, QString src) {
+    unsigned char buf[16];
+    memset(buf, 0, sizeof(buf));
+    size_t bufLen = 0;
+
+    switch(type) {
+        // decimal
+        case DECIMAL:
+            {
+                QString tmp = QString::number(src.toULongLong(), 16);
+                size_t len = tmp.length();
+                if(len % 2 != 0) {
+                    len++;
+                }
+                YubiKeyUtil::qstrClean(&tmp, (size_t)len, true);
+                YubiKeyUtil::qstrHexDecode(buf, &bufLen, tmp);
+                break;
+            }
+        // modhex
+        case MODHEX:
+            YubiKeyUtil::qstrModhexDecode(buf, &bufLen, src);
+            break;
+        // hex
+        case HEX:
+            YubiKeyUtil::qstrHexDecode(buf, &bufLen, src);
+            break;
+    }
+    QString hex = YubiKeyUtil::qstrHexEncode(buf, bufLen);
+    QString modhex = YubiKeyUtil::qstrModhexEncode(buf, bufLen);
+    bool ok = false;
+    qulonglong dec = hex.toULongLong(&ok, 16);
+    if(dec > 0) {
+        ui->custPrefixDecTxt->setText(QString::number(dec));
+        ui->custPrefixModhexTxt->setText(modhex);
+        ui->custPrefixHexTxt->setText(hex);
     }
 }
