@@ -297,8 +297,10 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
             pixmap.load(":/res/images/neo_transparent.png");
         } else if(version % 10 == 9){
             pixmap.load(":/res/images/yubikey_devel.png");
-        } else {
+        } else if(version < YK_VERSION(2,3,0)){
             movie->setFileName(":/res/images/v2-2-animated.gif");
+        } else {
+            movie->setFileName(":/res/images/v2-3-animated.gif");
         }
         if(pixmap.isNull()) {
             ui->deviceImage->setMovie(movie);
