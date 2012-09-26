@@ -881,7 +881,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Update Settings (YubiKey 2.3 only)</string>
+     <string>Update Settings (YubiKey 2.3)</string>
     </property>
     <widget class="QCheckBox" name="updateCheck">
      <property name="geometry">
@@ -957,7 +957,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Extended Settings (YubiKey 2.3 only)</string>
+     <string>Extended Settings (YubiKey 2.3)</string>
     </property>
     <widget class="QCheckBox" name="useNumericKeypadCheck">
      <property name="geometry">
