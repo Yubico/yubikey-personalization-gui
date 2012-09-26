@@ -1018,7 +1018,7 @@ border-radius: 10px;
     <widget class="QPushButton" name="updateHelpBtn">
      <property name="geometry">
       <rect>
-       <x>280</x>
+       <x>315</x>
        <y>4</y>
        <width>16</width>
        <height>16</height>
