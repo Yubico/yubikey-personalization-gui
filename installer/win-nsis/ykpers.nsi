@@ -113,16 +113,16 @@ Section "Uninstall"
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\yubikey-personalization-gui"
   DeleteRegKey HKLM "Software\Yubico\yubikey-personalization-gui"
 
-  DELETE $INSTDIR/YKPersonalization.exe
-  DELETE $INSTDIR/libyubikey-0.dll
-  DELETE $INSTDIR/libykpers-1-1.dll
-  DELETE $INSTDIR/QtCore4.dll
-  DELETE $INSTDIR/QtGui4.dll
-  DELETE $INSTDIR/libgcc_s_dw2-1.dll
-  DELETE $INSTDIR/libgcc_s_sjlj-1.dll
-  DELETE $INSTDIR/libstdc++-6.dll
-  DELETE $INSTDIR/mingwm10.dll
-  DELETE $INSTDIR/imageformats/qgif4.dll
+  DELETE "$INSTDIR\YKPersonalization.exe"
+  DELETE "$INSTDIR\libyubikey-0.dll"
+  DELETE "$INSTDIR\libykpers-1-1.dll"
+  DELETE "$INSTDIR\QtCore4.dll"
+  DELETE "$INSTDIR\QtGui4.dll"
+  DELETE "$INSTDIR\libgcc_s_dw2-1.dll"
+  DELETE "$INSTDIR\libgcc_s_sjlj-1.dll"
+  DELETE "$INSTDIR\libstdc++-6.dll"
+  DELETE "$INSTDIR\mingwm10.dll"
+  DELETE "$INSTDIR\imageformats\qgif4.dll"
 
   RMDir "$INSTDIR\imageformats"
 
@@ -131,20 +131,20 @@ Section "Uninstall"
 
   ; Remove shortcuts, if any
   !insertmacro MUI_STARTMENU_GETFOLDER Application $MUI_TEMP
-    
+
   Delete "$SMPROGRAMS\$MUI_TEMP\Uninstall.lnk"
   Delete "$SMPROGRAMS\$MUI_TEMP\Yubico Web page.url"
 
   ;Delete empty start menu parent diretories
   StrCpy $MUI_TEMP "$SMPROGRAMS\$MUI_TEMP"
- 
+
   startMenuDeleteLoop:
 	ClearErrors
     RMDir $MUI_TEMP
     GetFullPathName $MUI_TEMP "$MUI_TEMP\.."
-    
+
     IfErrors startMenuDeleteLoopDone
-  
+
     StrCmp $MUI_TEMP $SMPROGRAMS startMenuDeleteLoopDone startMenuDeleteLoop
   startMenuDeleteLoopDone:
 
