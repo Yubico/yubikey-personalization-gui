@@ -110,6 +110,49 @@ OTHER_FILES += \
   INCLUDEPATH    += . src src/ui deps/libusb-1.0 deps/libykpers deps/libykpers/ykcore deps/libyubikey
 }
 
+cross {
+    message("Doing a cross platform build..")
+    QMAKE_CXXFLAGS += $$(CXXFLAGS)
+    QMAKE_LFLAGS += $$(LDFLAGS)
+
+    # pickup compiler from environment
+    _TARGET = $$(TARGET)
+    isEmpty(_TARGET) {
+        error("Cross compiling without a target is completely invalid.")
+    }
+    QMAKE_CC = $$(TARGET)-gcc
+    QMAKE_CXX = $$(TARGET)-g++
+
+    QMAKE_LINK = $$QMAKE_CXX
+    QMAKE_LINK_C = $$QMAKE_CC
+
+    win32 {
+        QMAKE_LIB = $$(TARGET)-ar -ru
+        QMAKE_RC = $$(TARGET)-windres
+
+        QMAKE_MOC = $$[QT_INSTALL_BINS]/moc
+        QMAKE_UIC = $$[QT_INSTALL_BINS]/uic
+        QMAKE_IDC = $$[QT_INSTALL_BINS]/idc
+    }
+
+    _INCDIR = $$(QT_INCDIR)
+    !isEmpty (_INCDIR) {
+        QMAKE_INCDIR_QT = $$(QT_INCDIR)
+        macx {
+            QMAKE_CPPFLAGS += -I$$(QT_INCDIR)/QtCore.Framework/Headers/
+            QMAKE_CPPFLAGS += -I$$(QT_INCDIR)/QtGui.Framework/Headers/
+        }
+    }
+    _LIBDIR = $$(QT_LIBDIR)
+    !isEmpty (_LIBDIR) {
+        QMAKE_LIBDIR_QT = $$(QT_LIBDIR)
+        macx {
+            QMAKE_LFLAGS += -L$$(QT_LIBDIR)/QtCore.Framework/
+            QMAKE_LFLAGS += -L$$(QT_LIBDIR)/QtGui.Framework/
+        }
+    }
+}
+
 #
 # Windows specific configuration
 #
@@ -154,13 +197,14 @@ win32 {
             libs/win64/libykpers-1-1.dll
     }
 
-    LIB_FILES_WIN = $${LIB_FILES}
-    LIB_FILES_WIN ~= s,/,\\,g
-    TARGET_DIR_WIN = $${DESTDIR}
-    TARGET_DIR_WIN ~= s,/,\\,g
-
-    for(FILE, LIB_FILES_WIN) {
-        QMAKE_POST_LINK +=$$quote(cmd /c copy /y $${FILE} $${TARGET_DIR_WIN}$$escape_expand(\\n\\t))
+    !cross {
+        LIB_FILES_WIN = $${LIB_FILES}
+        LIB_FILES_WIN ~= s,/,\\,g
+        TARGET_DIR_WIN = $${DESTDIR}
+        TARGET_DIR_WIN ~= s,/,\\,g
+        for(FILE, LIB_FILES_WIN) {
+            QMAKE_POST_LINK +=$$quote(cmd /c copy /y $${FILE} $${TARGET_DIR_WIN}$$escape_expand(\\n\\t))
+        }
     }
 }
 
