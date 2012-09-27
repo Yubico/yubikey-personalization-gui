@@ -288,10 +288,8 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
         QMovie *movie = new QMovie();
         if(version < YK_VERSION(2,0,0)) {
             pixmap.load(":/res/images/v1-3-not-animated.png");
-        } else if(version < YK_VERSION(2,1,0)) {
-            movie->setFileName(":/res/images/V2-0-Animated.gif");
         } else if(version < YK_VERSION(2,1,4)) {
-            movie->setFileName(":/res/images/v2-1-animated.gif");
+            movie->setFileName(":/res/images/V2-0-2-1-animated.gif");
         } else if(version < YK_VERSION(2,2,0)) {
             // YubiKey NEO
             pixmap.load(":/res/images/neo_transparent.png");
