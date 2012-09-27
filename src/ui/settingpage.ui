@@ -910,7 +910,7 @@ border-radius: 10px;
      <property name="geometry">
       <rect>
        <x>275</x>
-       <y>4</y>
+       <y>0</y>
        <width>16</width>
        <height>16</height>
       </rect>
