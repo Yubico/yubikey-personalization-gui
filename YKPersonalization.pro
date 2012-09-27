@@ -121,7 +121,7 @@ win32 {
     RC_FILE = resources/win/resources.rc
 
     # The application dependencies
-    !contains(QMAKE_HOST.arch, x86_64) {
+    !contains(QMAKE_TARGET.arch, x86_64) {
         message("Windows x86 build")
 
         LIBS += $$quote(-L./libs/win32) -llibyubikey-0 -llibykpers-1-1
@@ -132,7 +132,7 @@ win32 {
     }
 
     # Copy dependencies
-    !contains(QMAKE_HOST.arch, x86_64) {
+    !contains(QMAKE_TARGET.arch, x86_64) {
         CONFIG(debug, debug|release) {
             LIB_FILES += \
                 $(QTDIR)/bin/QtCored4.dll \
