@@ -84,7 +84,7 @@ SettingPage::SettingPage(QWidget *parent) :
             this, SLOT(keyFound(bool, bool*)));
 
     QRegExp rx("^[cbdefghijklnrtuv]{0,4}$");
-    ui->custPrefixModhexTxt->setValidator(new QRegExpValidator(rx));
+    ui->custPrefixModhexTxt->setValidator(new QRegExpValidator(rx, this));
 }
 
 SettingPage::~SettingPage() {
