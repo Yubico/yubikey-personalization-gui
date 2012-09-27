@@ -66,8 +66,6 @@ Section "YubiKey Personalization Tool"
   FILE ../../build/release/QtCore4.dll
   FILE ../../build/release/QtGui4.dll
   FILE ../../build/release/libgcc_s_dw2-1.dll
-  FILE ../../build/release/libgcc_s_sjlj-1.dll
-  FILE ../../build/release/libstdc++-6.dll
   FILE ../../build/release/mingwm10.dll
   SetOutPath $INSTDIR\imageformats
   FILE ../../build/release/imageformats/qgif4.dll

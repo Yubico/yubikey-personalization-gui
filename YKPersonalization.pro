@@ -133,6 +133,8 @@ cross {
         QMAKE_MOC = $$[QT_INSTALL_BINS]/moc
         QMAKE_UIC = $$[QT_INSTALL_BINS]/uic
         QMAKE_IDC = $$[QT_INSTALL_BINS]/idc
+
+        QMAKE_LFLAGS += -static-libstdc++ -static-libgcc
     }
 
     _INCDIR = $$(QT_INCDIR)
