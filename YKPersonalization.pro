@@ -18,7 +18,7 @@ CONFIG(debug, debug|release) {
 
     CONFIG     += console no_lflags_merge
 } else {
-    TARGET_DIR  = build/release
+    TARGET_DIR  = build$${DIR_SEPARATOR}release
 
     DEFINES    += QT_NO_DEBUG_OUTPUT
 }
@@ -137,20 +137,28 @@ cross {
         QMAKE_LFLAGS += -static-libstdc++ -static-libgcc
     }
 
-    _INCDIR = $$(QT_INCDIR)
-    !isEmpty (_INCDIR) {
-        QMAKE_INCDIR_QT = $$(QT_INCDIR)
+    _QTDIR = $$(QTDIR)
+    !isEmpty (_QTDIR) {
+      _QT_INCDIR = $$(QTDIR)/include
+      _QT_LIBDIR = $$(QTDIR)/lib
+      _QT_BINDIR = $$(QTDIR)/bin
+    } else {
+      _QT_INCDIR = $$(QT_INCDIR)
+      _QT_LIBDIR = $$(QT_LIBDIR)
+      _QT_BINDIR = $$(QT_BINDIR)
+    }
+    !isEmpty (_QT_INCDIR) {
+        QMAKE_INCDIR_QT = $$_QT_INCDIR
         macx {
-            QMAKE_CPPFLAGS += -I$$(QT_INCDIR)/QtCore.Framework/Headers/
-            QMAKE_CPPFLAGS += -I$$(QT_INCDIR)/QtGui.Framework/Headers/
+            QMAKE_CPPFLAGS += -I$$_QT_INCDIR/QtCore.Framework/Headers/
+            QMAKE_CPPFLAGS += -I$$_QT_INCDIR/QtGui.Framework/Headers/
         }
     }
-    _LIBDIR = $$(QT_LIBDIR)
-    !isEmpty (_LIBDIR) {
-        QMAKE_LIBDIR_QT = $$(QT_LIBDIR)
+    !isEmpty (_QT_LIBDIR) {
+        QMAKE_LIBDIR_QT = $$_QT_LIBDIR
         macx {
-            QMAKE_LFLAGS += -L$$(QT_LIBDIR)/QtCore.Framework/
-            QMAKE_LFLAGS += -L$$(QT_LIBDIR)/QtGui.Framework/
+            QMAKE_LFLAGS += -L$$_QT_LIBDIR/QtCore.Framework/
+            QMAKE_LFLAGS += -L$$_QT_LIBDIR/QtGui.Framework/
         }
     }
 }
@@ -176,37 +184,19 @@ win32 {
         LIBS += $$quote(-L./libs/win64) -llibyubikey-0 -llibykpers-1-1
     }
 
-    # Copy dependencies
-    !contains(QMAKE_TARGET.arch, x86_64) {
-        CONFIG(debug, debug|release) {
-            LIB_FILES += \
-                $(QTDIR)/bin/QtCored4.dll \
-                $(QTDIR)/bin/QtGuid4.dll
-        } else {
-            LIB_FILES += \
-                $(QTDIR)/bin/QtCore4.dll \
-                $(QTDIR)/bin/QtGui4.dll
-        }
+     LIB_FILES += \
+         $$_QT_BINDIR$${DIR_SEPARATOR}QtCore4.dll \
+         $$_QT_BINDIR$${DIR_SEPARATOR}QtGui4.dll \
+         $$_QT_BINDIR$${DIR_SEPARATOR}..$${DIR_SEPARATOR}plugins$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qgif4.dll \
+         $$_QT_BINDIR$${DIR_SEPARATOR}libgcc_s_dw2-1.dll \
+         $$_QT_BINDIR$${DIR_SEPARATOR}mingwm10.dll \
+         libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libyubikey-0.dll \
+         libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libykpers-1-1.dll
 
-        LIB_FILES += \
-            $(QTDIR)/bin/libgcc_s_dw2-1.dll \
-            $(QTDIR)/../mingw/bin/mingwm10.dll \
-            libs/win32/libyubikey-0.dll \
-            libs/win32/libykpers-1-1.dll
-    } else {
-        LIB_FILES += \
-            libs/win64/libyubikey-0.dll \
-            libs/win64/libykpers-1-1.dll
-    }
-
-    !cross {
-        LIB_FILES_WIN = $${LIB_FILES}
-        LIB_FILES_WIN ~= s,/,\\,g
-        TARGET_DIR_WIN = $${DESTDIR}
-        TARGET_DIR_WIN ~= s,/,\\,g
-        for(FILE, LIB_FILES_WIN) {
-            QMAKE_POST_LINK +=$$quote(cmd /c copy /y $${FILE} $${TARGET_DIR_WIN}$$escape_expand(\\n\\t))
-        }
+    LIB_FILES_WIN = $${LIB_FILES}
+    TARGET_DIR_WIN = $${DESTDIR}
+    for(FILE, LIB_FILES_WIN) {
+        QMAKE_POST_LINK +=$$quote($$QMAKE_COPY $${FILE} $${TARGET_DIR_WIN}$$escape_expand(\\n\\t))
     }
 }
 
@@ -372,10 +362,9 @@ macx {
 #
 win32 {
     TARGET_DIR_WIN = $${DESTDIR}
-    TARGET_DIR_WIN ~= s,/,\\,g
 
-    QMAKE_CLEAN += $${TARGET_DIR_WIN}\\*.exe \
-                   $${TARGET_DIR_WIN}\\*.dll
+    QMAKE_CLEAN += $${TARGET_DIR_WIN}$${DIR_SEPARATOR}*.exe \
+                   $${TARGET_DIR_WIN}$${DIR_SEPARATOR}*.dll
 } else:macx {
     QMAKE_CLEAN += -r $${DESTDIR}/*.app
 } else {

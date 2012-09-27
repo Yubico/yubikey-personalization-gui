@@ -68,7 +68,7 @@ Section "YubiKey Personalization Tool"
   FILE ../../build/release/libgcc_s_dw2-1.dll
   FILE ../../build/release/mingwm10.dll
   SetOutPath $INSTDIR\imageformats
-  FILE ../../build/release/imageformats/qgif4.dll
+  FILE ../../build/release/qgif4.dll
 SectionEnd
 
 Var MYTMP
