@@ -295,9 +295,14 @@ macx {
 
     SOURCES += deps/libykpers/ykcore/ykcore_osx.c
 
+    DEFINES += QT_MAC_USE_COCOA
+
+    cross {
+        _SDK = $$(OSX_SDK)
+    }
     # The application dependencies
-    LIBS += /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
-    LIBS += /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+    LIBS += $$_SDK/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+    LIBS += $$_SDK/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
 
     # The application executable name
     TARGET = $$APP_NAME
