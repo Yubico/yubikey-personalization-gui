@@ -291,7 +291,7 @@ unix:!macx {
 macx {
     message("Mac build")
 
-    CONFIG += x86
+    CONFIG += x86_64
 
     SOURCES += deps/libykpers/ykcore/ykcore_osx.c
 
