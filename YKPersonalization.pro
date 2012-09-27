@@ -299,6 +299,10 @@ macx {
 
     cross {
         _SDK = $$(OSX_SDK)
+        !isEmpty (_SDK) {
+            # FIXME: this is prone to breaking with version numbers
+            QT_INCDIR += $$(OSX_SDK)/use/include/c++/4.2.1
+        }
     }
     # The application dependencies
     LIBS += $$_SDK/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
