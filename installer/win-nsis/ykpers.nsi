@@ -4,7 +4,7 @@
 Name "YubiKey Personalization Tool"
 
 ; The file to write
-OutFile "yubikey-personalization-gui-${YKPERS_VERSION}.exe"
+OutFile "../../build/release/yubikey-personalization-gui-${YKPERS_VERSION}.exe"
 
 ; The default installation directory
 InstallDir "$PROGRAMFILES\Yubico\YubiKey Personalization Tool"
