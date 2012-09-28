@@ -328,6 +328,8 @@ macx {
             cp -R $$_QT_LIBDIR/QtCore.framework $$_FRAMEWORKDIR/QtCore.framework && \
             cp -R $$_QT_LIBDIR/QtGui.framework $$_FRAMEWORKDIR/QtGui.framework && \
             find $$_FRAMEWORKDIR -type l -print0 | xargs -0 rm -f  && \
+            mv $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
+            rmdir $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources && \
             mkdir -p $$_PLUGINDIR/imageformats && \
             cp -R $$_QT_PLUGINDIR/imageformats/libqgif.dylib $$_PLUGINDIR/imageformats)
 
@@ -340,14 +342,14 @@ macx {
             $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
             $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqgif.dylib && \
             $$(TARGET_ARCH)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqgif.dylib)
-
+        
         build_installer {
             QMAKE_POST_LINK += $$quote( && mkdir -p $${DESTDIR}/temp/ && \
                 cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
                 ln -s /Applications $${DESTDIR}/temp/Applications && \
                 mkdir $${DESTDIR}/temp/.background/ && \
                 cp resources/mac/yubico-logo.png $${DESTDIR}/temp/.background/background.png && \
-                genisoimage -V "$$TARGET_MAC" -D -r -apple --hfs-bless "/$${TARGET_MAC}.app" -o $${DESTDIR}/ykpers-pre.dmg  $${DESTDIR}/temp && \
+                genisoimage -V "$$TARGET_MAC" -r -apple --hfs-bless "/$${TARGET_MAC}.app" -o $${DESTDIR}/ykpers-pre.dmg  $${DESTDIR}/temp && \
                 rm -rf $${DESTDIR}/temp && \
                 dmg dmg $${DESTDIR}/ykpers-pre.dmg $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.dmg)
         }
