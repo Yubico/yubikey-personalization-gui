@@ -149,17 +149,9 @@ cross {
     }
     !isEmpty (_QT_INCDIR) {
         QMAKE_INCDIR_QT = $$_QT_INCDIR
-        macx {
-            QMAKE_CPPFLAGS += -I$$_QT_INCDIR/QtCore.Framework/Headers/
-            QMAKE_CPPFLAGS += -I$$_QT_INCDIR/QtGui.Framework/Headers/
-        }
     }
     !isEmpty (_QT_LIBDIR) {
         QMAKE_LIBDIR_QT = $$_QT_LIBDIR
-        macx {
-            QMAKE_LFLAGS += -L$$_QT_LIBDIR/QtCore.Framework/
-            QMAKE_LFLAGS += -L$$_QT_LIBDIR/QtGui.Framework/
-        }
     }
 }
 
@@ -296,9 +288,15 @@ macx {
         _SDK = $$(OSX_SDK)
         !isEmpty (_SDK) {
             # FIXME: this is prone to breaking with version numbers
-            QT_INCDIR += $$(OSX_SDK)/use/include/c++/4.2.1
+            INCLUDEPATH += $$(OSX_SDK)/usr/include/c++/4.2.1
         }
     }
+
+    QMAKE_CFLAGS_X86_64 -= -arch
+    QMAKE_CFLAGS_X86_64 -= x86_64
+    QMAKE_CXXFLAGS_X86_64 -= -arch
+    QMAKE_CXXFLAGS_X86_64 -= x86_64
+
     # The application dependencies
     LIBS += $$_SDK/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
     LIBS += $$_SDK/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
