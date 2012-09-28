@@ -95,7 +95,6 @@ OTHER_FILES += \
 
 !debian {
   HEADERS += \
-      deps/libusb-1.0/libusb.h \
       deps/libykpers/ykpers.h \
       deps/libykpers/ykpbkdf2.h \
       deps/libykpers/ykcore/yktsd.h \
@@ -237,6 +236,7 @@ unix:!macx {
   } else {
     message("Linux build")
 
+    HEADERS += deps/libusb-1.0/libusb.h
     SOURCES += deps/libykpers/ykcore/ykcore_libusb-1.0.c
 
     # The application dependencies
