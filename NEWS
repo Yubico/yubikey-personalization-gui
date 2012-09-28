@@ -2,6 +2,31 @@ yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- out
 
 * Version 3.0.7 (unreleased)
 
+** Support for features in YubiKey 2.3.
+Requires updating the ykpers library to version 1.8.0.
+
+** Support for writing NDEF of YubiKey NEO.
+
+** Removes the dj prefix that was added for customer prefixes.
+
+** Support for entering customer prefix in modhex or hex as well, show all
+formats.
+
+** Option to allow public id to be based on key serial.
+
+** View for testing out challenge response with YubiKey.
+
+** Autosave settings when changing.
+
+** Don't write HMAC-SHA1 without variable input on 2.2 key.
+
+** Oath IMF is set as direct number, not as what was entered * 16, also
+use higher ceiling for this.
+
+** New windows installer based on nsis.
+
+** New pictures, and changing picture depending on YubiKey version.
+
 * Version 3.0.6 (released 2012-06-07)
 
 ** Bump copyright years.
