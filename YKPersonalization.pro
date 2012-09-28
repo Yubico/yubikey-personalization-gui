@@ -192,7 +192,7 @@ win32 {
     for(FILE, LIB_FILES_WIN) {
         QMAKE_POST_LINK +=$$quote($$QMAKE_COPY $${FILE} $${TARGET_DIR_WIN}$$escape_expand(\\n\\t))
     }
-    nsis_installer {
+    build_installer {
         QMAKE_POST_LINK += $$quote("makensis -DYKPERS_VERSION=$${VERSION} installer/win-nsis/ykpers.nsi")
     }
 }
@@ -286,6 +286,7 @@ macx {
     DEFINES += QT_MAC_USE_COCOA
 
     cross {
+        CONFIG += qt_framework
         _SDK = $$(OSX_SDK)
         !isEmpty (_SDK) {
             # FIXME: this is prone to breaking with version numbers
@@ -340,6 +341,13 @@ macx {
             $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqgif.dylib && \
             $$(TARGET_ARCH)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqgif.dylib)
         
+        build_installer {
+            QMAKE_POST_LINK += $$quote( && mkdir -p $${DESTDIR}/temp/$${TARGET_MAC} && \
+                cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/$${TARGET_MAC} && \
+                echo -n "/Applications" > $${DESTDIR}/temp/$${TARGET_MAC}/\[\] && \
+                genisoimage -V "$$TARGET_MAC" -r -apple --hfs-bless "/$${TARGET_MAC}" -o $${DESTDIR}/ykpers-pre.dmg  $${DESTDIR}/temp && \
+                dmg dmg $${DESTDIR}/ykpers-pre.dmg $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.dmg)
+        }
     } else {
 
         # Create application dmg
