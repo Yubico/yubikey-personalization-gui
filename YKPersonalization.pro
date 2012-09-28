@@ -139,13 +139,15 @@ cross {
 
     _QTDIR = $$(QTDIR)
     !isEmpty (_QTDIR) {
-      _QT_INCDIR = $$(QTDIR)/include
-      _QT_LIBDIR = $$(QTDIR)/lib
-      _QT_BINDIR = $$(QTDIR)/bin
+      _QT_INCDIR = $$(QTDIR)$${DIR_SEPARATOR}include
+      _QT_LIBDIR = $$(QTDIR)$${DIR_SEPARATOR}lib
+      _QT_BINDIR = $$(QTDIR)$${DIR_SEPARATOR}bin
+      _QT_PLUGINDIR = $$(QTDIR)$${DIR_SEPARATOR}plugins
     } else {
       _QT_INCDIR = $$(QT_INCDIR)
       _QT_LIBDIR = $$(QT_LIBDIR)
       _QT_BINDIR = $$(QT_BINDIR)
+      _QT_PLUGINDIR = $$(QT_PLUGINDIR)
     }
     !isEmpty (_QT_INCDIR) {
         QMAKE_INCDIR_QT = $$_QT_INCDIR
@@ -179,7 +181,7 @@ win32 {
      LIB_FILES += \
          $$_QT_BINDIR$${DIR_SEPARATOR}QtCore4.dll \
          $$_QT_BINDIR$${DIR_SEPARATOR}QtGui4.dll \
-         $$_QT_BINDIR$${DIR_SEPARATOR}..$${DIR_SEPARATOR}plugins$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qgif4.dll \
+         $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qgif4.dll \
          $$_QT_BINDIR$${DIR_SEPARATOR}libgcc_s_dw2-1.dll \
          $$_QT_BINDIR$${DIR_SEPARATOR}mingwm10.dll \
          libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libyubikey-0.dll \
@@ -290,13 +292,12 @@ macx {
             # FIXME: this is prone to breaking with version numbers
             INCLUDEPATH += $$(OSX_SDK)/usr/include/c++/4.2.1
         }
-
-        # this is a hack to get rid of the -arch
-        QMAKE_CFLAGS_X86_64 -= -arch
-        QMAKE_CFLAGS_X86_64 -= x86_64
-        QMAKE_CXXFLAGS_X86_64 -= -arch
-        QMAKE_CXXFLAGS_X86_64 -= x86_64
     }
+
+    QMAKE_CFLAGS_X86_64 -= -arch
+    QMAKE_CFLAGS_X86_64 -= x86_64
+    QMAKE_CXXFLAGS_X86_64 -= -arch
+    QMAKE_CXXFLAGS_X86_64 -= x86_64
 
     # The application dependencies
     LIBS += $$_SDK/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
@@ -312,10 +313,33 @@ macx {
 
     # Copy required resources into the final app bundle and
     # put the current version number into Info.plist
-    QMAKE_POST_LINK = $$quote(mkdir -p $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources && \
+    QMAKE_POST_LINK += $$quote(mkdir -p $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources && \
         cp -R resources/mac/Yubico.icns $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources/. && \
         sed -e \'s|@@version@@|$$VERSION|g\' \
         < resources/mac/Info.plist.in  > $${DESTDIR}/$${TARGET_MAC}.app/Contents/Info.plist)
+
+    cross {
+        # copy the QT libraries into our bundle
+        _BASEDIR = $${DESTDIR}/$${TARGET_MAC}.app/Contents
+        _FRAMEWORKDIR = $${_BASEDIR}/Frameworks
+        _PLUGINDIR = $${_BASEDIR}/PlugIns
+        QMAKE_POST_LINK += $$quote( && mkdir -p $$_FRAMEWORKDIR && \
+            cp -R $$_QT_LIBDIR/QtCore.framework $$_FRAMEWORKDIR/QtCore.framework && \
+            cp -R $$_QT_LIBDIR/QtGui.framework $$_FRAMEWORKDIR/QtGui.framework && \
+            find $$_FRAMEWORKDIR -type l -print0 | xargs -0 rm -f  && \
+            mkdir -p $$_PLUGINDIR/imageformats && \
+            cp -R $$_QT_PLUGINDIR/imageformats/libqgif.dylib $$_PLUGINDIR/imageformats)
+
+        # fixup all library paths..
+        _BASE = $$quote(@executable_path/../Frameworks)
+        _QTCORE = $$quote(QtCore.framework/Versions/4/QtCore)
+        _QTGUI = $$quote(QtGui.framework/Versions/4/QtGui)
+        QMAKE_POST_LINK += $$quote( && $$(TARGET)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_BASEDIR/MacOS/$$TARGET_MAC && \
+            $$(TARGET)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_BASEDIR/MacOS/$$TARGET_MAC && \
+            $$(TARGET)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
+            $$(TARGET)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqgif.dylib && \
+            $$(TARGET)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqgif.dylib)
+    }
 
     # Create application dmg
     shutup = ">/dev/null 2>&1"
