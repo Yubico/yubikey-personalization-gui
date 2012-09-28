@@ -290,12 +290,13 @@ macx {
             # FIXME: this is prone to breaking with version numbers
             INCLUDEPATH += $$(OSX_SDK)/usr/include/c++/4.2.1
         }
-    }
 
-    QMAKE_CFLAGS_X86_64 -= -arch
-    QMAKE_CFLAGS_X86_64 -= x86_64
-    QMAKE_CXXFLAGS_X86_64 -= -arch
-    QMAKE_CXXFLAGS_X86_64 -= x86_64
+        # this is a hack to get rid of the -arch
+        QMAKE_CFLAGS_X86_64 -= -arch
+        QMAKE_CFLAGS_X86_64 -= x86_64
+        QMAKE_CXXFLAGS_X86_64 -= -arch
+        QMAKE_CXXFLAGS_X86_64 -= x86_64
+    }
 
     # The application dependencies
     LIBS += $$_SDK/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
