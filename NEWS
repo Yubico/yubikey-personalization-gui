@@ -1,6 +1,6 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.0.7 (unreleased)
+* Version 3.1.0 (released 2012-09-28)
 
 ** Support for features in YubiKey 2.3.
 Requires updating the ykpers library to version 1.8.0.
