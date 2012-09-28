@@ -9,7 +9,7 @@ APP_NAME        = $$quote(YubiKey Personalization Tool)
 #
 QT             += core gui
 TEMPLATE        = app
-TARGET          = YKPersonalization
+TARGET          = yubikey-personalization-gui
 
 DEFINES        += VERSION=\\\"$${VERSION}\\\"
 
@@ -224,8 +224,6 @@ win32 {
 unix:!macx {
   debian {
     message("Debian build")
-
-    TARGET = yubikey-personalization-gui
 
     LIBS += -lyubikey
 
