@@ -54,6 +54,9 @@ appears to not be needed for command-line builds.)
 Dependencies
 ============
 
+yubikey-personalization-gui depends on atleast version 1.8.0 of
+libykpers.
+
 When building on Windows you will need binary releases of libykpers
 and libyubikey, these can be downloaded from
 http://code.google.com/p/yubikey-personalization/, the dlls
@@ -82,6 +85,33 @@ Run these commands:
 qmake
 make
 
+==========================
+Cross Compiling from Linux
+==========================
+
+The project can be cross compiled from linux for osX and windows. As
+a first step you need a cross-compiler chain for that OS, for windows
+you want mingw-w64 and for osX you can follow directions at
+https://github.com/Tatsh/xchain/.
+
+Then you need unpacked qt binaries for that platform, fetchable
+from http://qt-project.org/.
+
+You can then do (for windows):
+TARGET_ARCH=i686-w64-mingw32 QTDIR=<qt location> qmake \
+  -spec win32-g++-4.6 "CONFIG+=cross"
+
+or (for osX):
+TARGET_ARCH=x86_64-apple-darwin11 OSX_SDK=<osx sdk location> \
+  QT_LIBDIR=<qt libs> QT_PLUGINDIR=<qt plugins> qmake -spec macx-g++ \
+  "CONFIG +=cross"
+
+Note that you need to point QT_LIBDIR and QT_PLUGINDIR at the
+/Library/Frameworks directory of the unpacked distribution.
+
+To build installers you can add build_installer to the CONFIG variable
+for qmake. This requires makensis to be in path for windows and
+genisoimage and dmg (from libhfs-dmg) for mac.
 
 ==================================
 Opening the project in Qt designer
