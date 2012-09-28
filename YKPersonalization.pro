@@ -90,7 +90,8 @@ RESOURCES += \
 OTHER_FILES += \
     resources/win/resources.rc \
     resources/mac/Yubico.icns \
-    resources/mac/Info.plist.in
+    resources/mac/Info.plist.in \
+    resources/mac/qt.conf
 
 !debian {
   HEADERS += \
@@ -313,6 +314,7 @@ macx {
     # put the current version number into Info.plist
     QMAKE_POST_LINK += $$quote(mkdir -p $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources && \
         cp -R resources/mac/Yubico.icns $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources/. && \
+        cp resources/mac/qt.conf $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources/. && \
         sed -e \'s|@@version@@|$$VERSION|g\' \
         < resources/mac/Info.plist.in  > $${DESTDIR}/$${TARGET_MAC}.app/Contents/Info.plist)
 
