@@ -60,7 +60,7 @@ FunctionEnd
 Section "YubiKey Personalization Tool"
   SectionIn RO
   SetOutPath $INSTDIR
-  FILE ../../build/release/YKPersonalization.exe
+  FILE ../../build/release/yubikey-personalization-gui.exe
   FILE ../../build/release/libyubikey-0.dll
   FILE ../../build/release/libykpers-1-1.dll
   FILE ../../build/release/QtCore4.dll
@@ -95,7 +95,7 @@ Section
     
 ;Create shortcuts
   CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
-  CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\YubiKey Personalization Tool.lnk" "$INSTDIR\YKPersonalization.exe" "" "$INSTDIR\YKPersonalization.exe" 0
+  CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\YubiKey Personalization Tool.lnk" "$INSTDIR\yubikey-personalization-gui.exe" "" "$INSTDIR\yubikey-personalization-gui.exe" 0
   CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 1
   WriteINIStr "$SMPROGRAMS\$STARTMENU_FOLDER\Yubico Web page.url" \
                    "InternetShortcut" "URL" "http://www.yubico.com/"
@@ -111,7 +111,7 @@ Section "Uninstall"
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\yubikey-personalization-gui"
   DeleteRegKey HKLM "Software\Yubico\yubikey-personalization-gui"
 
-  DELETE "$INSTDIR\YKPersonalization.exe"
+  DELETE "$INSTDIR\yubikey-personalization-gui.exe"
   DELETE "$INSTDIR\libyubikey-0.dll"
   DELETE "$INSTDIR\libykpers-1-1.dll"
   DELETE "$INSTDIR\QtCore4.dll"
