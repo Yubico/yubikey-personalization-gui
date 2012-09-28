@@ -116,19 +116,19 @@ cross {
     QMAKE_LFLAGS += $$(LDFLAGS)
 
     # pickup compiler from environment
-    _TARGET = $$(TARGET)
-    isEmpty(_TARGET) {
-        error("Cross compiling without a target is completely invalid.")
+    _TARGET_ARCH = $$(TARGET_ARCH)
+    isEmpty(_TARGET_ARCH) {
+        error("Cross compiling without a target is completely invalid, set TARGET_ARCH")
     }
-    QMAKE_CC = $$(TARGET)-gcc
-    QMAKE_CXX = $$(TARGET)-g++
+    QMAKE_CC = $$(TARGET_ARCH)-gcc
+    QMAKE_CXX = $$(TARGET_ARCH)-g++
 
     QMAKE_LINK = $$QMAKE_CXX
     QMAKE_LINK_C = $$QMAKE_CC
 
     win32 {
-        QMAKE_LIB = $$(TARGET)-ar -ru
-        QMAKE_RC = $$(TARGET)-windres
+        QMAKE_LIB = $$(TARGET_ARCH)-ar -ru
+        QMAKE_RC = $$(TARGET_ARCH)-windres
 
         QMAKE_MOC = $$[QT_INSTALL_BINS]/moc
         QMAKE_UIC = $$[QT_INSTALL_BINS]/uic
@@ -332,11 +332,11 @@ macx {
         _BASE = $$quote(@executable_path/../Frameworks)
         _QTCORE = $$quote(QtCore.framework/Versions/4/QtCore)
         _QTGUI = $$quote(QtGui.framework/Versions/4/QtGui)
-        QMAKE_POST_LINK += $$quote( && $$(TARGET)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_BASEDIR/MacOS/$$TARGET_MAC && \
-            $$(TARGET)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_BASEDIR/MacOS/$$TARGET_MAC && \
-            $$(TARGET)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
-            $$(TARGET)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqgif.dylib && \
-            $$(TARGET)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqgif.dylib)
+        QMAKE_POST_LINK += $$quote( && $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_BASEDIR/MacOS/$$TARGET_MAC && \
+            $$(TARGET_ARCH)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_BASEDIR/MacOS/$$TARGET_MAC && \
+            $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
+            $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqgif.dylib && \
+            $$(TARGET_ARCH)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqgif.dylib)
     }
 
     # Create application dmg
