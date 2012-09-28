@@ -339,46 +339,48 @@ macx {
             $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
             $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqgif.dylib && \
             $$(TARGET_ARCH)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqgif.dylib)
-    }
-
-    # Create application dmg
-    shutup = ">/dev/null 2>&1"
-    isEmpty(MACDEPLOYQT):MACDEPLOYQT = macdeployqt
-    !system($$MACDEPLOYQT $$shutup) {
-        warning("macdeployqt utility '$$MACDEPLOYQT' not found \
-                 will not create target for application bundling")
+        
     } else {
-        macdeploy.depends  = $${DESTDIR}/$${TARGET_MAC}.app/Contents/MacOS/$${TARGET_MAC}
-        macdeploy.target   = macdeploy
-        macdeploy.commands = \
-            [ -f $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources/qt.conf ] || \
-                $$MACDEPLOYQT $${DESTDIR}/$${TARGET_MAC}.app -no-strip;
 
-        QMAKE_EXTRA_TARGETS += macdeploy
-    }
+        # Create application dmg
+        shutup = ">/dev/null 2>&1"
+        isEmpty(MACDEPLOYQT):MACDEPLOYQT = macdeployqt
+        !system($$MACDEPLOYQT $$shutup) {
+            warning("macdeployqt utility '$$MACDEPLOYQT' not found \
+                     will not create target for application bundling")
+        } else {
+            macdeploy.depends  = $${DESTDIR}/$${TARGET_MAC}.app/Contents/MacOS/$${TARGET_MAC}
+            macdeploy.target   = macdeploy
+            macdeploy.commands = \
+                [ -f $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources/qt.conf ] || \
+                    $$MACDEPLOYQT $${DESTDIR}/$${TARGET_MAC}.app -no-strip;
 
-    isEmpty(HDIUTIL):HDIUTIL = "hdiutil"
-    !system($$HDIUTIL help $$shutup) {
-        warning("hdiutil utility '$$HDIUTIL' not found \
-                 will not create target for disk image creation")
-    } else {
-        contains(QMAKE_EXTRA_TARGETS, macdeploy) {
-            IMAGEROOT = $${DESTDIR}/disk-image-root
-            IMAGEFILE = $${DESTDIR}/$${TARGET_MAC}\\ Installer-mac.dmg
+            QMAKE_EXTRA_TARGETS += macdeploy
+        }
 
-            #Note: Volume name for disk image should be passed without escaping quotes
-            macdisk.depends  = macdeploy
-            macdisk.target   = macdisk
-            macdisk.commands = \
-                rm -rf $${IMAGEROOT}; \
-                mkdir $${IMAGEROOT}; \
-                cp -R $${DESTDIR}/$${TARGET_MAC}.app $${IMAGEROOT}; \
-                rm -f $${IMAGEFILE}; \
-                $${HDIUTIL} create -srcfolder $${IMAGEROOT} -format UDBZ \
-                    -volname \'$${TARGET} $${VERSION}\' $${IMAGEFILE}; \
-                rm -rf $${IMAGEROOT}
+        isEmpty(HDIUTIL):HDIUTIL = "hdiutil"
+        !system($$HDIUTIL help $$shutup) {
+            warning("hdiutil utility '$$HDIUTIL' not found \
+                     will not create target for disk image creation")
+        } else {
+            contains(QMAKE_EXTRA_TARGETS, macdeploy) {
+                IMAGEROOT = $${DESTDIR}/disk-image-root
+                IMAGEFILE = $${DESTDIR}/$${TARGET_MAC}\\ Installer-mac.dmg
 
-            QMAKE_EXTRA_TARGETS += macdisk
+                #Note: Volume name for disk image should be passed without escaping quotes
+                macdisk.depends  = macdeploy
+                macdisk.target   = macdisk
+                macdisk.commands = \
+                    rm -rf $${IMAGEROOT}; \
+                    mkdir $${IMAGEROOT}; \
+                    cp -R $${DESTDIR}/$${TARGET_MAC}.app $${IMAGEROOT}; \
+                    rm -f $${IMAGEFILE}; \
+                    $${HDIUTIL} create -srcfolder $${IMAGEROOT} -format UDBZ \
+                        -volname \'$${TARGET} $${VERSION}\' $${IMAGEFILE}; \
+                    rm -rf $${IMAGEROOT}
+
+                QMAKE_EXTRA_TARGETS += macdisk
+            }
         }
     }
 }
