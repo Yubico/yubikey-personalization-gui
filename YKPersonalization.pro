@@ -318,7 +318,7 @@ macx {
 
     # Create application dmg
     shutup = ">/dev/null 2>&1"
-    isEmpty(MACDEPLOYQT):MACDEPLOYQT = macdeployqt"
+    isEmpty(MACDEPLOYQT):MACDEPLOYQT = macdeployqt
     !system($$MACDEPLOYQT $$shutup) {
         warning("macdeployqt utility '$$MACDEPLOYQT' not found \
                  will not create target for application bundling")
