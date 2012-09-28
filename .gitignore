@@ -1,6 +1,10 @@
 YKPersonalization.pro.user
 Makefile
+Makefile.Release
+Makefile.Debug
 src/ui/ui_*.h
 build/
 deps/
 libs/
+object_script.yubikey-personalization-gui.Debug
+object_script.yubikey-personalization-gui.Release
