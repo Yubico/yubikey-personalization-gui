@@ -128,7 +128,7 @@ background-color: rgb(255, 255, 255);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>210</y>
+       <y>260</y>
        <width>151</width>
        <height>16</height>
       </rect>
@@ -138,7 +138,7 @@ background-color: rgb(255, 255, 255);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>190</y>
+       <y>240</y>
        <width>151</width>
        <height>16</height>
       </rect>
@@ -535,7 +535,7 @@ background-color: rgb(255, 255, 255);</string>
      <property name="geometry">
       <rect>
        <x>8</x>
-       <y>250</y>
+       <y>275</y>
        <width>155</width>
        <height>105</height>
       </rect>
@@ -781,6 +781,32 @@ border-radius: 2px;</string>
        <string>Modhex:</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QLabel" name="programDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>200</y>
+       <width>151</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Programming status:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="programLbl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>220</y>
+       <width>151</width>
+       <height>16</height>
+      </rect>
+     </property>
     </widget>
    </widget>
    <widget class="QStackedWidget" name="pagesWidget">

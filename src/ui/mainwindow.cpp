@@ -277,6 +277,18 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
 
     if(found) {
         YubiKeyFinder *finder = YubiKeyFinder::getInstance();
+        int touchLevel = finder->touchLevel();
+        qDebug() << "touchLevel is " << touchLevel;
+        if(touchLevel & CONFIG1_VALID && touchLevel & CONFIG2_VALID) {
+            ui->programLbl->setText(tr("Slot 1 and 2 configured"));
+        } else if(touchLevel & CONFIG1_VALID) {
+            ui->programLbl->setText(tr("Slot 1 configured"));
+        } else if(touchLevel & CONFIG2_VALID) {
+            ui->programLbl->setText(tr("Slot 2 configured"));
+        } else {
+            ui->programLbl->setText(tr("Not configured"));
+        }
+
         unsigned int version = finder->version();
         ui->statusLbl->setText(KEY_FOUND);
         ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_SUCCESS));
@@ -415,6 +427,7 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
             ui->ndefSupportLbl->setPixmap(CROSSMAP);
         }
     } else {
+        ui->programLbl->clear();
         ui->deviceImage->setHidden(true);
         if(ui->deviceImage->movie()) {
             delete(ui->deviceImage->movie());

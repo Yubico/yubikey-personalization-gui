@@ -221,6 +221,8 @@ void YubiKeyFinder::findKey() {
                                    m_versionMinor,
                                    m_versionBuild);
 
+            m_touchLevel = ykds_touch_level(ykst);
+
             //Get serial number
             if(checkFeatureSupport(Feature_SerialNumber)) {
                 if (!yk_get_serial(m_yk, 0, 0, &m_serial)) {

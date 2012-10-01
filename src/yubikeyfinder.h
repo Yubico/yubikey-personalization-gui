@@ -80,6 +80,9 @@ public:
     unsigned int serial() const
     {return m_serial;}
 
+    int touchLevel() const
+    {return m_touchLevel;}
+
     QString versionStr();
     void reportError();
 
@@ -102,6 +105,8 @@ private:
     unsigned int m_versionMajor;
     unsigned int m_versionBuild;
     unsigned int m_serial;
+
+    int m_touchLevel;
 
     QTimer *m_timer;
 
