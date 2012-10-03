@@ -271,7 +271,7 @@ color: rgb(140, 192, 65);</string>
       <rect>
        <x>10</x>
        <y>25</y>
-       <width>221</width>
+       <width>171</width>
        <height>17</height>
       </rect>
      </property>
@@ -353,6 +353,38 @@ font-weight: bold;</string>
      </property>
      <property name="flat">
       <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="logTraditionalRadio">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>25</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Traditional format</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="logYubicoRadio">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>25</y>
+       <width>120</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Yubico format</string>
      </property>
     </widget>
    </widget>
