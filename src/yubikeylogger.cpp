@@ -173,7 +173,32 @@ void YubiKeyLogger::logConfigTraditional(YubiKeyConfig *ykConfig, QTextStream &o
 }
 
 void YubiKeyLogger::logConfigYubico(YubiKeyConfig *ykConfig, QTextStream &out) {
-
+    if(ykConfig->serial() != "0") {
+        out << ykConfig->serial();
+    }
+    out << LOG_SEPARATOR;
+    switch(ykConfig->programmingMode()) {
+    case YubiKeyConfig::Mode_YubicoOtp:
+        out << ykConfig->pubIdTxt() << LOG_SEPARATOR;
+        out << ykConfig->pvtIdTxt() << LOG_SEPARATOR;
+        break;
+    case YubiKeyConfig::Mode_OathHotp:
+        out << ykConfig->pubIdTxt() << LOG_SEPARATOR;
+        out << ykConfig->oathMovingFactorSeed() << LOG_SEPARATOR;
+        break;
+    case YubiKeyConfig::Mode_ChalRespHmac:
+        out << LOG_SEPARATOR;
+        out << "0" << LOG_SEPARATOR;
+        break;
+    default:
+        qDebug() << "Yubico format has no support for programmingMode " << ykConfig->programmingMode();
+        break;
+    }
+    out << ykConfig->secretKeyTxt() << LOG_SEPARATOR;
+    out << ykConfig->newAccessCodeTxt() << LOG_SEPARATOR;
+    QDateTime timestamp = QDateTime::currentDateTime();
+    out << timestamp.toString("yyyy-MM-ddThh:mm:ss");
+    out << LOG_SEPARATOR << endl;
 }
 
 void YubiKeyLogger::enableLogging() {
