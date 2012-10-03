@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <QObject>
 #include <QtCore/QString>
+#include <QTextStream>
 
 #include "yubikeyconfig.h"
 
@@ -38,6 +39,11 @@ class YubiKeyLogger : public QObject {
 
 public:
     ~YubiKeyLogger();
+
+    enum Format {
+        Format_Traditional,
+        Format_Yubico,
+    };
     static void logConfig(YubiKeyConfig *ykConfig);
 
     static void enableLogging();
@@ -47,11 +53,16 @@ public:
     static void setLogFilename(const QString &filename);
     static QString logFilename();
     static QString defaultLogFilename();
+    static void setLogFormat(Format format);
 
 private:
     static bool m_enabled;
     static QString m_filename;
     static bool m_started;
+    static Format m_format;
+
+    static void logConfigTraditional(YubiKeyConfig *ykConfig, QTextStream &out);
+    static void logConfigYubico(YubiKeyConfig *ykConfig, QTextStream &out);
 };
 
 #endif // YUBIKEYLOGGER_H

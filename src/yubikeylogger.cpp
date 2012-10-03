@@ -29,7 +29,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "yubikeylogger.h"
 #include <QFile>
 #include <QDir>
-#include <QTextStream>
 #include <QDebug>
 #include <QDateTime>
 
@@ -39,6 +38,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 QString YubiKeyLogger::m_filename   = defaultLogFilename();
 bool YubiKeyLogger::m_enabled       = true;
 bool YubiKeyLogger::m_started       = true;
+YubiKeyLogger::Format YubiKeyLogger::m_format = Format_Traditional;
 
 YubiKeyLogger::~YubiKeyLogger() {
 }
@@ -70,6 +70,16 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
         m_started = false;
     }
 
+    if(m_format == Format_Traditional) {
+        logConfigTraditional(ykConfig, out);
+    } else {
+        logConfigYubico(ykConfig, out);
+    }
+    file.flush();
+    file.close();
+}
+
+void YubiKeyLogger::logConfigTraditional(YubiKeyConfig *ykConfig, QTextStream &out) {
     //Event type...
     QString eventType;
 
@@ -159,9 +169,10 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
     }
 
     out << endl;
+}
 
-    file.flush();
-    file.close();
+void YubiKeyLogger::logConfigYubico(YubiKeyConfig *ykConfig, QTextStream &out) {
+
 }
 
 void YubiKeyLogger::enableLogging() {
@@ -187,3 +198,8 @@ QString YubiKeyLogger::logFilename() {
 QString YubiKeyLogger::defaultLogFilename() {
     return QDir::homePath() + "/" + LOG_FILENAME_DEF;
 }
+
+void YubiKeyLogger::setLogFormat(Format format) {
+    m_format = format;
+}
+
