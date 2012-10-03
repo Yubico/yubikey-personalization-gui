@@ -268,8 +268,10 @@ void SettingPage::load() {
         ui->logYubicoRadio->setEnabled(true);
         if(logFormat == YubiKeyLogger::Format_Yubico) {
             ui->logYubicoRadio->setChecked(true);
+            YubiKeyLogger::setLogFormat(YubiKeyLogger::Format_Yubico);
         } else {
             ui->logTraditionalRadio->setChecked(true);
+            YubiKeyLogger::setLogFormat(YubiKeyLogger::Format_Traditional);
         }
     }
 
