@@ -60,15 +60,6 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
 
     QTextStream out(&file);
 
-    if(m_started) {
-        QDateTime ts = QDateTime::currentDateTime();
-        out << tr("LOGGING START")
-                << LOG_SEPARATOR
-                << ts.toString(Qt::SystemLocaleDate)
-                << endl;
-
-        m_started = false;
-    }
 
     if(m_format == Format_Traditional) {
         logConfigTraditional(ykConfig, out);
@@ -80,6 +71,16 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
 }
 
 void YubiKeyLogger::logConfigTraditional(YubiKeyConfig *ykConfig, QTextStream &out) {
+    if(m_started) {
+        QDateTime ts = QDateTime::currentDateTime();
+        out << tr("LOGGING START")
+                << LOG_SEPARATOR
+                << ts.toString(Qt::SystemLocaleDate)
+                << endl;
+
+        m_started = false;
+    }
+
     //Event type...
     QString eventType;
 
