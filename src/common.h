@@ -138,6 +138,7 @@ typedef std::vector<int>::size_type size_t;
 
 #define SG_LOG_DISABLED             "Log/Disabled"
 #define SG_LOG_FILENAME             "Log/Filename"
+#define SG_LOG_FORMAT               "Log/Format"
 
 #define SG_TAB_FIRST                "Flag/TabTirst"
 #define SG_APPEND_TAB1              "Flag/AppendTab1"
