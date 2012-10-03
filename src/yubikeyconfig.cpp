@@ -38,6 +38,7 @@ YubiKeyConfig::YubiKeyConfig() {
     m_secretKeyTxt.clear();
     m_currentAccessCodeTxt.clear();
     m_newAccessCodeTxt.clear();
+    m_serial.clear();
 
     QSettings settings;
 

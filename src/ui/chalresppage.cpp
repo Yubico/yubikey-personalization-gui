@@ -526,6 +526,9 @@ void ChalRespPage::writeQuickConfig() {
     //Programming mode...
     m_ykConfig->setProgrammingMode(YubiKeyConfig::Mode_ChalRespYubico);
 
+    // set serial
+    m_ykConfig->setSerial(QString::number(YubiKeyFinder::getInstance()->serial()));
+
     //Configuration slot...
     int configSlot = 1;
     if(ui->quickConfigSlot2Radio->isChecked()) {
@@ -867,6 +870,9 @@ void ChalRespPage::writeAdvConfig() {
 
     //Programming mode...
     m_ykConfig->setProgrammingMode(YubiKeyConfig::Mode_ChalRespHmac);
+
+    // set serial
+    m_ykConfig->setSerial(QString::number(YubiKeyFinder::getInstance()->serial()));
 
     //Configuration slot...
     int configSlot = 1;

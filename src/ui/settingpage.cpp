@@ -437,6 +437,9 @@ void SettingPage::on_doUpdateBtn_clicked() {
     m_ykConfig->setProgrammingMode(YubiKeyConfig::Mode_Update);
     m_ykConfig->setConfigSlot(slot);
 
+    // set serial
+    m_ykConfig->setSerial(QString::number(YubiKeyFinder::getInstance()->serial()));
+
     // access code
     m_ykConfig->setCurrentAccessCodeTxt(ui->currentAccessCodeTxt->text());
     if(ui->configProtectionCombo->currentIndex() ==
@@ -478,6 +481,9 @@ void SettingPage::on_swapBtn_clicked() {
     m_ykConfig = new YubiKeyConfig();
 
     m_ykConfig->setProgrammingMode(YubiKeyConfig::Mode_Swap);
+
+    // set serial
+    m_ykConfig->setSerial(QString::number(YubiKeyFinder::getInstance()->serial()));
 
     // access code
     m_ykConfig->setCurrentAccessCodeTxt(ui->currentAccessCodeTxt->text());

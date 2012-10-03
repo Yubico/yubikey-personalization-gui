@@ -81,6 +81,11 @@ public:
     QString newAccessCodeTxt() const
     {return m_newAccessCodeTxt;}
 
+    void setSerial(const QString &serial)
+    {m_serial = serial;}
+    QString serial() const
+    {return m_serial;}
+
     void setTabFirst(bool tabFirst)
     {m_tabFirst = tabFirst;}
     bool tabFirst() const
@@ -255,6 +260,8 @@ private:
     QString m_secretKeyTxt;
     QString m_currentAccessCodeTxt;
     QString m_newAccessCodeTxt;
+
+    QString m_serial;
 
     //Ticket flags
     bool m_tabFirst;

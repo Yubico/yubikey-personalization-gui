@@ -488,6 +488,9 @@ void OathPage::writeQuickConfig() {
     //Programming mode...
     m_ykConfig->setProgrammingMode(YubiKeyConfig::Mode_OathHotp);
 
+    // set serial
+    m_ykConfig->setSerial(QString::number(YubiKeyFinder::getInstance()->serial()));
+
     //Configuration slot...
     int configSlot = 1;
     if(ui->quickConfigSlot2Radio->isChecked()) {
@@ -1003,6 +1006,9 @@ void OathPage::writeAdvConfig() {
 
     //Programming mode...
     m_ykConfig->setProgrammingMode(YubiKeyConfig::Mode_OathHotp);
+
+    // set serial
+    m_ykConfig->setSerial(QString::number(YubiKeyFinder::getInstance()->serial()));
 
     //Configuration slot...
     int configSlot = 1;
