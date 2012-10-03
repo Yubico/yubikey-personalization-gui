@@ -8,3 +8,6 @@ deps/
 libs/
 object_script.yubikey-personalization-gui.Debug
 object_script.yubikey-personalization-gui.Release
+.*.swp
+yubikey-personalization-gui-*.tar.gz
+yubikey-personalization-gui-*.tar.gz.sig
