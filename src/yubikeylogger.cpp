@@ -124,8 +124,8 @@ void YubiKeyLogger::logConfigTraditional(YubiKeyConfig *ykConfig, QTextStream &o
     out << eventType;
 
     //Timestamp...
-    QDateTime timstamp = QDateTime::currentDateTime();
-    out << LOG_SEPARATOR << timstamp.toString(Qt::SystemLocaleDate);
+    QDateTime timestamp = QDateTime::currentDateTime();
+    out << LOG_SEPARATOR << timestamp.toString(Qt::SystemLocaleDate);
 
     //Configuration slot...
     out << LOG_SEPARATOR << ykConfig->configSlot();
