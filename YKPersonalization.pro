@@ -8,6 +8,7 @@ APP_NAME        = $$quote(YubiKey Personalization Tool)
 # common configuration
 #
 QT             += core gui
+DEPLOYMENT_PLUGIN += qgif
 TEMPLATE        = app
 TARGET          = yubikey-personalization-gui
 
