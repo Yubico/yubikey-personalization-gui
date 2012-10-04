@@ -331,7 +331,9 @@ macx {
     _PLUGINDIR = $${_BASEDIR}/PlugIns
     QMAKE_POST_LINK += $$quote( && mkdir -p $$_FRAMEWORKDIR && \
         cp -R $$_QT_LIBDIR/QtCore.framework $$_FRAMEWORKDIR/QtCore.framework && \
+        rm -rf $$_FRAMEWORKDIR/QtCore.framework/Versions/4/Headers && \
         cp -R $$_QT_LIBDIR/QtGui.framework $$_FRAMEWORKDIR/QtGui.framework && \
+        rm -rf $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Headers && \
         find $$_FRAMEWORKDIR -type l -print0 | xargs -0 rm -f  && \
         mv $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
         rmdir $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources && \
