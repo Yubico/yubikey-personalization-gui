@@ -300,6 +300,9 @@ macx {
     } else {
         _QT_LIBDIR = $$QMAKE_FRAMEWORKDIR_QT
         _QT_PLUGINDIR = $$[QT_INSTALL_PLUGINS]
+
+        isEmpty(PACKAGE_SIGN_IDENTITY):PACKAGE_SIGN_IDENTITY = 'Developer ID Application'
+        isEmpty(INSTALLER_SIGN_IDENTITY):INSTALLER_SIGN_IDENTITY = 'Developer ID Installer'
     }
 
     # The application dependencies
@@ -357,9 +360,14 @@ macx {
                 dmg dmg $${DESTDIR}/ykpers-pre.dmg $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.dmg)
         }
     } else {
+        build_installer {
+            QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app && \
+                pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --component $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg)
+        }
 
         # Create application dmg
         shutup = ">/dev/null 2>&1"
+
         isEmpty(MACDEPLOYQT):MACDEPLOYQT = macdeployqt
         !system($$MACDEPLOYQT $$shutup) {
             warning("macdeployqt utility '$$MACDEPLOYQT' not found \
