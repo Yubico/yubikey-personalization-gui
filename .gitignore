@@ -11,3 +11,4 @@ object_script.yubikey-personalization-gui.Release
 .*.swp
 yubikey-personalization-gui-*.tar.gz
 yubikey-personalization-gui-*.tar.gz.sig
+.DS_Store
