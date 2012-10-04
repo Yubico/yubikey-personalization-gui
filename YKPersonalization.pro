@@ -298,7 +298,7 @@ macx {
         QMAKE_CXXFLAGS_X86_64 -= -arch
         QMAKE_CXXFLAGS_X86_64 -= x86_64
     } else {
-        _QT_LIBDIR = $$QMAKE_FRAMEWORKDIR_QT
+        _QT_LIBDIR = $$QMAKE_LIBDIR_QT
         _QT_PLUGINDIR = $$[QT_INSTALL_PLUGINS]
 
         isEmpty(PACKAGE_SIGN_IDENTITY):PACKAGE_SIGN_IDENTITY = 'Developer ID Application'
