@@ -369,7 +369,9 @@ macx {
     } else {
         build_installer {
             QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app && \
-                pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --component $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg)
+		mkdir -p $${DESTDIR}/temp/ && \
+		cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
+                pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --version $${VERSION} --root $${DESTDIR}/temp/ --component-plist resources/mac/installer.plist --install-location '/Applications/' $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg)
         }
 
         # Create application dmg
