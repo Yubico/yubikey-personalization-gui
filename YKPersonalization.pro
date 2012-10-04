@@ -338,17 +338,22 @@ macx {
         mkdir -p $$_PLUGINDIR/imageformats && \
         cp -R $$_QT_PLUGINDIR/imageformats/libqgif.dylib $$_PLUGINDIR/imageformats)
 
-    cross {
-        # fixup all library paths..
-        _BASE = $$quote(@executable_path/../Frameworks)
-        _QTCORE = $$quote(QtCore.framework/Versions/4/QtCore)
-        _QTGUI = $$quote(QtGui.framework/Versions/4/QtGui)
-        QMAKE_POST_LINK += $$quote( && $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_BASEDIR/MacOS/$$TARGET_MAC && \
-            $$(TARGET_ARCH)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_BASEDIR/MacOS/$$TARGET_MAC && \
-            $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
-            $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqgif.dylib && \
-            $$(TARGET_ARCH)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqgif.dylib)
+    # fixup all library paths..
+    _BASE = $$quote(@executable_path/../Frameworks)
+    _QTCORE = $$quote(QtCore.framework/Versions/4/QtCore)
+    _QTGUI = $$quote(QtGui.framework/Versions/4/QtGui)
+    isEmpty($$_TARGET_ARCH) {
+        _INSTALL_NAME_TOOL = install_name_tool
+    } else {
+        _INSTALL_NAME_TOOL = $$(TARGET_ARCH)-install_name_tool
+    }
+    QMAKE_POST_LINK += $$quote( && $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/$$_QTGUI $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
+        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqgif.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqgif.dylib)
         
+    cross {
         build_installer {
             QMAKE_POST_LINK += $$quote( && mkdir -p $${DESTDIR}/temp/ && \
                 cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
