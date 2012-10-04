@@ -293,12 +293,14 @@ macx {
             # FIXME: this is prone to breaking with version numbers
             INCLUDEPATH += $$(OSX_SDK)/usr/include/c++/4.2.1
         }
+        QMAKE_CFLAGS_X86_64 -= -arch
+        QMAKE_CFLAGS_X86_64 -= x86_64
+        QMAKE_CXXFLAGS_X86_64 -= -arch
+        QMAKE_CXXFLAGS_X86_64 -= x86_64
+    } else {
+        _QT_LIBDIR = $$QMAKE_FRAMEWORKDIR_QT
+        _QT_PLUGINDIR = $$[QT_INSTALL_PLUGINS]
     }
-
-    QMAKE_CFLAGS_X86_64 -= -arch
-    QMAKE_CFLAGS_X86_64 -= x86_64
-    QMAKE_CXXFLAGS_X86_64 -= -arch
-    QMAKE_CXXFLAGS_X86_64 -= x86_64
 
     # The application dependencies
     LIBS += $$_SDK/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
@@ -320,20 +322,20 @@ macx {
         sed -e \'s|@@version@@|$$VERSION|g\' \
         < resources/mac/Info.plist.in  > $${DESTDIR}/$${TARGET_MAC}.app/Contents/Info.plist)
 
-    cross {
-        # copy the QT libraries into our bundle
-        _BASEDIR = $${DESTDIR}/$${TARGET_MAC}.app/Contents
-        _FRAMEWORKDIR = $${_BASEDIR}/Frameworks
-        _PLUGINDIR = $${_BASEDIR}/PlugIns
-        QMAKE_POST_LINK += $$quote( && mkdir -p $$_FRAMEWORKDIR && \
-            cp -R $$_QT_LIBDIR/QtCore.framework $$_FRAMEWORKDIR/QtCore.framework && \
-            cp -R $$_QT_LIBDIR/QtGui.framework $$_FRAMEWORKDIR/QtGui.framework && \
-            find $$_FRAMEWORKDIR -type l -print0 | xargs -0 rm -f  && \
-            mv $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
-            rmdir $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources && \
-            mkdir -p $$_PLUGINDIR/imageformats && \
-            cp -R $$_QT_PLUGINDIR/imageformats/libqgif.dylib $$_PLUGINDIR/imageformats)
+    # copy the QT libraries into our bundle
+    _BASEDIR = $${DESTDIR}/$${TARGET_MAC}.app/Contents
+    _FRAMEWORKDIR = $${_BASEDIR}/Frameworks
+    _PLUGINDIR = $${_BASEDIR}/PlugIns
+    QMAKE_POST_LINK += $$quote( && mkdir -p $$_FRAMEWORKDIR && \
+        cp -R $$_QT_LIBDIR/QtCore.framework $$_FRAMEWORKDIR/QtCore.framework && \
+        cp -R $$_QT_LIBDIR/QtGui.framework $$_FRAMEWORKDIR/QtGui.framework && \
+        find $$_FRAMEWORKDIR -type l -print0 | xargs -0 rm -f  && \
+        mv $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
+        rmdir $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources && \
+        mkdir -p $$_PLUGINDIR/imageformats && \
+        cp -R $$_QT_PLUGINDIR/imageformats/libqgif.dylib $$_PLUGINDIR/imageformats)
 
+    cross {
         # fixup all library paths..
         _BASE = $$quote(@executable_path/../Frameworks)
         _QTCORE = $$quote(QtCore.framework/Versions/4/QtCore)
