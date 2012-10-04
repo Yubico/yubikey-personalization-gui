@@ -381,7 +381,7 @@ macx {
         } else {
             contains(QMAKE_EXTRA_TARGETS, macdeploy) {
                 IMAGEROOT = $${DESTDIR}/disk-image-root
-                IMAGEFILE = $${DESTDIR}/$${TARGET_MAC}\\ Installer-mac.dmg
+                IMAGEFILE = $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.dmg
 
                 #Note: Volume name for disk image should be passed without escaping quotes
                 macdisk.depends  = macdeploy
