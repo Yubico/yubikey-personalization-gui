@@ -259,8 +259,8 @@ unix:!macx {
     }
 
     # Create application tarball
-    TARROOT = Yubico
-    TARFILE = "$${TARGET_LIN}\\ Installer-lin.tgz"
+    TARROOT = "$${TARGET_LIN}-linux-$${VERSION}"
+    TARFILE = "$${TARGET_LIN}-linux-$${VERSION}.tgz"
 
     tarball.target   = tarball
     tarball.commands = \
