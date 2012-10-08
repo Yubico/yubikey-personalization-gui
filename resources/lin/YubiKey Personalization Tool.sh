@@ -1,5 +1,5 @@
 #!/bin/sh
-appname="YKPersonalization"
+appname="yubikey-personalization-gui"
 
 dirname=`dirname "$0"`
 tmp="${dirname#?}"
