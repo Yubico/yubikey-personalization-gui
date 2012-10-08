@@ -247,8 +247,9 @@ unix:!macx {
 
     # Copy dependencies and other resources
     LIB_FILES += \
-        $(QTDIR)/lib/libQtGui.so.4 \
-        $(QTDIR)/lib/libQtCore.so.4 \
+        $$[QT_INSTALL_LIBS]/libQtGui.so.4 \
+        $$[QT_INSTALL_LIBS]/libQtCore.so.4 \
+        $$[QT_INSTALL_PLUGINS]/imageformats/libqgif.so \
         libs/lin/libusb-1.0.so.0 \
         resources/lin/$${TARGET_LIN}.sh
 
