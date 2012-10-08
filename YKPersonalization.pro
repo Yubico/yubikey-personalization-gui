@@ -369,8 +369,9 @@ macx {
     } else {
         build_installer {
             QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app && \
-		mkdir -p $${DESTDIR}/temp/ && \
-		cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
+                rm -rf $${DESTDIR}/temp && \
+                mkdir -p $${DESTDIR}/temp/ && \
+                cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
                 pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --version $${VERSION} --root $${DESTDIR}/temp/ --component-plist resources/mac/installer.plist --install-location '/Applications/' $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg)
         }
 
@@ -427,7 +428,7 @@ win32 {
     QMAKE_CLEAN += $${TARGET_DIR_WIN}$${DIR_SEPARATOR}*.exe \
                    $${TARGET_DIR_WIN}$${DIR_SEPARATOR}*.dll
 } else:macx {
-    QMAKE_CLEAN += -r $${DESTDIR}/*.app
+    QMAKE_CLEAN += -r $${DESTDIR}/*.app $${DESTDIR}/*.pkg $${DESTDIR}/*.dmg $${DESTDIR}/temp
 } else {
     QMAKE_CLEAN += -r $${DESTDIR}/*
 }
