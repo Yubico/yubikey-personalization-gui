@@ -8,6 +8,7 @@ APP_NAME        = $$quote(YubiKey Personalization Tool)
 # common configuration
 #
 QT             += core gui
+DEPLOYMENT_PLUGIN += qgif
 TEMPLATE        = app
 TARGET          = yubikey-personalization-gui
 
@@ -293,12 +294,17 @@ macx {
             # FIXME: this is prone to breaking with version numbers
             INCLUDEPATH += $$(OSX_SDK)/usr/include/c++/4.2.1
         }
-    }
+        QMAKE_CFLAGS_X86_64 -= -arch
+        QMAKE_CFLAGS_X86_64 -= x86_64
+        QMAKE_CXXFLAGS_X86_64 -= -arch
+        QMAKE_CXXFLAGS_X86_64 -= x86_64
+    } else {
+        _QT_LIBDIR = $$QMAKE_LIBDIR_QT
+        _QT_PLUGINDIR = $$[QT_INSTALL_PLUGINS]
 
-    QMAKE_CFLAGS_X86_64 -= -arch
-    QMAKE_CFLAGS_X86_64 -= x86_64
-    QMAKE_CXXFLAGS_X86_64 -= -arch
-    QMAKE_CXXFLAGS_X86_64 -= x86_64
+        isEmpty(PACKAGE_SIGN_IDENTITY):PACKAGE_SIGN_IDENTITY = 'Developer ID Application'
+        isEmpty(INSTALLER_SIGN_IDENTITY):INSTALLER_SIGN_IDENTITY = 'Developer ID Installer'
+    }
 
     # The application dependencies
     LIBS += $$_SDK/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
@@ -320,30 +326,37 @@ macx {
         sed -e \'s|@@version@@|$$VERSION|g\' \
         < resources/mac/Info.plist.in  > $${DESTDIR}/$${TARGET_MAC}.app/Contents/Info.plist)
 
-    cross {
-        # copy the QT libraries into our bundle
-        _BASEDIR = $${DESTDIR}/$${TARGET_MAC}.app/Contents
-        _FRAMEWORKDIR = $${_BASEDIR}/Frameworks
-        _PLUGINDIR = $${_BASEDIR}/PlugIns
-        QMAKE_POST_LINK += $$quote( && mkdir -p $$_FRAMEWORKDIR && \
-            cp -R $$_QT_LIBDIR/QtCore.framework $$_FRAMEWORKDIR/QtCore.framework && \
-            cp -R $$_QT_LIBDIR/QtGui.framework $$_FRAMEWORKDIR/QtGui.framework && \
-            find $$_FRAMEWORKDIR -type l -print0 | xargs -0 rm -f  && \
-            mv $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
-            rmdir $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources && \
-            mkdir -p $$_PLUGINDIR/imageformats && \
-            cp -R $$_QT_PLUGINDIR/imageformats/libqgif.dylib $$_PLUGINDIR/imageformats)
+    # copy the QT libraries into our bundle
+    _BASEDIR = $${DESTDIR}/$${TARGET_MAC}.app/Contents
+    _FRAMEWORKDIR = $${_BASEDIR}/Frameworks
+    _PLUGINDIR = $${_BASEDIR}/PlugIns
+    QMAKE_POST_LINK += $$quote( && mkdir -p $$_FRAMEWORKDIR && \
+        cp -R $$_QT_LIBDIR/QtCore.framework $$_FRAMEWORKDIR/QtCore.framework && \
+        rm -rf $$_FRAMEWORKDIR/QtCore.framework/Versions/4/Headers && \
+        cp -R $$_QT_LIBDIR/QtGui.framework $$_FRAMEWORKDIR/QtGui.framework && \
+        rm -rf $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Headers && \
+        find $$_FRAMEWORKDIR -type l -print0 | xargs -0 rm -f  && \
+        mv $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
+        rmdir $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources && \
+        mkdir -p $$_PLUGINDIR/imageformats && \
+        cp -R $$_QT_PLUGINDIR/imageformats/libqgif.dylib $$_PLUGINDIR/imageformats)
 
-        # fixup all library paths..
-        _BASE = $$quote(@executable_path/../Frameworks)
-        _QTCORE = $$quote(QtCore.framework/Versions/4/QtCore)
-        _QTGUI = $$quote(QtGui.framework/Versions/4/QtGui)
-        QMAKE_POST_LINK += $$quote( && $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_BASEDIR/MacOS/$$TARGET_MAC && \
-            $$(TARGET_ARCH)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_BASEDIR/MacOS/$$TARGET_MAC && \
-            $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
-            $$(TARGET_ARCH)-install_name_tool -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqgif.dylib && \
-            $$(TARGET_ARCH)-install_name_tool -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqgif.dylib)
+    # fixup all library paths..
+    _BASE = $$quote(@executable_path/../Frameworks)
+    _QTCORE = $$quote(QtCore.framework/Versions/4/QtCore)
+    _QTGUI = $$quote(QtGui.framework/Versions/4/QtGui)
+    isEmpty($$_TARGET_ARCH) {
+        _INSTALL_NAME_TOOL = install_name_tool
+    } else {
+        _INSTALL_NAME_TOOL = $$(TARGET_ARCH)-install_name_tool
+    }
+    QMAKE_POST_LINK += $$quote( && $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/$$_QTGUI $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
+        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqgif.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqgif.dylib)
         
+    cross {
         build_installer {
             QMAKE_POST_LINK += $$quote( && mkdir -p $${DESTDIR}/temp/ && \
                 cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
@@ -355,9 +368,16 @@ macx {
                 dmg dmg $${DESTDIR}/ykpers-pre.dmg $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.dmg)
         }
     } else {
+        build_installer {
+            QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app && \
+		mkdir -p $${DESTDIR}/temp/ && \
+		cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
+                pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --version $${VERSION} --root $${DESTDIR}/temp/ --component-plist resources/mac/installer.plist --install-location '/Applications/' $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg)
+        }
 
         # Create application dmg
         shutup = ">/dev/null 2>&1"
+
         isEmpty(MACDEPLOYQT):MACDEPLOYQT = macdeployqt
         !system($$MACDEPLOYQT $$shutup) {
             warning("macdeployqt utility '$$MACDEPLOYQT' not found \
@@ -379,7 +399,7 @@ macx {
         } else {
             contains(QMAKE_EXTRA_TARGETS, macdeploy) {
                 IMAGEROOT = $${DESTDIR}/disk-image-root
-                IMAGEFILE = $${DESTDIR}/$${TARGET_MAC}\\ Installer-mac.dmg
+                IMAGEFILE = $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.dmg
 
                 #Note: Volume name for disk image should be passed without escaping quotes
                 macdisk.depends  = macdeploy
