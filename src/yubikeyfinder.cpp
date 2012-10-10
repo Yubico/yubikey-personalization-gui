@@ -180,9 +180,9 @@ bool YubiKeyFinder::closeKey() {
         if (!yk_close_key(m_yk)) {
             flag = false;
         }
+        m_yk = 0;
     }
 
-    init();
     return flag;
 }
 
@@ -250,6 +250,7 @@ void YubiKeyFinder::findKey() {
     closeKey();
 
     if(error) {
+        init();
         m_state = State_Absent;
         reportError();
         emit keyFound(false, NULL);
