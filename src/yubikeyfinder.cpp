@@ -65,6 +65,9 @@ const unsigned int YubiKeyFinder::FEATURE_MATRIX_EXCLUDE[][2] = {
 };
 
 YubiKeyFinder::YubiKeyFinder() {
+    // init the ykpers library
+    yk_init();
+
     //Initialize fields
     init();
 
@@ -76,6 +79,7 @@ YubiKeyFinder::YubiKeyFinder() {
 
 YubiKeyFinder::~YubiKeyFinder() {
     closeKey();
+    yk_release();
 
     if(m_timer != 0) {
         delete m_timer;
@@ -153,7 +157,6 @@ void YubiKeyFinder::start() {
     if(m_timer && !m_timer->isActive()) {
         m_timer->start(TIMEOUT_FINDER);
     }
-    yk_init();
 }
 
 void YubiKeyFinder::stop() {

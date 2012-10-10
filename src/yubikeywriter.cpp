@@ -134,9 +134,7 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
     qDebug() << "-------------------------";
 
     try {
-        if (!yk_init()) {
-            throw 0;
-        } else if (!(yk = yk_open_first_key())) {
+        if (!(yk = yk_open_first_key())) {
             throw 0;
         } else if (!yk_get_status(yk, ykst)) {
             throw 0;
@@ -426,10 +424,6 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
         error = true;
     }
 
-    if (!yk_release()) {
-        error = true;
-    }
-
     YubiKeyFinder::getInstance()->start();
 
     if(error) {
@@ -458,9 +452,7 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
         const unsigned char *chal = reinterpret_cast<const unsigned char*>(chal_array.constData());
         unsigned char resp[64];
         memset(resp, 0, sizeof(resp));
-        if (!yk_init()) {
-            throw 0;
-        } else if (!(yk = yk_open_first_key())) {
+        if (!(yk = yk_open_first_key())) {
             throw 0;
         }
 
@@ -498,12 +490,7 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
         error = true;
     }
 
-    if (!yk_release()) {
-        error = true;
-    }
-
     YubiKeyFinder::getInstance()->start();
-
 
     if(error) {
         qDebug() << "Challenge response failed.";
@@ -525,9 +512,7 @@ void YubiKeyWriter::writeNdef(bool uri, const QString language, const QString pa
         QByteArray payload_array = payload.toUtf8();
         const char *ndef_payload = payload_array.constData();
         qDebug() << "payload: " << ndef_payload;
-        if (!yk_init()) {
-            throw 0;
-        } else if (!(yk = yk_open_first_key())) {
+        if (!(yk = yk_open_first_key())) {
             throw 0;
         }
 
@@ -561,10 +546,6 @@ void YubiKeyWriter::writeNdef(bool uri, const QString language, const QString pa
     }
 
     if (yk && !yk_close_key(yk)) {
-        error = true;
-    }
-
-    if (!yk_release()) {
         error = true;
     }
 
