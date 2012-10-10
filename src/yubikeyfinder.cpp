@@ -78,7 +78,6 @@ YubiKeyFinder::YubiKeyFinder() {
 }
 
 YubiKeyFinder::~YubiKeyFinder() {
-    closeKey();
     yk_release();
 
     if(m_timer != 0) {
@@ -164,15 +163,10 @@ void YubiKeyFinder::stop() {
     if(m_timer && m_timer->isActive()) {
         m_timer->stop();
     }
-    closeKey();
-    yk_release();
 }
 
 bool YubiKeyFinder::openKey() {
     bool flag = true;
-    if(m_yk != 0) {
-        closeKey();
-    }
     if (!(m_yk = yk_open_first_key())) {
         flag = false;
     }
@@ -253,9 +247,10 @@ void YubiKeyFinder::findKey() {
         ykds_free(ykst);
     }
 
+    closeKey();
+
     if(error) {
         m_state = State_Absent;
-        closeKey();
         reportError();
         emit keyFound(false, NULL);
     }
