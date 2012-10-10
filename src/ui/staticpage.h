@@ -138,6 +138,8 @@ private slots:
 
     void advUpdateResults(bool written, const QString &msg);
 
+    void on_quickScanCodesTxt_textEdited(const QString &text);
+
 signals:
     void showStatusMessage(const QString &text, int status = 0);
 };

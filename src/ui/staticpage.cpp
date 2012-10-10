@@ -61,6 +61,9 @@ StaticPage::StaticPage(QWidget *parent) :
 
     ui->quickResultsWidget->resizeColumnsToContents();
     ui->advResultsWidget->resizeColumnsToContents();
+
+    QRegExp rx("^[a-f0-9]{0,72}$");
+    ui->quickScanCodesTxt->setValidator(new QRegExpValidator(rx, this));
 }
 
 StaticPage::~StaticPage() {
@@ -358,6 +361,11 @@ void StaticPage::on_quickHideParams_clicked(bool checked) {
 
 void StaticPage::on_quickStaticTxt_textChanged(const QString &txt) {
     int len = ui->quickStaticTxt->len();
+    ui->quickScanCodesTxt->setEnabled(len == 0);
+
+    if(!ui->quickHideParams->isChecked()) {
+        ui->quickScanCodesTxt->setText(ui->quickStaticTxt->scanCodeText());
+    }
 
     ui->quickStaticLenTxt->setText(QString::number(len));
     if(len >= MAX_SCAN_EDIT_SIZE) {
@@ -376,6 +384,10 @@ void StaticPage::on_quickInsertTabBtn_clicked() {
 
 void StaticPage::on_quickClearBtn_clicked() {
     ui->quickStaticTxt->clearScanCodeText();
+    ui->quickScanCodesTxt->clear();
+    ui->quickStaticTxt->setEnabled(true);
+    ui->quickScanCodesTxt->setEnabled(true);
+    ui->quickInsertTabBtn->setEnabled(true);
     ui->quickStaticTxt->clear();
     ui->quickStaticTxt->setFocus();
 }
@@ -517,8 +529,15 @@ void StaticPage::writeQuickConfig() {
     m_ykConfig->setConfigSlot(configSlot);
 
     //Parameters...
-    QString staticTxt = ui->quickStaticTxt->scanCodeText();
+    QString staticTxt;
+    if(!ui->quickScanCodesTxt->text().isEmpty()) {
+        staticTxt = ui->quickScanCodesTxt->text();
+    } else {
+        staticTxt = ui->quickStaticTxt->scanCodeText();
+    }
+
     YubiKeyUtil::qstrClean(&staticTxt, 0);
+    qDebug() << "static txt is: " << staticTxt;
 
     QString pubIdTxt("");
     QString pvtIdTxt("");
@@ -1181,4 +1200,11 @@ void StaticPage::advUpdateResults(bool written, const QString &msg) {
 
     ui->advResultsWidget->resizeColumnsToContents();
     ui->advResultsWidget->resizeRowsToContents();
+}
+
+void StaticPage::on_quickScanCodesTxt_textEdited(const QString &text) {
+    ui->quickStaticTxt->setEnabled(text.length() == 0);
+    ui->quickInsertTabBtn->setEnabled(text.length() == 0);
+    ui->quickStaticLenTxt->setText(QString::number(text.length() / 2));
+    ui->quickClearBtn->setEnabled(text.length() != 0);
 }
