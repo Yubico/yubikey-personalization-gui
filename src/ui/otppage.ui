@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>2</number>
+   <number>1</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -227,7 +227,7 @@ color: rgb(118, 116, 108)</string>
        <x>10</x>
        <y>45</y>
        <width>151</width>
-       <height>17</height>
+       <height>19</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -243,7 +243,7 @@ color: rgb(118, 116, 108)</string>
        <x>240</x>
        <y>45</y>
        <width>151</width>
-       <height>17</height>
+       <height>19</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -820,7 +820,7 @@ color: rgb(118, 116, 108);</string>
        <x>10</x>
        <y>45</y>
        <width>151</width>
-       <height>17</height>
+       <height>19</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -842,7 +842,7 @@ color: rgb(118, 116, 108);</string>
        <x>240</x>
        <y>45</y>
        <width>151</width>
-       <height>17</height>
+       <height>19</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -1771,9 +1771,9 @@ font-weight: bold;</string>
       </property>
      </item>
      <item>
-       <property name="text">
-         <string>Identity from serial; Randomize Secrets</string>
-       </property>
+      <property name="text">
+       <string>Identity from serial; Randomize Secrets</string>
+      </property>
      </item>
     </widget>
     <widget class="QPushButton" name="advParamGenSchemeHelpBtn">

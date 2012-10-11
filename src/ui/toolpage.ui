@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>0</number>
+   <number>2</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -664,7 +664,7 @@ color: rgb(140, 192, 65);</string>
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>60</y>
+       <y>70</y>
        <width>361</width>
        <height>50</height>
       </rect>
@@ -692,7 +692,7 @@ color: rgb(118, 116, 108);</string>
         <x>10</x>
         <y>20</y>
         <width>151</width>
-        <height>17</height>
+        <height>19</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -714,7 +714,7 @@ color: rgb(118, 116, 108);</string>
         <x>200</x>
         <y>20</y>
         <width>151</width>
-        <height>17</height>
+        <height>19</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -731,7 +731,7 @@ color: rgb(118, 116, 108);</string>
        <x>0</x>
        <y>0</y>
        <width>361</width>
-       <height>50</height>
+       <height>60</height>
       </rect>
      </property>
      <widget class="QLabel" name="chalRespSlotLabel">
@@ -757,7 +757,7 @@ color: rgb(118, 116, 108);</string>
         <x>10</x>
         <y>30</y>
         <width>151</width>
-        <height>17</height>
+        <height>19</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -779,7 +779,7 @@ color: rgb(118, 116, 108);</string>
         <x>200</x>
         <y>30</y>
         <width>151</width>
-        <height>17</height>
+        <height>19</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -794,7 +794,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>120</y>
+       <y>130</y>
        <width>321</width>
        <height>16</height>
       </rect>
@@ -811,7 +811,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>140</y>
+       <y>150</y>
        <width>361</width>
        <height>20</height>
       </rect>
@@ -836,7 +836,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>165</y>
+       <y>175</y>
        <width>321</width>
        <height>16</height>
       </rect>
@@ -853,7 +853,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>185</y>
+       <y>195</y>
        <width>361</width>
        <height>20</height>
       </rect>

@@ -127,7 +127,7 @@ color: rgb(140, 192, 65);</string>
       <number>5</number>
      </property>
      <property name="cursorPosition">
-      <number>5</number>
+      <number>0</number>
      </property>
     </widget>
     <widget class="QLabel" name="custPrefixDecLabel">
@@ -240,7 +240,7 @@ color: rgb(140, 192, 65);</string>
       <number>4</number>
      </property>
      <property name="cursorPosition">
-      <number>4</number>
+      <number>0</number>
      </property>
     </widget>
    </widget>
@@ -1388,7 +1388,7 @@ color: rgb(118, 116, 108);</string>
        <x>10</x>
        <y>40</y>
        <width>151</width>
-       <height>17</height>
+       <height>19</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -1410,7 +1410,7 @@ color: rgb(118, 116, 108);</string>
        <x>200</x>
        <y>40</y>
        <width>151</width>
-       <height>17</height>
+       <height>19</height>
       </rect>
      </property>
      <property name="styleSheet">
