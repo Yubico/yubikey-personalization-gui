@@ -246,7 +246,7 @@ unix:!macx {
     QMAKE_LFLAGS += $$(LDFLAGS)
 
   } else {
-    message("Linux build")
+    message("Generic Linux build")
 
     HEADERS += deps/libusb-1.0/libusb.h
     SOURCES += deps/libykpers/ykcore/ykcore_libusb-1.0.c
