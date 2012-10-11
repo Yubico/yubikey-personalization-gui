@@ -94,7 +94,7 @@ OTHER_FILES += \
     resources/mac/Info.plist.in \
     resources/mac/qt.conf
 
-!debian {
+!debian:!fedora {
   HEADERS += \
       deps/libykpers/ykpers.h \
       deps/libykpers/ykpbkdf2.h \
@@ -201,7 +201,7 @@ win32 {
 #
 # Non-windows specific configuration
 #
-!win32:!debian {
+!win32:!debian:!fedora {
     SOURCES += \
         deps/libykpers/ykpers.c \
         deps/libykpers/ykpbkdf2.c \
@@ -234,8 +234,19 @@ unix:!macx {
     QMAKE_CXXFLAGS += $$(CXXFLAGS)
     QMAKE_LFLAGS += $$(LDFLAGS)
 
+  } fedora {
+    message("Fedora build")
+
+    LIBS += -lyubikey
+
+    CONFIG += link_pkgconfig
+    PKGCONFIG += ykpers-1
+
+    QMAKE_CXXFLAGS += $$(CXXFLAGS)
+    QMAKE_LFLAGS += $$(LDFLAGS)
+
   } else {
-    message("Linux build")
+    message("Generic Linux build")
 
     HEADERS += deps/libusb-1.0/libusb.h
     SOURCES += deps/libykpers/ykcore/ykcore_libusb-1.0.c
