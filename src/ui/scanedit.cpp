@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define	RETURN  0x28
 #define	SHIFT   0x80
 
-static const unsigned char key2usb[0x80] = {
+static const unsigned char key2usb[] = {
     0x00,               /*   0 0x00 */
     0x00,               /*   1 0x01 */
     0x00,               /*   2 0x02 */
@@ -166,80 +166,166 @@ static const unsigned char key2usb[0x80] = {
     0x00,		/* 127 0x7f  */
 };
 
-ScanEdit::ScanEdit(QWidget *parent) : QLineEdit(parent) {
-    this->setContextMenuPolicy( Qt::NoContextMenu );
-    clearScanCodeText();
-}
+static const char *usb2key1[] = {
+    "",
+    "",
+    "",
+    "",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g", /* 0xa */
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q", /* 0x14 */
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+    "1", /* 0x1e */
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "0",
+    "\\n", /* 0x28 */
+    "",
+    "",
+    "\\t",
+    " ",
+    "-",
+    "=",
+    "[",
+    "]",
+    "",
+    "\\\\",
+    ";",
+    "'",
+    "`",
+    ",",
+    ".",
+    "/", /* 0x38 */
+};
 
-void ScanEdit::injectText(const QString &txt) {
-    setText(tr("%1%2").arg(text()).arg(txt));
-}
+static const char *usb2key2[] = {
+    "",
+    "",
+    "",
+    "",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G", /* 0x8a */
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q", /* 0x94 */
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+    "!",
+    "@",
+    "#",
+    "$",
+    "%",
+    "^",
+    "&",
+    "*",
+    "(",
+    ")",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "_",
+    "+",
+    "{",
+    "}",
+    "|",
+    "",
+    ":",
+    "\"",
+    "~",
+    "<",
+    ">",
+    "?",
+};
 
-int ScanEdit::len() const {
-    QString txt = text();
-    txt = txt.replace(QRegExp("\\\\[tn]"), QString("1"));
-    return txt.length();
-}
-
-void ScanEdit::injectScanCode(unsigned char code) {
-    if (!code) return;
-
-    QString hexTxt = YubiKeyUtil::qstrHexEncode(&code, 1);
-    m_scanCodeText.append(hexTxt);
-
-    // Handle special characters...
-    switch(code) {
-    case TAB:
-        injectText(tr("\\t"));
-        break;
-    case RETURN:
-        injectText(tr("\\n"));
-        break;
-    }
-}
-
-void ScanEdit::clearScanCodeText() {
-    m_scanCodeText.clear();
-}
-
-QString ScanEdit::scanCodeText() const {
-    return m_scanCodeText;
-}
-
-void ScanEdit::keyPressEvent(QKeyEvent *event) {
-    qDebug() << "key text:" << event->text();
-    qDebug() << "key code:" << event->key();
-    //qDebug() << "scan code:" << event->nativeScanCode();
-    //qDebug() << "usb key code:" << trans[event->nativeScanCode() & 0x7f];
-
-    // Check if text length exceeds max scan edit length
-    if(len() >= MAX_SCAN_EDIT_SIZE) {
-        event->ignore();
-        return;
-    }
-
-    switch(event->key()) {
-    case Qt::Key_Enter:
-    case Qt::Key_Return:
-        injectScanCode(RETURN);
-        break;
-
-    default:
-        if(event->key() < SHIFT) {
-            QChar ch = event->text().at(0).toAscii();
-            int chValue = ch.toAscii();
-
-            injectScanCode( key2usb[chValue] );
-            injectText(event->text());
-        } else {
-            event->ignore();
-            return;
+QString ScanEdit::textToScanCodes(const QString text) {
+    QString scanCode;
+    for(int i = 0; i < text.length(); i++) {
+        QChar ch = text.at(i).toAscii();
+        unsigned char code = 0;
+        if(ch == '\\') {
+            if(i + 1 != text.length()) {
+                QChar next = text.at(i + 1).toAscii();
+                if(next == '\\') {
+                    i++;
+                } else if(next == 't') {
+                    i++;
+                    code = TAB;
+                } else if(next == 'n') {
+                    i++;
+                    code = RETURN;
+                }
+            }
         }
-        break;
+        if(code == 0) {
+            code = key2usb[(int)ch.toAscii()];
+        }
+        QString hexTxt = YubiKeyUtil::qstrHexEncode(&code, 1);
+        scanCode += hexTxt;
     }
+    return scanCode;
 }
 
-void ScanEdit::focusInEvent(QFocusEvent *event) {
-    QLineEdit::focusInEvent(event);
-    setCursorPosition(text().length());
+QString ScanEdit::scanCodesToText(const QString scanCode) {
+    QString text;
+    for(int i = 0; i < scanCode.length(); i += 2) {
+        bool ok;
+        int code = scanCode.mid(i, 2).toInt(&ok, 16);
+        if(ok == true) {
+            if(code < SHIFT) {
+                text += usb2key1[code];
+            } else {
+                text += usb2key2[code ^ SHIFT];
+            }
+        }
+    }
+    return text;
 }

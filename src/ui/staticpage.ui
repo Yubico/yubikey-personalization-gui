@@ -361,7 +361,7 @@ border-radius: 10px;
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="ScanEdit" name="quickStaticTxt">
+    <widget class="QLineEdit" name="quickStaticTxt">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -2366,13 +2366,6 @@ color: rgb(0, 0, 0);</string>
    </widget>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>ScanEdit</class>
-   <extends>QLineEdit</extends>
-   <header>scanedit.h</header>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>quickBtn</tabstop>
   <tabstop>advBtn</tabstop>
