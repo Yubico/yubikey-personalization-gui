@@ -120,9 +120,6 @@ color: rgb(140, 192, 65);</string>
      <property name="styleSheet">
       <string notr="true">font-weight: normal;</string>
      </property>
-     <property name="inputMask">
-      <string>00000; </string>
-     </property>
      <property name="text">
       <string/>
      </property>
@@ -235,9 +232,6 @@ color: rgb(140, 192, 65);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">font-weight: normal;</string>
-     </property>
-     <property name="inputMask">
-      <string>hhhh; </string>
      </property>
      <property name="text">
       <string/>

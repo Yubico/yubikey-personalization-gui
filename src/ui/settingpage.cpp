@@ -85,8 +85,12 @@ SettingPage::SettingPage(QWidget *parent) :
     connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
             this, SLOT(keyFound(bool, bool*)));
 
-    QRegExp rx("^[cbdefghijklnrtuv]{0,4}$");
-    ui->custPrefixModhexTxt->setValidator(new QRegExpValidator(rx, this));
+    QRegExp modHexRx("^[cbdefghijklnrtuv]{0,4}$");
+    ui->custPrefixModhexTxt->setValidator(new QRegExpValidator(modHexRx, this));
+    QRegExp decRx("^[0-9]{0,5}$");
+    ui->custPrefixDecTxt->setValidator(new QRegExpValidator(decRx, this));
+    QRegExp hexRx("^[0-9a-f]{0,4}$");
+    ui->custPrefixHexTxt->setValidator(new QRegExpValidator(hexRx, this));
 }
 
 SettingPage::~SettingPage() {
