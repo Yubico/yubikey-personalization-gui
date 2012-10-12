@@ -525,12 +525,7 @@ void StaticPage::writeQuickConfig() {
     m_ykConfig->setConfigSlot(configSlot);
 
     //Parameters...
-    QString staticTxt;
-    if(ui->quickScanCodesTxt->text().length() > 0) {
-        staticTxt = ui->quickScanCodesTxt->text();
-    } else if(ui->quickStaticTxt->text().length() > 0) {
-        staticTxt = ScanEdit::textToScanCodes(ui->quickStaticTxt->text());
-    }
+    QString staticTxt = ScanEdit::textToScanCodes(ui->quickStaticTxt->text());
 
     YubiKeyUtil::qstrClean(&staticTxt, 0);
     qDebug() << "static txt is: " << staticTxt;
