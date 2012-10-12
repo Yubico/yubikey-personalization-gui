@@ -391,6 +391,7 @@ void StaticPage::on_quickInsertTabBtn_clicked() {
 void StaticPage::on_quickClearBtn_clicked() {
     ui->quickScanCodesTxt->clear();
     ui->quickStaticTxt->clear();
+    ui->quickStaticLenTxt->setText("0");
     ui->quickInsertTabBtn->setEnabled(true);
 }
 
