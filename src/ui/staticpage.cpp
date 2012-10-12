@@ -375,6 +375,12 @@ void StaticPage::on_quickStaticTxt_textEdited(const QString &txt) {
     }
 }
 
+void StaticPage::on_quickStaticTxt_returnPressed() {
+    QString text = ui->quickStaticTxt->text() + "\\n";
+    ui->quickStaticTxt->setText(text);
+    on_quickStaticTxt_textEdited(text);
+}
+
 void StaticPage::on_quickInsertTabBtn_clicked() {
     QString text = ui->quickStaticTxt->text() + "\\t";
     ui->quickStaticTxt->setText(text);

@@ -84,6 +84,7 @@ private slots:
 
     void on_quickHideParams_clicked(bool checked);
     void on_quickStaticTxt_textEdited(const QString &txt);
+    void on_quickStaticTxt_returnPressed();
     void on_quickInsertTabBtn_clicked();
     void on_quickClearBtn_clicked();
 
