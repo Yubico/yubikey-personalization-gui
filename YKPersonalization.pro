@@ -234,7 +234,7 @@ unix:!macx {
     QMAKE_CXXFLAGS += $$(CXXFLAGS)
     QMAKE_LFLAGS += $$(LDFLAGS)
 
-  } fedora {
+  } else:fedora {
     message("Fedora build")
 
     LIBS += -lyubikey
