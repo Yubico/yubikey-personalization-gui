@@ -355,16 +355,16 @@ void StaticPage::on_quickNewAccessCodeTxt_editingFinished() {
 void StaticPage::on_quickHideParams_clicked(bool checked) {
     if(checked) {
         ui->quickStaticTxt->setEchoMode(QLineEdit::Password);
+        ui->quickScanCodesTxt->setEchoMode(QLineEdit::Password);
     } else {
         ui->quickStaticTxt->setEchoMode(QLineEdit::Normal);
+        ui->quickScanCodesTxt->setEchoMode(QLineEdit::Normal);
     }
 }
 
 void StaticPage::on_quickStaticTxt_textEdited(const QString &txt) {
     QString scanCodes = ScanEdit::textToScanCodes(txt);
-    if(!ui->quickHideParams->isChecked()) {
-        ui->quickScanCodesTxt->setText(scanCodes);
-    }
+    ui->quickScanCodesTxt->setText(scanCodes);
 
     int len = scanCodes.length() / 2;
     ui->quickStaticLenTxt->setText(QString::number(len));
