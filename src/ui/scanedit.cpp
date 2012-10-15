@@ -321,9 +321,14 @@ QString ScanEdit::scanCodesToText(const QString scanCode) {
         int code = scanCode.mid(i, 2).toInt(&ok, 16);
         if(ok == true) {
             if(code < SHIFT) {
-                text += usb2key1[code];
+                if(code < sizeof(usb2key1) / sizeof(char*)) {
+                    text += usb2key1[code];
+                }
             } else {
-                text += usb2key2[code ^ SHIFT];
+                code = code ^ SHIFT;
+                if(code < sizeof(usb2key2) / sizeof(char*)) {
+                    text += usb2key2[code ^ SHIFT];
+                }
             }
         }
     }
