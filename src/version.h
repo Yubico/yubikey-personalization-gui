@@ -29,8 +29,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef VERSION_H
 #define VERSION_H
 
-#define VER_PRODUCTVERSION          3,1,1,0
-#define VER_PRODUCTVERSION_STR      "3.1.1\0"
+#define VER_PRODUCTVERSION          3,1,2,0
+#define VER_PRODUCTVERSION_STR      "3.1.2\0"
 
 #define VER_FILEDESCRIPTION_STR     "YubiKey Personalization Tool"
 #define VER_INTERNALNAME_STR        "YKPersonalization"
