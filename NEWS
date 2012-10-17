@@ -1,6 +1,18 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.1 (unreleased)
+* Version 3.1.1 (released 2012-10-17)
+
+** For native mac builds, sign and use pkgbuilder to create pkg installer.
+
+** Add logging format "Yubico" that corresponds to other tools.
+
+** Show which slots of a key contain valid configuration.
+
+** Refactor scancode input for static keys, now allows editing, pasting and
+entering raw scancodes.
+
+** When scanning if the key is present, keep it open for as short as possible,
+should increase possibility for other concurrent accesses.
 
 * Version 3.1.0 (released 2012-09-28)
 
