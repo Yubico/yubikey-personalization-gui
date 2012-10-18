@@ -612,6 +612,9 @@ border-radius: 2px;</string>
       <property name="text">
        <string/>
       </property>
+      <property name="textInteractionFlags">
+       <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+      </property>
      </widget>
      <widget class="QLabel" name="serialNoDecLbl">
       <property name="geometry">
@@ -627,6 +630,9 @@ border-radius: 2px;</string>
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="textInteractionFlags">
+       <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
       </property>
      </widget>
      <widget class="QPushButton" name="serialNoDecCopyBtn">
@@ -690,6 +696,9 @@ border-radius: 2px;</string>
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="textInteractionFlags">
+       <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
       </property>
      </widget>
      <widget class="QPushButton" name="serialNoModhexCopyBtn">
