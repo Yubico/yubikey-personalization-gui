@@ -54,6 +54,7 @@ private:
     static YubiKeyWriter* _instance;
 
     QString reportError();
+    int encodeAccessCode(const QString accCode, unsigned char *accessCode, size_t *accessCodeLen);
 
 public slots:
     void writeConfig(YubiKeyConfig *ykConfig);

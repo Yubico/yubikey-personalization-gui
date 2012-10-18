@@ -299,22 +299,9 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
         size_t accessCodeLen = 0;
 
         if(ykConfig->currentAccessCodeTxt().length() > 0) {
-            qDebug() << "Current access code: " << ykConfig->currentAccessCodeTxt()
-                    << "length:" << ykConfig->currentAccessCodeTxt().length();
-
-            char accessCodeStr[MAX_SIZE];
-            YubiKeyUtil::qstrToRaw(accessCodeStr, sizeof(accessCodeStr),
-                                   ykConfig->currentAccessCodeTxt());
-            size_t accessCodeStrLen = strlen(accessCodeStr);
-
-            int rc = YubiKeyUtil::hexModhexDecode(accessCode, &accessCodeLen,
-                                                  accessCodeStr, accessCodeStrLen,
-                                                  ACC_CODE_SIZE * 2,
-                                                  ACC_CODE_SIZE * 2,
-                                                  false);
-
+            int rc = encodeAccessCode(ykConfig->currentAccessCodeTxt(), accessCode, &accessCodeLen);
             if (rc <= 0) {
-                qDebug() << "Invalid current access code: " << accessCodeStr;
+                qDebug() << "Invalid current access code: " << ykConfig->currentAccessCodeTxt();
                 throw 0;
             }
         }
@@ -324,22 +311,9 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
         size_t newAccessCodeLen = 0;
 
         if(ykConfig->newAccessCodeTxt().length() > 0) {
-            qDebug() << "New access code: " << ykConfig->newAccessCodeTxt()
-                    << "length:" << ykConfig->newAccessCodeTxt().length();
-
-            char newAccessCodeStr[MAX_SIZE];
-            YubiKeyUtil::qstrToRaw(newAccessCodeStr, sizeof(newAccessCodeStr),
-                                   ykConfig->newAccessCodeTxt());
-            size_t newAccessCodeStrLen = strlen(newAccessCodeStr);
-
-            int rc = YubiKeyUtil::hexModhexDecode(newAccessCode, &newAccessCodeLen,
-                                                  newAccessCodeStr, newAccessCodeStrLen,
-                                                  ACC_CODE_SIZE * 2,
-                                                  ACC_CODE_SIZE * 2,
-                                                  false);
-
+            int rc = encodeAccessCode(ykConfig->newAccessCodeTxt(), newAccessCode, &newAccessCodeLen);
             if (rc <= 0) {
-                qDebug() << "Invalid new access code: " << newAccessCodeStr;
+                qDebug() << "Invalid new access code: " << ykConfig->newAccessCodeTxt();
                 throw 0;
             }
         }
@@ -559,3 +533,19 @@ void YubiKeyWriter::writeNdef(bool uri, const QString language, const QString pa
     }
 }
 
+int YubiKeyWriter::encodeAccessCode(QString accCode, unsigned char* accessCode, size_t *accessCodeLen) {
+    qDebug() << "access code: " << accCode
+        << "length:" << accCode.length();
+
+    char accessCodeStr[MAX_SIZE];
+    YubiKeyUtil::qstrToRaw(accessCodeStr, sizeof(accessCodeStr),
+            accCode);
+    size_t accessCodeStrLen = strlen(accessCodeStr);
+
+    int rc = YubiKeyUtil::hexModhexDecode(accessCode, accessCodeLen,
+            accessCodeStr, accessCodeStrLen,
+            ACC_CODE_SIZE * 2,
+            ACC_CODE_SIZE * 2,
+            false);
+    return rc;
+}
