@@ -50,6 +50,7 @@ private:
         Page_Converter,
         Page_ChalResp,
         Page_Ndef,
+        Page_Zap,
     };
     int m_currentPage;
 
@@ -82,6 +83,9 @@ private slots:
     void programNdef();
     void on_ndefTextRadio_toggled(bool checked);
     void ndefWritten(bool written, const QString &msg);
+
+    // zap page
+    void on_zapPerformBtn_clicked();
 
     void keyFound(bool found, bool* featuresMatrix);
 signals:

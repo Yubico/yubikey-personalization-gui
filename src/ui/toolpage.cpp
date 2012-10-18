@@ -87,6 +87,9 @@ void ToolPage::connectPages() {
     connect(ui->ndefBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->ndefBackBtn, SIGNAL(clicked()), mapper, SLOT(map()));
 
+    connect(ui->zapBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+    connect(ui->zapBackBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+
     //Set a value for each button
     mapper->setMapping(ui->converterBtn, Page_Converter);
     mapper->setMapping(ui->converterBackBtn, Page_Base);
@@ -96,6 +99,9 @@ void ToolPage::connectPages() {
 
     mapper->setMapping(ui->ndefBtn, Page_Ndef);
     mapper->setMapping(ui->ndefBackBtn, Page_Base);
+
+    mapper->setMapping(ui->zapBtn, Page_Zap);
+    mapper->setMapping(ui->zapBackBtn, Page_Base);
 
     //Connect the mapper to the widget
     //The mapper will set a value to each button and
@@ -342,6 +348,9 @@ void ToolPage::on_ndefTextRadio_toggled(bool checked) {
         ui->ndefTextLangEdit->setText("en-US");
         ui->ndefTextLangEdit->setEnabled(false);
     }
+}
+
+void ToolPage::on_zapPerformBtn_clicked() {
 }
 
 void ToolPage::keyFound(bool found, bool* featuresMatrix) {

@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>2</number>
+   <number>4</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -60,7 +60,7 @@ color: rgb(140, 192, 65);</string>
       <x>10</x>
       <y>50</y>
       <width>711</width>
-      <height>240</height>
+      <height>320</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -188,7 +188,7 @@ font-weight: bold;</string>
 font-weight: bold;</string>
      </property>
      <property name="text">
-      <string>NDEF programming</string>
+      <string>NDEF Programming</string>
      </property>
      <property name="autoExclusive">
       <bool>false</bool>
@@ -211,6 +211,54 @@ font-weight: bold;</string>
      </property>
      <property name="text">
       <string>Program the static NDEF string of a Yubikey NEO</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="zapBtn">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>260</y>
+       <width>191</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Delete Configuration</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="zapDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>285</y>
+       <width>671</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Delete the configuration stored in the YubiKey</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1127,6 +1175,133 @@ color: rgb(118, 116, 108);</string>
      </property>
      <property name="text">
       <string>NDEF payload, OTP will be appended on the end</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="zapPage">
+   <widget class="QWidget" name="zapSlotWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>361</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="zapSlotLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>321</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108);</string>
+     </property>
+     <property name="text">
+      <string>Select the configuration slot to be deleted</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="zapSlot1Radio">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>151</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Configuration Slot 1</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="zapSlot2Radio">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>30</y>
+       <width>151</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Configuration Slot 2</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="zapHeadingLbl">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>710</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 18px &quot;Verdana&quot;;
+font-weight: bold;
+color: rgb(140, 192, 65);</string>
+    </property>
+    <property name="text">
+     <string>Delete Configuration</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="zapActions">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>125</y>
+      <width>711</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;</string>
+    </property>
+    <widget class="QPushButton" name="zapPerformBtn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>85</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="zapBackBtn">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>10</y>
+       <width>85</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Back</string>
      </property>
     </widget>
    </widget>
