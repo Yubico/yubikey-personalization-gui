@@ -351,6 +351,16 @@ void ToolPage::on_ndefTextRadio_toggled(bool checked) {
 }
 
 void ToolPage::on_zapPerformBtn_clicked() {
+    int slot;
+    if(ui->zapSlot1Radio->isChecked()) {
+        slot = 1;
+    } else if(ui->zapSlot2Radio->isChecked()) {
+        slot = 2;
+    } else {
+      emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+      return;
+    }
+    YubiKeyWriter::getInstance()->deleteConfig(slot, "");
 }
 
 void ToolPage::keyFound(bool found, bool* featuresMatrix) {
