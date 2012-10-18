@@ -533,6 +533,67 @@ void YubiKeyWriter::writeNdef(bool uri, const QString language, const QString pa
     }
 }
 
+void YubiKeyWriter::deleteConfig(int slot, const QString accCode) {
+    bool error = false;
+    YK_KEY *yk;
+    YKP_CONFIG *cfg = ykp_alloc();
+    YK_STATUS *ykst = ykds_alloc();
+
+    YubiKeyFinder::getInstance()->stop();
+
+    try {
+        if (!(yk = yk_open_first_key())) {
+            throw 0;
+        }
+
+        if (!(yk_check_firmware_version(yk))) {
+            throw 0;
+        }
+
+        unsigned char accessCode[MAX_SIZE];
+        size_t accessCodeLen = 0;
+
+        if(accCode.length() > 0) {
+            int rc = encodeAccessCode(accCode, accessCode, &accessCodeLen);
+            if (rc <= 0) {
+                qDebug() << "Invalid access code: " << accCode;
+                throw 0;
+            }
+        }
+
+        // write NULL to delete config
+        if (!yk_write_config(yk,
+                    NULL, slot,
+                    accessCodeLen > 0 ? accessCode : NULL)) {
+            qDebug() << "Failed to delete.";
+            throw 0;
+        }
+        qDebug() << "successfully deleted slot " << slot;
+    } catch(...) {
+        error = true;
+    }
+
+    if (cfg) {
+        ykp_free_config(cfg);
+    }
+
+    if(ykst) {
+        ykds_free(ykst);
+    }
+
+    if (yk && !yk_close_key(yk)) {
+        error = true;
+    }
+
+    YubiKeyFinder::getInstance()->start();
+
+    if(error) {
+        qDebug() << "Failed to delete configuration in slot" << slot;
+        QString errMsg = reportError();
+        emit configWritten(false, errMsg);
+    }
+}
+
 int YubiKeyWriter::encodeAccessCode(QString accCode, unsigned char* accessCode, size_t *accessCodeLen) {
     qDebug() << "access code: " << accCode
         << "length:" << accCode.length();

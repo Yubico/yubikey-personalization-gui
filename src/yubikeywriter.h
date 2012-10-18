@@ -61,7 +61,7 @@ public slots:
     void doChallengeResponse(const QString challenge,
         QString &response, int slot, bool hmac);
     void writeNdef(bool uri, const QString language, const QString payload);
-
+    void deleteConfig(int slot, const QString accCode);
 
 signals:
     void configWritten(bool written, const QString &msg);
