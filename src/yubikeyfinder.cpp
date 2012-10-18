@@ -153,6 +153,7 @@ void YubiKeyFinder::init() {
 
 void YubiKeyFinder::start() {
     //Start timer
+    init();
     if(m_timer && !m_timer->isActive()) {
         m_timer->start(TIMEOUT_FINDER);
     }
