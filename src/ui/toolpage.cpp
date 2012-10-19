@@ -368,7 +368,19 @@ void ToolPage::on_zapPerformBtn_clicked() {
       emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
       return;
     }
-    YubiKeyWriter::getInstance()->deleteConfig(slot, ui->zapAccCodeEdit->text().remove(" "));
+
+    YubiKeyWriter *writer = YubiKeyWriter::getInstance();
+    connect(writer, SIGNAL(configWritten(bool, const QString &)),
+            this, SLOT(zapDone(bool, const QString &)));
+    writer->deleteConfig(slot, ui->zapAccCodeEdit->text().remove(" "));
+}
+
+void ToolPage::zapDone(bool written, const QString &msg) {
+    disconnect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+            this, SLOT(zapDone(bool, const QString &)));
+    if(written) {
+        showStatusMessage(tr("Configuration successfully deleted."));
+    }
 }
 
 void ToolPage::on_zapAccCodeCheckbox_toggled(bool checked) {

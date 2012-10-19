@@ -581,6 +581,7 @@ void YubiKeyWriter::deleteConfig(int slot, const QString accCode) {
             qDebug() << "Failed to delete.";
             throw 0;
         }
+        emit configWritten(true, NULL);
         qDebug() << "successfully deleted slot " << slot;
     } catch(...) {
         error = true;
