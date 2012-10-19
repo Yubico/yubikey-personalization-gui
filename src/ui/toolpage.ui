@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>4</number>
+   <number>3</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -1176,6 +1176,45 @@ color: rgb(118, 116, 108);</string>
      <property name="text">
       <string>NDEF payload, OTP will be appended on the end</string>
      </property>
+    </widget>
+    <widget class="QWidget" name="ndefAccCodeWidget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>530</x>
+       <y>10</y>
+       <width>150</width>
+       <height>75</height>
+      </rect>
+     </property>
+     <widget class="QCheckBox" name="ndefAccCodeCheckbox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>125</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use Access Code</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="ndefAccCodeEdit">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>125</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="inputMask">
+       <string>hh hh hh hh hh hh; </string>
+      </property>
+      <property name="text">
+       <string>00 00 00 00 00 00</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

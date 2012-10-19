@@ -83,6 +83,7 @@ private slots:
     void programNdef();
     void on_ndefTextRadio_toggled(bool checked);
     void ndefWritten(bool written, const QString &msg);
+    void on_ndefAccCodeCheckbox_toggled(bool checkd);
 
     // zap page
     void on_zapPerformBtn_clicked();

@@ -472,7 +472,7 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
     }
 }
 
-void YubiKeyWriter::writeNdef(bool uri, const QString language, const QString payload) {
+void YubiKeyWriter::writeNdef(bool uri, const QString language, const QString payload, const QString accCode) {
     YubiKeyFinder::getInstance()->stop();
 
     YK_KEY *yk = 0;
@@ -483,6 +483,19 @@ void YubiKeyWriter::writeNdef(bool uri, const QString language, const QString pa
     qDebug() << "Writing ndef " << payload << " of type " << uri;
 
     try {
+
+        if(accCode.length() > 0) {
+            unsigned char accessCode[MAX_SIZE];
+            size_t accessCodeLen = 0;
+            int rc = encodeAccessCode(accCode, accessCode, &accessCodeLen);
+            if (rc <= 0) {
+                qDebug() << "Invalid access code: " << accCode;
+                throw 0;
+            }
+
+            ykp_set_ndef_access_code(ndef, accessCode);
+        }
+
         QByteArray payload_array = payload.toUtf8();
         const char *ndef_payload = payload_array.constData();
         qDebug() << "payload: " << ndef_payload;

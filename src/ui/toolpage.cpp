@@ -62,6 +62,7 @@ ToolPage::ToolPage(QWidget *parent) :
             this, SLOT(keyFound(bool, bool*)));
 
     ui->zapAccCodeEdit->setEnabled(false);
+    ui->ndefAccCodeEdit->setEnabled(false);
 }
 
 ToolPage::~ToolPage() {
@@ -332,7 +333,7 @@ void ToolPage::programNdef() {
 
     connect(writer, SIGNAL(configWritten(bool, const QString &)),
             this, SLOT(ndefWritten(bool, const QString &)));
-    writer->writeNdef(uri, language, payload);
+    writer->writeNdef(uri, language, payload, ui->ndefAccCodeEdit->text().remove(" "));
 }
 
 void ToolPage::ndefWritten(bool written, const QString &msg) {
@@ -350,6 +351,11 @@ void ToolPage::on_ndefTextRadio_toggled(bool checked) {
         ui->ndefTextLangEdit->setText("en-US");
         ui->ndefTextLangEdit->setEnabled(false);
     }
+}
+
+void ToolPage::on_ndefAccCodeCheckbox_toggled(bool checked) {
+    ui->ndefAccCodeEdit->setText("00 00 00 00 00 00");
+    ui->ndefAccCodeEdit->setEnabled(checked);
 }
 
 void ToolPage::on_zapPerformBtn_clicked() {
