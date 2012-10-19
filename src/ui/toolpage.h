@@ -86,6 +86,7 @@ private slots:
 
     // zap page
     void on_zapPerformBtn_clicked();
+    void on_zapAccCodeCheckbox_toggled(bool checked);
 
     void keyFound(bool found, bool* featuresMatrix);
 signals:

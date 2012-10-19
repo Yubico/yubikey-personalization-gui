@@ -1186,7 +1186,7 @@ color: rgb(118, 116, 108);</string>
       <x>10</x>
       <y>50</y>
       <width>361</width>
-      <height>60</height>
+      <height>75</height>
      </rect>
     </property>
     <widget class="QLabel" name="zapSlotLabel">
@@ -1210,7 +1210,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>40</y>
        <width>151</width>
        <height>19</height>
       </rect>
@@ -1232,7 +1232,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>200</x>
-       <y>30</y>
+       <y>40</y>
        <width>151</width>
        <height>19</height>
       </rect>
@@ -1302,6 +1302,45 @@ color: rgb(140, 192, 65);</string>
      </property>
      <property name="text">
       <string>Back</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="zapAccCodeWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>50</y>
+      <width>150</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <widget class="QCheckBox" name="zapAccCodeCheckbox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>125</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Use Access Code</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="zapAccCodeEdit">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>125</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="inputMask">
+      <string>hh hh hh hh hh hh; </string>
+     </property>
+     <property name="text">
+      <string>00 00 00 00 00 00</string>
      </property>
     </widget>
    </widget>

@@ -60,6 +60,8 @@ ToolPage::ToolPage(QWidget *parent) :
 
     connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
             this, SLOT(keyFound(bool, bool*)));
+
+    ui->zapAccCodeEdit->setEnabled(false);
 }
 
 ToolPage::~ToolPage() {
@@ -360,7 +362,12 @@ void ToolPage::on_zapPerformBtn_clicked() {
       emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
       return;
     }
-    YubiKeyWriter::getInstance()->deleteConfig(slot, "");
+    YubiKeyWriter::getInstance()->deleteConfig(slot, ui->zapAccCodeEdit->text().remove(" "));
+}
+
+void ToolPage::on_zapAccCodeCheckbox_toggled(bool checked) {
+    ui->zapAccCodeEdit->setText("00 00 00 00 00 00");
+    ui->zapAccCodeEdit->setEnabled(checked);
 }
 
 void ToolPage::keyFound(bool found, bool* featuresMatrix) {
@@ -374,4 +381,5 @@ void ToolPage::keyFound(bool found, bool* featuresMatrix) {
     } else {
         ui->ndefProgramBtn->setEnabled(false);
     }
+    ui->zapPerformBtn->setEnabled(found);
 }
