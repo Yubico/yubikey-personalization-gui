@@ -42,6 +42,7 @@ StaticPage::StaticPage(QWidget *parent) :
     ui->setupUi(this);
 
     m_ykConfig = 0;
+    m_keyPresent = false;
     clearState();
 
     //Connect pages
@@ -212,7 +213,7 @@ void StaticPage::keyFound(bool found, bool* featuresMatrix) {
             if(!featuresMatrix[YubiKeyFinder::Feature_StaticPassword]) {
                 this->setEnabled(false);
             }
-        } else if(m_state >= State_Programming_Multiple) {
+        } else if(m_state >= State_Programming_Multiple && m_keyPresent == false) {
             if(this->currentIndex() == Page_Quick) {
                 if(m_state == State_Programming_Multiple) {
                     ui->quickWriteConfigBtn->setEnabled(true);
@@ -227,10 +228,13 @@ void StaticPage::keyFound(bool found, bool* featuresMatrix) {
                 }
             }
         }
+        m_keyPresent = true;
     } else {
         ui->quickBtn->setEnabled(true);
         ui->quickWriteConfigBtn->setEnabled(false);
         ui->advWriteConfigBtn->setEnabled(false);
+
+        m_keyPresent = false;
 
         if(m_state == State_Initial) {
             ui->quickConfigSlot2Radio->setEnabled(true);

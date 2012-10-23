@@ -40,6 +40,7 @@ ChalRespPage::ChalRespPage(QWidget *parent) :
     ui->setupUi(this);
 
     m_ykConfig = 0;
+    m_keyPresent = false;
     clearState();
 
     //Connect pages
@@ -197,7 +198,7 @@ void ChalRespPage::keyFound(bool found, bool* featuresMatrix) {
             if(!featuresMatrix[YubiKeyFinder::Feature_ChallengeResponse]) {
                 this->setEnabled(false);
             }
-        } else if(m_state >= State_Programming_Multiple) {
+        } else if(m_state >= State_Programming_Multiple && m_keyPresent == false) {
             if(this->currentIndex() == Page_Quick) {
                 if(m_state == State_Programming_Multiple) {
                     ui->quickWriteConfigBtn->setEnabled(true);
@@ -213,10 +214,12 @@ void ChalRespPage::keyFound(bool found, bool* featuresMatrix) {
                 }
             }
         }
+        m_keyPresent = true;
     } else {
         ui->quickWriteConfigBtn->setEnabled(false);
         ui->advWriteConfigBtn->setEnabled(false);
         ui->advHmacFixedInputRadio->setEnabled(true);
+        m_keyPresent = false;
 
         if(m_state == State_Initial) {
             ui->quickConfigSlot2Radio->setEnabled(true);

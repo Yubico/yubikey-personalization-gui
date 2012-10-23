@@ -50,6 +50,7 @@ OathPage::OathPage(QWidget *parent) :
     memset(&m_pubId, 0, sizeof(m_pubId));
     m_pubIdFormat = 0;
     m_ykConfig = 0;
+    m_keyPresent = false;
     clearState();
 
     //Connect pages
@@ -212,17 +213,21 @@ void OathPage::keyFound(bool found, bool* featuresMatrix) {
                 resetQuickPrefix();
             }
         } else if(this->currentIndex() == Page_Advanced &&
-                  m_state >= State_Programming_Multiple) {
+                  m_state >= State_Programming_Multiple &&
+                  m_keyPresent == false) {
             if(m_state == State_Programming_Multiple) {
                 ui->advWriteConfigBtn->setEnabled(true);
             } else {
                 writeAdvConfig();
             }
         }
+        m_keyPresent = true;
     } else {
 
         ui->quickWriteConfigBtn->setEnabled(false);
         ui->advWriteConfigBtn->setEnabled(false);
+
+        m_keyPresent = false;
 
         if(m_state == State_Initial) {
             ui->quickConfigSlot2Radio->setEnabled(true);

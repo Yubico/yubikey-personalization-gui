@@ -68,6 +68,9 @@ private:
     unsigned int m_keysProgrammedCtr;
     bool m_ready;
 
+    // remember the last state of the key.
+    bool m_keyPresent;
+
     QString m_uploadUrl;
 
 public slots:

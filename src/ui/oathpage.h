@@ -70,6 +70,8 @@ private:
     bool m_ready;
     bool m_serialNumberSupported;
 
+    bool m_keyPresent;
+
 public slots:
     void loadSettings();
 

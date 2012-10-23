@@ -64,6 +64,8 @@ private:
     unsigned int m_keysProgrammedCtr;
     bool m_ready;
 
+    bool m_keyPresent;
+
 private slots:
     void connectPages();
     void connectHelpButtons();
