@@ -275,6 +275,11 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
 
     resetDeviceInfo();
 
+    if(ui->deviceImage->movie()) {
+      delete(ui->deviceImage->movie());
+      ui->deviceImage->setMovie(NULL);
+    }
+
     if(found) {
         YubiKeyFinder *finder = YubiKeyFinder::getInstance();
         int touchLevel = finder->touchLevel();
@@ -429,10 +434,6 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
     } else {
         ui->programLbl->clear();
         ui->deviceImage->setHidden(true);
-        if(ui->deviceImage->movie()) {
-            delete(ui->deviceImage->movie());
-            ui->deviceImage->setMovie(NULL);
-        }
         if(ui->deviceImage->pixmap()) {
             ui->deviceImage->setPixmap(NULL);
         }
