@@ -193,6 +193,9 @@ void OtpPage::keyFound(bool found, bool* featuresMatrix) {
         } else if(this->currentIndex() == Page_Advanced &&
                   m_state >= State_Programming_Multiple &&
                   m_keyPresent == false) {
+            if(m_keysProgrammedCtr > 0 && !m_ready) {
+                changeAdvConfigParams();
+            }
             if(m_state == State_Programming_Multiple) {
                 ui->advWriteConfigBtn->setEnabled(true);
             } else {
@@ -209,11 +212,6 @@ void OtpPage::keyFound(bool found, bool* featuresMatrix) {
         if(m_state == State_Initial) {
             ui->quickConfigSlot2Radio->setEnabled(true);
             ui->advConfigSlot2Radio->setEnabled(true);
-        } else if(this->currentIndex() == Page_Advanced &&
-                  m_state >= State_Programming_Multiple) {
-            if(m_keysProgrammedCtr > 0 && !m_ready) {
-                changeAdvConfigParams();
-            }
         }
     }
 }
