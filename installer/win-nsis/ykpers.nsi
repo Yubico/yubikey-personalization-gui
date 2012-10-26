@@ -94,9 +94,10 @@ Section
 !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     
 ;Create shortcuts
-  CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
-  CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\YubiKey Personalization Tool.lnk" "$INSTDIR\yubikey-personalization-gui.exe" "" "$INSTDIR\yubikey-personalization-gui.exe" 0
-  CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 1
+  SetShellVarContext all
+  SetOutPath "$SMPROGRAMS\$STARTMENU_FOLDER"
+  CreateShortCut "YubiKey Personalization Tool.lnk" "$INSTDIR\yubikey-personalization-gui.exe" "" "$INSTDIR\yubikey-personalization-gui.exe" 0
+  CreateShortCut "Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 1
   WriteINIStr "$SMPROGRAMS\$STARTMENU_FOLDER\Yubico Web page.url" \
                    "InternetShortcut" "URL" "http://www.yubico.com/"
 !insertmacro MUI_STARTMENU_WRITE_END
@@ -129,9 +130,11 @@ Section "Uninstall"
 
   ; Remove shortcuts, if any
   !insertmacro MUI_STARTMENU_GETFOLDER Application $MUI_TEMP
+  SetShellVarContext all
 
   Delete "$SMPROGRAMS\$MUI_TEMP\Uninstall.lnk"
   Delete "$SMPROGRAMS\$MUI_TEMP\Yubico Web page.url"
+  Delete "$SMPROGRAMS\$MUI_TEMP\YubiKey Personalization Tool.lnk"
 
   ;Delete empty start menu parent diretories
   StrCpy $MUI_TEMP "$SMPROGRAMS\$MUI_TEMP"
