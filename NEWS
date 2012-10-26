@@ -2,6 +2,16 @@ yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- out
 
 * Version 3.1.2 (unreleased)
 
+** Support for deleting YubiKey configurations.
+
+** Re-read key after writing it, so we can see it changed.
+
+** Add Access-code entry for NDEF programming.
+
+** Fix bug which wrote same key multiple times in multi-write mode.
+
+** Small windows installer fixes.
+
 * Version 3.1.1 (released 2012-10-17)
 
 ** For native mac builds, sign and use pkgbuilder to create pkg installer.
