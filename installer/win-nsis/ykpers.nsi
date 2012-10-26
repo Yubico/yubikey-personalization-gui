@@ -41,7 +41,8 @@ FunctionEnd
   !insertmacro MUI_PAGE_LICENSE "../../COPYING"
   !insertmacro MUI_PAGE_DIRECTORY
   ;Start Menu Folder Page Configuration
-  !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKCU" 
+  !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Yubico\YubiKey Personalization Tool"
+  !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKCU"
   !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\Yubico\YubiKey Personalization Tool"
   !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "Start Menu Folder"
   !insertmacro MUI_PAGE_STARTMENU Application $STARTMENU_FOLDER
