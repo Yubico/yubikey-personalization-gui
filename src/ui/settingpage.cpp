@@ -58,8 +58,6 @@ SettingPage::SettingPage(QWidget *parent) :
     setCurrentIndex(Page_Base);
 
     //Connect other signals and slots
-    connect(ui->saveBtn, SIGNAL(clicked()),
-            this, SLOT(save()));
     connect(ui->restoreBtn, SIGNAL(clicked()),
             this, SLOT(restore()));
 

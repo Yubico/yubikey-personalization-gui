@@ -397,38 +397,12 @@ font-weight: bold;</string>
     <property name="title">
      <string>Actions</string>
     </property>
-    <widget class="QPushButton" name="saveBtn">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>45</y>
-       <width>85</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 12px;
-font-weight: bold;</string>
-     </property>
-     <property name="text">
-      <string>Save</string>
-     </property>
-     <property name="autoExclusive">
-      <bool>false</bool>
-     </property>
-     <property name="default">
-      <bool>false</bool>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-    </widget>
     <widget class="QLabel" name="actionsDescLbl">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>25</y>
-       <width>691</width>
+       <width>200</width>
        <height>16</height>
       </rect>
      </property>
@@ -438,7 +412,7 @@ color: rgb(118, 116, 108)
 </string>
      </property>
      <property name="text">
-      <string>Press Save to save your settings</string>
+      <string>Settings are saved automatically</string>
      </property>
     </widget>
     <widget class="QPushButton" name="restoreBtn">
@@ -447,7 +421,7 @@ color: rgb(118, 116, 108)
      </property>
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>10</x>
        <y>45</y>
        <width>171</width>
        <height>25</height>
@@ -1677,7 +1651,6 @@ border-radius: 10px;
   <tabstop>logOutputCheck</tabstop>
   <tabstop>logFileTxt</tabstop>
   <tabstop>browseBtn</tabstop>
-  <tabstop>saveBtn</tabstop>
   <tabstop>restoreBtn</tabstop>
   <tabstop>outFormatHelpBtn</tabstop>
   <tabstop>outSpeedHelpBtn</tabstop>
