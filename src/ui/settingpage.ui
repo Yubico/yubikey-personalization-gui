@@ -77,9 +77,9 @@ color: rgb(140, 192, 65);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>40</y>
+      <y>35</y>
       <width>711</width>
-      <height>55</height>
+      <height>60</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -461,6 +461,24 @@ font-weight: bold;</string>
      </property>
      <property name="text">
       <string>Update</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="updateDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>405</x>
+       <y>25</y>
+       <width>250</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108)
+</string>
+     </property>
+     <property name="text">
+      <string>Update is available for YubiKey 2.3 and later</string>
      </property>
     </widget>
    </widget>
@@ -856,7 +874,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Serial # Visibility Settings (YubiKey 2.2)</string>
+     <string>Serial # Visibility Settings (YubiKey 2.2+)</string>
     </property>
     <widget class="QCheckBox" name="srBtnVisibleCheck">
      <property name="geometry">
@@ -1040,7 +1058,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Update Settings (YubiKey 2.3)</string>
+     <string>Update Settings (YubiKey 2.3+)</string>
     </property>
     <widget class="QCheckBox" name="updateCheck">
      <property name="geometry">
@@ -1116,7 +1134,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Extended Settings (YubiKey 2.3)</string>
+     <string>Extended Settings (YubiKey 2.3+)</string>
     </property>
     <widget class="QCheckBox" name="useNumericKeypadCheck">
      <property name="geometry">
