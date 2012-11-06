@@ -460,7 +460,7 @@ font-weight: bold;</string>
       </rect>
      </property>
      <property name="text">
-      <string>Update</string>
+      <string>Update...</string>
      </property>
     </widget>
     <widget class="QLabel" name="updateDescLbl">
