@@ -1,6 +1,6 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.2 (unreleased)
+* Version 3.1.2 (released 2012-11-07)
 
 ** Support for deleting YubiKey configurations.
 
