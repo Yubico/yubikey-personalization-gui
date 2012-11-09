@@ -564,6 +564,7 @@ void OtpPage::set_advPubId_default() {
 
     txt.append(YubiKeyUtil::qstrModhexEncode(buf, bufLen));
     ui->advPubIdTxt->setText(txt);
+    on_advPubIdTxt_editingFinished();
 }
 
 void OtpPage::on_advPubIdTxt_editingFinished() {
