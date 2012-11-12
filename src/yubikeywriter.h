@@ -60,7 +60,8 @@ public slots:
     void writeConfig(YubiKeyConfig *ykConfig);
     void doChallengeResponse(const QString challenge,
         QString &response, int slot, bool hmac);
-    void writeNdef(bool uri, const QString language, const QString payload, const QString accCode);
+    void writeNdef(bool uri, const QString language,
+        const QString payload, const QString accCode, int slot);
     void deleteConfig(int slot, const QString accCode);
 
 signals:

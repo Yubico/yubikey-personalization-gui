@@ -472,7 +472,8 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
     }
 }
 
-void YubiKeyWriter::writeNdef(bool uri, const QString language, const QString payload, const QString accCode) {
+void YubiKeyWriter::writeNdef(bool uri, const QString language,
+    const QString payload, const QString accCode, int slot) {
     YubiKeyFinder::getInstance()->stop();
 
     YK_KEY *yk = 0;
@@ -520,7 +521,7 @@ void YubiKeyWriter::writeNdef(bool uri, const QString language, const QString pa
         }
 
         qDebug() << "writing the ndef.";
-        if(! yk_write_ndef(yk, ndef)) {
+        if(! yk_write_ndef2(yk, ndef, slot)) {
             throw 0;
         }
         emit configWritten(true, NULL);

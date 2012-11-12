@@ -1002,7 +1002,7 @@ color: rgb(140, 192, 65);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>250</y>
+      <y>300</y>
       <width>711</width>
       <height>50</height>
      </rect>
@@ -1056,14 +1056,14 @@ color: rgb(140, 192, 65);</string>
       <x>10</x>
       <y>50</y>
       <width>711</width>
-      <height>180</height>
+      <height>240</height>
      </rect>
     </property>
     <widget class="QLabel" name="ndefTypeLabel">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>5</y>
+       <y>65</y>
        <width>321</width>
        <height>16</height>
       </rect>
@@ -1080,7 +1080,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>25</y>
+       <y>85</y>
        <width>151</width>
        <height>17</height>
       </rect>
@@ -1102,7 +1102,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>45</y>
+       <y>105</y>
        <width>151</width>
        <height>17</height>
       </rect>
@@ -1118,7 +1118,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>150</y>
+       <y>210</y>
        <width>391</width>
        <height>20</height>
       </rect>
@@ -1134,7 +1134,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>85</y>
+       <y>145</y>
        <width>113</width>
        <height>26</height>
       </rect>
@@ -1147,7 +1147,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>65</y>
+       <y>125</y>
        <width>321</width>
        <height>16</height>
       </rect>
@@ -1164,7 +1164,7 @@ color: rgb(118, 116, 108);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>130</y>
+       <y>190</y>
        <width>321</width>
        <height>16</height>
       </rect>
@@ -1213,6 +1213,71 @@ color: rgb(118, 116, 108);</string>
       </property>
       <property name="text">
        <string>00 00 00 00 00 00</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="ndefSlotWidget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>361</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <widget class="QLabel" name="ndefSlotLabel">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>321</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108);</string>
+      </property>
+      <property name="text">
+       <string>Select the configuration slot to be used</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="ndefSlot1Radio">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>20</y>
+        <width>151</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-weight: normal;</string>
+      </property>
+      <property name="text">
+       <string>Configuration Slot 1</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="ndefSlot2Radio">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>20</y>
+        <width>151</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-weight: normal;</string>
+      </property>
+      <property name="text">
+       <string>Configuration Slot 2</string>
       </property>
      </widget>
     </widget>

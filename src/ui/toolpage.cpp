@@ -319,6 +319,7 @@ void ToolPage::programNdef() {
     bool uri = true;
     QString language;
     QString payload;
+    int slot;
     if(ui->ndefTextRadio->isChecked()) {
         uri = false;
         language = ui->ndefTextLangEdit->text().trimmed();
@@ -331,9 +332,18 @@ void ToolPage::programNdef() {
         return;
     }
 
+    if(ui->ndefSlot1Radio->isChecked()) {
+        slot = 1;
+    } else if(ui->ndefSlot2Radio->isChecked()) {
+        slot = 2;
+    } else {
+        emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+        return;
+    }
+
     connect(writer, SIGNAL(configWritten(bool, const QString &)),
             this, SLOT(ndefWritten(bool, const QString &)));
-    writer->writeNdef(uri, language, payload, ui->ndefAccCodeEdit->text().remove(" "));
+    writer->writeNdef(uri, language, payload, ui->ndefAccCodeEdit->text().remove(" "), slot);
 }
 
 void ToolPage::ndefWritten(bool written, const QString &msg) {
@@ -398,6 +408,15 @@ void ToolPage::keyFound(bool found, bool* featuresMatrix) {
         ui->ndefProgramBtn->setEnabled(true);
     } else {
         ui->ndefProgramBtn->setEnabled(false);
+    }
+    if(found && featuresMatrix[YubiKeyFinder::Feature_MultipleConfigurations]) {
+        ui->chalRespSlot2Radio->setEnabled(true);
+        ui->zapSlot2Radio->setEnabled(true);
+        ui->ndefSlot2Radio->setEnabled(true);
+    } else {
+        ui->chalRespSlot2Radio->setEnabled(false);
+        ui->zapSlot2Radio->setEnabled(false);
+        ui->ndefSlot2Radio->setEnabled(false);
     }
     ui->zapPerformBtn->setEnabled(found);
 }
