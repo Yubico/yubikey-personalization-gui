@@ -140,7 +140,7 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             throw 0;
         }
 
-        if (!(yk_check_firmware_version(yk))) {
+        if (!(yk_check_firmware_version2(ykst))) {
             throw 0;
         }
 
@@ -390,10 +390,6 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
         ykp_free_config(cfg);
     }
 
-    if(ykst) {
-        ykds_free(ykst);
-    }
-
     if (yk && !yk_close_key(yk)) {
         error = true;
     }
@@ -551,7 +547,6 @@ void YubiKeyWriter::deleteConfig(int slot, const QString accCode) {
     bool error = false;
     YK_KEY *yk;
     YKP_CONFIG *cfg = ykp_alloc();
-    YK_STATUS *ykst = ykds_alloc();
 
     YubiKeyFinder::getInstance()->stop();
 
