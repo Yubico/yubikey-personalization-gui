@@ -79,6 +79,7 @@ SettingPage::SettingPage(QWidget *parent) :
     connect(ui->useNumericKeypadCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->logTraditionalRadio, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->logYubicoRadio, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->outCharRateCombo, SIGNAL(activated(int)), this, SLOT(save()));
 
     connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
             this, SLOT(keyFound(bool, bool*)));
