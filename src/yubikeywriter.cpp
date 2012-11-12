@@ -390,6 +390,10 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
         ykp_free_config(cfg);
     }
 
+    if(ykst) {
+        ykds_free(ykst);
+    }
+
     if (yk && !yk_close_key(yk)) {
         error = true;
     }
@@ -585,10 +589,6 @@ void YubiKeyWriter::deleteConfig(int slot, const QString accCode) {
 
     if (cfg) {
         ykp_free_config(cfg);
-    }
-
-    if(ykst) {
-        ykds_free(ykst);
     }
 
     if (yk && !yk_close_key(yk)) {
