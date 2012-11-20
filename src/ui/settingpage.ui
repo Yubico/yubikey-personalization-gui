@@ -453,14 +453,14 @@ font-weight: bold;</string>
      </property>
      <property name="geometry">
       <rect>
-       <x>550</x>
+       <x>480</x>
        <y>45</y>
-       <width>105</width>
+       <width>171</width>
        <height>27</height>
       </rect>
      </property>
      <property name="text">
-      <string>Update...</string>
+      <string>Update Settings...</string>
      </property>
     </widget>
     <widget class="QLabel" name="updateDescLbl">
@@ -468,7 +468,7 @@ font-weight: bold;</string>
       <rect>
        <x>405</x>
        <y>25</y>
-       <width>250</width>
+       <width>275</width>
        <height>16</height>
       </rect>
      </property>
