@@ -15,5 +15,6 @@
         <file>images/v2-3-animated.gif</file>
         <file>images/neo_transparent.png</file>
         <file>images/yubikey_devel.png</file>
+        <file>images/neo_production.png</file>
     </qresource>
 </RCC>

@@ -316,8 +316,8 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
             movie->setFileName(":/res/images/v2-2-animated.gif");
         } else if(version < YK_VERSION(3,0,0)){
             movie->setFileName(":/res/images/v2-3-animated.gif");
-        } else {
-            pixmap.load(":/res/images/neo_transparent.png");
+        } else { // only case left should be version over 3, that is neo
+            pixmap.load(":/res/images/neo_production.png");
         }
         if(pixmap.isNull()) {
             ui->deviceImage->setMovie(movie);
