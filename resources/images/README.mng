@@ -1,0 +1,7 @@
+This is a short walkthrough for creating mng files compatible with the libmng
+shipped with Qt (jng turned off). Export the mng from gimp, then run convert
+from imagemagick on it, like:
+
+$ convert foo.mng bar.mng
+
+This strips the jng information from it and it'll work with bundled libmng.

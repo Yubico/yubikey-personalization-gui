@@ -68,7 +68,7 @@ Section "YubiKey Personalization Tool"
   FILE ../../build/release/libgcc_s_dw2-1.dll
   FILE ../../build/release/mingwm10.dll
   SetOutPath $INSTDIR\imageformats
-  FILE ../../build/release/qgif4.dll
+  FILE ../../build/release/qmng4.dll
 SectionEnd
 
 Var MYTMP
@@ -121,7 +121,7 @@ Section "Uninstall"
   DELETE "$INSTDIR\libgcc_s_sjlj-1.dll"
   DELETE "$INSTDIR\libstdc++-6.dll"
   DELETE "$INSTDIR\mingwm10.dll"
-  DELETE "$INSTDIR\imageformats\qgif4.dll"
+  DELETE "$INSTDIR\imageformats\qmng4.dll"
 
   RMDir "$INSTDIR\imageformats"
 

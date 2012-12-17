@@ -8,7 +8,7 @@ APP_NAME        = $$quote(YubiKey Personalization Tool)
 # common configuration
 #
 QT             += core gui
-DEPLOYMENT_PLUGIN += qgif
+DEPLOYMENT_PLUGIN += qmng
 TEMPLATE        = app
 TARGET          = yubikey-personalization-gui
 
@@ -182,7 +182,7 @@ win32 {
      LIB_FILES += \
          $$_QT_BINDIR$${DIR_SEPARATOR}QtCore4.dll \
          $$_QT_BINDIR$${DIR_SEPARATOR}QtGui4.dll \
-         $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qgif4.dll \
+         $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmng4.dll \
          $$_QT_BINDIR$${DIR_SEPARATOR}libgcc_s_dw2-1.dll \
          $$_QT_BINDIR$${DIR_SEPARATOR}mingwm10.dll \
          libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libyubikey-0.dll \
@@ -261,7 +261,7 @@ unix:!macx {
     LIB_FILES += \
         $$[QT_INSTALL_LIBS]/libQtGui.so.4 \
         $$[QT_INSTALL_LIBS]/libQtCore.so.4 \
-        $$[QT_INSTALL_PLUGINS]/imageformats/libqgif.so \
+        $$[QT_INSTALL_PLUGINS]/imageformats/libqmng.so \
         libs/lin/libusb-1.0.so.0 \
         resources/lin/$${TARGET_LIN}.sh
 
@@ -350,7 +350,7 @@ macx {
         mv $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
         rmdir $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources && \
         mkdir -p $$_PLUGINDIR/imageformats && \
-        cp -R $$_QT_PLUGINDIR/imageformats/libqgif.dylib $$_PLUGINDIR/imageformats)
+        cp -R $$_QT_PLUGINDIR/imageformats/libqmng.dylib $$_PLUGINDIR/imageformats)
 
     # fixup all library paths..
     _BASE = $$quote(@executable_path/../Frameworks)
@@ -364,8 +364,8 @@ macx {
     QMAKE_POST_LINK += $$quote( && $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_BASEDIR/MacOS/$$TARGET_MAC && \
         $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/$$_QTGUI $$_BASEDIR/MacOS/$$TARGET_MAC && \
         $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
-        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqgif.dylib && \
-        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqgif.dylib)
+        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqmng.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqmng.dylib)
         
     cross {
         build_installer {

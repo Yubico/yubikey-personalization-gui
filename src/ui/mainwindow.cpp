@@ -306,16 +306,16 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
         if(version < YK_VERSION(2,0,0)) {
             pixmap.load(":/res/images/v1-3-not-animated.png");
         } else if(version < YK_VERSION(2,1,4)) {
-            movie->setFileName(":/res/images/V2-0-2-1-animated.gif");
+            movie->setFileName(":/res/images/V2-0-2-1-animated.mng");
         } else if(version < YK_VERSION(2,2,0)) {
             // YubiKey NEO
             pixmap.load(":/res/images/neo_transparent.png");
         } else if(version % 10 == 9){
             pixmap.load(":/res/images/yubikey_devel.png");
         } else if(version < YK_VERSION(2,3,0)){
-            movie->setFileName(":/res/images/v2-2-animated.gif");
+            movie->setFileName(":/res/images/v2-2-animated.mng");
         } else if(version < YK_VERSION(3,0,0)){
-            movie->setFileName(":/res/images/v2-3-animated.gif");
+            movie->setFileName(":/res/images/v2-3-animated.mng");
         } else { // only case left should be version over 3, that is neo
             pixmap.load(":/res/images/neo_production.png");
         }
