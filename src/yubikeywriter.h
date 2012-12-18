@@ -53,7 +53,7 @@ private:
     YubiKeyWriter();
     static YubiKeyWriter* _instance;
 
-    QString reportError();
+    QString reportError(bool chalresp);
     int encodeAccessCode(const QString accCode, unsigned char *accessCode, size_t *accessCodeLen);
 
 public slots:

@@ -15,6 +15,8 @@ yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- out
 ** Create a setting for toggling animations on and off, accessible
 from context menu.
 
+** Different error message for challenge-response than configuring.
+
 * Version 3.1.2 (released 2012-11-07)
 
 ** Support for deleting YubiKey configurations.

@@ -63,7 +63,7 @@ YubiKeyWriter* YubiKeyWriter::getInstance() {
     return _instance;
 }
 
-QString YubiKeyWriter::reportError() {
+QString YubiKeyWriter::reportError(bool chalresp = false) {
     QString errMsg;
 
     if (ykp_errno) {
@@ -94,7 +94,11 @@ QString YubiKeyWriter::reportError() {
             errMsg = ERR_FIRMWARE_NOT_SUPPORTED;
             break;
         default:
-            errMsg = ERR_PROCESSING;
+            if(chalresp) {
+                errMsg = ERR_PROCESSING_CHALRESP;
+            } else {
+                errMsg = ERR_PROCESSING;
+            }
             break;
         }
         yk_errno = 0;
@@ -468,7 +472,7 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
 
     if(error) {
         qDebug() << "Challenge response failed.";
-        QString errMsg = reportError();
+        QString errMsg = reportError(true);
     }
 }
 

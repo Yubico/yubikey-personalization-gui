@@ -112,6 +112,7 @@ typedef std::vector<int>::size_type size_t;
 #define ERR_FEATURE_NOT_SUPPORTED   tr("Selected configuration is not supported by the YubiKey being programmed")
 #define ERR_FIRMWARE_NOT_SUPPORTED  tr("This YubiKey firmware version is not supported")
 #define ERR_PROCESSING              tr("YubiKey could not be configured. Perhaps protected with configuration protection access code?")
+#define ERR_PROCESSING_CHALRESP     tr("Challenge response could not be performed. Perhaps the YubiKey is not configured for challenge-response?")
 #define ERR_CONF_SLOT_NOT_SELECTED  tr("No configuration slot selected. Please select the configuration slot to be programmed")
 #define ERR_CHAL_TYPE_NOT_SELECTED  tr("No Challenge-Response Type selected. Please select the one to use")
 
