@@ -81,6 +81,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Start YubiKey finder
     YubiKeyFinder::getInstance()->start();
+
+    // add action for toggling animation
+    animationAction = new QAction(this);
+    animationAction->setText("Device image animated");
+    animationAction->setCheckable(true);
+    connect(animationAction, SIGNAL(triggered(bool)), this, SLOT(toggleAnimation(bool)));
+    ui->deviceImage->addAction(animationAction);
+
+    QSettings settings;
+    if(settings.value(SG_ANIMATIONS_PREFERENCE, true).toBool()) {
+        animationAction->setChecked(true);
+    } else {
+        animationAction->setChecked(false);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -95,6 +109,8 @@ MainWindow::~MainWindow()
     delete m_settingPage;
     delete m_toolPage;
     delete m_aboutPage;
+
+    delete animationAction;
 
     delete ui;
 }
@@ -322,11 +338,13 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
         if(pixmap.isNull()) {
             ui->deviceImage->setMovie(movie);
             movie->start();
+            if(!animationAction->isChecked()) {
+                movie->stop();
+            }
         } else {
             delete movie;
             ui->deviceImage->setPixmap(pixmap);
         }
-        ui->deviceImage->setHidden(false);
 
         unsigned int serial = 0;
         if(featuresMatrix[YubiKeyFinder::Feature_SerialNumber]) {
@@ -435,10 +453,10 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
         }
     } else {
         ui->programLbl->clear();
-        ui->deviceImage->setHidden(true);
         if(ui->deviceImage->pixmap()) {
             ui->deviceImage->setPixmap(NULL);
         }
+        ui->deviceImage->clear();
         ui->statusLbl->setText(NO_KEY_FOUND);
         ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_ERROR));
 
@@ -529,4 +547,17 @@ void MainWindow::on_serialNoHexCopyBtn_clicked() {
 
 void MainWindow::on_serialNoModhexCopyBtn_clicked() {
     copyToClipboard(ui->serialNoModhexLbl->text());
+}
+
+void MainWindow::toggleAnimation(bool checked) {
+    QSettings settings;
+    settings.setValue(SG_ANIMATIONS_PREFERENCE, checked);
+    animationAction->setChecked(checked);
+    if(ui->deviceImage->movie()) {
+        if(checked) {
+            ui->deviceImage->movie()->start();
+        } else {
+            ui->deviceImage->movie()->stop();
+        }
+    }
 }

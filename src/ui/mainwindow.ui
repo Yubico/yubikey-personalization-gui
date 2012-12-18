@@ -120,6 +120,9 @@ background-color: rgb(255, 255, 255);</string>
        <height>128</height>
       </rect>
      </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>

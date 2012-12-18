@@ -164,6 +164,8 @@ typedef std::vector<int>::size_type size_t;
 #define SG_DIFF_PUBLIC_ID_LEN       "DontAsk/PublicIdLen"
 #define SG_ENABLE_CONF_PROTECTION   "DontAsk/ConfProtection"
 
+#define SG_ANIMATIONS_PREFERENCE    "Preference/Animations"
+
 //Help messages
 
 #define HELP_CONFIG_SLOT            tr("<p>YubiKey 2.x and later comes with two configuration slots. Each configuration slot works independent of each other and can be programmed in any of the following modes:<ol><li>Yubico OTP</li><li>OATH-HOTP</li><li>Static Password</li><li>Challenge-Response (YubiKey 2.2 and onwards)</li></ol></p><p>The first slot is used to generate the output when the YubiKey button is touched between 0.3 to 1.5 seconds and released and the second slot is used if the button is touched between 2 to 5 seconds.</p><p>When the YubiKey 2.X is shipped, it's first configuration slot is factory programmed for Yubico OTP mode (which works with online Yubico OTP validation server) and the second configuration slot is left blank.</p>");

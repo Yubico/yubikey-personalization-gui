@@ -77,6 +77,8 @@ private:
 
     QTimer *m_timer;
 
+    QAction *animationAction;
+
     void createPages();
 
 private slots:
@@ -94,6 +96,8 @@ private slots:
     void on_serialNoDecCopyBtn_clicked();
     void on_serialNoHexCopyBtn_clicked();
     void on_serialNoModhexCopyBtn_clicked();
+
+    void toggleAnimation(bool checked);
 };
 
 #endif // MAINWINDOW_H
