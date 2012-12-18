@@ -2,6 +2,19 @@ yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- out
 
 * Version 3.1.3 (unreleased)
 
+** Bugfix for publidId as serial in multi-key writes.
+
+** Correctly show and enable what the production NEO is capable of.
+
+** Support for writing SLOT_NDEF2 for production NEO.
+
+** Fix saving of pacing options.
+
+** Switch animations to mng, higher quality.
+
+** Create a setting for toggling animations on and off, accessible
+from context menu.
+
 * Version 3.1.2 (released 2012-11-07)
 
 ** Support for deleting YubiKey configurations.
