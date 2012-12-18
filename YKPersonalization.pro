@@ -14,6 +14,8 @@ TARGET          = yubikey-personalization-gui
 
 DEFINES        += VERSION=\\\"$${VERSION}\\\"
 
+CONFIG         += silent
+
 CONFIG(debug, debug|release) {
     TARGET_DIR  = build/debug
 
