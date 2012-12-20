@@ -48,6 +48,7 @@ OathPage::OathPage(QWidget *parent) :
 
     m_customerPrefix = -1;
     memset(&m_pubId, 0, sizeof(m_pubId));
+    m_pubIdMUI = 0;
     m_pubIdFormat = 0;
     m_ykConfig = 0;
     m_keyPresent = false;
@@ -270,69 +271,57 @@ void OathPage::updatePrefix() {
                      (unsigned char) (m_customerPrefix / 1000);
 
         if(m_customerPrefix > 0) {
-            unsigned short tmp;
-            tmp = m_customerPrefix % 1000;
-
-            m_pubId[2] = ((tmp / 100) << 4) | (( tmp % 100) / 10);
-            m_pubId[3] = (m_pubId[3] & 0xf) | ((tmp % 10) << 4);
+            // make room for the prefix..
+            m_pubIdMUI %= 99999;
+            int mui_part = m_customerPrefix % 1000;
+            m_pubIdMUI += mui_part * 100000;
         }
     }
 
     QString pubIdTxt;
+    QString muiTxt = QString::number(m_pubIdMUI).rightJustified(8, '0');
     QString pubIdModhexTxt = YubiKeyUtil::qstrModhexEncode(
-            m_pubId, OATH_HOTP_PUBLIC_ID_SIZE);
+            m_pubId, 2);
 
     switch(m_currentPage) {
     case Page_Quick:
-        fixBCD(m_pubId + 2, OATH_HOTP_TT_SIZE +  OATH_HOTP_MUI_SIZE);
-
-        pubIdTxt = YubiKeyUtil::qstrHexEncode(
-                m_pubId, OATH_HOTP_PUBLIC_ID_SIZE);
-
         ui->quickPrefixTxt->setText(pubIdModhexTxt.left(4));
-        ui->quickMUITxt->setText(pubIdTxt.right(8));
+        ui->quickMUITxt->setText(muiTxt);
         break;
 
     case Page_Advanced:
         switch(ui->advPubIdFormatCombo->currentIndex()){
         case OATH_FIXED_NUMERIC:
-            fixBCD(m_pubId, OATH_HOTP_PUBLIC_ID_SIZE);
-
+            fixBCD(m_pubId, 2);
             pubIdTxt = YubiKeyUtil::qstrHexEncode(
-                    m_pubId, OATH_HOTP_PUBLIC_ID_SIZE);
+                    m_pubId, 2);
 
             ui->advOMPTxt->setText(pubIdTxt.left(2));
             ui->advTTTxt->setText(pubIdTxt.mid(2, 2));
-            ui->advMUITxt->setText(pubIdTxt.right(8));
+            ui->advMUITxt->setText(muiTxt);
             break;
 
         case OATH_FIXED_MODHEX1:
-            fixBCD(m_pubId + 1, OATH_HOTP_TT_SIZE +  OATH_HOTP_MUI_SIZE);
-
+            fixBCD(m_pubId + 1, 1);
             pubIdTxt = YubiKeyUtil::qstrHexEncode(
-                    m_pubId, OATH_HOTP_PUBLIC_ID_SIZE);
-
+                    m_pubId, 2);
 
             ui->advOMPTxt->setText(pubIdModhexTxt.left(2));
             ui->advTTTxt->setText(pubIdTxt.mid(2, 2));
-            ui->advMUITxt->setText(pubIdTxt.right(8));
+            ui->advMUITxt->setText(muiTxt);
             break;
 
         case OATH_FIXED_MODHEX2:
-            fixBCD(m_pubId + 2, OATH_HOTP_MUI_SIZE);
-
-            pubIdTxt = YubiKeyUtil::qstrHexEncode(
-                    m_pubId, OATH_HOTP_PUBLIC_ID_SIZE);
-
             ui->advOMPTxt->setText(pubIdModhexTxt.left(2));
             ui->advTTTxt->setText(pubIdModhexTxt.mid(2, 2));
-            ui->advMUITxt->setText(pubIdTxt.right(8));
+            ui->advMUITxt->setText(muiTxt);
             break;
 
         case OATH_FIXED_MODHEX:
+            muiTxt = YubiKeyUtil::qstrModhexEncode((unsigned char*)&m_pubIdMUI, 4);
             ui->advOMPTxt->setText(pubIdModhexTxt.left(2));
             ui->advTTTxt->setText(pubIdModhexTxt.mid(2, 2));
-            ui->advMUITxt->setText(pubIdModhexTxt.right(8));
+            ui->advMUITxt->setText(muiTxt);
             break;
         }
 
@@ -430,7 +419,8 @@ void OathPage::on_quickMUITxt_editingFinished() {
 }
 
 void OathPage::on_quickMUIGenerateBtn_clicked() {
-    YubiKeyUtil::generateRandom(m_pubId + 2, OATH_HOTP_MUI_SIZE);
+    YubiKeyUtil::generateRandom((unsigned char*)&m_pubIdMUI, sizeof(m_pubIdMUI));
+    m_pubIdMUI %= 99999999;
     updatePrefix();
 }
 
@@ -505,7 +495,7 @@ void OathPage::writeQuickConfig() {
 
     //Public ID...
     if(ui->quickPubIdCheck->isChecked()) {
-        QString pubIdTxt = YubiKeyUtil::qstrModhexEncode(m_pubId, OATH_HOTP_PUBLIC_ID_SIZE);
+        QString pubIdTxt = YubiKeyUtil::qstrModhexEncode(m_pubId, 2);
         m_ykConfig->setPubIdTxt(pubIdTxt);
 
         //OATH Public ID Type...
@@ -793,7 +783,8 @@ void OathPage::on_advMUITxt_editingFinished() {
 }
 
 void OathPage::on_advMUIGenerateBtn_clicked() {
-    YubiKeyUtil::generateRandom(m_pubId + 2, OATH_HOTP_MUI_SIZE);
+    YubiKeyUtil::generateRandom((unsigned char*)&m_pubIdMUI, sizeof(m_pubIdMUI));
+    m_pubIdMUI %= 99999999;
     updatePrefix();
 }
 
@@ -912,19 +903,15 @@ void OathPage::changeAdvConfigParams() {
         switch(idScheme) {
         case GEN_SCHEME_INCR:
             {
-                size_t pubIdLen = sizeof(m_pubId)/sizeof(m_pubId[0]);
-                for (int i = pubIdLen; i--; ) {
-                    if (++m_pubId[i]) {
-                        break;
-                    }
-                }
+                m_pubIdMUI++;
                 updatePrefix();
             }
             break;
 
         case GEN_SCHEME_RAND:
+            YubiKeyUtil::generateRandom((unsigned char*)&m_pubIdMUI, sizeof(m_pubIdMUI));
+            m_pubIdMUI %= 99999999;
 
-            YubiKeyUtil::generateRandom(m_pubId, OATH_HOTP_PUBLIC_ID_SIZE);
             updatePrefix();
             break;
         }
@@ -1024,7 +1011,7 @@ void OathPage::writeAdvConfig() {
 
     //Public ID...
     if(ui->advPubIdCheck->isChecked()) {
-        QString pubIdTxt = YubiKeyUtil::qstrModhexEncode(m_pubId, OATH_HOTP_PUBLIC_ID_SIZE);
+        QString pubIdTxt = YubiKeyUtil::qstrModhexEncode(m_pubId, 2);
         m_ykConfig->setPubIdTxt(pubIdTxt);
 
         //OATH Public ID Type...
