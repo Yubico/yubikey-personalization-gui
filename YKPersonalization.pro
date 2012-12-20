@@ -17,7 +17,9 @@ DEFINES        += VERSION=\\\"$${VERSION}\\\"
 CONFIG         += silent
 
 CONFIG(debug, debug|release) {
-    TARGET_DIR  = build/debug
+    TARGET_DIR  = build$${DIR_SEPARATOR}debug
+
+    QT += testlib
 
     CONFIG     += console no_lflags_merge
 } else {
@@ -181,14 +183,27 @@ win32 {
         LIBS += $$quote(-L./libs/win64) -llibyubikey-0 -llibykpers-1-1
     }
 
-     LIB_FILES += \
-         $$_QT_BINDIR$${DIR_SEPARATOR}QtCore4.dll \
-         $$_QT_BINDIR$${DIR_SEPARATOR}QtGui4.dll \
-         $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmng4.dll \
-         $$_QT_BINDIR$${DIR_SEPARATOR}libgcc_s_dw2-1.dll \
-         $$_QT_BINDIR$${DIR_SEPARATOR}mingwm10.dll \
-         libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libyubikey-0.dll \
-         libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libykpers-1-1.dll
+    CONFIG(debug) {
+        LIB_FILES += \
+             $$_QT_BINDIR$${DIR_SEPARATOR}QtCored4.dll \
+             $$_QT_BINDIR$${DIR_SEPARATOR}QtGuid4.dll \
+             $$_QT_BINDIR$${DIR_SEPARATOR}QtTestd4.dll \
+             $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmngd4.dll \
+             $$_QT_BINDIR$${DIR_SEPARATOR}libgcc_s_dw2-1.dll \
+             $$_QT_BINDIR$${DIR_SEPARATOR}mingwm10.dll \
+             libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libyubikey-0.dll \
+             libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libykpers-1-1.dll
+    } else {
+        LIB_FILES += \
+             $$_QT_BINDIR$${DIR_SEPARATOR}QtCore4.dll \
+             $$_QT_BINDIR$${DIR_SEPARATOR}QtGui4.dll \
+             $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmng4.dll \
+             $$_QT_BINDIR$${DIR_SEPARATOR}libgcc_s_dw2-1.dll \
+             $$_QT_BINDIR$${DIR_SEPARATOR}mingwm10.dll \
+             libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libyubikey-0.dll \
+             libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libykpers-1-1.dll
+    }
+
 
     LIB_FILES_WIN = $${LIB_FILES}
     TARGET_DIR_WIN = $${DESTDIR}
