@@ -103,7 +103,6 @@ OTHER_FILES += \
 !debian:!fedora {
   HEADERS += \
       deps/libykpers/ykpers.h \
-      deps/libykpers/ykpbkdf2.h \
       deps/libykpers/ykcore/yktsd.h \
       deps/libykpers/ykcore/ykstatus.h \
       deps/libykpers/ykcore/ykdef.h \
@@ -187,22 +186,21 @@ win32 {
              $$_QT_BINDIR$${DIR_SEPARATOR}QtCored4.dll \
              $$_QT_BINDIR$${DIR_SEPARATOR}QtGuid4.dll \
              $$_QT_BINDIR$${DIR_SEPARATOR}QtTestd4.dll \
-             $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmngd4.dll \
-             $$_QT_BINDIR$${DIR_SEPARATOR}libgcc_s_dw2-1.dll \
-             $$_QT_BINDIR$${DIR_SEPARATOR}mingwm10.dll \
-             libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libyubikey-0.dll \
-             libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libykpers-1-1.dll
+             $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmngd4.dll
     } else {
         LIB_FILES += \
              $$_QT_BINDIR$${DIR_SEPARATOR}QtCore4.dll \
              $$_QT_BINDIR$${DIR_SEPARATOR}QtGui4.dll \
-             $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmng4.dll \
-             $$_QT_BINDIR$${DIR_SEPARATOR}libgcc_s_dw2-1.dll \
-             $$_QT_BINDIR$${DIR_SEPARATOR}mingwm10.dll \
-             libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libyubikey-0.dll \
-             libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libykpers-1-1.dll
+             $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmng4.dll
     }
 
+    LIB_FILES += \
+        $$_QT_BINDIR$${DIR_SEPARATOR}libgcc_s_dw2-1.dll \
+        $$_QT_BINDIR$${DIR_SEPARATOR}mingwm10.dll \
+        libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libyubikey-0.dll \
+        libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libykpers-1-1.dll
+
+    isEmpty(TIMESTAMP_URL):TIMESTAMP_URL = 'http://timestamp.verisign.com/scripts/timstamp.dll'
 
     LIB_FILES_WIN = $${LIB_FILES}
     TARGET_DIR_WIN = $${DESTDIR}
