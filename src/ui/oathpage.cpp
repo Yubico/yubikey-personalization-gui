@@ -547,6 +547,7 @@ void OathPage::quickConfigWritten(bool written, const QString &msg) {
 */
 void OathPage::resetAdvPage() {
     memset(&m_pubId, 0, sizeof(m_pubId));
+    m_pubIdMUI = 0;
 
     bool customerPrefixFlag = !(m_customerPrefix > 0);
 
