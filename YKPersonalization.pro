@@ -17,12 +17,14 @@ DEFINES        += VERSION=\\\"$${VERSION}\\\"
 CONFIG         += silent
 
 CONFIG(debug, debug|release) {
+    message("Debug build")
     TARGET_DIR  = build$${DIR_SEPARATOR}debug
 
     QT += testlib
 
     CONFIG     += console no_lflags_merge
 } else {
+    message("Release build")
     TARGET_DIR  = build$${DIR_SEPARATOR}release
 
     DEFINES    += QT_NO_DEBUG_OUTPUT
@@ -105,11 +107,8 @@ OTHER_FILES += \
       deps/libykpers/ykcore/yktsd.h \
       deps/libykpers/ykcore/ykstatus.h \
       deps/libykpers/ykcore/ykdef.h \
-      deps/libykpers/ykcore/ykcore_lcl.h \
       deps/libykpers/ykcore/ykcore_backend.h \
       deps/libykpers/ykcore/ykcore.h \
-      deps/libykpers/rfc4634/sha.h \
-      deps/libykpers/rfc4634/sha-private.h \
       deps/libyubikey/yubikey.h
 
   INCLUDEPATH    += . src src/ui deps/libusb-1.0 deps/libykpers deps/libykpers/ykcore deps/libyubikey
@@ -183,7 +182,7 @@ win32 {
         LIBS += $$quote(-L./libs/win64) -llibyubikey-0 -llibykpers-1-1
     }
 
-    CONFIG(debug) {
+    CONFIG(debug, debug|release) {
         LIB_FILES += \
              $$_QT_BINDIR$${DIR_SEPARATOR}QtCored4.dll \
              $$_QT_BINDIR$${DIR_SEPARATOR}QtGuid4.dll \
