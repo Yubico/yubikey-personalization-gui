@@ -163,6 +163,10 @@ void YubiKeyFinder::stop() {
     //Stop timer
     if(m_timer && m_timer->isActive()) {
         m_timer->stop();
+        // doing closeKey() here might look out of place and may cause findKey()
+        // to fail unexpectedly, but it's needed to not leak file descriptors
+        // when writing the key.
+        closeKey();
     }
 }
 
