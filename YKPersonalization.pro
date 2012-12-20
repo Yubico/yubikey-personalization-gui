@@ -370,7 +370,7 @@ macx {
     _BASE = $$quote(@executable_path/../Frameworks)
     _QTCORE = $$quote(QtCore.framework/Versions/4/QtCore)
     _QTGUI = $$quote(QtGui.framework/Versions/4/QtGui)
-    isEmpty($$_TARGET_ARCH) {
+    isEmpty(_TARGET_ARCH) {
         _INSTALL_NAME_TOOL = install_name_tool
     } else {
         _INSTALL_NAME_TOOL = $$(TARGET_ARCH)-install_name_tool
