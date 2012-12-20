@@ -56,7 +56,7 @@ private:
 
     int m_customerPrefix;
     unsigned char m_pubId[2];
-    int m_pubIdMUI;
+    unsigned int m_pubIdMUI;
     int m_pubIdFormat;
 
     enum State {
