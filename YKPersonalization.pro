@@ -207,8 +207,30 @@ win32 {
     for(FILE, LIB_FILES_WIN) {
         QMAKE_POST_LINK +=$$quote($$QMAKE_COPY $${FILE} $${TARGET_DIR_WIN}$$escape_expand(\\n\\t))
     }
+    sign_binaries {
+        _PVK_FILE = $$(PVK_FILE)
+        _SPC_FILE = $$(SPC_FILE)
+        isEmpty(_PVK_FILE) {
+            error("Must have a pvk file to sign (PVK_FILE env variable).")
+        }
+        isEmpty(_SPC_FILE) {
+            error("Must have a spc file to sign (SPC_FILE env variable).")
+        }
+
+        # sign all Yubico binaries
+        SIGN_FILES = $${TARGET}.exe \
+            libyubikey-0.dll \
+            libykpers-1-1.dll
+
+        for(FILE, SIGN_FILES) {
+            QMAKE_POST_LINK += $$quote("signcode -spc $$(SPC_FILE) -v $$(PVK_FILE) -a sha1 -$ commercial -n '$${APP_NAME}' -i 'http://www.yubico.com' -t $${TIMESTAMP_URL} $${TARGET_DIR_WIN}$${DIR_SEPARATOR}$${FILE}"$$escape_expand(\\n\\t))
+        }
+    }
     build_installer {
-        QMAKE_POST_LINK += $$quote("makensis -DYKPERS_VERSION=$${VERSION} installer/win-nsis/ykpers.nsi")
+        QMAKE_POST_LINK += $$quote("makensis -DYKPERS_VERSION=$${VERSION} installer/win-nsis/ykpers.nsi"$$escape_expand(\\n\\t))
+        sign_binaries {
+            QMAKE_POST_LINK += $$quote("signcode -spc $$(SPC_FILE) -v $$(PVK_FILE) -a sha1 -$ commercial -n '$${APP_NAME} Installer' -i 'http://www.yubico.com' -t '$${TIMESTAMP_URL}' $${TARGET_DIR_WIN}$${DIR_SEPARATOR}$${TARGET}-$${VERSION}.exe"$$escape_expand(\\n\\t))
+        }
     }
 }
 
@@ -452,7 +474,8 @@ win32 {
     TARGET_DIR_WIN = $${DESTDIR}
 
     QMAKE_CLEAN += $${TARGET_DIR_WIN}$${DIR_SEPARATOR}*.exe \
-                   $${TARGET_DIR_WIN}$${DIR_SEPARATOR}*.dll
+                   $${TARGET_DIR_WIN}$${DIR_SEPARATOR}*.dll \
+                   $${TARGET_DIR_WIN}$${DIR_SEPARATOR}*.exe.bak
 } else:macx {
     QMAKE_CLEAN += -r $${DESTDIR}/*.app $${DESTDIR}/*.pkg $${DESTDIR}/*.dmg $${DESTDIR}/temp
 } else {
