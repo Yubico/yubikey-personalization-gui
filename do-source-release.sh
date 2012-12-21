@@ -49,5 +49,7 @@ git add releases/${releasename}.tar.gz
 x=`ls -1 releases/*.tar.gz | awk -F\- '{print $4}' | sed 's/.tar.gz/,/' | paste -sd ' ' -`; sed -i -e "2s|\[.*\]|[$x]|" releases.html
 git add releases.html
 git commit -m "Added release $VERSION"
+git checkout master
+git push origin gh-pages
 rm -rf $tmpdir
 rm -rf $stagedir
