@@ -1,6 +1,6 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.3 (unreleased)
+* Version 3.1.3 (released 2012-12-21)
 
 ** Bugfix for publidId as serial in multi-key writes.
 
@@ -16,6 +16,10 @@ yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- out
 from context menu.
 
 ** Different error message for challenge-response than configuring.
+
+** Fix a resource leak when auto-programming keys.
+
+** Fix oath identity increments.
 
 * Version 3.1.2 (released 2012-11-07)
 
