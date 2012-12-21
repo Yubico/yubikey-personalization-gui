@@ -1,0 +1,10 @@
+These are good-to-have qmake invocations for windows and osx binary distributions:
+
+windows cross compiled with installer and signed binaries:
+$ TARGET_ARCH=i686-w64-mingw32 QTDIR=$win_qt_location SPC_FILE=$spc_file PVK_FILE=$pvk_file qmake -spec win32-g++-4.6 "CONFIG+= cross build_installer sign_binaries"
+
+os x native compile with installer and signed binaries:
+$ qmake -spec macx-llvm "CONFIG += build_installer release"
+
+os x cross compiled, just application:
+TARGET_ARCH=x86_64-apple-darwin11 OSX_SDK=$sdk_location QT_LIBDIR=$qt_library_frameworks_location QT_PLUGINDIR=$qt_plugins_location qmake -spec macx-g++42 "CONFIG += cross"
