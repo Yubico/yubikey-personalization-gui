@@ -3,12 +3,11 @@
 set -e
 
 VERSION=$1
-USER=$2
-PGP_KEYID=$3
+PGP_KEYID=$2
 
 if [ "x$PGP_KEYID" = "x" ]; then
-  echo "try with $0 VERSION GOOGLECODE_USER PGP_KEYID"
-  echo "example: $0 3.0.4 klas@yubico.com 9D1C0E79"
+  echo "try with $0 VERSION PGP_KEYID"
+  echo "example: $0 3.0.4 9D1C0E79"
   exit
 fi
 
