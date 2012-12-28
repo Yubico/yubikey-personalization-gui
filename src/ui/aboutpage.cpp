@@ -33,6 +33,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "common.h"
 #include "version.h"
 
+#include <ykpers-version.h>
+
 AboutPage::AboutPage(QWidget *parent) :
         QWidget(parent),
         ui(new Ui::AboutPage)
@@ -45,6 +47,13 @@ AboutPage::AboutPage(QWidget *parent) :
                          arg(VER_PRODUCTVERSION_STR);
 
     ui->appVersionLbl->setText(appVersion);
+
+    // Set the library version
+    QString libVersion = tr("%1 %2").
+                         arg(ui->libVersionLbl->text()).
+                         arg(ykpers_check_version(NULL));
+
+    ui->libVersionLbl->setText(libVersion);
 
     //Set build timestamp
     QString buildTS = tr("%1 %2 %3").

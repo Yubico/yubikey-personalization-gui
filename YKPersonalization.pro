@@ -103,6 +103,7 @@ OTHER_FILES += \
 !debian:!fedora {
   HEADERS += \
       deps/libykpers/ykpers.h \
+      deps/libykpers/ykpers-version.h \
       deps/libykpers/ykcore/yktsd.h \
       deps/libykpers/ykcore/ykstatus.h \
       deps/libykpers/ykcore/ykdef.h \

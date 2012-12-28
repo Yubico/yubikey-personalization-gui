@@ -242,7 +242,7 @@ color: rgb(5, 67, 168);</string>
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>355</y>
+      <y>330</y>
       <width>240</width>
       <height>20</height>
      </rect>
@@ -569,6 +569,25 @@ color: rgb(5, 67, 168);</string>
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="libVersionLbl">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>355</y>
+      <width>240</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Library Version:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
   </widget>
