@@ -46,6 +46,7 @@ public:
         Confirm_ConfigurationSlot,
         Confirm_PublicID,
         Confirm_ConfigurationProtection,
+        Confirm_NdefWithoutHttp,
     };
 
     void setConfirmIndex(Confirm confirmIndex);

@@ -62,6 +62,10 @@ void ConfirmBox::setConfirmIndex(Confirm confirmIndex) {
         confirmMsg = WARN_ENABLE_CONF_PROTECTION;
         break;
 
+    case Confirm_NdefWithoutHttp:
+        title = NDEF_WITHOUT_HTTP;
+        confirmMsg = WARN_NDEF_WITHOUT_HTTP;
+        break;
     default:
         confirmMsg = tr("");
     }

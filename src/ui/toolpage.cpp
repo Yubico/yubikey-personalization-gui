@@ -29,6 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "toolpage.h"
 #include "ui_toolpage.h"
 #include "ui/helpbox.h"
+#include "ui/confirmbox.h"
 
 #include "common.h"
 
@@ -330,6 +331,16 @@ void ToolPage::programNdef() {
     payload = ui->ndefEdit->text().trimmed();
     if(payload.isEmpty()) {
         return;
+    }
+
+    if(uri) {
+        if(!payload.startsWith("http")) {
+            ConfirmBox confirm(this);
+            confirm.setConfirmIndex(ConfirmBox::Confirm_NdefWithoutHttp);
+            int ret = confirm.exec();
+            if(ret != 1) // 1 is yes
+                return;
+        }
     }
 
     if(ui->ndefSlot1Radio->isChecked()) {

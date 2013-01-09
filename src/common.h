@@ -132,6 +132,9 @@ typedef std::vector<int>::size_type size_t;
 #define ENABLE_CONF_PROTECTION      tr("Enable configuration protection?")
 #define WARN_ENABLE_CONF_PROTECTION tr("YubiKey Personalization Tool logging is currently disabled. It is not possible to retrieve the configuration protection access code from the YubiKey. If protection access code is forgotten, you may not be able to program the YubiKey again. Yubico highly recommends to enable logging and archive the relevant log records. \n\nAre you sure you still want to enable the configuration protection?")
 
+#define NDEF_WITHOUT_HTTP           tr("Write NDEF without HTTP?")
+#define WARN_NDEF_WITHOUT_HTTP      tr("The NDEF URI entered does not start with http, are you sure that is what you want?")
+
 //Settings
 
 #define SG_CUSTOMER_PREFIX_USED     "Customer/Used"
