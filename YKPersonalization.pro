@@ -1,7 +1,7 @@
 #
 # global definitions
 #
-VERSION         = "3.1.3"
+VERSION         = "3.1.4"
 APP_NAME        = $$quote(YubiKey Personalization Tool)
 
 #
