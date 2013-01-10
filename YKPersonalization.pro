@@ -241,6 +241,7 @@ win32 {
 !win32:!debian:!fedora {
     SOURCES += \
         deps/libykpers/ykpers.c \
+        deps/libykpers/ykpers-version.c \
         deps/libykpers/ykpbkdf2.c \
         deps/libykpers/ykcore/ykstatus.c \
         deps/libykpers/ykcore/ykcore.c \
