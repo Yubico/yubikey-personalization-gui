@@ -1,5 +1,7 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
+* Version 3.1.6 (unreleased)
+
 * Version 3.1.5 (released 2013-01-10)
 
 ** Fixup building on osx.
