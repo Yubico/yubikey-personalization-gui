@@ -316,6 +316,7 @@ void ToolPage::resetNdefPage() {
 }
 
 void ToolPage::programNdef() {
+    QSettings settings;
     YubiKeyWriter *writer = YubiKeyWriter::getInstance();
     bool uri = true;
     QString language;
@@ -333,7 +334,7 @@ void ToolPage::programNdef() {
         return;
     }
 
-    if(uri) {
+    if(uri && !settings.value(SG_NDEF_WITHOUT_HTTP).toBool()) {
         if(!payload.startsWith("http")) {
             ConfirmBox confirm(this);
             confirm.setConfirmIndex(ConfirmBox::Confirm_NdefWithoutHttp);

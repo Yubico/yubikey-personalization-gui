@@ -96,5 +96,9 @@ void ConfirmBox::on_dontaskCheck_stateChanged(int state) {
     case Confirm_ConfigurationProtection:
         settings.setValue(SG_ENABLE_CONF_PROTECTION,    checked);
         break;
+
+    case Confirm_NdefWithoutHttp:
+        settings.setValue(SG_NDEF_WITHOUT_HTTP,    checked);
+        break;
     }
 }

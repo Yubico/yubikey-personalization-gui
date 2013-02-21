@@ -167,6 +167,7 @@ typedef std::vector<int>::size_type size_t;
 #define SG_OVERWRITE_CONF_SLOT1     "DontAsk/Slot1Overwriting"
 #define SG_DIFF_PUBLIC_ID_LEN       "DontAsk/PublicIdLen"
 #define SG_ENABLE_CONF_PROTECTION   "DontAsk/ConfProtection"
+#define SG_NDEF_WITHOUT_HTTP        "DontAsk/NdefWithoutHttp"
 
 #define SG_ANIMATIONS_PREFERENCE    "Preference/Animations"
 
