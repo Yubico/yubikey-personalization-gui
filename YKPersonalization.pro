@@ -14,6 +14,8 @@ TARGET          = yubikey-personalization-gui
 
 DEFINES        += VERSION=\\\"$${VERSION}\\\"
 
+CONFIG         += exceptions
+
 CONFIG         += silent
 
 CONFIG(debug, debug|release) {
