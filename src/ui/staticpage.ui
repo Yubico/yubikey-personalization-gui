@@ -464,7 +464,7 @@ border-radius: 10px;
 color: rgb(118, 116, 108)</string>
      </property>
      <property name="text">
-      <string>(Max. 38 chars for YubiKey 2.2 and 16 chars for 2.0 and 2.1)</string>
+      <string>(Max. 38 chars for YubiKey 2.2+ and 16 chars for 2.0 and 2.1)</string>
      </property>
     </widget>
     <widget class="QPushButton" name="quickStaticBkpHelpBtn">
