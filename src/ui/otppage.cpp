@@ -429,7 +429,12 @@ void OtpPage::quickConfigWritten(bool written, const QString &msg) {
 }
 
 void OtpPage::uploadQuickConfig() {
-    QDesktopServices::openUrl(QUrl(m_uploadUrl));
+    m_tempFile.setFileTemplate(QDir::tempPath() + "/ykpers.XXXXXX.html");
+    m_tempFile.open();
+    m_tempFile.write(m_uploadUrl.toAscii(), m_uploadUrl.length());
+    m_tempFile.close();
+    qDebug() << "temporary file for upload is: " << m_tempFile.fileName();
+    QDesktopServices::openUrl(QUrl("file://" + m_tempFile.fileName()));
 }
 
 /*

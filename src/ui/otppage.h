@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define OTPPAGE_H
 
 #include <QStackedWidget>
+#include <QTemporaryFile>
 #include "yubikeyconfig.h"
 
 namespace Ui {
@@ -72,6 +73,8 @@ private:
     bool m_keyPresent;
 
     QString m_uploadUrl;
+
+    QTemporaryFile m_tempFile;
 
 public slots:
     void loadSettings();
