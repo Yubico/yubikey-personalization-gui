@@ -49,7 +49,6 @@ OathPage::OathPage(QWidget *parent) :
     m_customerPrefix = -1;
     memset(&m_pubId, 0, sizeof(m_pubId));
     m_pubIdMUI = 0;
-    m_pubIdFormat = 0;
     m_ykConfig = 0;
     m_keyPresent = false;
     clearState();
@@ -673,12 +672,7 @@ void OathPage::on_advPubIdCheck_stateChanged(int state) {
 }
 
 void OathPage::on_advPubIdFormatCombo_currentIndexChanged(int index) {
-    updateAdvOMP(m_pubIdFormat);
-    updateAdvTT(m_pubIdFormat);
-    updateAdvMUI(m_pubIdFormat);
     updatePrefix();
-
-    m_pubIdFormat = index;
 }
 
 void OathPage::updateAdvOMP(int index) {
