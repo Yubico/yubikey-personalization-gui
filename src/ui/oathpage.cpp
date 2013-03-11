@@ -318,7 +318,12 @@ void OathPage::updatePrefix() {
             break;
 
         case OATH_FIXED_MODHEX:
-            muiTxt = YubiKeyUtil::qstrModhexEncode((unsigned char*)&m_pubIdMUI, 4);
+            unsigned char tempMUI[4];
+            tempMUI[0] = (m_pubIdMUI >> 24) & 0xff;
+            tempMUI[1] = (m_pubIdMUI >> 16) & 0xff;
+            tempMUI[2] = (m_pubIdMUI >> 8) & 0xff;
+            tempMUI[3] = m_pubIdMUI & 0xff;
+            muiTxt = YubiKeyUtil::qstrModhexEncode(tempMUI, 4);
             ui->advOMPTxt->setText(pubIdModhexTxt.left(2));
             ui->advTTTxt->setText(pubIdModhexTxt.mid(2, 2));
             ui->advMUITxt->setText(muiTxt);
@@ -762,20 +767,18 @@ void OathPage::on_advTTTxt_editingFinished() {
 void OathPage::updateAdvMUI(int index) {
     QString txt = ui->advMUITxt->text();
 
-    unsigned char buf[MAX_SIZE];
-    memset(buf, 0, sizeof(buf));
-    size_t bufLen = 0;
-
     if (index != OATH_FIXED_MODHEX) {
         YubiKeyUtil::qstrClean(&txt, OATH_HOTP_MUI_SIZE * 2, true);
-        YubiKeyUtil::qstrDecDecode(buf, &bufLen, txt);
+        m_pubIdMUI = txt.toInt();
     } else {
+        unsigned char buf[MAX_SIZE];
+        memset(buf, 0, sizeof(buf));
+        size_t bufLen = 0;
+
         YubiKeyUtil::qstrModhexClean(&txt, OATH_HOTP_MUI_SIZE * 2);
         YubiKeyUtil::qstrModhexDecode(buf, &bufLen, txt);
+        m_pubIdMUI = (buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + (buf[3]);
     }
-
-    ui->advMUITxt->setText(txt);
-    memcpy(m_pubId + 2, buf, OATH_HOTP_MUI_SIZE);
 }
 
 void OathPage::on_advMUITxt_editingFinished() {
