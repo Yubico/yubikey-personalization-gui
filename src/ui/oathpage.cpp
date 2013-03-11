@@ -676,42 +676,6 @@ void OathPage::on_advPubIdFormatCombo_currentIndexChanged(int index) {
     updateAdvOMP(m_pubIdFormat);
     updateAdvTT(m_pubIdFormat);
     updateAdvMUI(m_pubIdFormat);
-
-    //        QRegExp modhex2("([b-lnrt-v ]){2}");
-    //        QRegExp modhex8("([b-lnrt-v ]){8}");
-
-    //        switch(index) {
-    //        case OATH_FIXED_MODHEX1:
-    //            ui->advOMPTxt->setInputMask("");
-    //            ui->advOMPTxt->setValidator(new QRegExpValidator(modhex2, this));
-    //            ui->advTTTxt->setInputMask(tr("00;"));
-    //            ui->advMUITxt->setInputMask(tr("00 00 00 00;"));
-    //            break;
-
-    //        case OATH_FIXED_MODHEX2:
-    //            ui->advOMPTxt->setInputMask("");
-    //            ui->advOMPTxt->setValidator(new QRegExpValidator(modhex2, this));
-    //            ui->advTTTxt->setInputMask("");
-    //            ui->advTTTxt->setValidator(new QRegExpValidator(modhex2, this));
-    //            ui->advMUITxt->setInputMask(tr("00 00 00 00;"));
-    //            break;
-
-    //        case OATH_FIXED_MODHEX:
-    //            ui->advOMPTxt->setInputMask("");
-    //            ui->advOMPTxt->setValidator(new QRegExpValidator(modhex2, this));
-    //            ui->advTTTxt->setInputMask("");
-    //            ui->advTTTxt->setValidator(new QRegExpValidator(modhex2, this));
-    //            ui->advMUITxt->setInputMask("");
-    //            ui->advMUITxt->setValidator(new QRegExpValidator(modhex8, this));
-    //            break;
-
-    //        default:
-    //            ui->advOMPTxt->setInputMask(tr("00;"));
-    //            ui->advTTTxt->setInputMask(tr("00;"));
-    //            ui->advMUITxt->setInputMask(tr("00 00 00 00;"));
-    //            break;
-    //        }
-
     updatePrefix();
 
     m_pubIdFormat = index;
