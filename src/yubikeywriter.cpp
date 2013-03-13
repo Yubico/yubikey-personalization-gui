@@ -117,17 +117,24 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
     bool flagSrNoSupport = false;
     bool flagUpdateSupport = false;
     bool flagImfSupport = false;
-    if(YubiKeyFinder::getInstance()->checkFeatureSupport(
+    bool flagLedInvSupport = false;
+
+    YubiKeyFinder *finder = YubiKeyFinder::getInstance();
+    if(finder->checkFeatureSupport(
             YubiKeyFinder::Feature_SerialNumber)) {
         flagSrNoSupport = true;
     }
-    if(YubiKeyFinder::getInstance()->checkFeatureSupport(
+    if(finder->checkFeatureSupport(
           YubiKeyFinder::Feature_Updatable)) {
         flagUpdateSupport = true;
     }
-    if(YubiKeyFinder::getInstance()->checkFeatureSupport(
+    if(finder->checkFeatureSupport(
           YubiKeyFinder::Feature_MovingFactor)) {
         flagImfSupport = true;
+    }
+    if(finder->checkFeatureSupport(
+          YubiKeyFinder::Feature_LedInvert)) {
+        flagLedInvSupport = true;
     }
 
     YubiKeyFinder::getInstance()->stop();
@@ -368,6 +375,10 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             EXTFLAG(DORMANT, ykConfig->dormant());
             EXTFLAG(FAST_TRIG, ykConfig->fastTrig());
             EXTFLAG(USE_NUMERIC_KEYPAD, ykConfig->useNumericKeypad());
+        }
+
+        if(flagLedInvSupport) {
+            EXTFLAG(LED_INV, ykConfig->ledInvert());
         }
 
         //Log configuration...

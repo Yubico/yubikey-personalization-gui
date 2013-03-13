@@ -69,6 +69,7 @@ public:
         Feature_ChallengeResponseFixed,
         Feature_Updatable,
         Feature_Ndef,
+        Feature_LedInvert,
     };
 
     State state() const

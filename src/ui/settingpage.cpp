@@ -76,6 +76,7 @@ SettingPage::SettingPage(QWidget *parent) :
     connect(ui->manUpdateCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->updateCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->fastTrigCheck, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->ledInvertCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->useNumericKeypadCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->logTraditionalRadio, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->logYubicoRadio, SIGNAL(clicked()), this, SLOT(save()));
@@ -251,6 +252,7 @@ void SettingPage::load() {
     // extended settings..
     ui->fastTrigCheck->setChecked(settings.value(SG_FAST_TRIG).toBool());
     ui->useNumericKeypadCheck->setChecked(settings.value(SG_USE_NUMERIC_KEYPAD).toBool());
+    ui->ledInvertCheck->setChecked(settings.value(SG_LED_INVERT).toBool());
 
     //Logging settings...
     if(logDisabled) {
@@ -348,6 +350,7 @@ void SettingPage::save() {
     // Extended settings
     settings.setValue(SG_FAST_TRIG, ui->fastTrigCheck->isChecked());
     settings.setValue(SG_USE_NUMERIC_KEYPAD, ui->useNumericKeypadCheck->isChecked());
+    settings.setValue(SG_LED_INVERT, ui->ledInvertCheck->isChecked());
 
     //Logging settings...
     if(ui->logOutputCheck->isChecked()) {

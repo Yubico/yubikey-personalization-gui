@@ -251,6 +251,11 @@ public:
     bool useNumericKeypad() const
     {return m_useNumericKeypad;}
 
+    void setLedInvert(bool ledInvert)
+    {m_ledInvert = ledInvert;}
+    bool ledInvert() const
+    {return m_ledInvert;}
+
 private:
     Mode m_mode;
     int m_configSlot;
@@ -305,6 +310,8 @@ private:
     bool m_dormant;
     bool m_fastTrig;
     bool m_useNumericKeypad;
+
+    bool m_ledInvert;
 };
 
 #endif // YUBIKEYCONFIG_H

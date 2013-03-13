@@ -163,6 +163,7 @@ typedef std::vector<int>::size_type size_t;
 #define SG_ALLOW_UPDATE             "Flag/AllowUpdate"
 #define SG_FAST_TRIG                "Flag/FastTrig"
 #define SG_USE_NUMERIC_KEYPAD       "Flag/UseNumericKeypad"
+#define SG_LED_INVERT               "Flag/LedInvert"
 
 #define SG_OVERWRITE_CONF_SLOT1     "DontAsk/Slot1Overwriting"
 #define SG_DIFF_PUBLIC_ID_LEN       "DontAsk/PublicIdLen"

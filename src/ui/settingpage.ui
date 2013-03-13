@@ -874,7 +874,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Serial # Visibility Settings (YubiKey 2.2+)</string>
+     <string>Serial # Visibility Settings (2.2+)</string>
     </property>
     <widget class="QCheckBox" name="srBtnVisibleCheck">
      <property name="geometry">
@@ -982,7 +982,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Static Password Setttings</string>
+     <string>Static Password Setttings (2.0+)</string>
     </property>
     <widget class="QCheckBox" name="manUpdateCheck">
      <property name="geometry">
@@ -997,7 +997,7 @@ border-radius: 10px;
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="text">
-      <string>Enable manual update using the button (YubiKey 2)</string>
+      <string>Enable manual update using the button</string>
      </property>
     </widget>
     <widget class="QPushButton" name="manUpdateHelpBtn">
@@ -1047,8 +1047,8 @@ border-radius: 10px;
    <widget class="QGroupBox" name="UpdateBox">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>380</y>
+      <x>10</x>
+      <y>390</y>
       <width>350</width>
       <height>50</height>
      </rect>
@@ -1058,7 +1058,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Update Settings (YubiKey 2.3+)</string>
+     <string>Update Settings (2.3+)</string>
     </property>
     <widget class="QCheckBox" name="updateCheck">
      <property name="geometry">
@@ -1123,10 +1123,10 @@ border-radius: 10px;
    <widget class="QGroupBox" name="ExtendedBox">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>380</y>
+      <x>370</x>
+      <y>340</y>
       <width>350</width>
-      <height>75</height>
+      <height>100</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1134,7 +1134,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Extended Settings (YubiKey 2.3+)</string>
+     <string>Extended Settings</string>
     </property>
     <widget class="QCheckBox" name="useNumericKeypadCheck">
      <property name="geometry">
@@ -1149,7 +1149,7 @@ border-radius: 10px;
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="text">
-      <string>Use numeric keypad for digits</string>
+      <string>Use numeric keypad for digits (2.3+)</string>
      </property>
     </widget>
     <widget class="QCheckBox" name="fastTrigCheck">
@@ -1165,7 +1165,23 @@ border-radius: 10px;
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="text">
-      <string>Use fast triggering if only slot 1 is programmed</string>
+      <string>Use fast triggering if only slot 1 is programmed (2.3+)</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ledInvertCheck">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>75</y>
+       <width>331</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Invert led behaviour (2.4+/3.1+)</string>
      </property>
     </widget>
    </widget>
