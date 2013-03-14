@@ -434,7 +434,7 @@ void OtpPage::uploadQuickConfig() {
     m_tempFile.write(m_uploadUrl.toAscii(), m_uploadUrl.length());
     m_tempFile.close();
     qDebug() << "temporary file for upload is: " << m_tempFile.fileName();
-    QDesktopServices::openUrl(QUrl("file://" + m_tempFile.fileName()));
+    QDesktopServices::openUrl(QUrl::fromLocalFile(m_tempFile.fileName()));
 }
 
 /*
