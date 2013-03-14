@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
-
 README_FILE=`mktemp '/tmp/README.XXXXXX'`
 NEWS_FILE=`mktemp '/tmp/NEWS.XXXXXX'`
 
