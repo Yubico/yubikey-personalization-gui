@@ -2,6 +2,18 @@ yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- out
 
 * Version 3.1.7 (unreleased)
 
+** Try to make some version dependencies in the GUI clearer.
+
+** Change around the "Upload to Yubico" feature:
+It used to spawn a web browser with a standard URL with all fields, instead
+write down a html page with a self-submitting POST form to a temp directory
+and point the web browser at that.
+
+** Fixup entering of OATH MUI.
+
+** Add support for new YubiKey feature: Inversed LED, appearing in firmware
+2.4 and 3.1.
+
 * Version 3.1.6 (released 2013-02-21)
 
 ** Only lock the key when window has focus.
