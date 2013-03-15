@@ -74,6 +74,7 @@ private:
 
 public slots:
     void loadSettings();
+    QString getPublicId(bool bcd);
 
 private slots:
     void connectPages();

@@ -499,8 +499,7 @@ void OathPage::writeQuickConfig() {
 
     //Public ID...
     if(ui->quickPubIdCheck->isChecked()) {
-        QString pubIdTxt = YubiKeyUtil::qstrModhexEncode(m_pubId, 2);
-        m_ykConfig->setPubIdTxt(pubIdTxt);
+        m_ykConfig->setPubIdTxt(getPublicId(true));
 
         //OATH Public ID Type...
         m_ykConfig->setOathFixedModhex2(true);
@@ -943,6 +942,29 @@ bool OathPage::validateAdvSettings() {
     return true;
 }
 
+QString OathPage::getPublicId(bool bcd) {
+  unsigned char pubId[6];
+  memcpy(pubId, m_pubId, 2);
+
+  if(bcd) {
+    int part = m_pubIdMUI / 1000000;
+    pubId[2] = ((part / 10) << 4) + part % 10;
+    part = m_pubIdMUI / 10000 % 100;
+    pubId[3] = ((part / 10) << 4) + part % 10;
+    part = m_pubIdMUI / 100 % 100;
+    pubId[4] = ((part / 10) << 4) + part % 10;
+    part = m_pubIdMUI % 100;
+    pubId[5] = ((part / 10) << 4) + part % 10;
+  } else {
+    pubId[2] = (m_pubIdMUI >> 24) & 0xff;
+    pubId[3] = (m_pubIdMUI >> 16) & 0xff;
+    pubId[4] = (m_pubIdMUI >> 8) & 0xff;
+    pubId[5] = m_pubIdMUI & 0xff;
+  }
+  QString pubIdTxt = YubiKeyUtil::qstrModhexEncode(pubId, 6);
+  return pubIdTxt;
+}
+
 void OathPage::writeAdvConfig() {
     qDebug() << "Writing configuration...";
 
@@ -973,8 +995,8 @@ void OathPage::writeAdvConfig() {
 
     //Public ID...
     if(ui->advPubIdCheck->isChecked()) {
-        QString pubIdTxt = YubiKeyUtil::qstrModhexEncode(m_pubId, 2);
-        m_ykConfig->setPubIdTxt(pubIdTxt);
+        bool bcd = ui->advPubIdFormatCombo->currentIndex() < 3 ? true : false;
+        m_ykConfig->setPubIdTxt(getPublicId(bcd));
 
         //OATH Public ID Type...
         switch(ui->advPubIdFormatCombo->currentIndex()) {
