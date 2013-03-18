@@ -1,6 +1,9 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.8 (unreleased)
+* Version 3.1.8 (released 2013-03-18)
+
+** Fix programming of OATH MUI
+Identifier was never added to the token, broken since release 3.1.3.
 
 * Version 3.1.7 (released 2013-03-14)
 
