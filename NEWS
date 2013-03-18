@@ -1,5 +1,7 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
+* Version 3.1.9 (unreleased)
+
 * Version 3.1.8 (released 2013-03-18)
 
 ** Fix programming of OATH MUI
