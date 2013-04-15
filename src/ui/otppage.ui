@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>1</number>
+   <number>2</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -1684,6 +1684,35 @@ font-weight: bold;</string>
       <bool>false</bool>
      </property>
     </widget>
+    <widget class="QPushButton" name="advExportConfigBtn">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>45</y>
+       <width>100</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Export</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="advProgramMulKeysBox">
     <property name="geometry">
@@ -1899,29 +1928,6 @@ color: rgb(0, 0, 0);</string>
       </property>
      </column>
     </widget>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="uploadPage">
-   <widget class="QLabel" name="advHeadingLabel_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>710</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 18px &quot;Verdana&quot;;
-font-weight: bold;
-color: rgb(140, 192, 65);</string>
-    </property>
-    <property name="text">
-     <string>Upload to Yubico</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
    </widget>
   </widget>
  </widget>
