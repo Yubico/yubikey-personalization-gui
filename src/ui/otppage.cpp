@@ -182,6 +182,7 @@ void OtpPage::keyFound(bool found, bool* featuresMatrix) {
         if(m_state == State_Initial) {
             ui->quickWriteConfigBtn->setEnabled(true);
             ui->advWriteConfigBtn->setEnabled(true);
+            ui->advExportConfigBtn->setEnabled(true);
 
             if(!featuresMatrix[YubiKeyFinder::Feature_MultipleConfigurations]) {
                 ui->quickConfigSlot2Radio->setEnabled(false);
@@ -198,6 +199,7 @@ void OtpPage::keyFound(bool found, bool* featuresMatrix) {
             }
             if(m_state == State_Programming_Multiple) {
                 ui->advWriteConfigBtn->setEnabled(true);
+                ui->advExportConfigBtn->setEnabled(true);
             } else {
                 writeAdvConfig(WRITE_CONFIG);
             }
@@ -206,6 +208,7 @@ void OtpPage::keyFound(bool found, bool* featuresMatrix) {
     } else {
         ui->quickWriteConfigBtn->setEnabled(false);
         ui->advWriteConfigBtn->setEnabled(false);
+        ui->advExportConfigBtn->setEnabled(false);
 
         m_keyPresent = false;
 
@@ -481,6 +484,7 @@ void OtpPage::freezeAdvPage(bool freeze) {
     ui->advKeyParamsBox->setEnabled(disable);
 
     ui->advWriteConfigBtn->setEnabled(disable);
+    ui->advExportConfigBtn->setEnabled(disable);
     ui->advStopBtn->setEnabled(!disable);
     ui->advBackBtn->setEnabled(disable);
 }
