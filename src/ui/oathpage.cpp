@@ -191,6 +191,7 @@ void OathPage::keyFound(bool found, bool* featuresMatrix) {
         if(m_state == State_Initial) {
             ui->quickWriteConfigBtn->setEnabled(true);
             ui->advWriteConfigBtn->setEnabled(true);
+            ui->advExportConfigBtn->setEnabled(true);
 
             if(!featuresMatrix[YubiKeyFinder::Feature_MultipleConfigurations]) {
                 ui->quickConfigSlot2Radio->setEnabled(false);
@@ -217,8 +218,9 @@ void OathPage::keyFound(bool found, bool* featuresMatrix) {
                   m_keyPresent == false) {
             if(m_state == State_Programming_Multiple) {
                 ui->advWriteConfigBtn->setEnabled(true);
+                ui->advExportConfigBtn->setEnabled(true);
             } else {
-                writeAdvConfig();
+                writeAdvConfig(WRITE_CONFIG);
             }
         }
         m_keyPresent = true;
@@ -226,6 +228,7 @@ void OathPage::keyFound(bool found, bool* featuresMatrix) {
 
         ui->quickWriteConfigBtn->setEnabled(false);
         ui->advWriteConfigBtn->setEnabled(false);
+        ui->advExportConfigBtn->setEnabled(false);
 
         m_keyPresent = false;
 
@@ -596,6 +599,7 @@ void OathPage::freezeAdvPage(bool freeze) {
     ui->advKeyParamsBox->setEnabled(disable);
 
     ui->advWriteConfigBtn->setEnabled(disable);
+    ui->advExportConfigBtn->setEnabled(disable);
     ui->advStopBtn->setEnabled(!disable);
     ui->advResetBtn->setEnabled(disable);
     ui->advBackBtn->setEnabled(disable);
@@ -815,7 +819,22 @@ void OathPage::on_advWriteConfigBtn_clicked() {
         m_state = State_Programming;
     }
 
-    writeAdvConfig();
+    writeAdvConfig(WRITE_CONFIG);
+}
+
+void OathPage::on_advExportConfigBtn_clicked() {
+    emit showStatusMessage(NULL, -1);
+
+    //Validate settings
+    if(!validateAdvSettings()) {
+        return;
+    }
+
+    clearState();
+
+    freezeAdvPage(true);
+
+    writeAdvConfig(EXPORT_CONFIG);
 }
 
 void OathPage::on_advStopBtn_clicked() {
@@ -965,7 +984,7 @@ QString OathPage::getPublicId(bool bcd) {
   return pubIdTxt;
 }
 
-void OathPage::writeAdvConfig() {
+void OathPage::writeAdvConfig(int mode) {
     qDebug() << "Writing configuration...";
 
     //Disable stop button while configuration is being written
@@ -1038,11 +1057,18 @@ void OathPage::writeAdvConfig() {
         m_ykConfig->setNewAccessCodeTxt(ui->advNewAccessCodeTxt->text());
     }
 
-    //Write
-    connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
-            this, SLOT(advConfigWritten(bool, const QString &)));
+    if(mode == WRITE_CONFIG) {
+        //Write
+        connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+                this, SLOT(advConfigWritten(bool, const QString &)));
 
-    YubiKeyWriter::getInstance()->writeConfig(m_ykConfig);
+        YubiKeyWriter::getInstance()->writeConfig(m_ykConfig);
+    } else if(mode == EXPORT_CONFIG) {
+        connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+                this, SLOT(advConfigExported(bool, const QString &)));
+
+        YubiKeyWriter::getInstance()->exportConfig(m_ykConfig);
+    }
 }
 
 void OathPage::advConfigWritten(bool written, const QString &msg) {
@@ -1082,6 +1108,28 @@ void OathPage::advConfigWritten(bool written, const QString &msg) {
     }
 
     advUpdateResults(written, message);
+
+    m_ready = false;
+    stopAdvConfigWritting();
+}
+
+void OathPage::advConfigExported(bool written, const QString &msg) {
+    disconnect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+               this, SLOT(advConfigExported(bool, const QString &)));
+
+    QString message;
+
+    if(written && m_ykConfig != 0) {
+        qDebug() << "Configuration exported....";
+
+        message = KEY_EXPORTED;
+
+        showStatusMessage(message, 0);
+    } else {
+        qDebug() << "Configuration could not be exported....";
+
+        message = msg;
+    }
 
     m_ready = false;
     stopAdvConfigWritting();

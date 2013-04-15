@@ -179,7 +179,9 @@ void ChalRespPage::keyFound(bool found, bool* featuresMatrix) {
     if(found) {
         if(m_state == State_Initial) {
             ui->quickWriteConfigBtn->setEnabled(true);
+            ui->quickExportConfigBtn->setEnabled(true);
             ui->advWriteConfigBtn->setEnabled(true);
+            ui->advExportConfigBtn->setEnabled(true);
 
             if(!featuresMatrix[YubiKeyFinder::Feature_MultipleConfigurations]) {
                 ui->quickConfigSlot2Radio->setEnabled(false);
@@ -202,22 +204,26 @@ void ChalRespPage::keyFound(bool found, bool* featuresMatrix) {
             if(this->currentIndex() == Page_Quick) {
                 if(m_state == State_Programming_Multiple) {
                     ui->quickWriteConfigBtn->setEnabled(true);
+                    ui->quickExportConfigBtn->setEnabled(true);
                 } else {
-                    writeQuickConfig();
+                    writeQuickConfig(WRITE_CONFIG);
                 }
 
             } else {
                 if(m_state == State_Programming_Multiple) {
                     ui->advWriteConfigBtn->setEnabled(true);
+                    ui->advExportConfigBtn->setEnabled(true);
                 } else {
-                    writeAdvConfig();
+                    writeAdvConfig(WRITE_CONFIG);
                 }
             }
         }
         m_keyPresent = true;
     } else {
         ui->quickWriteConfigBtn->setEnabled(false);
+        ui->quickExportConfigBtn->setEnabled(false);
         ui->advWriteConfigBtn->setEnabled(false);
+        ui->advExportConfigBtn->setEnabled(false);
         ui->advHmacFixedInputRadio->setEnabled(true);
         m_keyPresent = false;
 
@@ -285,6 +291,7 @@ void ChalRespPage::freezeQuickPage(bool freeze) {
     ui->quickKeyParamsBox->setEnabled(disable);
 
     ui->quickWriteConfigBtn->setEnabled(disable);
+    ui->quickExportConfigBtn->setEnabled(disable);
     ui->quickStopBtn->setEnabled(!disable);
     ui->quickResetBtn->setEnabled(disable);
     ui->quickBackBtn->setEnabled(disable);
@@ -405,9 +412,23 @@ void ChalRespPage::on_quickWriteConfigBtn_clicked() {
         m_state = State_Programming;
     }
 
-    writeQuickConfig();
+    writeQuickConfig(WRITE_CONFIG);
 }
 
+void ChalRespPage::on_quickExportConfigBtn_clicked() {
+    emit showStatusMessage(NULL, -1);
+
+    //Validate settings
+    if(!validateQuickSettings()) {
+        return;
+    }
+
+    clearState();
+
+    freezeQuickPage(true);
+
+    writeQuickConfig(EXPORT_CONFIG);
+}
 void ChalRespPage::on_quickStopBtn_clicked() {
     ui->quickStopBtn->setEnabled(false);
     m_state = State_Initial;
@@ -512,7 +533,7 @@ bool ChalRespPage::validateQuickSettings() {
     return true;
 }
 
-void ChalRespPage::writeQuickConfig() {
+void ChalRespPage::writeQuickConfig(int mode) {
     qDebug() << "Writing configuration...";
 
     //Disable stop button while configuration is being written
@@ -563,11 +584,19 @@ void ChalRespPage::writeQuickConfig() {
     m_ykConfig->setChalYubico(true);
     m_ykConfig->setChalBtnTrig(ui->quickRequireUserInputCheck->isChecked());
 
-    //Write
-    connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
-            this, SLOT(quickConfigWritten(bool, const QString &)));
+    if(mode == WRITE_CONFIG) {
+        //Write
+        connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+                this, SLOT(quickConfigWritten(bool, const QString &)));
 
-    YubiKeyWriter::getInstance()->writeConfig(m_ykConfig);
+        YubiKeyWriter::getInstance()->writeConfig(m_ykConfig);
+    } else if(mode == EXPORT_CONFIG) {
+        //Write
+        connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+                this, SLOT(quickConfigExported(bool, const QString &)));
+
+        YubiKeyWriter::getInstance()->exportConfig(m_ykConfig);
+    }
 }
 
 void ChalRespPage::quickConfigWritten(bool written, const QString &msg) {
@@ -597,6 +626,28 @@ void ChalRespPage::quickConfigWritten(bool written, const QString &msg) {
     }
 
     quickUpdateResults(written, message);
+
+    m_ready = false;
+    stopQuickConfigWritting();
+}
+
+void ChalRespPage::quickConfigExported(bool written, const QString &msg) {
+    disconnect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+               this, SLOT(quickConfigExported(bool, const QString &)));
+
+    QString message;
+
+    if(written) {
+        qDebug() << "Configuration exported....";
+
+        message = KEY_EXPORTED;
+
+        showStatusMessage(message, 0);
+    } else {
+        qDebug() << "Configuration could not be exported....";
+
+        message = msg;
+    }
 
     m_ready = false;
     stopQuickConfigWritting();
@@ -671,6 +722,7 @@ void ChalRespPage::freezeAdvPage(bool freeze) {
     ui->advKeyParamsBox->setEnabled(disable);
 
     ui->advWriteConfigBtn->setEnabled(disable);
+    ui->advExportConfigBtn->setEnabled(disable);
     ui->advStopBtn->setEnabled(!disable);
     ui->advResetBtn->setEnabled(disable);
     ui->advBackBtn->setEnabled(disable);
@@ -773,7 +825,22 @@ void ChalRespPage::on_advWriteConfigBtn_clicked() {
         m_state = State_Programming;
     }
 
-    writeAdvConfig();
+    writeAdvConfig(WRITE_CONFIG);
+}
+
+void ChalRespPage::on_advExportConfigBtn_clicked() {
+    emit showStatusMessage(NULL, -1);
+
+    //Validate settings
+    if(!validateAdvSettings()) {
+        return;
+    }
+
+    clearState();
+
+    freezeAdvPage(true);
+
+    writeAdvConfig(EXPORT_CONFIG);
 }
 
 void ChalRespPage::on_advStopBtn_clicked() {
@@ -857,7 +924,7 @@ bool ChalRespPage::validateAdvSettings() {
     return true;
 }
 
-void ChalRespPage::writeAdvConfig() {
+void ChalRespPage::writeAdvConfig(int mode) {
     qDebug() << "Writing configuration...";
 
     //Disable stop button while configuration is being written
@@ -904,11 +971,19 @@ void ChalRespPage::writeAdvConfig() {
     m_ykConfig->setHmacLT64(ui->advHmacVarInputRadio->isChecked());
     m_ykConfig->setChalBtnTrig(ui->advRequireUserInputCheck->isChecked());
 
-    //Write
-    connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
-            this, SLOT(advConfigWritten(bool, const QString &)));
+    if(mode == WRITE_CONFIG) {
+        //Write
+        connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+                this, SLOT(advConfigWritten(bool, const QString &)));
 
-    YubiKeyWriter::getInstance()->writeConfig(m_ykConfig);
+        YubiKeyWriter::getInstance()->writeConfig(m_ykConfig);
+    } else if(mode == EXPORT_CONFIG) {
+        //Write
+        connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+                this, SLOT(advConfigExported(bool, const QString &)));
+
+        YubiKeyWriter::getInstance()->exportConfig(m_ykConfig);
+    }
 }
 
 void ChalRespPage::advConfigWritten(bool written, const QString &msg) {
@@ -938,6 +1013,28 @@ void ChalRespPage::advConfigWritten(bool written, const QString &msg) {
     }
 
     advUpdateResults(written, message);
+
+    m_ready = false;
+    stopAdvConfigWritting();
+}
+
+void ChalRespPage::advConfigExported(bool written, const QString &msg) {
+    disconnect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
+               this, SLOT(advConfigExported(bool, const QString &)));
+
+    QString message;
+
+    if(written) {
+        qDebug() << "Configuration written....";
+
+        message = KEY_EXPORTED;
+
+        showStatusMessage(message, 0);
+    } else {
+        qDebug() << "Configuration could not be exported....";
+
+        message = msg;
+    }
 
     m_ready = false;
     stopAdvConfigWritting();

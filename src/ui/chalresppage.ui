@@ -607,7 +607,7 @@ border-radius: 10px;
       <number>47</number>
      </property>
      <property name="cursorPosition">
-      <number>0</number>
+      <number>47</number>
      </property>
     </widget>
     <widget class="QPushButton" name="quickSecretKeyGenerateBtn">
@@ -699,7 +699,7 @@ font-weight: bold;</string>
       <number>17</number>
      </property>
      <property name="cursorPosition">
-      <number>0</number>
+      <number>17</number>
      </property>
     </widget>
     <widget class="QPushButton" name="quickPvtIdGenerateBtn">
@@ -986,6 +986,35 @@ font-weight: bold;</string>
       <bool>false</bool>
      </property>
     </widget>
+    <widget class="QPushButton" name="quickExportConfigBtn">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>45</y>
+       <width>100</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Export</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="quickConfigProtectionBox">
     <property name="geometry">
@@ -1066,7 +1095,7 @@ font-weight: bold;</string>
       <number>17</number>
      </property>
      <property name="cursorPosition">
-      <number>0</number>
+      <number>17</number>
      </property>
     </widget>
     <widget class="QLabel" name="quickCurrentAccessCodeLbl">
@@ -1132,7 +1161,7 @@ font-weight: bold;</string>
       <number>17</number>
      </property>
      <property name="cursorPosition">
-      <number>0</number>
+      <number>17</number>
      </property>
     </widget>
     <widget class="QPushButton" name="quickConfigProtectionHelpBtn">
@@ -1471,7 +1500,7 @@ border-radius: 10px;
       <number>17</number>
      </property>
      <property name="cursorPosition">
-      <number>0</number>
+      <number>17</number>
      </property>
     </widget>
     <widget class="QLabel" name="advCurrentAccessCodeLbl">
@@ -1537,7 +1566,7 @@ border-radius: 10px;
       <number>17</number>
      </property>
      <property name="cursorPosition">
-      <number>0</number>
+      <number>17</number>
      </property>
     </widget>
     <widget class="QPushButton" name="advConfigProtectionHelpBtn">
@@ -1725,6 +1754,35 @@ font-weight: bold;</string>
      </property>
      <property name="text">
       <string>Reset</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advExportConfigBtn">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>45</y>
+       <width>100</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Export</string>
      </property>
      <property name="autoExclusive">
       <bool>false</bool>
@@ -2006,7 +2064,7 @@ border-radius: 10px;
       <number>59</number>
      </property>
      <property name="cursorPosition">
-      <number>0</number>
+      <number>59</number>
      </property>
     </widget>
     <widget class="QPushButton" name="advSecretKeyGenerateBtn">

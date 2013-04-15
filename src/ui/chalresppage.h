@@ -94,13 +94,15 @@ private slots:
     void on_quickSecretKeyGenerateBtn_clicked();
 
     void on_quickWriteConfigBtn_clicked();
+    void on_quickExportConfigBtn_clicked();
     void on_quickStopBtn_clicked();
 
     void changeQuickConfigParams();
     void stopQuickConfigWritting();
     bool validateQuickSettings();
-    void writeQuickConfig();
+    void writeQuickConfig(int mode);
     void quickConfigWritten(bool written, const QString &msg);
+    void quickConfigExported(bool written, const QString &msg);
 
     void quickUpdateResults(bool written, const QString &msg);
 
@@ -119,13 +121,15 @@ private slots:
     void on_advSecretKeyGenerateBtn_clicked();
 
     void on_advWriteConfigBtn_clicked();
+    void on_advExportConfigBtn_clicked();
     void on_advStopBtn_clicked();
 
     void changeAdvConfigParams();
     void stopAdvConfigWritting();
     bool validateAdvSettings();
-    void writeAdvConfig();
+    void writeAdvConfig(int mode);
     void advConfigWritten(bool written, const QString &msg);
+    void advConfigExported(bool written, const QString &msg);
 
     void advUpdateResults(bool written, const QString &msg);
 

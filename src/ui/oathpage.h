@@ -131,13 +131,15 @@ private slots:
     void on_advSecretKeyGenerateBtn_clicked();
 
     void on_advWriteConfigBtn_clicked();
+    void on_advExportConfigBtn_clicked();
     void on_advStopBtn_clicked();
 
     void changeAdvConfigParams();
     void stopAdvConfigWritting();
     bool validateAdvSettings();
-    void writeAdvConfig();
+    void writeAdvConfig(int mode);
     void advConfigWritten(bool written, const QString &msg);
+    void advConfigExported(bool written, const QString &msg);
 
     void advUpdateResults(bool written, const QString &msg);
 

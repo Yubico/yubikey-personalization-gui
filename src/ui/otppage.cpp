@@ -642,19 +642,6 @@ void OtpPage::on_advExportConfigBtn_clicked() {
 
     freezeAdvPage(true);
 
-    // Change state
-    if(ui->advProgramMulKeysBox->isChecked()) {
-        if(ui->advAutoProgramKeysCheck->isChecked()) {
-            m_keysProgrammedCtr = 0;
-            m_state = State_Programming_Multiple_Auto;
-        } else {
-            m_state = State_Programming_Multiple;
-        }
-    } else {
-        m_keysProgrammedCtr = 0;
-        m_state = State_Programming;
-    }
-
     writeAdvConfig(EXPORT_CONFIG);
 }
 
@@ -938,7 +925,7 @@ void OtpPage::advConfigWritten(bool written, const QString &msg) {
 
 void OtpPage::advConfigExported(bool written, const QString &msg) {
     disconnect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
-               this, SLOT(advConfigWritten(bool, const QString &)));
+               this, SLOT(advConfigExported(bool, const QString &)));
 
     QString message;
 

@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>1</number>
+   <number>2</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -1869,6 +1869,35 @@ font-weight: bold;</string>
      </property>
      <property name="text">
       <string>Reset</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="advExportConfigBtn">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>45</y>
+       <width>100</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
+font-weight: bold;</string>
+     </property>
+     <property name="text">
+      <string>Export</string>
      </property>
      <property name="autoExclusive">
       <bool>false</bool>
