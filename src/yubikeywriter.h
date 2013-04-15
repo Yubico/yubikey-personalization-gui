@@ -56,8 +56,11 @@ private:
     QString reportError(bool chalresp);
     int encodeAccessCode(const QString accCode, unsigned char *accessCode, size_t *accessCodeLen);
 
+    int assembleConfig(YubiKeyConfig *ykConfig, YKP_CONFIG *ykp, bool *useAccessCode, unsigned char *accessCode);
+
 public slots:
     void writeConfig(YubiKeyConfig *ykConfig);
+    void exportConfig(YubiKeyConfig *ykConfig);
     void doChallengeResponse(const QString challenge,
         QString &response, int slot, bool hmac);
     void writeNdef(bool uri, const QString language,

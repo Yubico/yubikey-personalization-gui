@@ -30,17 +30,19 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "yubikeyfinder.h"
 #include "yubikeylogger.h"
 
+#include <QFileDialog>
+
 YubiKeyWriter* YubiKeyWriter::_instance = 0;
 
 #define TKTFLAG(f, s) \
-if(s) { if (!ykp_set_tktflag_##f(cfg, s)) { error = true; throw 0; } }
+if(s) { if (!ykp_set_tktflag_##f(cfg, s)) { return 0; } }
 
 
 #define CFGFLAG(f, s) \
-if(s) { if (!ykp_set_cfgflag_##f(cfg, s)) { error = true; throw 0; } }
+if(s) { if (!ykp_set_cfgflag_##f(cfg, s)) { return 0; } }
 
 #define EXTFLAG(f, s) \
-if(s) { if (!ykp_set_extflag_##f(cfg, s)) { error = true; throw 0; } }
+if(s) { if (!ykp_set_extflag_##f(cfg, s)) { return 0; } }
 
 
 static int writer(const char *buf, size_t count, void *stream) {
@@ -112,7 +114,7 @@ QString YubiKeyWriter::reportError(bool chalresp = false) {
     return errMsg;
 }
 
-void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
+int YubiKeyWriter::assembleConfig(YubiKeyConfig *ykConfig, YKP_CONFIG *cfg, bool *useAccessCode, unsigned char *accessCode) {
     // Check features support
     bool flagSrNoSupport = false;
     bool flagUpdateSupport = false;
@@ -137,40 +139,12 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
         flagLedInvSupport = true;
     }
 
-    YubiKeyFinder::getInstance()->stop();
+    //Programming Mode...
+    bool longSecretKey = false;
 
-    YK_KEY *yk = 0;
-    YK_STATUS *ykst = ykds_alloc();
-    YKP_CONFIG *cfg = ykp_alloc();
+    int command = ykConfig->configSlot() == 2 ? SLOT_CONFIG2 : SLOT_CONFIG;
 
-    bool error = false;
-
-    qDebug() << "-------------------------";
-    qDebug() << "Starting write config";
-    qDebug() << "-------------------------";
-
-    try {
-        if (!(yk = yk_open_first_key())) {
-            throw 0;
-        } else if (!yk_get_status(yk, ykst)) {
-            throw 0;
-        }
-
-        if (!(yk_check_firmware_version2(ykst))) {
-            throw 0;
-        }
-
-        ykp_configure_version(cfg, ykst);
-
-        qDebug() << "writer:configuration slot:" << ykConfig->configSlot();
-
-
-        //Programming Mode...
-        bool longSecretKey = false;
-
-        int command = ykConfig->configSlot() == 2 ? SLOT_CONFIG2 : SLOT_CONFIG;
-
-        switch(ykConfig->programmingMode()) {
+    switch(ykConfig->programmingMode()) {
         case YubiKeyConfig::Mode_Update:
             // if we're doing an update it's other commands.
             command = ykConfig->configSlot() == 2 ? SLOT_UPDATE2 : SLOT_UPDATE1;
@@ -203,7 +177,7 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
 
             //Moving Factor Seed...
             if(flagImfSupport && !ykp_set_oath_imf(cfg, ykConfig->oathMovingFactorSeed())) {
-              throw 0;
+                return 0;
             }
 
             //For OATH-HOTP, 160 bits key is also valid
@@ -227,164 +201,199 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             //For HMAC (not Yubico) challenge-response, 160 bits key is also valid
             longSecretKey = true;
             break;
+    }
+
+    //Configuration slot...
+    if (!ykp_configure_command(cfg, command)) {
+        return 0;
+    }
+
+    //Public ID...
+    if(ykConfig->pubIdTxt().length() > 0) {
+        qDebug() << "Pub id: " << ykConfig->pubIdTxt()
+            << "length:" << ykConfig->pubIdTxt().length();
+
+        char pubIdStr[MAX_SIZE];
+        YubiKeyUtil::qstrToRaw(pubIdStr, sizeof(pubIdStr),
+                ykConfig->pubIdTxt());
+        size_t pubIdStrLen = strlen(pubIdStr);
+
+        unsigned char pubId[MAX_SIZE];
+        size_t pubIdLen = 0;
+
+        int rc = YubiKeyUtil::hexModhexDecode(pubId, &pubIdLen,
+                pubIdStr, pubIdStrLen,
+                0, FIXED_SIZE * 2,
+                !ykConfig->pubIdInHex());
+
+        if (rc <= 0) {
+            qDebug("Invalid public id: %s", pubIdStr);
+            return 0;
+        }
+        ykp_set_fixed(cfg, pubId, pubIdLen);
+    }
+
+    //Private ID...
+    if(ykConfig->pvtIdTxt().length() > 0) {
+        qDebug() << "Pvt id: " << ykConfig->pvtIdTxt()
+            << "length:" << ykConfig->pvtIdTxt().length();
+
+        char pvtIdStr[MAX_SIZE];
+        YubiKeyUtil::qstrToRaw(pvtIdStr, sizeof(pvtIdStr),
+                ykConfig->pvtIdTxt());
+        size_t pvtIdStrLen = strlen(pvtIdStr);
+
+        unsigned char pvtId[MAX_SIZE];
+        size_t pvtIdLen = 0;
+
+        int rc = YubiKeyUtil::hexModhexDecode(pvtId, &pvtIdLen,
+                pvtIdStr, pvtIdStrLen,
+                UID_SIZE * 2,
+                UID_SIZE * 2,
+                false);
+
+        if (rc <= 0) {
+            qDebug("Invalid private id: %s", pvtIdStr);
+            return 0;
+        }
+        ykp_set_uid(cfg, pvtId, pvtIdLen);
+    }
+
+    //Secret Key...
+    if(ykConfig->secretKeyTxt().length() > 0) {
+        qDebug() << "Secret key: " << ykConfig->secretKeyTxt()
+            << "length:" << ykConfig->secretKeyTxt().length();
+
+        char secretKeyStr[MAX_SIZE];
+        YubiKeyUtil::qstrToRaw(secretKeyStr, sizeof(secretKeyStr),
+                ykConfig->secretKeyTxt());
+
+        int res = 0;
+
+        if(longSecretKey && strlen(secretKeyStr) == 40) {
+            res = ykp_HMAC_key_from_hex(cfg, secretKeyStr);
+        } else {
+            res = ykp_AES_key_from_hex(cfg, secretKeyStr);
         }
 
-        //Configuration slot...
-        if (!ykp_configure_command(cfg, command)) {
+        if (res) {
+            qDebug() << "Bad secret key: " << secretKeyStr;
+            return 0;
+        }
+    }
+
+
+    //Configuration protection...
+    //Current Access Code...
+    size_t accessCodeLen = 0;
+
+    if(ykConfig->currentAccessCodeTxt().length() > 0) {
+        int rc = encodeAccessCode(ykConfig->currentAccessCodeTxt(), accessCode, &accessCodeLen);
+        if (rc <= 0) {
+            qDebug() << "Invalid current access code: " << ykConfig->currentAccessCodeTxt();
+            return 0;
+        }
+    }
+
+    //New Access Code...
+    unsigned char newAccessCode[MAX_SIZE];
+    size_t newAccessCodeLen = 0;
+
+    if(ykConfig->newAccessCodeTxt().length() > 0) {
+        int rc = encodeAccessCode(ykConfig->newAccessCodeTxt(), newAccessCode, &newAccessCodeLen);
+        if (rc <= 0) {
+            qDebug() << "Invalid new access code: " << ykConfig->newAccessCodeTxt();
+            return 0;
+        }
+    }
+
+    if(accessCodeLen > 0) {
+        *useAccessCode = true;
+    }
+
+    if(newAccessCodeLen > 0) {
+        //Enable/change protection
+        ykp_set_access_code(cfg, newAccessCode, newAccessCodeLen);
+
+    } else if(accessCodeLen > 0) {
+        //Keep same protection
+        ykp_set_access_code(cfg, accessCode, accessCodeLen);
+    }
+
+    TKTFLAG(TAB_FIRST,          ykConfig->tabFirst());
+    TKTFLAG(APPEND_TAB1,        ykConfig->appendTab1());
+    TKTFLAG(APPEND_TAB2,        ykConfig->appendTab2());
+    TKTFLAG(APPEND_CR,          ykConfig->appendCr());
+    TKTFLAG(APPEND_DELAY1,      ykConfig->appendDelay1());
+    TKTFLAG(APPEND_DELAY2,      ykConfig->appendDelay2());
+    //TKTFLAG(PROTECT_CFG2,     ykConfig->protectCfg2());
+
+    //CFGFLAG(SEND_REF,         ykConfig->sendRef());
+    //CFGFLAG(TICKET_FIRST,     ykConfig->ticketFirst());
+    CFGFLAG(PACING_10MS,        ykConfig->pacing10ms());
+    CFGFLAG(PACING_20MS,        ykConfig->pacing20ms());
+    //CFGFLAG(ALLOW_HIDTRIG,    ykConfig->allowHidtrig());
+
+    //Serial # visibility...
+    if(flagSrNoSupport) {
+        EXTFLAG(SERIAL_BTN_VISIBLE, ykConfig->serialBtnVisible());
+        EXTFLAG(SERIAL_USB_VISIBLE, ykConfig->serialUsbVisible());
+        EXTFLAG(SERIAL_API_VISIBLE, ykConfig->serialApiVisible());
+    }
+
+    if(flagUpdateSupport) {
+        EXTFLAG(ALLOW_UPDATE, ykConfig->allowUpdate());
+        // XXX: let update support mean these as well..
+        EXTFLAG(DORMANT, ykConfig->dormant());
+        EXTFLAG(FAST_TRIG, ykConfig->fastTrig());
+        EXTFLAG(USE_NUMERIC_KEYPAD, ykConfig->useNumericKeypad());
+    }
+
+    if(flagLedInvSupport) {
+        EXTFLAG(LED_INV, ykConfig->ledInvert());
+    }
+    return 1;
+}
+
+void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
+
+    YubiKeyFinder::getInstance()->stop();
+
+    YK_KEY *yk = 0;
+    YK_STATUS *ykst = ykds_alloc();
+    YKP_CONFIG *cfg = ykp_alloc();
+
+    bool error = false;
+
+    qDebug() << "-------------------------";
+    qDebug() << "Starting write config";
+    qDebug() << "-------------------------";
+
+    try {
+        if (!(yk = yk_open_first_key())) {
+            throw 0;
+        } else if (!yk_get_status(yk, ykst)) {
             throw 0;
         }
 
-        //Public ID...
-        if(ykConfig->pubIdTxt().length() > 0) {
-            qDebug() << "Pub id: " << ykConfig->pubIdTxt()
-                    << "length:" << ykConfig->pubIdTxt().length();
-
-            char pubIdStr[MAX_SIZE];
-            YubiKeyUtil::qstrToRaw(pubIdStr, sizeof(pubIdStr),
-                                   ykConfig->pubIdTxt());
-            size_t pubIdStrLen = strlen(pubIdStr);
-
-            unsigned char pubId[MAX_SIZE];
-            size_t pubIdLen = 0;
-
-            int rc = YubiKeyUtil::hexModhexDecode(pubId, &pubIdLen,
-                                                  pubIdStr, pubIdStrLen,
-                                                  0, FIXED_SIZE * 2,
-                                                  !ykConfig->pubIdInHex());
-
-            if (rc <= 0) {
-                qDebug("Invalid public id: %s", pubIdStr);
-                throw 0;
-            }
-            ykp_set_fixed(cfg, pubId, pubIdLen);
+        if (!(yk_check_firmware_version2(ykst))) {
+            throw 0;
         }
 
-        //Private ID...
-        if(ykConfig->pvtIdTxt().length() > 0) {
-            qDebug() << "Pvt id: " << ykConfig->pvtIdTxt()
-                    << "length:" << ykConfig->pvtIdTxt().length();
+        ykp_configure_version(cfg, ykst);
 
-            char pvtIdStr[MAX_SIZE];
-            YubiKeyUtil::qstrToRaw(pvtIdStr, sizeof(pvtIdStr),
-                                   ykConfig->pvtIdTxt());
-            size_t pvtIdStrLen = strlen(pvtIdStr);
+        qDebug() << "writer:configuration slot:" << ykConfig->configSlot();
 
-            unsigned char pvtId[MAX_SIZE];
-            size_t pvtIdLen = 0;
-
-            int rc = YubiKeyUtil::hexModhexDecode(pvtId, &pvtIdLen,
-                                                  pvtIdStr, pvtIdStrLen,
-                                                  UID_SIZE * 2,
-                                                  UID_SIZE * 2,
-                                                  false);
-
-            if (rc <= 0) {
-                qDebug("Invalid private id: %s", pvtIdStr);
-                throw 0;
-            }
-            ykp_set_uid(cfg, pvtId, pvtIdLen);
-        }
-
-        //Secret Key...
-        if(ykConfig->secretKeyTxt().length() > 0) {
-            qDebug() << "Secret key: " << ykConfig->secretKeyTxt()
-                    << "length:" << ykConfig->secretKeyTxt().length();
-
-            char secretKeyStr[MAX_SIZE];
-            YubiKeyUtil::qstrToRaw(secretKeyStr, sizeof(secretKeyStr),
-                                   ykConfig->secretKeyTxt());
-
-            int res = 0;
-
-            if(longSecretKey && strlen(secretKeyStr) == 40) {
-                res = ykp_HMAC_key_from_hex(cfg, secretKeyStr);
-            } else {
-                res = ykp_AES_key_from_hex(cfg, secretKeyStr);
-            }
-
-            if (res) {
-                qDebug() << "Bad secret key: " << secretKeyStr;
-                throw 0;
-            }
-        }
-
-
-        //Configuration protection...
-        //Current Access Code...
+        bool useAccessCode;
         unsigned char accessCode[MAX_SIZE];
-        size_t accessCodeLen = 0;
 
-        if(ykConfig->currentAccessCodeTxt().length() > 0) {
-            int rc = encodeAccessCode(ykConfig->currentAccessCodeTxt(), accessCode, &accessCodeLen);
-            if (rc <= 0) {
-                qDebug() << "Invalid current access code: " << ykConfig->currentAccessCodeTxt();
-                throw 0;
-            }
-        }
-
-        //New Access Code...
-        unsigned char newAccessCode[MAX_SIZE];
-        size_t newAccessCodeLen = 0;
-
-        if(ykConfig->newAccessCodeTxt().length() > 0) {
-            int rc = encodeAccessCode(ykConfig->newAccessCodeTxt(), newAccessCode, &newAccessCodeLen);
-            if (rc <= 0) {
-                qDebug() << "Invalid new access code: " << ykConfig->newAccessCodeTxt();
-                throw 0;
-            }
-        }
-
-        bool useAccessCode = false;
-        if(accessCodeLen > 0) {
-            useAccessCode = true;
-        }
-
-        if(newAccessCodeLen > 0) {
-            //Enable/change protection
-            ykp_set_access_code(cfg, newAccessCode, newAccessCodeLen);
-
-        } else if(accessCodeLen > 0) {
-            //Keep same protection
-            ykp_set_access_code(cfg, accessCode, accessCodeLen);
-        }
-
-        TKTFLAG(TAB_FIRST,          ykConfig->tabFirst());
-        TKTFLAG(APPEND_TAB1,        ykConfig->appendTab1());
-        TKTFLAG(APPEND_TAB2,        ykConfig->appendTab2());
-        TKTFLAG(APPEND_CR,          ykConfig->appendCr());
-        TKTFLAG(APPEND_DELAY1,      ykConfig->appendDelay1());
-        TKTFLAG(APPEND_DELAY2,      ykConfig->appendDelay2());
-        //TKTFLAG(PROTECT_CFG2,     ykConfig->protectCfg2());
-
-        //CFGFLAG(SEND_REF,         ykConfig->sendRef());
-        //CFGFLAG(TICKET_FIRST,     ykConfig->ticketFirst());
-        CFGFLAG(PACING_10MS,        ykConfig->pacing10ms());
-        CFGFLAG(PACING_20MS,        ykConfig->pacing20ms());
-        //CFGFLAG(ALLOW_HIDTRIG,    ykConfig->allowHidtrig());
-
-        //Serial # visibility...
-        if(flagSrNoSupport) {
-            EXTFLAG(SERIAL_BTN_VISIBLE, ykConfig->serialBtnVisible());
-            EXTFLAG(SERIAL_USB_VISIBLE, ykConfig->serialUsbVisible());
-            EXTFLAG(SERIAL_API_VISIBLE, ykConfig->serialApiVisible());
-        }
-
-        if(flagUpdateSupport) {
-            EXTFLAG(ALLOW_UPDATE, ykConfig->allowUpdate());
-            // XXX: let update support mean these as well..
-            EXTFLAG(DORMANT, ykConfig->dormant());
-            EXTFLAG(FAST_TRIG, ykConfig->fastTrig());
-            EXTFLAG(USE_NUMERIC_KEYPAD, ykConfig->useNumericKeypad());
-        }
-
-        if(flagLedInvSupport) {
-            EXTFLAG(LED_INV, ykConfig->ledInvert());
+        if(!assembleConfig(ykConfig, cfg, &useAccessCode, accessCode)) {
+            throw 0;
         }
 
         //Log configuration...
         qDebug() << "-------------------------";
         qDebug() << "Config data to be written to key configuration...";
-        qDebug() << "Command is: " << command;
 
         ykp_write_config(cfg, writer, stderr);
 
@@ -429,6 +438,78 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
     qDebug() << "-------------------------";
     qDebug() << "Stopping write config";
     qDebug() << "-------------------------";
+}
+
+void YubiKeyWriter::exportConfig(YubiKeyConfig *ykConfig) {
+    YubiKeyFinder::getInstance()->stop();
+
+    YK_KEY *yk = 0;
+    YK_STATUS *ykst = ykds_alloc();
+    YKP_CONFIG *cfg = ykp_alloc();
+
+    bool error = false;
+
+    qDebug() << "-------------------------";
+    qDebug() << "Starting write config";
+    qDebug() << "-------------------------";
+
+    try {
+        if (!(yk = yk_open_first_key())) {
+            throw 0;
+        } else if (!yk_get_status(yk, ykst)) {
+            throw 0;
+        }
+
+        if (!(yk_check_firmware_version2(ykst))) {
+            throw 0;
+        }
+
+        ykp_configure_version(cfg, ykst);
+
+        qDebug() << "writer:configuration slot:" << ykConfig->configSlot();
+
+        bool useAccessCode;
+        unsigned char accessCode[MAX_SIZE];
+
+        if(!assembleConfig(ykConfig, cfg, &useAccessCode, accessCode)) {
+            throw 0;
+        }
+
+        QString filename = QFileDialog::getSaveFileName(NULL, tr("Export File"), tr("export.ycfg"));
+
+        char data[1024];
+        int len = ykp_export_config(cfg, data, 1024, YKP_FORMAT_JSON);
+
+        QFile file(filename);
+        file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate);
+        file.write(data, len);
+        file.close();
+
+        emit configWritten(true, NULL);
+    }
+    catch(...) {
+        error = true;
+    }
+
+    if (cfg) {
+        ykp_free_config(cfg);
+    }
+
+    if(ykst) {
+        ykds_free(ykst);
+    }
+
+    if (yk && !yk_close_key(yk)) {
+        error = true;
+    }
+
+    YubiKeyFinder::getInstance()->start();
+
+    if(error) {
+        qDebug() << "Config not exported";
+        QString errMsg = reportError();
+        emit configWritten(false, errMsg);
+    }
 }
 
 void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &response, int slot, bool hmac) {
