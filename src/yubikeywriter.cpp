@@ -479,10 +479,17 @@ void YubiKeyWriter::exportConfig(YubiKeyConfig *ykConfig) {
 
         char data[1024];
         int len = ykp_export_config(cfg, data, 1024, YKP_FORMAT_JSON);
+        if(!len) {
+            throw 0;
+        }
 
         QFile file(filename);
-        file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate);
-        file.write(data, len);
+        if(!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
+            throw 0;
+        }
+        if(!file.write(data, len)) {
+            throw 0;
+        }
         file.close();
 
         emit configWritten(true, NULL);
