@@ -178,11 +178,11 @@ win32 {
     !contains(QMAKE_TARGET.arch, x86_64) {
         message("Windows x86 build")
 
-        LIBS += $$quote(-L./libs/win32) -llibyubikey-0 -llibykpers-1-1
+        LIBS += $$quote(-L./libs/win32/bin) -llibyubikey-0 -llibykpers-1-1
     } else {
         message("Windows x86_64 build")
 
-        LIBS += $$quote(-L./libs/win64) -llibyubikey-0 -llibykpers-1-1
+        LIBS += $$quote(-L./libs/win64/bin) -llibyubikey-0 -llibykpers-1-1
     }
 
     CONFIG(debug, debug|release) {
@@ -201,9 +201,9 @@ win32 {
     LIB_FILES += \
         $$_QT_BINDIR$${DIR_SEPARATOR}libgcc_s_dw2-1.dll \
         $$_QT_BINDIR$${DIR_SEPARATOR}mingwm10.dll \
-        libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libjson-c-2.dll \
-        libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libyubikey-0.dll \
-        libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libykpers-1-1.dll
+        libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}bin$${DIR_SEPARATOR}libjson-c-2.dll \
+        libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}bin$${DIR_SEPARATOR}libyubikey-0.dll \
+        libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}bin$${DIR_SEPARATOR}libykpers-1-1.dll
 
     isEmpty(TIMESTAMP_URL):TIMESTAMP_URL = 'http://timestamp.verisign.com/scripts/timstamp.dll'
 
@@ -224,7 +224,6 @@ win32 {
 
         # sign all Yubico binaries
         SIGN_FILES = $${TARGET}.exe \
-            libjson-c-2.dll \
             libyubikey-0.dll \
             libykpers-1-1.dll
 
