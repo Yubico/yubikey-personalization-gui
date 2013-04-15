@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QObject>
 #include <QtCore/QString>
 #include <QTextStream>
+#include <QFile>
 
 #include "yubikeyconfig.h"
 
@@ -63,6 +64,9 @@ private:
 
     static void logConfigTraditional(YubiKeyConfig *ykConfig, QTextStream &out);
     static void logConfigYubico(YubiKeyConfig *ykConfig, QTextStream &out);
+
+    static QFile *m_logFile;
+    static QFile *getLogFile(void);
 };
 
 #endif // YUBIKEYLOGGER_H

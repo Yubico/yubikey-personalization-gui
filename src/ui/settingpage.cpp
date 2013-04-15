@@ -151,6 +151,7 @@ void SettingPage::restoreDefaults() {
     settings.setValue(SG_CUSTOMER_PREFIX,       0);
 
     settings.setValue(SG_LOG_DISABLED,          false);
+    // we continue loading LOG_FILENAME since we use that to check if settings are loaded
     settings.setValue(SG_LOG_FILENAME,          YubiKeyLogger::defaultLogFilename());
     settings.setValue(SG_LOG_FORMAT,            YubiKeyLogger::Format_Traditional);
 
@@ -259,16 +260,12 @@ void SettingPage::load() {
         YubiKeyLogger::disableLogging();
 
         ui->logOutputCheck->setChecked(false);
-        ui->logFileTxt->setEnabled(false);
-        ui->browseBtn->setEnabled(false);
         ui->logTraditionalRadio->setEnabled(false);
         ui->logYubicoRadio->setEnabled(false);
     } else {
         YubiKeyLogger::enableLogging();
 
         ui->logOutputCheck->setChecked(true);
-        ui->logFileTxt->setEnabled(true);
-        ui->browseBtn->setEnabled(true);
         ui->logTraditionalRadio->setEnabled(true);
         ui->logYubicoRadio->setEnabled(true);
         if(logFormat == YubiKeyLogger::Format_Yubico) {
@@ -279,15 +276,6 @@ void SettingPage::load() {
             YubiKeyLogger::setLogFormat(YubiKeyLogger::Format_Traditional);
         }
     }
-
-    if(!logFilename.isEmpty()) {
-        YubiKeyLogger::setLogFilename(logFilename);
-    } else {
-        logFilename = YubiKeyLogger::logFilename();
-    }
-
-    ui->logFileTxt->setText(logFilename);
-    ui->logFileTxt->setCursorPosition(0);
 
     //Signal everyone
     emit settingsChanged();
@@ -356,9 +344,6 @@ void SettingPage::save() {
     if(ui->logOutputCheck->isChecked()) {
         settings.setValue(SG_LOG_DISABLED,  false);
 
-        QString logFilename = ui->logFileTxt->text().trimmed();
-        settings.setValue(SG_LOG_FILENAME,  logFilename);
-
         if(ui->logYubicoRadio->isChecked()) {
             settings.setValue(SG_LOG_FORMAT, YubiKeyLogger::Format_Yubico);
         } else {
@@ -420,28 +405,6 @@ void SettingPage::on_custPrefixModhexTxt_editingFinished() {
 void SettingPage::on_custPrefixHexTxt_editingFinished() {
     custPrefixChanged(HEX, ui->custPrefixHexTxt->text());
     save();
-}
-
-void SettingPage::on_logOutputCheck_stateChanged(int state) {
-    if(state == 0) {
-        ui->logFileTxt->setEnabled(false);
-        ui->browseBtn->setEnabled(false);
-    } else {
-        ui->logFileTxt->setEnabled(true);
-        ui->browseBtn->setEnabled(true);
-    }
-}
-
-void SettingPage::on_browseBtn_clicked() {
-    QString fileName = QFileDialog::getSaveFileName(this,
-                                                    tr("Open"),
-                                                    QDir(ui->logFileTxt->text()).absolutePath(),
-                                                    tr("Comma-separated text file (*.txt *.csv)"));
-
-    if(!fileName.isEmpty()) {
-        ui->logFileTxt->setText(fileName);
-        save();
-    }
 }
 
 void SettingPage::on_doUpdateBtn_clicked() {

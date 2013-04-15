@@ -276,79 +276,6 @@ color: rgb(140, 192, 65);</string>
       <string>Log configuration output</string>
      </property>
     </widget>
-    <widget class="QLabel" name="logFileLbl">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>131</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-weight:normal;</string>
-     </property>
-     <property name="text">
-      <string>Log Output File</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="logFileTxt">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>50</y>
-       <width>371</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-weight: normal;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="maxLength">
-      <number>32767</number>
-     </property>
-     <property name="cursorPosition">
-      <number>0</number>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="browseBtn">
-     <property name="geometry">
-      <rect>
-       <x>550</x>
-       <y>48</y>
-       <width>105</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="whatsThis">
-      <string/>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 12px;
-font-weight: bold;</string>
-     </property>
-     <property name="text">
-      <string>Browse</string>
-     </property>
-     <property name="autoExclusive">
-      <bool>false</bool>
-     </property>
-     <property name="default">
-      <bool>false</bool>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-    </widget>
     <widget class="QRadioButton" name="logTraditionalRadio">
      <property name="geometry">
       <rect>
@@ -1683,8 +1610,6 @@ border-radius: 10px;
   <tabstop>srApiVisibleCheck</tabstop>
   <tabstop>manUpdateCheck</tabstop>
   <tabstop>logOutputCheck</tabstop>
-  <tabstop>logFileTxt</tabstop>
-  <tabstop>browseBtn</tabstop>
   <tabstop>restoreBtn</tabstop>
   <tabstop>outFormatHelpBtn</tabstop>
   <tabstop>outSpeedHelpBtn</tabstop>
