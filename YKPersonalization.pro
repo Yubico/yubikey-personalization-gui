@@ -201,6 +201,7 @@ win32 {
     LIB_FILES += \
         $$_QT_BINDIR$${DIR_SEPARATOR}libgcc_s_dw2-1.dll \
         $$_QT_BINDIR$${DIR_SEPARATOR}mingwm10.dll \
+        libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libjson-c-2.dll \
         libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libyubikey-0.dll \
         libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}libykpers-1-1.dll
 
@@ -223,6 +224,7 @@ win32 {
 
         # sign all Yubico binaries
         SIGN_FILES = $${TARGET}.exe \
+            libjson-c-2.dll \
             libyubikey-0.dll \
             libykpers-1-1.dll
 

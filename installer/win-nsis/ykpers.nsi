@@ -61,6 +61,7 @@ Section "YubiKey Personalization Tool"
   SectionIn RO
   SetOutPath $INSTDIR
   FILE ../../build/release/yubikey-personalization-gui.exe
+  FILE ../../build/release/libjson-c-2.dll
   FILE ../../build/release/libyubikey-0.dll
   FILE ../../build/release/libykpers-1-1.dll
   FILE ../../build/release/QtCore4.dll
@@ -113,6 +114,7 @@ Section "Uninstall"
   DeleteRegKey HKLM "Software\Yubico\yubikey-personalization-gui"
 
   DELETE "$INSTDIR\yubikey-personalization-gui.exe"
+  DELETE "$INSTDIR\libjson-c-2.dll"
   DELETE "$INSTDIR\libyubikey-0.dll"
   DELETE "$INSTDIR\libykpers-1-1.dll"
   DELETE "$INSTDIR\QtCore4.dll"
