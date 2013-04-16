@@ -103,11 +103,7 @@ OTHER_FILES += \
     resources/mac/qt.conf
 
 win32 {
-  INCLUDEPATH += libs/win32/include libs/win32/include/ykpers-1
-}
-macx {
-  INCLUDEPATH += libs/macx/include libs/macx/include/ykpers-1
-  LIBS += libs/macx/lib/libykpers-1.dylib libs/macx/lib/libyubikey.dylib
+    INCLUDEPATH += libs/win32/include libs/win32/include/ykpers-1
 }
 
 cross {
@@ -254,6 +250,9 @@ unix:!macx {
 macx {
     message("Mac build")
 
+    INCLUDEPATH += libs/macx/include libs/macx/include/ykpers-1
+    LIBS += libs/macx/lib/libykpers-1.dylib libs/macx/lib/libyubikey.dylib
+
     CONFIG += x86_64
 
     DEFINES += QT_MAC_USE_COCOA
@@ -320,68 +319,13 @@ macx {
         $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
         $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqmng.dylib && \
         $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqmng.dylib)
-        
-    cross {
-        build_installer {
-            QMAKE_POST_LINK += $$quote( && mkdir -p $${DESTDIR}/temp/ && \
-                cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
-                ln -s /Applications $${DESTDIR}/temp/Applications && \
-                mkdir $${DESTDIR}/temp/.background/ && \
-                cp resources/mac/yubico-logo.png $${DESTDIR}/temp/.background/background.png && \
-                genisoimage -V "$$TARGET_MAC" -r -apple --hfs-bless "/$${TARGET_MAC}.app" -o $${DESTDIR}/ykpers-pre.dmg  $${DESTDIR}/temp && \
-                rm -rf $${DESTDIR}/temp && \
-                dmg dmg $${DESTDIR}/ykpers-pre.dmg $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.dmg)
-        }
-    } else {
-        build_installer {
-            QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app && \
-                rm -rf $${DESTDIR}/temp && \
-                mkdir -p $${DESTDIR}/temp/ && \
-                cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
-                pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --version $${VERSION} --root $${DESTDIR}/temp/ --component-plist resources/mac/installer.plist --install-location '/Applications/' $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg)
-        }
 
-        # Create application dmg
-        shutup = ">/dev/null 2>&1"
-
-        isEmpty(MACDEPLOYQT):MACDEPLOYQT = macdeployqt
-        !system($$MACDEPLOYQT $$shutup) {
-            warning("macdeployqt utility '$$MACDEPLOYQT' not found \
-                     will not create target for application bundling")
-        } else {
-            macdeploy.depends  = $${DESTDIR}/$${TARGET_MAC}.app/Contents/MacOS/$${TARGET_MAC}
-            macdeploy.target   = macdeploy
-            macdeploy.commands = \
-                [ -f $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources/qt.conf ] || \
-                    $$MACDEPLOYQT $${DESTDIR}/$${TARGET_MAC}.app -no-strip;
-
-            QMAKE_EXTRA_TARGETS += macdeploy
-        }
-
-        isEmpty(HDIUTIL):HDIUTIL = "hdiutil"
-        !system($$HDIUTIL help $$shutup) {
-            warning("hdiutil utility '$$HDIUTIL' not found \
-                     will not create target for disk image creation")
-        } else {
-            contains(QMAKE_EXTRA_TARGETS, macdeploy) {
-                IMAGEROOT = $${DESTDIR}/disk-image-root
-                IMAGEFILE = $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.dmg
-
-                #Note: Volume name for disk image should be passed without escaping quotes
-                macdisk.depends  = macdeploy
-                macdisk.target   = macdisk
-                macdisk.commands = \
-                    rm -rf $${IMAGEROOT}; \
-                    mkdir $${IMAGEROOT}; \
-                    cp -R $${DESTDIR}/$${TARGET_MAC}.app $${IMAGEROOT}; \
-                    rm -f $${IMAGEFILE}; \
-                    $${HDIUTIL} create -srcfolder $${IMAGEROOT} -format UDBZ \
-                        -volname \'$${TARGET} $${VERSION}\' $${IMAGEFILE}; \
-                    rm -rf $${IMAGEROOT}
-
-                QMAKE_EXTRA_TARGETS += macdisk
-            }
-        }
+    build_installer {
+        QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app && \
+            rm -rf $${DESTDIR}/temp && \
+            mkdir -p $${DESTDIR}/temp/ && \
+            cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
+            pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --version $${VERSION} --root $${DESTDIR}/temp/ --component-plist resources/mac/installer.plist --install-location '/Applications/' $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg)
     }
 }
 
