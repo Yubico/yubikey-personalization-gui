@@ -102,10 +102,6 @@ OTHER_FILES += \
     resources/mac/Info.plist.in \
     resources/mac/qt.conf
 
-win32 {
-    INCLUDEPATH += libs/win32/include libs/win32/include/ykpers-1
-}
-
 cross {
     message("Doing a cross platform build..")
     QMAKE_CXXFLAGS += $$(CXXFLAGS)
@@ -158,6 +154,7 @@ cross {
 # Windows specific configuration
 #
 win32 {
+    INCLUDEPATH += libs/win32/include libs/win32/include/ykpers-1
     HEADERS += src/crandom.h
     SOURCES += src/crandom.cpp
 
