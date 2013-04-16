@@ -321,7 +321,8 @@ macx {
         $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqmng.dylib)
 
     build_installer {
-        QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app && \
+        QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app \
+            --entitlements resources/mac/Entitlements.plist && \
             rm -rf $${DESTDIR}/temp && \
             mkdir -p $${DESTDIR}/temp/ && \
             cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
