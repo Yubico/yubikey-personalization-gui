@@ -313,6 +313,14 @@ macx {
         cp libs/macx/lib/libykpers-1.1.dylib $$_LIBDIR && \
         cp libs/macx/lib/libjson-c.2.dylib $$_LIBDIR)
 
+    _LICENSEDIR = $${_BASEDIR}/licenses
+    QMAKE_POST_LINK += $$quote(&& mkdir -p $$_LICENSEDIR && \
+        cp COPYING $$_LICENSEDIR/yubikey-personalization-gui.txt)
+    for(FILE, LICENSEFILES) {
+        QMAKE_POST_LINK += $$quote(&& cp libs/macx/licenses/$${FILE} $$_LICENSEDIR)
+    }
+
+
     # fixup all library paths..
     _BASE = $$quote(@executable_path/../Frameworks)
     _QTCORE = $$quote(QtCore.framework/Versions/4/QtCore)
