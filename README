@@ -47,29 +47,20 @@ directory:
 Dependencies
 ------------
 
-yubikey-personalization-gui depends on version 1.12.0 or higher of
+yubikey-personalization-gui depends on version 1.13.0 or higher of
 libykpers.
 
-When building on Windows you will need binary releases of libykpers
-and libyubikey, these can be downloaded from
-http://code.google.com/p/yubikey-personalization/, the dlls
-libykpers-1-1.dll and libyubikey-0.dll should then be placed in
-libs/win32 and libs/win64 respectively.
+When building on Windows and mac you will need a binary buikd of libykpers,
+that can be downloaded from http://code.google.com/p/yubikey-personalization/,
+the contents should then be places in libs/win32, libs/win64 and libs/macx
+respectively.
 
-When building on MAC or Linux you will need sourcecode from yubico-c
-and yubikey-personalization. This can be downloaded from
-http://code.google.com/p/yubikey-personalization/ and
-http://code.google.com/p/yubico-c/ and should be placed unpacked in
-deps/libyubikey and deps/libykpers. You also need libusb.h
-from http://sourceforge.net/projects/libusb/files/libusb-1.0/
-placed in deps/libusb-1.0.
-
-You will need QT Creator and libusb-1.0 development files.
+For building on linux pkg-config is used to find these dependencies.
 
 -----------
-  $ sudo apt-get install libusb-1.0-0-dev qtcreator
+  $ sudo apt-get install libusb-1.0-0-dev qt4-qmake libykpers-1-dev \
+      libyubikey-dev
 -----------
-
 
 Command-line build
 ------------------
@@ -80,22 +71,12 @@ Run these commands:
   $ qmake && make
 -----------
 
-An alternative way of building is to let pkg-config find the dependencies,
-in that case you need development files for libyubikey and libykpers.
-
------------
-  $ sudo apt-get install libyubikey-dev libykpers-1-dev
-  $ qmake "CONFIG += debian" && make
------------
-
-
 Cross Compiling from Linux
 --------------------------
 
 The project can be cross compiled from linux for osX and windows. As
 a first step you need a cross-compiler chain for that OS, for windows
-you want mingw-w64 and for osX you can follow directions at
-https://github.com/Tatsh/xchain/.
+you want mingw-w64.
 
 Then you need unpacked qt binaries for that platform, fetchable
 from http://qt-project.org/.
@@ -103,14 +84,6 @@ from http://qt-project.org/.
 You can then do (for windows):
 TARGET_ARCH=i686-w64-mingw32 QTDIR=<qt location> qmake \
   -spec win32-g++-4.6 "CONFIG+=cross"
-
-or (for osX):
-TARGET_ARCH=x86_64-apple-darwin11 OSX_SDK=<osx sdk location> \
-  QT_LIBDIR=<qt libs> QT_PLUGINDIR=<qt plugins> qmake -spec macx-g++ \
-  "CONFIG +=cross"
-
-Note that you need to point QT_LIBDIR and QT_PLUGINDIR at the
-/Library/Frameworks directory of the unpacked distribution.
 
 To build installers you can add build_installer to the CONFIG variable
 for qmake. This requires makensis to be in path for windows and
