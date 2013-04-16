@@ -38,7 +38,6 @@ FunctionEnd
 
 ; Pages
   !insertmacro MUI_PAGE_WELCOME
-  !insertmacro MUI_PAGE_LICENSE "../../COPYING"
   !insertmacro MUI_PAGE_DIRECTORY
   ;Start Menu Folder Page Configuration
   !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Yubico\YubiKey Personalization Tool"
@@ -68,6 +67,8 @@ Section "YubiKey Personalization Tool"
   FILE ../../build/release/QtGui4.dll
   FILE ../../build/release/libgcc_s_dw2-1.dll
   FILE ../../build/release/mingwm10.dll
+  SetOutPath $INSTDIR\licenses
+  FILE /r ../../build/release/licenses/
   SetOutPath $INSTDIR\imageformats
   FILE ../../build/release/qmng4.dll
 SectionEnd
@@ -123,8 +124,10 @@ Section "Uninstall"
   DELETE "$INSTDIR\libgcc_s_sjlj-1.dll"
   DELETE "$INSTDIR\libstdc++-6.dll"
   DELETE "$INSTDIR\mingwm10.dll"
+  DELETE "$INSTDIR\licenses\*"
   DELETE "$INSTDIR\imageformats\qmng4.dll"
 
+  RMDir "$INSTDIR\licenses"
   RMDir "$INSTDIR\imageformats"
 
   ; Remove uninstaller

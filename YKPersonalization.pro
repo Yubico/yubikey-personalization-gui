@@ -41,6 +41,10 @@ DESTDIR         = "$$TARGET_DIR"
 DEPENDPATH     += . src src/ui
 INCLUDEPATH    += . src src/ui
 
+LICENSEFILES    = json-c.txt \
+                  libyubikey.txt \
+                  yubikey-personalization.txt
+
 FORMS += \
     src/ui/toolpage.ui \
     src/ui/staticpage.ui \
@@ -199,6 +203,13 @@ win32 {
     for(FILE, LIB_FILES_WIN) {
         QMAKE_POST_LINK +=$$quote($$QMAKE_COPY $${FILE} $${TARGET_DIR_WIN}$$escape_expand(\\n\\t))
     }
+    LICENSE_DIR = $${TARGET_DIR_WIN}$${DIR_SEPARATOR}licenses
+    QMAKE_POST_LINK += $$quote($$QMAKE_MKDIR $${LICENSE_DIR}$$escape_expand(\\n\\t))
+    BASEDIR = libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}licenses$${DIR_SEPARATOR}
+    for(FILE, LICENSEFILES) {
+        QMAKE_POST_LINK += $$quote($$QMAKE_COPY $${BASEDIR}$${FILE} $${LICENSE_DIR}$$escape_expand(\\n\\t))
+    }
+    QMAKE_POST_LINK += $$quote($$QMAKE_COPY COPYING $${LICENSE_DIR}$${DIR_SEPARATOR}yubikey-personalization-gui.txt$$escape_expand(\\n\\t))
     sign_binaries {
         _PVK_FILE = $$(PVK_FILE)
         _SPC_FILE = $$(SPC_FILE)
