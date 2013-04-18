@@ -309,7 +309,9 @@ macx {
         cp -R $$_QT_LIBDIR/QtGui.framework $$_FRAMEWORKDIR/QtGui.framework && \
         rm -rf $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Headers && \
         find $$_FRAMEWORKDIR -type l -print0 | xargs -0 rm -f  && \
+        test -d $$_BASEDIR/Resources/qt_menu.nib || \
         mv $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
+        test ! -d $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources || \
         rmdir $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources && \
         mkdir -p $$_PLUGINDIR/imageformats && \
         cp -R $$_QT_PLUGINDIR/imageformats/libqmng.dylib $$_PLUGINDIR/imageformats)
