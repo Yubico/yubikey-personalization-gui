@@ -269,6 +269,9 @@ macx {
     _QT_PLUGINDIR = $$[QT_INSTALL_PLUGINS]
 
     for_store {
+        QMAKE_CFLAGS += -gdwarf-2
+        QMAKE_CXXFLAGS += -gdwarf-2
+
         isEmpty(PACKAGE_SIGN_IDENTITY):PACKAGE_SIGN_IDENTITY = '3rd Party Mac Developer Application'
         isEmpty(INSTALLER_SIGN_IDENTITY):INSTALLER_SIGN_IDENTITY = '3rd Party Mac Developer Installer'
     } else {
