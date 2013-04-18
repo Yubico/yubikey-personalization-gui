@@ -268,8 +268,13 @@ macx {
     _QT_LIBDIR = $$QMAKE_LIBDIR_QT
     _QT_PLUGINDIR = $$[QT_INSTALL_PLUGINS]
 
-    isEmpty(PACKAGE_SIGN_IDENTITY):PACKAGE_SIGN_IDENTITY = 'Developer ID Application'
-    isEmpty(INSTALLER_SIGN_IDENTITY):INSTALLER_SIGN_IDENTITY = 'Developer ID Installer'
+    for_store {
+        isEmpty(PACKAGE_SIGN_IDENTITY):PACKAGE_SIGN_IDENTITY = '3rd Party Mac Developer Application'
+        isEmpty(INSTALLER_SIGN_IDENTITY):INSTALLER_SIGN_IDENTITY = '3rd Party Mac Developer Installer'
+    } else {
+        isEmpty(PACKAGE_SIGN_IDENTITY):PACKAGE_SIGN_IDENTITY = 'Developer ID Application'
+        isEmpty(INSTALLER_SIGN_IDENTITY):INSTALLER_SIGN_IDENTITY = 'Developer ID Installer'
+    }
 
     # The application dependencies
     LIBS += $$_SDK/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
