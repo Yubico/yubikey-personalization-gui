@@ -347,9 +347,6 @@ macx {
     build_installer {
         QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app \
             --entitlements resources/mac/Entitlements.plist && \
-            rm -rf $${DESTDIR}/temp && \
-            mkdir -p $${DESTDIR}/temp/ && \
-            cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
             productbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --component $${DESTDIR}/$${TARGET_MAC}.app /Applications $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg)
     }
 }
@@ -364,7 +361,7 @@ win32 {
                    $${TARGET_DIR_WIN}$${DIR_SEPARATOR}*.dll \
                    $${TARGET_DIR_WIN}$${DIR_SEPARATOR}*.exe.bak
 } else:macx {
-    QMAKE_CLEAN += -r $${DESTDIR}/*.app $${DESTDIR}/*.pkg $${DESTDIR}/*.dmg $${DESTDIR}/temp
+    QMAKE_CLEAN += -r $${DESTDIR}/*.app $${DESTDIR}/*.pkg $${DESTDIR}/*.dmg
 } else {
     QMAKE_CLEAN += -r $${DESTDIR}/*
 }
