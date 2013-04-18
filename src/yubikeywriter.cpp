@@ -478,7 +478,7 @@ void YubiKeyWriter::exportConfig(YubiKeyConfig *ykConfig) {
         QString filename = QFileDialog::getSaveFileName(NULL, tr("Export File"), tr("export.ycfg"), "Yubico cfg format (*.ycfg)");
 
         char data[1024];
-        int len = ykp_export_config(cfg, data, 1024, YKP_FORMAT_JSON);
+        int len = ykp_export_config(cfg, data, 1024, YKP_FORMAT_YCFG);
         if(!len) {
             throw 0;
         }
