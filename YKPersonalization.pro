@@ -342,7 +342,7 @@ macx {
             rm -rf $${DESTDIR}/temp && \
             mkdir -p $${DESTDIR}/temp/ && \
             cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp/ && \
-            pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --version $${VERSION} --root $${DESTDIR}/temp/ --component-plist resources/mac/installer.plist --install-location '/Applications/' $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg)
+            productbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --component $${DESTDIR}/$${TARGET_MAC}.app /Applications $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg)
     }
 }
 
