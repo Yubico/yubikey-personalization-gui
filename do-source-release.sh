@@ -31,11 +31,6 @@ if [ "x$YUBICO_GITHUB_REPO" = "x" ]; then
   exit
 fi
 
-if [ ! -d $YUBICO_GITHUB_REPO/yubikey-personalization-gui ]; then
-  echo "$YUBICO_GITHUB_REPO/yubikey-personalization-gui does not exist"
-  exit
-fi
-
 releasename=yubikey-personalization-gui-${VERSION}
 
 git push
@@ -48,15 +43,6 @@ git archive $releasename --format=tar | tar -xC $releasedir
 git2cl > $releasedir/ChangeLog
 tar -cz --directory=$tmpdir --file=${releasename}.tar.gz $releasename
 gpg --detach-sign --default-key $PGP_KEYID ${releasename}.tar.gz
-mv ${releasename}.tar.gz.sig $YUBICO_GITHUB_REPO/yubikey-personalization-gui/releases/
-mv ${releasename}.tar.gz $YUBICO_GITHUB_REPO/yubikey-personalization-gui/releases/
-cd $YUBICO_GITHUB_REPO/yubikey-personalization-gui
-git add releases/${releasename}.tar.gz.sig
-git add releases/${releasename}.tar.gz
-x=`ls -1 releases/*.tar.gz | awk -F\- '{print $4}' | sed 's/.tar.gz/,/' | paste -sd ' ' - | sed 's/,$//'`; sed -i -e "2s|\[.*\]|[$x]|" releases.html
-git add releases.html
-git commit -m "Added release $VERSION"
-git push
-cd -
+$YUBICO_GITHUB_REPO/publish yubikey-personalization-gui $VERSION ${releasename}.tar.gz*
 rm -rf $tmpdir
 rm -rf $stagedir
