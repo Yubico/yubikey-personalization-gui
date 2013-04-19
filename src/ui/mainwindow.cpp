@@ -75,6 +75,8 @@ MainWindow::MainWindow(QWidget *parent) :
             m_otpPage, SLOT(loadSettings()));
     connect(m_settingPage, SIGNAL(settingsChanged()),
             m_oathPage, SLOT(loadSettings()));
+    connect(m_settingPage, SIGNAL(settingsChanged()),
+            m_chalRespPage, SLOT(loadSettings()));
 
     //Intialize settings
     m_settingPage->init();

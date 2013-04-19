@@ -175,6 +175,7 @@ typedef std::vector<int>::size_type size_t;
 #define SG_NDEF_WITHOUT_HTTP        "DontAsk/NdefWithoutHttp"
 
 #define SG_ANIMATIONS_PREFERENCE    "Preference/Animations"
+#define SG_EXPORT_PREFERENCE        "Preference/Export"
 
 //Help messages
 

@@ -356,6 +356,8 @@ void OathPage::loadSettings() {
     ui->advPubIdFormatCombo->setEnabled(customerPrefixFlag);
     ui->advOMPTxt->setEnabled(customerPrefixFlag);
     ui->advTTTxt->setEnabled(customerPrefixFlag);
+
+    ui->advExportConfigBtn->setVisible(settings.value(SG_EXPORT_PREFERENCE).toBool());
 }
 
 /*

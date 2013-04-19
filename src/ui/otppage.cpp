@@ -263,8 +263,9 @@ void OtpPage::loadSettings() {
 
         m_pubIdPrefix = QString("");
     }
-}
 
+    ui->advExportConfigBtn->setVisible(settings.value(SG_EXPORT_PREFERENCE).toBool());
+}
 
 /*
  Quick Page handling

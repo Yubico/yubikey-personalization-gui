@@ -81,6 +81,7 @@ SettingPage::SettingPage(QWidget *parent) :
     connect(ui->logTraditionalRadio, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->logYubicoRadio, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->outCharRateCombo, SIGNAL(activated(int)), this, SLOT(save()));
+    connect(ui->exportCheck, SIGNAL(clicked()), this, SLOT(save()));
 
     connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
             this, SLOT(keyFound(bool, bool*)));
@@ -173,6 +174,8 @@ void SettingPage::restoreDefaults() {
     settings.setValue(SG_ALLOW_UPDATE,          true);
     settings.setValue(SG_FAST_TRIG,             false);
     settings.setValue(SG_USE_NUMERIC_KEYPAD,    false);
+
+    settings.setValue(SG_EXPORT_PREFERENCE,     false);
 }
 
 void SettingPage::load() {
@@ -277,6 +280,8 @@ void SettingPage::load() {
         }
     }
 
+    ui->exportCheck->setChecked(settings.value(SG_EXPORT_PREFERENCE).toBool());
+
     //Signal everyone
     emit settingsChanged();
 }
@@ -352,6 +357,8 @@ void SettingPage::save() {
     } else {
         settings.setValue(SG_LOG_DISABLED,  true);
     }
+
+    settings.setValue(SG_EXPORT_PREFERENCE, ui->exportCheck->isChecked());
 
     //Reload settings
     load();

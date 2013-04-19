@@ -60,6 +60,8 @@ ChalRespPage::ChalRespPage(QWidget *parent) :
 
     ui->quickResultsWidget->resizeColumnsToContents();
     ui->advResultsWidget->resizeColumnsToContents();
+
+    loadSettings();
 }
 
 ChalRespPage::~ChalRespPage() {
@@ -68,6 +70,13 @@ ChalRespPage::~ChalRespPage() {
         m_ykConfig = 0;
     }
     delete ui;
+}
+
+void ChalRespPage::loadSettings() {
+    QSettings settings;
+
+    ui->advExportConfigBtn->setVisible(settings.value(SG_EXPORT_PREFERENCE).toBool());
+    ui->quickExportConfigBtn->setVisible(settings.value(SG_EXPORT_PREFERENCE).toBool());
 }
 
 /*

@@ -43,6 +43,9 @@ public:
     explicit ChalRespPage(QWidget *parent = 0);
     ~ChalRespPage();
 
+public slots:
+    void loadSettings();
+
 private:
     Ui::ChalRespPage *ui;
 

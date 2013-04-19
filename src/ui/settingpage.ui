@@ -1112,6 +1112,39 @@ border-radius: 10px;
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="applicationBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>500</y>
+      <width>711</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: bold;
+</string>
+    </property>
+    <property name="title">
+     <string>Application Settings</string>
+    </property>
+    <widget class="QCheckBox" name="exportCheck">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>25</y>
+       <width>275</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <property name="text">
+      <string>Enable configuration export (experimental)</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QWidget" name="updatePage">
    <property name="sizePolicy">
