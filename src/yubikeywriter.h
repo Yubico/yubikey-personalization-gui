@@ -48,8 +48,12 @@ class YubiKeyWriter : public QObject {
 public:
     static YubiKeyWriter* getInstance();
     ~YubiKeyWriter();
+    static void setExportFilename(QString filename);
+    static QString defaultExportFilename(void);
 
 private:
+    static QString m_filename;
+
     YubiKeyWriter();
     static YubiKeyWriter* _instance;
 

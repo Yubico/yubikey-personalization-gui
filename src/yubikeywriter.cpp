@@ -32,7 +32,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <QFileDialog>
 
+#define EXPORT_FILENAME_DEF "export.ycfg"
+
 YubiKeyWriter* YubiKeyWriter::_instance = 0;
+QString YubiKeyWriter::m_filename = defaultExportFilename();
 
 #define TKTFLAG(f, s) \
 if(s) { if (!ykp_set_tktflag_##f(cfg, s)) { return 0; } }
@@ -475,7 +478,7 @@ void YubiKeyWriter::exportConfig(YubiKeyConfig *ykConfig) {
             throw 0;
         }
 
-        QString filename = QFileDialog::getSaveFileName(NULL, tr("Export File"), QDir::homePath() + "/export.ycfg", tr("Yubico cfg format (*.ycfg)"), NULL);
+        m_filename = QFileDialog::getSaveFileName(NULL, tr("Export File"), m_filename, tr("Yubico cfg format (*.ycfg)"), NULL);
 
         char data[1024];
         int len = ykp_export_config(cfg, data, 1024, YKP_FORMAT_YCFG);
@@ -483,7 +486,7 @@ void YubiKeyWriter::exportConfig(YubiKeyConfig *ykConfig) {
             throw 0;
         }
 
-        QFile file(filename);
+        QFile file(m_filename);
         if(!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
             throw 0;
         }
@@ -491,6 +494,9 @@ void YubiKeyWriter::exportConfig(YubiKeyConfig *ykConfig) {
             throw 0;
         }
         file.close();
+
+        QSettings settings;
+        settings.setValue(SG_EXPORT_FILENAME, m_filename);
 
         emit configWritten(true, NULL);
     }
@@ -727,4 +733,12 @@ int YubiKeyWriter::encodeAccessCode(QString accCode, unsigned char* accessCode, 
             ACC_CODE_SIZE * 2,
             false);
     return rc;
+}
+
+void YubiKeyWriter::setExportFilename(QString filename) {
+    m_filename = filename;
+}
+
+QString YubiKeyWriter::defaultExportFilename() {
+    return QDir::homePath() + "/" + EXPORT_FILENAME_DEF;
 }

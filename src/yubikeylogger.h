@@ -34,6 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QTextStream>
 #include <QFile>
 
+#include "common.h"
 #include "yubikeyconfig.h"
 
 class YubiKeyLogger : public QObject {

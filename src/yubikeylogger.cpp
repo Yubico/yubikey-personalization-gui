@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QDebug>
 #include <QDateTime>
 #include <QFileDialog>
+#include <QSettings>
 
 #define LOG_FILENAME_DEF   "configuration_log.csv"
 #define LOG_SEPARATOR      ","
@@ -47,12 +48,14 @@ YubiKeyLogger::~YubiKeyLogger() {
 
 QFile *YubiKeyLogger::getLogFile() {
     if(m_logFile == NULL) {
-        QString filename = QFileDialog::getSaveFileName(NULL, tr("Select Log File"), defaultLogFilename(), "Comma-sepparated values (*.csv)", NULL, QFileDialog::DontConfirmOverwrite);
-        m_logFile = new QFile(filename);
+        m_filename = QFileDialog::getSaveFileName(NULL, tr("Select Log File"), m_filename, "Comma-sepparated values (*.csv)", NULL, QFileDialog::DontConfirmOverwrite);
+        m_logFile = new QFile(m_filename);
         if(!m_logFile->open(QIODevice::WriteOnly | QIODevice::Append)) {
             qDebug() << "File could not be opened for writing";
             return NULL;
         }
+        QSettings settings;
+        settings.setValue(SG_LOG_FILENAME, m_filename);
     }
     return m_logFile;
 }

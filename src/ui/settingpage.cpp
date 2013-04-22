@@ -156,6 +156,8 @@ void SettingPage::restoreDefaults() {
     settings.setValue(SG_LOG_FILENAME,          YubiKeyLogger::defaultLogFilename());
     settings.setValue(SG_LOG_FORMAT,            YubiKeyLogger::Format_Traditional);
 
+    settings.setValue(SG_EXPORT_FILENAME,       YubiKeyWriter::defaultExportFilename());
+
     settings.setValue(SG_TAB_FIRST,             false);
     settings.setValue(SG_APPEND_TAB1,           false);
     settings.setValue(SG_APPEND_TAB2,           false);
@@ -187,6 +189,13 @@ void SettingPage::load() {
     if(logFilename.isEmpty()) {
         //This is the first time... set defaults
         restoreDefaults();
+    }
+
+    YubiKeyLogger::setLogFilename(logFilename);
+
+    QString exportFilename = settings.value(SG_EXPORT_FILENAME).toString();
+    if(!exportFilename.isEmpty()) {
+        YubiKeyWriter::setExportFilename(exportFilename);
     }
 
     //General settings...
