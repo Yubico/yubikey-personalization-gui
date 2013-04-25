@@ -51,8 +51,12 @@ private:
         Page_ChalResp,
         Page_Ndef,
         Page_Zap,
+        Page_Import,
     };
     int m_currentPage;
+
+public slots:
+    void loadSettings();
 
 private slots:
     void connectPages();

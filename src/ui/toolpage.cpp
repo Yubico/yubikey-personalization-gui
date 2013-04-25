@@ -64,6 +64,10 @@ ToolPage::ToolPage(QWidget *parent) :
 
     ui->zapAccCodeEdit->setEnabled(false);
     ui->ndefAccCodeEdit->setEnabled(false);
+
+    ui->importBox->setVisible(false);
+
+    loadSettings();
 }
 
 ToolPage::~ToolPage() {
@@ -94,6 +98,9 @@ void ToolPage::connectPages() {
     connect(ui->zapBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->zapBackBtn, SIGNAL(clicked()), mapper, SLOT(map()));
 
+    connect(ui->importBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+    connect(ui->importBackBtn, SIGNAL(clicked()), mapper, SLOT(map()));
+
     //Set a value for each button
     mapper->setMapping(ui->converterBtn, Page_Converter);
     mapper->setMapping(ui->converterBackBtn, Page_Base);
@@ -107,6 +114,9 @@ void ToolPage::connectPages() {
     mapper->setMapping(ui->zapBtn, Page_Zap);
     mapper->setMapping(ui->zapBackBtn, Page_Base);
 
+    mapper->setMapping(ui->importBtn, Page_Import);
+    mapper->setMapping(ui->importBackBtn, Page_Base);
+
     //Connect the mapper to the widget
     //The mapper will set a value to each button and
     //set that value to the widget
@@ -116,6 +126,11 @@ void ToolPage::connectPages() {
     //Set the current page
     m_currentPage = 0;
     setCurrentIndex(Page_Base);
+}
+
+void ToolPage::loadSettings() {
+    QSettings settings;
+    ui->importBox->setVisible(settings.value(SG_EXPORT_PREFERENCE).toBool());
 }
 
 void ToolPage::setCurrentPage(int pageIndex) {
