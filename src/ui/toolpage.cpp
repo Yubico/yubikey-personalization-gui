@@ -33,6 +33,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "common.h"
 
+#define IMPORT_FILENAME_DEF "import.ycfg"
+
+QString ToolPage::m_filename = defaultImportFilename();
+
 ToolPage::ToolPage(QWidget *parent) :
         QStackedWidget(parent),
         ui(new Ui::ToolPage)
@@ -425,6 +429,10 @@ void ToolPage::on_zapAccCodeCheckbox_toggled(bool checked) {
     ui->zapAccCodeEdit->setEnabled(checked);
 }
 
+void ToolPage::on_importPerformBtn_clicked() {
+
+}
+
 void ToolPage::keyFound(bool found, bool* featuresMatrix) {
     if(found && featuresMatrix[YubiKeyFinder::Feature_ChallengeResponse]) {
         ui->chalRespPerformBtn->setEnabled(true);
@@ -446,4 +454,12 @@ void ToolPage::keyFound(bool found, bool* featuresMatrix) {
         ui->ndefSlot2Radio->setEnabled(false);
     }
     ui->zapPerformBtn->setEnabled(found);
+}
+
+void ToolPage::setImportFilename(QString filename) {
+        m_filename = filename;
+}
+
+QString ToolPage::defaultImportFilename() {
+    return QDir::homePath() + "/" + IMPORT_FILENAME_DEF;
 }

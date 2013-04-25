@@ -29,6 +29,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "settingpage.h"
 #include "ui_settingpage.h"
 #include "ui/helpbox.h"
+#include "toolpage.h"
+
 #include <QFile>
 
 #include "common.h"
@@ -157,6 +159,7 @@ void SettingPage::restoreDefaults() {
     settings.setValue(SG_LOG_FORMAT,            YubiKeyLogger::Format_Traditional);
 
     settings.setValue(SG_EXPORT_FILENAME,       YubiKeyWriter::defaultExportFilename());
+    settings.setValue(SG_IMPORT_FILENAME,       ToolPage::defaultImportFilename());
 
     settings.setValue(SG_TAB_FIRST,             false);
     settings.setValue(SG_APPEND_TAB1,           false);
@@ -196,6 +199,11 @@ void SettingPage::load() {
     QString exportFilename = settings.value(SG_EXPORT_FILENAME).toString();
     if(!exportFilename.isEmpty()) {
         YubiKeyWriter::setExportFilename(exportFilename);
+    }
+
+    QString importFilename = settings.value(SG_IMPORT_FILENAME).toString();
+    if(!importFilename.isEmpty()) {
+        ToolPage::setImportFilename(importFilename);
     }
 
     //General settings...

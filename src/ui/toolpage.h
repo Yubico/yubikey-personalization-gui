@@ -41,6 +41,8 @@ class ToolPage : public QStackedWidget {
 public:
     explicit ToolPage(QWidget *parent = 0);
     ~ToolPage();
+    static void setImportFilename(QString filename);
+    static QString defaultImportFilename(void);
 
 private:
     Ui::ToolPage *ui;
@@ -54,6 +56,8 @@ private:
         Page_Import,
     };
     int m_currentPage;
+
+    static QString m_filename;
 
 public slots:
     void loadSettings();
@@ -93,6 +97,9 @@ private slots:
     void on_zapPerformBtn_clicked();
     void on_zapAccCodeCheckbox_toggled(bool checked);
     void zapDone(bool written, const QString &msg);
+
+    // import page
+    void on_importPerformBtn_clicked();
 
     void keyFound(bool found, bool* featuresMatrix);
 signals:
