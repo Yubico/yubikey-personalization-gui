@@ -31,6 +31,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui/helpbox.h"
 #include "ui/confirmbox.h"
 
+#include <QFileDialog>
+
+#include <ykpers.h>
+
 #include "common.h"
 
 #define IMPORT_FILENAME_DEF "import.ycfg"
@@ -430,7 +434,30 @@ void ToolPage::on_zapAccCodeCheckbox_toggled(bool checked) {
 }
 
 void ToolPage::on_importPerformBtn_clicked() {
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open file for import"), m_filename, tr("Yubico cfg format (*.ycfg);;All Files (*.*)"));
+    if(filename.isEmpty()) {
+        return;
+    }
+    QFile file(filename);
 
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        showStatusMessage(tr("Failed to open selected file."), 1);
+    }
+
+    char data[1024];
+    int len = file.read(data, 1024);
+    if(!len) {
+        showStatusMessage(tr("Failed to read from selected file."), 1);
+    }
+
+    YKP_CONFIG *cfg = ykp_alloc();
+    int ret = ykp_import_config(cfg, data, len, YKP_FORMAT_YCFG);
+    if(ret) {
+
+    } else {
+        showStatusMessage(tr("Failed to parse the configuration."), 1);
+    }
+    ykp_free_config(cfg);
 }
 
 void ToolPage::keyFound(bool found, bool* featuresMatrix) {
