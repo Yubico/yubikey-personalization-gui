@@ -179,7 +179,7 @@ void MainWindow::createPages() {
     setCurrentPage(Page_About);
 }
 
-void MainWindow::setCurrentPage(int pageIndex) {
+void MainWindow::setCurrentPage(int pageIndex, int tab) {
     // Page changed...
 
     // Clear status message
@@ -229,20 +229,26 @@ void MainWindow::setCurrentPage(int pageIndex) {
     switch(pageIndex){
     case Page_Otp:
         ui->otpMenuBtn->setStyleSheet(checkedMenuBtnSS);
+        if(tab) m_otpPage->setCurrentPage(tab);
         break;
     case Page_Oath:
         ui->oathHotpMenuBtn->setStyleSheet(checkedMenuBtnSS);
+        if(tab) m_oathPage->setCurrentPage(tab);
         break;
     case Page_Static:
         ui->staticMenuBtn->setStyleSheet(checkedMenuBtnSS);
+        if(tab) m_staticPage->setCurrentPage(tab);
         break;
     case Page_ChalResp:
         ui->chalRespMenuBtn->setStyleSheet(checkedMenuBtnSS);
+        if(tab) m_chalRespPage->setCurrentPage(tab);
         break;
     case Page_Settings:
         ui->settingsMenuBtn->setStyleSheet(checkedMenuBtnSS);
+        if(tab) m_settingPage->setCurrentPage(tab);
         break;
     case Page_Tools:
+        if(tab) m_toolPage->setCurrentPage(tab);
         ui->toolsMenuBtn->setStyleSheet(checkedMenuBtnSS);
         break;
     case Page_About:

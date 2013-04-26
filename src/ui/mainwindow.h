@@ -82,7 +82,7 @@ private:
     void createPages();
 
 private slots:
-    void setCurrentPage(int pageIndex);
+    void setCurrentPage(int pageIndex, int tab = 0);
 
     // Device Widget
     void resetDeviceInfo();
