@@ -463,6 +463,8 @@ void ToolPage::on_importPerformBtn_clicked() {
     int ret = ykp_import_config(cfg, data, len, YKP_FORMAT_YCFG);
     if(ret) {
         QSettings settings;
+        m_filename = filename;
+        settings.setValue(SG_IMPORT_FILENAME, filename);
 
         MainWindow::Page page = MainWindow::Page_Otp;
         int tab = OtpPage::Page_Advanced;
