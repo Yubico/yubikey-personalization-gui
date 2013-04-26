@@ -79,11 +79,11 @@ private:
 
 public slots:
     void loadSettings();
+    void setCurrentPage(int pageIndex);
 
 private slots:
     void connectPages();
     void connectHelpButtons();
-    void setCurrentPage(int pageIndex);
     void helpBtn_pressed(int helpIndex);
     void keyFound(bool found, bool* featuresMatrix);
 

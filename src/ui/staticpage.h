@@ -68,10 +68,12 @@ private:
 
     bool m_keyPresent;
 
+public slots:
+    void setCurrentPage(int pageIndex);
+
 private slots:
     void connectPages();
     void connectHelpButtons();
-    void setCurrentPage(int pageIndex);
     void helpBtn_pressed(int helpIndex);
     void keyFound(bool found, bool* featuresMatrix);
 

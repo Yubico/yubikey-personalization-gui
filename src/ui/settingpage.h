@@ -58,10 +58,10 @@ private:
 
 public slots:
     void reloadSettings();
+    void setCurrentPage(int pageIndex);
 
 private slots:
     void connectHelpButtons();
-    void setCurrentPage(int pageIndex);
     void helpBtn_pressed(int helpIndex);
     void restoreDefaults();
     void load();

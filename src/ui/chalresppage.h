@@ -51,6 +51,7 @@ public:
 
 public slots:
     void loadSettings();
+    void setCurrentPage(int pageIndex);
 
 private:
     Ui::ChalRespPage *ui;
@@ -73,7 +74,6 @@ private:
 private slots:
     void connectPages();
     void connectHelpButtons();
-    void setCurrentPage(int pageIndex);
     void helpBtn_pressed(int helpIndex);
     void keyFound(bool found, bool* featuresMatrix);
 
