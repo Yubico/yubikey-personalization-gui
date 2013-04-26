@@ -363,7 +363,7 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
     YubiKeyFinder::getInstance()->stop();
 
     YK_KEY *yk = 0;
-    YK_STATUS *ykst = ykds_alloc();
+    YK_STATUS *ykst = YubiKeyFinder::getInstance()->status();
     YKP_CONFIG *cfg = ykp_alloc();
 
     bool error = false;
@@ -422,10 +422,6 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
         ykp_free_config(cfg);
     }
 
-    if(ykst) {
-        ykds_free(ykst);
-    }
-
     if (yk && !yk_close_key(yk)) {
         error = true;
     }
@@ -447,7 +443,7 @@ void YubiKeyWriter::exportConfig(YubiKeyConfig *ykConfig) {
     YubiKeyFinder::getInstance()->stop();
 
     YK_KEY *yk = 0;
-    YK_STATUS *ykst = ykds_alloc();
+    YK_STATUS *ykst = YubiKeyFinder::getInstance()->status();
     YKP_CONFIG *cfg = ykp_alloc();
 
     bool error = false;
@@ -458,8 +454,6 @@ void YubiKeyWriter::exportConfig(YubiKeyConfig *ykConfig) {
 
     try {
         if (!(yk = yk_open_first_key())) {
-            throw 0;
-        } else if (!yk_get_status(yk, ykst)) {
             throw 0;
         }
 
@@ -506,10 +500,6 @@ void YubiKeyWriter::exportConfig(YubiKeyConfig *ykConfig) {
 
     if (cfg) {
         ykp_free_config(cfg);
-    }
-
-    if(ykst) {
-        ykds_free(ykst);
     }
 
     if (yk && !yk_close_key(yk)) {
