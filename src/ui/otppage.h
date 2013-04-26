@@ -44,15 +44,16 @@ public:
     explicit OtpPage(QWidget *parent = 0);
     ~OtpPage();
 
-private:
-    Ui::OtpPage *ui;
-
     enum Page {
         Page_Base,
         Page_Quick,
         Page_Advanced,
         Page_Upload
     };
+
+private:
+    Ui::OtpPage *ui;
+
     int m_currentPage;
 
     int m_customerPrefix;

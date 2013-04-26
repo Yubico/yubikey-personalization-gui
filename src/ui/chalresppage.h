@@ -43,17 +43,18 @@ public:
     explicit ChalRespPage(QWidget *parent = 0);
     ~ChalRespPage();
 
+    enum Page {
+        Page_Base,
+        Page_Quick,     //Yubico OTP
+        Page_Advanced   //HMAC-SHA1
+    };
+
 public slots:
     void loadSettings();
 
 private:
     Ui::ChalRespPage *ui;
 
-    enum Page {
-        Page_Base,
-        Page_Quick,     //Yubico OTP
-        Page_Advanced   //HMAC-SHA1
-    };
     int m_currentPage;
 
     enum State {

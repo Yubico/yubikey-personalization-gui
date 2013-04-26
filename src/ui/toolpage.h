@@ -44,9 +44,6 @@ public:
     static void setImportFilename(QString filename);
     static QString defaultImportFilename(void);
 
-private:
-    Ui::ToolPage *ui;
-
     enum Page {
         Page_Base,
         Page_Converter,
@@ -55,6 +52,10 @@ private:
         Page_Zap,
         Page_Import,
     };
+
+private:
+    Ui::ToolPage *ui;
+
     int m_currentPage;
 
     static QString m_filename;

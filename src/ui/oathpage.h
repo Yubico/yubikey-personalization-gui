@@ -44,14 +44,15 @@ public:
     explicit OathPage(QWidget *parent = 0);
     ~OathPage();
 
-private:
-    Ui::OathPage *ui;
-
     enum Page {
         Page_Base,
         Page_Quick,
         Page_Advanced
     };
+
+private:
+    Ui::OathPage *ui;
+
     int m_currentPage;
 
     int m_customerPrefix;

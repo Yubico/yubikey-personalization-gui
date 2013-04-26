@@ -44,13 +44,14 @@ public:
     ~SettingPage();
     void init();
 
-private:
-    Ui::SettingPage *ui;
-
     enum Page {
         Page_Base,
         Page_Update,
     };
+
+private:
+    Ui::SettingPage *ui;
+
     int m_currentPage;
 
     YubiKeyConfig *m_ykConfig;

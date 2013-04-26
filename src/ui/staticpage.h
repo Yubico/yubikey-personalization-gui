@@ -43,15 +43,16 @@ public:
     explicit StaticPage(QWidget *parent = 0);
     ~StaticPage();
 
-private:
-    Ui::StaticPage *ui;
-
     enum Page {
         Page_Base,
         Page_Quick,
         Page_Advanced,
         Page_Upload
     };
+
+private:
+    Ui::StaticPage *ui;
+
     int m_currentPage;
 
     enum State {
