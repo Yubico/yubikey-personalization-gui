@@ -56,6 +56,9 @@ private:
 
     YubiKeyConfig *m_ykConfig;
 
+public slots:
+    void reloadSettings();
+
 private slots:
     void connectHelpButtons();
     void setCurrentPage(int pageIndex);

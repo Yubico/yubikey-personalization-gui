@@ -105,6 +105,7 @@ private slots:
     void keyFound(bool found, bool* featuresMatrix);
 signals:
     void showStatusMessage(const QString &text, int status = 0);
+    void reloadSettings();
 };
 
 #endif // TOOLPAGE_H

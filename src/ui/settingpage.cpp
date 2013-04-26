@@ -622,3 +622,7 @@ void SettingPage::custPrefixChanged(int type, QString src) {
         ui->custPrefixHexTxt->setText(hex);
     }
 }
+
+void SettingPage::reloadSettings() {
+    load();
+}

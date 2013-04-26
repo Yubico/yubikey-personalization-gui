@@ -80,6 +80,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_settingPage, SIGNAL(settingsChanged()),
             m_toolPage, SLOT(loadSettings()));
 
+    connect(m_toolPage, SIGNAL(reloadSettings()),
+            m_settingPage, SLOT(reloadSettings()));
+
     //Intialize settings
     m_settingPage->init();
 
