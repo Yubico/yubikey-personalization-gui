@@ -106,6 +106,7 @@ private slots:
 signals:
     void showStatusMessage(const QString &text, int status = 0);
     void reloadSettings();
+    void switchPage(int page, int tab);
 };
 
 #endif // TOOLPAGE_H

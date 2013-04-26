@@ -83,6 +83,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_toolPage, SIGNAL(reloadSettings()),
             m_settingPage, SLOT(reloadSettings()));
 
+    connect(m_toolPage, SIGNAL(switchPage(int, int)),
+            this, SLOT(setCurrentPage(int, int)));
+
     //Intialize settings
     m_settingPage->init();
 

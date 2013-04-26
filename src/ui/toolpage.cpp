@@ -30,10 +30,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui_toolpage.h"
 #include "ui/helpbox.h"
 #include "ui/confirmbox.h"
+#include "mainwindow.h"
+#include "otppage.h"
+#include "chalresppage.h"
+#include "oathpage.h"
+#include "staticpage.h"
 
 #include <QFileDialog>
 
 #include <ykpers.h>
+#include <ykdef.h>
 
 #include "common.h"
 
@@ -449,11 +455,35 @@ void ToolPage::on_importPerformBtn_clicked() {
     if(!len) {
         showStatusMessage(tr("Failed to read from selected file."), 1);
     }
+    file.close();
 
     YKP_CONFIG *cfg = ykp_alloc();
+    YK_STATUS *ykds = YubiKeyFinder::getInstance()->status();
+    ykp_configure_version(cfg, ykds);
     int ret = ykp_import_config(cfg, data, len, YKP_FORMAT_YCFG);
     if(ret) {
+        QSettings settings;
 
+        MainWindow::Page page = MainWindow::Page_Otp;
+        int tab = OtpPage::Page_Advanced;
+        if(ykp_get_tktflag_OATH_HOTP(cfg)) {
+            if(ykp_get_cfgflag_CHAL_HMAC(cfg)) {
+                page = MainWindow::Page_ChalResp;
+                tab = ChalRespPage::Page_Advanced;
+            } else if(ykp_get_cfgflag_CHAL_YUBICO(cfg)) {
+                page = MainWindow::Page_ChalResp;
+                tab = ChalRespPage::Page_Quick;
+            } else {
+                page = MainWindow::Page_Oath;
+                tab = OathPage::Page_Advanced;
+            }
+        } else if(ykp_get_cfgflag_STATIC_TICKET(cfg)) {
+            page = MainWindow::Page_Static;
+            tab = StaticPage::Page_Advanced;
+        }
+
+        emit switchPage(page, tab);
+        emit reloadSettings();
     } else {
         showStatusMessage(tr("Failed to parse the configuration."), 1);
     }
