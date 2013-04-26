@@ -84,6 +84,9 @@ public:
     int touchLevel() const
     {return m_touchLevel;}
 
+    YK_STATUS *status() const
+    { return m_ykds;}
+
     QString versionStr();
     void reportError();
 
@@ -101,6 +104,7 @@ private:
 
     State m_state;
     YK_KEY *m_yk;
+    YK_STATUS *m_ykds;
     unsigned int m_version;
     unsigned int m_versionMinor;
     unsigned int m_versionMajor;

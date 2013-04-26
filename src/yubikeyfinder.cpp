@@ -90,6 +90,10 @@ YubiKeyFinder::~YubiKeyFinder() {
     if(_instance) {
         delete _instance;
     }
+
+    if(m_ykds) {
+      ykds_free(m_ykds);
+    }
 }
 
 YubiKeyFinder* YubiKeyFinder::getInstance() {
@@ -151,6 +155,8 @@ void YubiKeyFinder::init() {
     m_versionMinor = 0;
     m_versionBuild = 0;
     m_serial = 0;
+
+    m_ykds = ykds_alloc();
 }
 
 void YubiKeyFinder::start() {
@@ -199,7 +205,6 @@ void YubiKeyFinder::findKey() {
         return;
     }
 
-    YK_STATUS *ykst = ykds_alloc();
     bool error = false;
 
     //qDebug() << "-------------------------";
@@ -211,7 +216,7 @@ void YubiKeyFinder::findKey() {
             throw 0;
         }
 
-        if (!yk_get_status(m_yk, ykst)) {
+        if (!yk_get_status(m_yk, m_ykds)) {
             throw 0;
         }
 
@@ -223,14 +228,14 @@ void YubiKeyFinder::findKey() {
             m_state = State_Present;
 
             //Get version
-            m_versionMajor = ykds_version_major(ykst);
-            m_versionMinor = ykds_version_minor(ykst);
-            m_versionBuild = ykds_version_build(ykst);
+            m_versionMajor = ykds_version_major(m_ykds);
+            m_versionMinor = ykds_version_minor(m_ykds);
+            m_versionBuild = ykds_version_build(m_ykds);
             m_version = YK_VERSION(m_versionMajor,
                                    m_versionMinor,
                                    m_versionBuild);
 
-            m_touchLevel = ykds_touch_level(ykst);
+            m_touchLevel = ykds_touch_level(m_ykds);
 
             //Get serial number
             if(checkFeatureSupport(Feature_SerialNumber)) {
@@ -253,10 +258,6 @@ void YubiKeyFinder::findKey() {
     }
     catch(...) {
         error = true;
-    }
-
-    if(ykst) {
-        ykds_free(ykst);
     }
 
     closeKey();
