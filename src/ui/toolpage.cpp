@@ -470,17 +470,37 @@ void ToolPage::on_importPerformBtn_clicked() {
             if(ykp_get_cfgflag_CHAL_HMAC(cfg)) {
                 page = MainWindow::Page_ChalResp;
                 tab = ChalRespPage::Page_Advanced;
+                // handle btn_trig
             } else if(ykp_get_cfgflag_CHAL_YUBICO(cfg)) {
                 page = MainWindow::Page_ChalResp;
                 tab = ChalRespPage::Page_Quick;
             } else {
                 page = MainWindow::Page_Oath;
                 tab = OathPage::Page_Advanced;
+                // XXX: handle digits, seed and fixed_modhex
             }
         } else if(ykp_get_cfgflag_STATIC_TICKET(cfg)) {
             page = MainWindow::Page_Static;
             tab = StaticPage::Page_Advanced;
+            // XXX: handle STRONG_PW1 and STRONG_PW2
         }
+
+        settings.setValue(SG_MAN_UPDATE, ykp_get_cfgflag_MAN_UPDATE(cfg));
+        settings.setValue(SG_PACING_10MS, ykp_get_cfgflag_PACING_10MS(cfg));
+        settings.setValue(SG_PACING_20MS, ykp_get_cfgflag_PACING_20MS(cfg));
+        settings.setValue(SG_APPEND_CR, ykp_get_tktflag_APPEND_CR(cfg));
+        settings.setValue(SG_APPEND_DELAY1, ykp_get_tktflag_APPEND_DELAY1(cfg));
+        settings.setValue(SG_APPEND_DELAY2, ykp_get_tktflag_APPEND_DELAY2(cfg));
+        settings.setValue(SG_APPEND_TAB1, ykp_get_tktflag_APPEND_TAB1(cfg));
+        settings.setValue(SG_APPEND_TAB2, ykp_get_tktflag_APPEND_TAB2(cfg));
+        settings.setValue(SG_TAB_FIRST, ykp_get_tktflag_TAB_FIRST(cfg));
+        settings.setValue(SG_SR_BTN_VISIBLE, ykp_get_extflag_SERIAL_BTN_VISIBLE(cfg));
+        settings.setValue(SG_SR_USB_VISIBLE, ykp_get_extflag_SERIAL_USB_VISIBLE(cfg));
+        settings.setValue(SG_SR_API_VISIBLE, ykp_get_extflag_SERIAL_API_VISIBLE(cfg));
+        settings.setValue(SG_USE_NUMERIC_KEYPAD, ykp_get_extflag_USE_NUMERIC_KEYPAD(cfg));
+        settings.setValue(SG_FAST_TRIG, ykp_get_extflag_FAST_TRIG(cfg));
+        settings.setValue(SG_ALLOW_UPDATE, ykp_get_extflag_ALLOW_UPDATE(cfg));
+        settings.setValue(SG_LED_INVERT, ykp_get_extflag_LED_INV(cfg));
 
         emit switchPage(page, tab);
         emit reloadSettings();
