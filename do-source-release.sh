@@ -21,11 +21,6 @@ if ! head -5 YKPersonalization.pro | grep -q "VERSION.*= \"$VERSION\""; then
   exit
 fi
 
-if ! cat src/version.h | grep -q "#define VER_PRODUCTVERSION.*$VERSION"; then
-  echo "You need to update version in src/version.h"
-  exit
-fi
-
 if [ "x$YUBICO_GITHUB_REPO" = "x" ]; then
   echo "you need to define YUBICO_GITHUB_REPO"
   exit

@@ -1,7 +1,10 @@
 #
 # global definitions
 #
-VERSION         = "3.1.10"
+VERSION_MAJOR   = 3
+VERSION_MINOR   = 1
+VERSION_BUILD   = 10
+VERSION         = "$${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}"
 APP_NAME        = $$quote(YubiKey Personalization Tool)
 
 #
@@ -12,7 +15,7 @@ DEPLOYMENT_PLUGIN += qmng
 TEMPLATE        = app
 TARGET          = yubikey-personalization-gui
 
-DEFINES        += VERSION=\\\"$${VERSION}\\\"
+DEFINES        += VERSION_MAJOR=\\\"$${VERSION_MAJOR}\\\" VERSION_MINOR=\\\"$${VERSION_MINOR}\\\" VERSION_BUILD=\\\"$${VERSION_BUILD}\\\"
 
 CONFIG         += exceptions
 
