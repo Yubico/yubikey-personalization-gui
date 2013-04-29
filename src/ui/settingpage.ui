@@ -1133,7 +1133,7 @@ border-radius: 10px;
       <rect>
        <x>10</x>
        <y>25</y>
-       <width>275</width>
+       <width>350</width>
        <height>19</height>
       </rect>
      </property>
@@ -1141,7 +1141,7 @@ border-radius: 10px;
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="text">
-      <string>Enable configuration export (experimental)</string>
+      <string>Enable configuration export and import (experimental)</string>
      </property>
     </widget>
    </widget>
