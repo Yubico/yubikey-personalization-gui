@@ -125,6 +125,8 @@ private slots:
     void on_advMUITxt_editingFinished();
     void on_advMUIGenerateBtn_clicked();
 
+    void hotpLen_clicked();
+
     void on_advMovingFactorSeedCombo_currentIndexChanged(int index);
     void on_advMovingFactorSeedTxt_editingFinished();
 

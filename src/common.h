@@ -172,6 +172,8 @@ typedef std::vector<int>::size_type size_t;
 #define SG_USE_NUMERIC_KEYPAD       "Flag/UseNumericKeypad"
 #define SG_LED_INVERT               "Flag/LedInvert"
 
+#define SG_OATH_HOTP8               "Flag/OathHotp8"
+
 #define SG_OVERWRITE_CONF_SLOT1     "DontAsk/Slot1Overwriting"
 #define SG_DIFF_PUBLIC_ID_LEN       "DontAsk/PublicIdLen"
 #define SG_ENABLE_CONF_PROTECTION   "DontAsk/ConfProtection"

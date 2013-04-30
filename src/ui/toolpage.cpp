@@ -470,21 +470,29 @@ void ToolPage::on_importPerformBtn_clicked() {
         int tab = OtpPage::Page_Advanced;
         if(ykp_get_tktflag_OATH_HOTP(cfg)) {
             if(ykp_get_cfgflag_CHAL_HMAC(cfg)) {
+                qDebug() << "importing mode chal-resp hmac";
                 page = MainWindow::Page_ChalResp;
                 tab = ChalRespPage::Page_Advanced;
-                // handle btn_trig
+                // handle btn_trig and lt64
             } else if(ykp_get_cfgflag_CHAL_YUBICO(cfg)) {
+                qDebug() << "importing mode chal-resp yubico";
                 page = MainWindow::Page_ChalResp;
                 tab = ChalRespPage::Page_Quick;
+                // handle btn_trig
             } else {
+                qDebug() << "importing mode oath hotp";
                 page = MainWindow::Page_Oath;
                 tab = OathPage::Page_Advanced;
-                // XXX: handle digits, seed and fixed_modhex
+                settings.setValue(SG_OATH_HOTP8, ykp_get_cfgflag_OATH_HOTP8(cfg));
+                // XXX: handle seed and fixed_modhex
             }
         } else if(ykp_get_cfgflag_STATIC_TICKET(cfg)) {
+            qDebug() << "importing mode static";
             page = MainWindow::Page_Static;
             tab = StaticPage::Page_Advanced;
             // XXX: handle STRONG_PW1 and STRONG_PW2
+        } else {
+            qDebug() << "importing yubico otp";
         }
 
         settings.setValue(SG_MAN_UPDATE, ykp_get_cfgflag_MAN_UPDATE(cfg));

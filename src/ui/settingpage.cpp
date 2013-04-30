@@ -180,6 +180,8 @@ void SettingPage::restoreDefaults() {
     settings.setValue(SG_FAST_TRIG,             false);
     settings.setValue(SG_USE_NUMERIC_KEYPAD,    false);
 
+    settings.setValue(SG_OATH_HOTP8,            false);
+
     settings.setValue(SG_EXPORT_PREFERENCE,     false);
 }
 

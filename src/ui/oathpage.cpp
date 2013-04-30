@@ -71,6 +71,15 @@ OathPage::OathPage(QWidget *parent) :
     connect(ui->advMovingFactorSeedTxt, SIGNAL(editingFinished()),
             this, SLOT(on_advMovingFactorSeedTxt_editingFinished()));
 
+    connect(ui->advHotpLen6Radio, SIGNAL(clicked()),
+            this, SLOT(hotpLen_clicked()));
+    connect(ui->advHotpLen8Radio, SIGNAL(clicked()),
+            this, SLOT(hotpLen_clicked()));
+    connect(ui->quickHotpLen6Radio, SIGNAL(clicked()),
+            this, SLOT(hotpLen_clicked()));
+    connect(ui->quickHotpLen8Radio, SIGNAL(clicked()),
+            this, SLOT(hotpLen_clicked()));
+
     //Load settings
     loadSettings();
 
@@ -358,6 +367,12 @@ void OathPage::loadSettings() {
     ui->advTTTxt->setEnabled(customerPrefixFlag);
 
     ui->advExportConfigBtn->setVisible(settings.value(SG_EXPORT_PREFERENCE).toBool());
+
+    bool hotp8 = settings.value(SG_OATH_HOTP8).toBool();
+    ui->advHotpLen6Radio->setChecked(!hotp8);
+    ui->quickHotpLen6Radio->setChecked(!hotp8);
+    ui->advHotpLen8Radio->setChecked(hotp8);
+    ui->quickHotpLen8Radio->setChecked(hotp8);
 }
 
 /*
@@ -371,7 +386,6 @@ void OathPage::resetQuickPage() {
     }
 
     ui->quickPubIdCheck->setChecked(true);
-    ui->quickHotpLen6Radio->setChecked(true);
 
     on_quickResetBtn_clicked();
 }
@@ -582,7 +596,6 @@ void OathPage::resetAdvPage() {
     ui->advTTTxt->setEnabled(customerPrefixFlag);
     on_advMUITxt_editingFinished();
 
-    ui->advHotpLen6Radio->setChecked(true);
     ui->advMovingFactorSeedCombo->setCurrentIndex(0);
     ui->advMovingFactorSeedTxt->setText(tr("0"));
     ui->advMovingFactorSeedTxt->setEnabled(false);
@@ -1186,4 +1199,20 @@ void OathPage::advUpdateResults(bool written, const QString &msg) {
 
     ui->advResultsWidget->resizeColumnsToContents();
     ui->advResultsWidget->resizeRowsToContents();
+}
+
+void OathPage::hotpLen_clicked() {
+    QSettings settings;
+    QRadioButton *button = ui->advHotpLen8Radio;
+    QRadioButton *button2 = ui->quickHotpLen8Radio;
+    if(m_currentPage == Page_Quick) {
+        button = ui->quickHotpLen8Radio;
+        button2 = ui->advHotpLen8Radio;
+    }
+    if(button->isChecked()) {
+        settings.setValue(SG_OATH_HOTP8, true);
+    } else {
+        settings.setValue(SG_OATH_HOTP8, false);
+    }
+    button2->toggle();
 }
