@@ -181,6 +181,7 @@ void SettingPage::restoreDefaults() {
     settings.setValue(SG_USE_NUMERIC_KEYPAD,    false);
 
     settings.setValue(SG_OATH_HOTP8,            false);
+    settings.setValue(SG_REQUIRE_INPUT,         false);
 
     settings.setValue(SG_EXPORT_PREFERENCE,     false);
 }

@@ -473,12 +473,13 @@ void ToolPage::on_importPerformBtn_clicked() {
                 qDebug() << "importing mode chal-resp hmac";
                 page = MainWindow::Page_ChalResp;
                 tab = ChalRespPage::Page_Advanced;
-                // handle btn_trig and lt64
+                settings.setValue(SG_REQUIRE_INPUT, ykp_get_cfgflag_CHAL_BTN_TRIG(cfg));
+                // handle lt64
             } else if(ykp_get_cfgflag_CHAL_YUBICO(cfg)) {
                 qDebug() << "importing mode chal-resp yubico";
                 page = MainWindow::Page_ChalResp;
                 tab = ChalRespPage::Page_Quick;
-                // handle btn_trig
+                settings.setValue(SG_REQUIRE_INPUT, ykp_get_cfgflag_CHAL_BTN_TRIG(cfg));
             } else {
                 qDebug() << "importing mode oath hotp";
                 page = MainWindow::Page_Oath;

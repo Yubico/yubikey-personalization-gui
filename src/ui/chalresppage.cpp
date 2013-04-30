@@ -58,6 +58,11 @@ ChalRespPage::ChalRespPage(QWidget *parent) :
     connect(ui->advResetBtn, SIGNAL(clicked()),
             this, SLOT(resetAdvPage()));
 
+    connect(ui->advRequireUserInputCheck, SIGNAL(clicked(bool)),
+            this, SLOT(requireInput_clicked(bool)));
+    connect(ui->quickRequireUserInputCheck, SIGNAL(clicked(bool)),
+            this, SLOT(requireInput_clicked(bool)));
+
     ui->quickResultsWidget->resizeColumnsToContents();
     ui->advResultsWidget->resizeColumnsToContents();
 
@@ -77,6 +82,10 @@ void ChalRespPage::loadSettings() {
 
     ui->advExportConfigBtn->setVisible(settings.value(SG_EXPORT_PREFERENCE).toBool());
     ui->quickExportConfigBtn->setVisible(settings.value(SG_EXPORT_PREFERENCE).toBool());
+
+    bool reqInput = settings.value(SG_REQUIRE_INPUT).toBool();
+    ui->quickRequireUserInputCheck->setChecked(reqInput);
+    ui->advRequireUserInputCheck->setChecked(reqInput);
 }
 
 /*
@@ -278,8 +287,6 @@ void ChalRespPage::resetQuickPage() {
     ui->quickProgramMulKeysBox->setChecked(false);
 
     ui->quickConfigProtectionCombo->setCurrentIndex(0);
-
-    ui->quickRequireUserInputCheck->setChecked(false);
 
     ui->quickPvtIdCheck->setChecked(true);
     ui->quickPvtIdTxt->clear();
@@ -713,7 +720,6 @@ void ChalRespPage::resetAdvPage() {
 
     ui->advConfigProtectionCombo->setCurrentIndex(0);
 
-    ui->advRequireUserInputCheck->setChecked(false);
     ui->advHmacVarInputRadio->setChecked(true);
 
     ui->advSecretKeyTxt->clear();
@@ -1083,4 +1089,14 @@ void ChalRespPage::advUpdateResults(bool written, const QString &msg) {
 
     ui->advResultsWidget->resizeColumnsToContents();
     ui->advResultsWidget->resizeRowsToContents();
+}
+
+void ChalRespPage::requireInput_clicked(bool checked) {
+    QSettings settings;
+    settings.setValue(SG_REQUIRE_INPUT, checked);
+    if(m_currentPage == Page_Quick) {
+        ui->advRequireUserInputCheck->setChecked(checked);
+    } else {
+        ui->quickRequireUserInputCheck->setChecked(checked);
+    }
 }
