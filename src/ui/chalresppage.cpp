@@ -63,6 +63,11 @@ ChalRespPage::ChalRespPage(QWidget *parent) :
     connect(ui->quickRequireUserInputCheck, SIGNAL(clicked(bool)),
             this, SLOT(requireInput_clicked(bool)));
 
+    connect(ui->advHmacVarInputRadio, SIGNAL(clicked()),
+            this, SLOT(hmac_lt64_clicked()));
+    connect(ui->advHmacFixedInputRadio, SIGNAL(clicked()),
+            this, SLOT(hmac_lt64_clicked()));
+
     ui->quickResultsWidget->resizeColumnsToContents();
     ui->advResultsWidget->resizeColumnsToContents();
 
@@ -86,6 +91,13 @@ void ChalRespPage::loadSettings() {
     bool reqInput = settings.value(SG_REQUIRE_INPUT).toBool();
     ui->quickRequireUserInputCheck->setChecked(reqInput);
     ui->advRequireUserInputCheck->setChecked(reqInput);
+
+    bool hmaclt64 = true;
+    if(settings.contains(SG_HMAC_LT64)) {
+      hmaclt64 = settings.value(SG_HMAC_LT64).toBool();
+    }
+    ui->advHmacVarInputRadio->setChecked(hmaclt64);
+    ui->advHmacFixedInputRadio->setChecked(!hmaclt64);
 }
 
 /*
@@ -720,8 +732,6 @@ void ChalRespPage::resetAdvPage() {
 
     ui->advConfigProtectionCombo->setCurrentIndex(0);
 
-    ui->advHmacVarInputRadio->setChecked(true);
-
     ui->advSecretKeyTxt->clear();
     on_advSecretKeyTxt_editingFinished();
 
@@ -1099,4 +1109,9 @@ void ChalRespPage::requireInput_clicked(bool checked) {
     } else {
         ui->quickRequireUserInputCheck->setChecked(checked);
     }
+}
+
+void ChalRespPage::hmac_lt64_clicked() {
+    QSettings settings;
+    settings.setValue(SG_HMAC_LT64, ui->advHmacVarInputRadio->isChecked());
 }

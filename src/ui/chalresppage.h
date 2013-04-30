@@ -138,6 +138,7 @@ private slots:
     void advUpdateResults(bool written, const QString &msg);
 
     void requireInput_clicked(bool checked);
+    void hmac_lt64_clicked();
 
 signals:
     void showStatusMessage(const QString &text, int status = 0);

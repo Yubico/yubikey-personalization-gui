@@ -474,7 +474,7 @@ void ToolPage::on_importPerformBtn_clicked() {
                 page = MainWindow::Page_ChalResp;
                 tab = ChalRespPage::Page_Advanced;
                 settings.setValue(SG_REQUIRE_INPUT, ykp_get_cfgflag_CHAL_BTN_TRIG(cfg));
-                // handle lt64
+                settings.setValue(SG_HMAC_LT64, ykp_get_cfgflag_HMAC_LT64(cfg));
             } else if(ykp_get_cfgflag_CHAL_YUBICO(cfg)) {
                 qDebug() << "importing mode chal-resp yubico";
                 page = MainWindow::Page_ChalResp;

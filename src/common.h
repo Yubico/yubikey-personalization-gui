@@ -174,6 +174,7 @@ typedef std::vector<int>::size_type size_t;
 
 #define SG_OATH_HOTP8               "Flag/OathHotp8"
 #define SG_REQUIRE_INPUT            "Flag/RequireInput"
+#define SG_HMAC_LT64                "Flag/HmacLt64"
 
 #define SG_OVERWRITE_CONF_SLOT1     "DontAsk/Slot1Overwriting"
 #define SG_DIFF_PUBLIC_ID_LEN       "DontAsk/PublicIdLen"
