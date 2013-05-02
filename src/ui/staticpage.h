@@ -69,6 +69,7 @@ private:
     bool m_keyPresent;
 
 public slots:
+    void loadSettings();
     void setCurrentPage(int pageIndex);
     void setCurrentSlot(int slot);
 
@@ -131,6 +132,7 @@ private slots:
     void on_advSecretKeyTxt_editingFinished();
     void on_advSecretKeyGenerateBtn_clicked();
 
+    void on_advStrongPw1Check_stateChanged(int state);
     void on_advStrongPw2Check_stateChanged(int state);
     void on_advStrongPw3Check_stateChanged(int state);
 

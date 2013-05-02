@@ -176,6 +176,10 @@ typedef std::vector<int>::size_type size_t;
 #define SG_REQUIRE_INPUT            "Flag/RequireInput"
 #define SG_HMAC_LT64                "Flag/HmacLt64"
 
+#define SG_STRONG_PW1               "Flag/StrongPw1"
+#define SG_STRONG_PW2               "Flag/StrongPw2"
+#define SG_STRONG_PW3               "Flag/StrongPw3"
+
 #define SG_OVERWRITE_CONF_SLOT1     "DontAsk/Slot1Overwriting"
 #define SG_DIFF_PUBLIC_ID_LEN       "DontAsk/PublicIdLen"
 #define SG_ENABLE_CONF_PROTECTION   "DontAsk/ConfProtection"

@@ -184,6 +184,10 @@ void SettingPage::restoreDefaults() {
     settings.setValue(SG_REQUIRE_INPUT,         false);
     settings.setValue(SG_HMAC_LT64,             true);
 
+    settings.setValue(SG_STRONG_PW1,            false);
+    settings.setValue(SG_STRONG_PW2,            false);
+    settings.setValue(SG_STRONG_PW3,            false);
+
     settings.setValue(SG_EXPORT_PREFERENCE,     false);
 }
 

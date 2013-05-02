@@ -78,6 +78,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_settingPage, SIGNAL(settingsChanged()),
             m_chalRespPage, SLOT(loadSettings()));
     connect(m_settingPage, SIGNAL(settingsChanged()),
+            m_staticPage, SLOT(loadSettings()));
+    connect(m_settingPage, SIGNAL(settingsChanged()),
             m_toolPage, SLOT(loadSettings()));
 
     connect(m_toolPage, SIGNAL(reloadSettings()),

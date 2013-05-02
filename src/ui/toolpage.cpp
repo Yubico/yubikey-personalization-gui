@@ -491,7 +491,13 @@ void ToolPage::on_importPerformBtn_clicked() {
             qDebug() << "importing mode static";
             page = MainWindow::Page_Static;
             tab = StaticPage::Page_Advanced;
-            // XXX: handle STRONG_PW1 and STRONG_PW2
+            settings.setValue(SG_STRONG_PW1, ykp_get_cfgflag_STRONG_PW1(cfg));
+            if(ykp_get_cfgflag_STRONG_PW2(cfg)) {
+                settings.setValue(SG_STRONG_PW2, true);
+                settings.setValue(SG_STRONG_PW3, ykp_get_cfgflag_SEND_REF(cfg));
+            } else {
+                settings.setValue(SG_STRONG_PW2, false);
+            }
         } else {
             qDebug() << "importing yubico otp";
         }

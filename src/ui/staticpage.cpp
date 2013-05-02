@@ -168,6 +168,13 @@ void StaticPage::connectHelpButtons() {
     connect(mapper, SIGNAL(mapped(int)), this, SLOT(helpBtn_pressed(int)));
 }
 
+void StaticPage::loadSettings() {
+    QSettings settings;
+    ui->advStrongPw1Check->setChecked(settings.value(SG_STRONG_PW1).toBool());
+    ui->advStrongPw2Check->setChecked(settings.value(SG_STRONG_PW2).toBool());
+    ui->advStrongPw3Check->setChecked(settings.value(SG_STRONG_PW3).toBool());
+}
+
 void StaticPage::helpBtn_pressed(int helpIndex) {
     HelpBox help(this);
     help.setHelpIndex((HelpBox::Help)helpIndex);
@@ -711,10 +718,6 @@ void StaticPage::resetAdvPage() {
     ui->advSecretKeyTxt->clear();
     on_advSecretKeyTxt_editingFinished();
 
-    ui->advStrongPw1Check->setChecked(false);
-    ui->advStrongPw2Check->setChecked(false);
-    ui->advStrongPw3Check->setChecked(false);
-
     ui->advStopBtn->setEnabled(false);
     ui->advResetBtn->setEnabled(false);
 }
@@ -863,13 +866,22 @@ void StaticPage::on_advSecretKeyGenerateBtn_clicked() {
             YubiKeyUtil::generateRandomHex((size_t)KEY_SIZE * 2));
 }
 
+void StaticPage::on_advStrongPw1Check_stateChanged(int state) {
+    QSettings settings;
+    settings.setValue(SG_STRONG_PW1, state != 0);
+}
+
 void StaticPage::on_advStrongPw2Check_stateChanged(int state) {
+    QSettings settings;
+    settings.setValue(SG_STRONG_PW2, state != 0);
     if(state == 0) {
         ui->advStrongPw3Check->setChecked(false);
     }
 }
 
 void StaticPage::on_advStrongPw3Check_stateChanged(int state) {
+    QSettings settings;
+    settings.setValue(SG_STRONG_PW3, state != 0);
     if(!ui->advStrongPw2Check->isChecked() && state > 0) {
         ui->advStrongPw2Check->setChecked(true);
     }
