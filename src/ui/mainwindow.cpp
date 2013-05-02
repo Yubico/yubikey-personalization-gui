@@ -83,8 +83,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_toolPage, SIGNAL(reloadSettings()),
             m_settingPage, SLOT(reloadSettings()));
 
-    connect(m_toolPage, SIGNAL(switchPage(int, int)),
-            this, SLOT(setCurrentPage(int, int)));
+    connect(m_toolPage, SIGNAL(switchPage(int, int, int)),
+            this, SLOT(setCurrentPage(int, int, int)));
 
     //Intialize settings
     m_settingPage->init();
@@ -182,7 +182,7 @@ void MainWindow::createPages() {
     setCurrentPage(Page_About);
 }
 
-void MainWindow::setCurrentPage(int pageIndex, int tab) {
+void MainWindow::setCurrentPage(int pageIndex, int tab, int slot) {
     // Page changed...
 
     // Clear status message
@@ -233,26 +233,30 @@ void MainWindow::setCurrentPage(int pageIndex, int tab) {
     case Page_Otp:
         ui->otpMenuBtn->setStyleSheet(checkedMenuBtnSS);
         if(tab) m_otpPage->setCurrentPage(tab);
+        if(slot) m_otpPage->setCurrentSlot(slot);
         break;
     case Page_Oath:
         ui->oathHotpMenuBtn->setStyleSheet(checkedMenuBtnSS);
         if(tab) m_oathPage->setCurrentPage(tab);
+        if(slot) m_oathPage->setCurrentSlot(slot);
         break;
     case Page_Static:
         ui->staticMenuBtn->setStyleSheet(checkedMenuBtnSS);
         if(tab) m_staticPage->setCurrentPage(tab);
+        if(slot) m_staticPage->setCurrentSlot(slot);
         break;
     case Page_ChalResp:
         ui->chalRespMenuBtn->setStyleSheet(checkedMenuBtnSS);
         if(tab) m_chalRespPage->setCurrentPage(tab);
+        if(slot) m_chalRespPage->setCurrentSlot(slot);
         break;
     case Page_Settings:
         ui->settingsMenuBtn->setStyleSheet(checkedMenuBtnSS);
         if(tab) m_settingPage->setCurrentPage(tab);
         break;
     case Page_Tools:
-        if(tab) m_toolPage->setCurrentPage(tab);
         ui->toolsMenuBtn->setStyleSheet(checkedMenuBtnSS);
+        if(tab) m_toolPage->setCurrentPage(tab);
         break;
     case Page_About:
         ui->aboutMenuBtn->setStyleSheet(checkedMenuBtnSS);

@@ -77,6 +77,7 @@ public slots:
     void loadSettings();
     QString getPublicId(bool bcd);
     void setCurrentPage(int pageIndex);
+    void setCurrentSlot(int slot);
 
 private slots:
     void connectPages();

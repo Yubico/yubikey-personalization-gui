@@ -52,6 +52,7 @@ public:
 public slots:
     void loadSettings();
     void setCurrentPage(int pageIndex);
+    void setCurrentSlot(int slot);
 
 private:
     Ui::ChalRespPage *ui;

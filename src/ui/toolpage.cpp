@@ -513,7 +513,9 @@ void ToolPage::on_importPerformBtn_clicked() {
         settings.setValue(SG_ALLOW_UPDATE, ykp_get_extflag_ALLOW_UPDATE(cfg));
         settings.setValue(SG_LED_INVERT, ykp_get_extflag_LED_INV(cfg));
 
-        emit switchPage(page, tab);
+        int config = ykp_config_num(cfg);
+
+        emit switchPage(page, tab, config);
         emit reloadSettings();
     } else {
         showStatusMessage(tr("Failed to parse the configuration."), 1);

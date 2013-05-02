@@ -1216,3 +1216,13 @@ void OathPage::hotpLen_clicked() {
     }
     button2->toggle();
 }
+
+void OathPage::setCurrentSlot(int slot) {
+    if(m_currentPage == Page_Advanced) {
+        ui->advConfigSlot1Radio->setChecked(slot == 1);
+        ui->advConfigSlot2Radio->setChecked(slot == 2);
+    } else if(m_currentPage == Page_Quick) {
+        ui->quickConfigSlot1Radio->setChecked(slot == 1);
+        ui->quickConfigSlot2Radio->setChecked(slot == 2);
+    }
+}

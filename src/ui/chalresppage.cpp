@@ -1115,3 +1115,14 @@ void ChalRespPage::hmac_lt64_clicked() {
     QSettings settings;
     settings.setValue(SG_HMAC_LT64, ui->advHmacVarInputRadio->isChecked());
 }
+
+
+void ChalRespPage::setCurrentSlot(int slot) {
+    if(m_currentPage == Page_Advanced) {
+        ui->advConfigSlot1Radio->setChecked(slot == 1);
+        ui->advConfigSlot2Radio->setChecked(slot == 2);
+    } else if(m_currentPage == Page_Quick) {
+        ui->quickConfigSlot1Radio->setChecked(slot == 1);
+        ui->quickConfigSlot2Radio->setChecked(slot == 2);
+    }
+}

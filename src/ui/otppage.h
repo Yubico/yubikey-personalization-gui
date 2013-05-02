@@ -80,6 +80,7 @@ private:
 public slots:
     void loadSettings();
     void setCurrentPage(int pageIndex);
+    void setCurrentSlot(int slot);
 
 private slots:
     void connectPages();

@@ -1000,3 +1000,13 @@ void OtpPage::advUpdateResults(bool written, const QString &msg) {
     ui->advResultsWidget->resizeColumnsToContents();
     ui->advResultsWidget->resizeRowsToContents();
 }
+
+void OtpPage::setCurrentSlot(int slot) {
+    if(m_currentPage == Page_Advanced) {
+        ui->advConfigSlot1Radio->setChecked(slot == 1);
+        ui->advConfigSlot2Radio->setChecked(slot == 2);
+    } else if(m_currentPage == Page_Quick) {
+        ui->quickConfigSlot1Radio->setChecked(slot == 1);
+        ui->quickConfigSlot2Radio->setChecked(slot == 2);
+    }
+}

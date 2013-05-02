@@ -70,6 +70,7 @@ private:
 
 public slots:
     void setCurrentPage(int pageIndex);
+    void setCurrentSlot(int slot);
 
 private slots:
     void connectPages();
