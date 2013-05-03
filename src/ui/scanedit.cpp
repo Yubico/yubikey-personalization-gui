@@ -327,7 +327,7 @@ QString ScanEdit::scanCodesToText(const QString scanCode) {
             } else {
                 code = code ^ SHIFT;
                 if(code < sizeof(usb2key2) / sizeof(char*)) {
-                    text += usb2key2[code ^ SHIFT];
+                    text += usb2key2[code];
                 }
             }
         }
