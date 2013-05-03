@@ -19,7 +19,9 @@ DEFINES        += VERSION_MAJOR=\\\"$${VERSION_MAJOR}\\\" VERSION_MINOR=\\\"$${V
 
 CONFIG         += exceptions
 
-CONFIG         += silent
+!nosilent {
+    CONFIG         += silent
+}
 
 CONFIG(debug, debug|release) {
     message("Debug build")
