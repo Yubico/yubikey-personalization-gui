@@ -215,7 +215,7 @@ void ToolPage::resetConverterPage() {
 }
 
 void ToolPage::convert(int updatedIndex, QString txt) {
-    unsigned char buf[16];
+    unsigned char buf[32];
     memset(buf, 0, sizeof(buf));
     size_t bufLen = 0;
 
