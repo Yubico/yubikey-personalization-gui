@@ -109,11 +109,6 @@ private slots:
     void freezeAdvPage(bool freeze);
 
     void on_advProgramMulKeysBox_clicked(bool checked);
-    void on_advConfigParamsCombo_currentIndexChanged(int index);
-
-    void on_advConfigProtectionCombo_currentIndexChanged(int index);
-    void on_advCurrentAccessCodeTxt_editingFinished();
-    void on_advNewAccessCodeTxt_editingFinished();
 
     void set_advPubId_default();
     void on_advPubIdCheck_stateChanged(int state);
