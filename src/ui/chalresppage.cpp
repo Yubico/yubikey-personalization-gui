@@ -169,13 +169,11 @@ void ChalRespPage::connectHelpButtons() {
 
     connect(ui->quickConfigHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->quickParamGenSchemeHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
-    connect(ui->quickConfigProtectionHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->quickChalRespOptionsHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->quickPvtIdHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->quickSecretKeyHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
 
     connect(ui->advConfigHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
-    connect(ui->advConfigProtectionHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->advChalRespOptionsHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->advSecretKeyHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
 
@@ -185,13 +183,11 @@ void ChalRespPage::connectHelpButtons() {
 
     mapper->setMapping(ui->quickConfigHelpBtn, HelpBox::Help_ConfigurationSlot);
     mapper->setMapping(ui->quickParamGenSchemeHelpBtn, HelpBox::Help_ParameterGeneration);
-    mapper->setMapping(ui->quickConfigProtectionHelpBtn, HelpBox::Help_ConfigurationProtection);
     mapper->setMapping(ui->quickChalRespOptionsHelpBtn, HelpBox::Help_ChalRespOption);
     mapper->setMapping(ui->quickPvtIdHelpBtn, HelpBox::Help_PrivateID);
     mapper->setMapping(ui->quickSecretKeyHelpBtn, HelpBox::Help_SecretKey);
 
     mapper->setMapping(ui->advConfigHelpBtn, HelpBox::Help_ConfigurationSlot);
-    mapper->setMapping(ui->advConfigProtectionHelpBtn, HelpBox::Help_ConfigurationProtection);
     mapper->setMapping(ui->advChalRespOptionsHelpBtn, HelpBox::Help_ChalRespOption);
     mapper->setMapping(ui->advSecretKeyHelpBtn, HelpBox::Help_SecretKey);
 
@@ -298,7 +294,7 @@ void ChalRespPage::resetQuickPage() {
     ui->quickAutoProgramKeysCheck->setChecked(false);
     ui->quickProgramMulKeysBox->setChecked(false);
 
-    ui->quickConfigProtectionCombo->setCurrentIndex(0);
+    ui->quickConfigProtectionBox->reset();
 
     ui->quickPvtIdCheck->setChecked(true);
     ui->quickPvtIdTxt->clear();
@@ -333,52 +329,6 @@ void ChalRespPage::on_quickProgramMulKeysBox_clicked(bool checked) {
 
 void ChalRespPage::on_quickConfigParamsCombo_currentIndexChanged(int index) {
     changeQuickConfigParams();
-}
-
-void ChalRespPage::on_quickConfigProtectionCombo_currentIndexChanged(int index) {
-    switch(index) {
-    case CONFIG_PROTECTION_DISABLED:
-        ui->quickCurrentAccessCodeTxt->clear();
-        ui->quickCurrentAccessCodeTxt->setEnabled(false);
-
-        ui->quickNewAccessCodeTxt->clear();
-        ui->quickNewAccessCodeTxt->setEnabled(false);
-        break;
-    case CONFIG_PROTECTION_ENABLE:
-        ui->quickCurrentAccessCodeTxt->clear();
-        ui->quickCurrentAccessCodeTxt->setEnabled(false);
-
-        on_quickNewAccessCodeTxt_editingFinished();
-        ui->quickNewAccessCodeTxt->setEnabled(true);
-        break;
-    case CONFIG_PROTECTION_DISABLE:
-    case CONFIG_PROTECTION_ENABLED:
-        on_quickCurrentAccessCodeTxt_editingFinished();
-        ui->quickCurrentAccessCodeTxt->setEnabled(true);
-
-        ui->quickNewAccessCodeTxt->clear();
-        ui->quickNewAccessCodeTxt->setEnabled(false);
-        break;
-    case CONFIG_PROTECTION_CHANGE:
-        on_quickCurrentAccessCodeTxt_editingFinished();
-        ui->quickCurrentAccessCodeTxt->setEnabled(true);
-
-        on_quickNewAccessCodeTxt_editingFinished();
-        ui->quickNewAccessCodeTxt->setEnabled(true);
-        break;
-    }
-}
-
-void ChalRespPage::on_quickCurrentAccessCodeTxt_editingFinished() {
-    QString txt = ui->quickCurrentAccessCodeTxt->text();
-    YubiKeyUtil::qstrClean(&txt, (size_t)ACC_CODE_SIZE * 2);
-    ui->quickCurrentAccessCodeTxt->setText(txt);
-}
-
-void ChalRespPage::on_quickNewAccessCodeTxt_editingFinished() {
-    QString txt = ui->quickNewAccessCodeTxt->text();
-    YubiKeyUtil::qstrClean(&txt, (size_t)ACC_CODE_SIZE * 2);
-    ui->quickNewAccessCodeTxt->setText(txt);
 }
 
 void ChalRespPage::on_quickPvtIdCheck_stateChanged(int state) {
@@ -541,23 +491,10 @@ bool ChalRespPage::validateQuickSettings() {
         }
     }
 
-    //Check if logging is disabled and
-    //configuration protection is being enabled
-    if(!settings.value(SG_ENABLE_CONF_PROTECTION).toBool() &&
-       !YubiKeyLogger::isLogging() &&
-       ui->quickConfigProtectionCombo->currentIndex() == CONFIG_PROTECTION_ENABLE) {
-        //Confirm from client
-        ConfirmBox confirm(this);
-        confirm.setConfirmIndex(ConfirmBox::Confirm_ConfigurationProtection);
-        int ret = confirm.exec();
-
-        switch (ret) {
-        case 1:     //Yes
-            break;
-        default:    //No
-            return false;
-        }
+    if(!ui->quickConfigProtectionBox->checkConfirm()) {
+        return false;
     }
+
     return true;
 }
 
@@ -598,15 +535,10 @@ void ChalRespPage::writeQuickConfig(int mode) {
 
     //Configuration protection...
     //Current Access Code...
-    m_ykConfig->setCurrentAccessCodeTxt(ui->quickCurrentAccessCodeTxt->text());
-
-    //New Access Code...
-    if(ui->quickConfigProtectionCombo->currentIndex()
-        == CONFIG_PROTECTION_DISABLE){
-        m_ykConfig->setNewAccessCodeTxt(ACCESS_CODE_DEFAULT);
-    } else {
-        m_ykConfig->setNewAccessCodeTxt(ui->quickNewAccessCodeTxt->text());
-    }
+    m_ykConfig->setCurrentAccessCodeTxt(
+            ui->quickConfigProtectionBox->currentAccessCode());
+    m_ykConfig->setNewAccessCodeTxt(
+            ui->quickConfigProtectionBox->newAccessCode());
 
     //Challenge-Response Options...
     m_ykConfig->setChalYubico(true);
@@ -730,7 +662,7 @@ void ChalRespPage::resetAdvPage() {
     ui->advAutoProgramKeysCheck->setChecked(false);
     ui->advProgramMulKeysBox->setChecked(false);
 
-    ui->advConfigProtectionCombo->setCurrentIndex(0);
+    ui->advConfigProtectionBox->reset();
 
     ui->advSecretKeyTxt->clear();
     on_advSecretKeyTxt_editingFinished();
@@ -761,52 +693,6 @@ void ChalRespPage::on_advProgramMulKeysBox_clicked(bool checked) {
 
 void ChalRespPage::on_advConfigParamsCombo_currentIndexChanged(int index) {
     changeAdvConfigParams();
-}
-
-void ChalRespPage::on_advConfigProtectionCombo_currentIndexChanged(int index) {
-    switch(index) {
-    case CONFIG_PROTECTION_DISABLED:
-        ui->advCurrentAccessCodeTxt->clear();
-        ui->advCurrentAccessCodeTxt->setEnabled(false);
-
-        ui->advNewAccessCodeTxt->clear();
-        ui->advNewAccessCodeTxt->setEnabled(false);
-        break;
-    case CONFIG_PROTECTION_ENABLE:
-        ui->advCurrentAccessCodeTxt->clear();
-        ui->advCurrentAccessCodeTxt->setEnabled(false);
-
-        on_advNewAccessCodeTxt_editingFinished();
-        ui->advNewAccessCodeTxt->setEnabled(true);
-        break;
-    case CONFIG_PROTECTION_DISABLE:
-    case CONFIG_PROTECTION_ENABLED:
-        on_advCurrentAccessCodeTxt_editingFinished();
-        ui->advCurrentAccessCodeTxt->setEnabled(true);
-
-        ui->advNewAccessCodeTxt->clear();
-        ui->advNewAccessCodeTxt->setEnabled(false);
-        break;
-    case CONFIG_PROTECTION_CHANGE:
-        on_advCurrentAccessCodeTxt_editingFinished();
-        ui->advCurrentAccessCodeTxt->setEnabled(true);
-
-        on_advNewAccessCodeTxt_editingFinished();
-        ui->advNewAccessCodeTxt->setEnabled(true);
-        break;
-    }
-}
-
-void ChalRespPage::on_advCurrentAccessCodeTxt_editingFinished() {
-    QString txt = ui->advCurrentAccessCodeTxt->text();
-    YubiKeyUtil::qstrClean(&txt, (size_t)ACC_CODE_SIZE * 2);
-    ui->advCurrentAccessCodeTxt->setText(txt);
-}
-
-void ChalRespPage::on_advNewAccessCodeTxt_editingFinished() {
-    QString txt = ui->advNewAccessCodeTxt->text();
-    YubiKeyUtil::qstrClean(&txt, (size_t)ACC_CODE_SIZE * 2);
-    ui->advNewAccessCodeTxt->setText(txt);
 }
 
 void ChalRespPage::on_advSecretKeyTxt_editingFinished() {
@@ -929,23 +815,10 @@ bool ChalRespPage::validateAdvSettings() {
         }
     }
 
-    //Check if logging is disabled and
-    //configuration protection is being enabled
-    if(!settings.value(SG_ENABLE_CONF_PROTECTION).toBool() &&
-       !YubiKeyLogger::isLogging() &&
-       ui->advConfigProtectionCombo->currentIndex() == CONFIG_PROTECTION_ENABLE) {
-        //Confirm from client
-        ConfirmBox confirm(this);
-        confirm.setConfirmIndex(ConfirmBox::Confirm_ConfigurationProtection);
-        int ret = confirm.exec();
-
-        switch (ret) {
-        case 1:     //Yes
-            break;
-        default:    //No
-            return false;
-        }
+    if(!ui->advConfigProtectionBox->checkConfirm()) {
+        return false;
     }
+
     return true;
 }
 
@@ -980,16 +853,10 @@ void ChalRespPage::writeAdvConfig(int mode) {
     m_ykConfig->setSecretKeyTxt(ui->advSecretKeyTxt->text());
 
     //Configuration protection...
-    //Current Access Code...
-    m_ykConfig->setCurrentAccessCodeTxt(ui->advCurrentAccessCodeTxt->text());
-
-    //New Access Code...
-    if(ui->advConfigProtectionCombo->currentIndex()
-        == CONFIG_PROTECTION_DISABLE){
-        m_ykConfig->setNewAccessCodeTxt(ACCESS_CODE_DEFAULT);
-    } else {
-        m_ykConfig->setNewAccessCodeTxt(ui->advNewAccessCodeTxt->text());
-    }
+    m_ykConfig->setCurrentAccessCodeTxt(
+            ui->advConfigProtectionBox->currentAccessCode());
+    m_ykConfig->setNewAccessCodeTxt(
+            ui->advConfigProtectionBox->newAccessCode());
 
     //Challenge-Response Options...
     m_ykConfig->setChalHmac(true);

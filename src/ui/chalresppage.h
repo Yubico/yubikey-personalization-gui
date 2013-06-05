@@ -87,10 +87,6 @@ private slots:
     void on_quickProgramMulKeysBox_clicked(bool checked);
     void on_quickConfigParamsCombo_currentIndexChanged(int index);
 
-    void on_quickConfigProtectionCombo_currentIndexChanged(int index);
-    void on_quickCurrentAccessCodeTxt_editingFinished();
-    void on_quickNewAccessCodeTxt_editingFinished();
-
     void on_quickPvtIdCheck_stateChanged(int state);
     void on_quickPvtIdTxt_editingFinished();
     void on_quickPvtIdGenerateBtn_clicked();
@@ -117,10 +113,6 @@ private slots:
 
     void on_advProgramMulKeysBox_clicked(bool checked);
     void on_advConfigParamsCombo_currentIndexChanged(int index);
-
-    void on_advConfigProtectionCombo_currentIndexChanged(int index);
-    void on_advCurrentAccessCodeTxt_editingFinished();
-    void on_advNewAccessCodeTxt_editingFinished();
 
     void on_advSecretKeyTxt_editingFinished();
     void on_advSecretKeyGenerateBtn_clicked();
