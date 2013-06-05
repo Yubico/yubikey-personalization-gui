@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>YubiAccBox</class>
+ <widget class="QWidget" name="YubiAccBox">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>350</width>
+    <height>107</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QGroupBox" name="configProtectionBox">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>350</width>
+     <height>107</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-weight: bold;
+</string>
+   </property>
+   <property name="title">
+    <string>Configuration Protection (6 bytes Hex)</string>
+   </property>
+   <widget class="QComboBox" name="configProtectionCombo">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>24</y>
+      <width>330</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: normal;</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>YubiKey(s) unprotected - Keep it that way</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>YubiKey(s) unprotected - Enable protection</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>YubiKey(s) protected - Disable protection</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>YubiKey(s) protected - Keep it that way</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>YubiKey(s) protected - Change access code</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLineEdit" name="currentAccessCodeTxt">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>52</y>
+      <width>170</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: normal;</string>
+    </property>
+    <property name="inputMask">
+     <string>hh hh hh hh hh hh; </string>
+    </property>
+    <property name="text">
+     <string>     </string>
+    </property>
+    <property name="maxLength">
+     <number>17</number>
+    </property>
+    <property name="cursorPosition">
+     <number>17</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="currentAccessCodeLbl">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>52</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight:normal;</string>
+    </property>
+    <property name="text">
+     <string>Current Access Code</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="newAccessCodeLbl">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>77</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight:normal;</string>
+    </property>
+    <property name="text">
+     <string>New Access Code</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="newAccessCodeTxt">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>77</y>
+      <width>170</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: normal;</string>
+    </property>
+    <property name="inputMask">
+     <string>hh hh hh hh hh hh; </string>
+    </property>
+    <property name="text">
+     <string>     </string>
+    </property>
+    <property name="maxLength">
+     <number>17</number>
+    </property>
+    <property name="cursorPosition">
+     <number>17</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="configProtectionHelpBtn">
+    <property name="geometry">
+     <rect>
+      <x>325</x>
+      <y>0</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::DefaultContextMenu</enum>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/res/images/question.png);
+color: lightgray;
+border-radius: 10px;
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

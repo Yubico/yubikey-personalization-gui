@@ -60,7 +60,8 @@ FORMS += \
     src/ui/helpbox.ui \
     src/ui/confirmbox.ui \
     src/ui/chalresppage.ui \
-    src/ui/aboutpage.ui
+    src/ui/aboutpage.ui \
+    src/ui/yubiaccbox.ui
 
 HEADERS += \
     src/ui/toolpage.h \
@@ -81,7 +82,8 @@ HEADERS += \
     src/yubikeyconfig.h \
     src/version.h \
     src/otpdef.h \
-    src/common.h
+    src/common.h \
+    src/ui/yubiaccbox.h
 
 SOURCES += \
     src/main.cpp \
@@ -100,7 +102,8 @@ SOURCES += \
     src/yubikeyutil.cpp \
     src/yubikeylogger.cpp \
     src/yubikeyfinder.cpp \
-    src/yubikeyconfig.cpp
+    src/yubikeyconfig.cpp \
+    src/ui/yubiaccbox.cpp
 
 RESOURCES += \
     resources/resources.qrc
