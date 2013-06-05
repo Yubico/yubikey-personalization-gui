@@ -85,10 +85,6 @@ private slots:
     void resetQuickPage();
     void freezeQuickPage(bool freeze);
 
-    void on_quickConfigProtectionCombo_currentIndexChanged(int index);
-    void on_quickCurrentAccessCodeTxt_editingFinished();
-    void on_quickNewAccessCodeTxt_editingFinished();
-
     void on_quickHideParams_clicked(bool checked);
     void on_quickStaticTxt_textEdited(const QString &txt);
     void on_quickStaticTxt_returnPressed();
@@ -113,10 +109,6 @@ private slots:
 
     void on_advProgramMulKeysBox_clicked(bool checked);
     void on_advConfigParamsCombo_currentIndexChanged(int index);
-
-    void on_advConfigProtectionCombo_currentIndexChanged(int index);
-    void on_advCurrentAccessCodeTxt_editingFinished();
-    void on_advNewAccessCodeTxt_editingFinished();
 
     void on_advStaticLen16Radio_clicked(bool checked);
     void on_advStaticLen32Radio_clicked(bool checked);
