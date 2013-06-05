@@ -165,7 +165,6 @@ void OathPage::connectHelpButtons() {
 
     connect(ui->advConfigHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->advParamGenSchemeHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
-    connect(ui->advConfigProtectionHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->advPubIdHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->advHotpLenHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     connect(ui->advHotpParamsHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
@@ -179,7 +178,6 @@ void OathPage::connectHelpButtons() {
 
     mapper->setMapping(ui->advConfigHelpBtn, HelpBox::Help_ConfigurationSlot);
     mapper->setMapping(ui->advParamGenSchemeHelpBtn, HelpBox::Help_ParameterGeneration);
-    mapper->setMapping(ui->advConfigProtectionHelpBtn, HelpBox::Help_ConfigurationProtection);
     mapper->setMapping(ui->advPubIdHelpBtn, HelpBox::Help_OathPublicID);
     mapper->setMapping(ui->advHotpLenHelpBtn, HelpBox::Help_HotpLen);
     mapper->setMapping(ui->advHotpParamsHelpBtn, HelpBox::Help_HotpParam);
@@ -581,7 +579,7 @@ void OathPage::resetAdvPage() {
     ui->advAutoProgramKeysCheck->setChecked(false);
     ui->advProgramMulKeysBox->setChecked(false);
 
-    ui->advConfigProtectionCombo->setCurrentIndex(0);
+    ui->advConfigProtectionBox->reset();
 
     ui->advPubIdCheck->setChecked(true);
     if(customerPrefixFlag) {
@@ -628,52 +626,6 @@ void OathPage::on_advProgramMulKeysBox_clicked(bool checked) {
 
 void OathPage::on_advConfigParamsCombo_currentIndexChanged(int index) {
     changeAdvConfigParams();
-}
-
-void OathPage::on_advConfigProtectionCombo_currentIndexChanged(int index) {
-    switch(index) {
-    case CONFIG_PROTECTION_DISABLED:
-        ui->advCurrentAccessCodeTxt->clear();
-        ui->advCurrentAccessCodeTxt->setEnabled(false);
-
-        ui->advNewAccessCodeTxt->clear();
-        ui->advNewAccessCodeTxt->setEnabled(false);
-        break;
-    case CONFIG_PROTECTION_ENABLE:
-        ui->advCurrentAccessCodeTxt->clear();
-        ui->advCurrentAccessCodeTxt->setEnabled(false);
-
-        on_advNewAccessCodeTxt_editingFinished();
-        ui->advNewAccessCodeTxt->setEnabled(true);
-        break;
-    case CONFIG_PROTECTION_DISABLE:
-    case CONFIG_PROTECTION_ENABLED:
-        on_advCurrentAccessCodeTxt_editingFinished();
-        ui->advCurrentAccessCodeTxt->setEnabled(true);
-
-        ui->advNewAccessCodeTxt->clear();
-        ui->advNewAccessCodeTxt->setEnabled(false);
-        break;
-    case CONFIG_PROTECTION_CHANGE:
-        on_advCurrentAccessCodeTxt_editingFinished();
-        ui->advCurrentAccessCodeTxt->setEnabled(true);
-
-        on_advNewAccessCodeTxt_editingFinished();
-        ui->advNewAccessCodeTxt->setEnabled(true);
-        break;
-    }
-}
-
-void OathPage::on_advCurrentAccessCodeTxt_editingFinished() {
-    QString txt = ui->advCurrentAccessCodeTxt->text();
-    YubiKeyUtil::qstrClean(&txt, (size_t)ACC_CODE_SIZE * 2);
-    ui->advCurrentAccessCodeTxt->setText(txt);
-}
-
-void OathPage::on_advNewAccessCodeTxt_editingFinished() {
-    QString txt = ui->advNewAccessCodeTxt->text();
-    YubiKeyUtil::qstrClean(&txt, (size_t)ACC_CODE_SIZE * 2);
-    ui->advNewAccessCodeTxt->setText(txt);
 }
 
 void OathPage::on_advPubIdCheck_stateChanged(int state) {
@@ -955,22 +907,8 @@ bool OathPage::validateAdvSettings() {
         }
     }
 
-    //Check if logging is disabled and
-    //configuration protection is being enabled
-    if(!settings.value(SG_ENABLE_CONF_PROTECTION).toBool() &&
-       !YubiKeyLogger::isLogging() &&
-       ui->advConfigProtectionCombo->currentIndex() == CONFIG_PROTECTION_ENABLE) {
-        //Confirm from client
-        ConfirmBox confirm(this);
-        confirm.setConfirmIndex(ConfirmBox::Confirm_ConfigurationProtection);
-        int ret = confirm.exec();
-
-        switch (ret) {
-        case 1:     //Yes
-            break;
-        default:    //No
-            return false;
-        }
+    if(!ui->advConfigProtectionBox->checkConfirm()) {
+        return false;
     }
 
     return true;
@@ -1061,16 +999,10 @@ void OathPage::writeAdvConfig(int mode) {
     m_ykConfig->setSecretKeyTxt(ui->advSecretKeyTxt->text());
 
     //Configuration protection...
-    //Current Access Code...
-    m_ykConfig->setCurrentAccessCodeTxt(ui->advCurrentAccessCodeTxt->text());
-
-    //New Access Code...
-    if(ui->advConfigProtectionCombo->currentIndex()
-        == CONFIG_PROTECTION_DISABLE){
-        m_ykConfig->setNewAccessCodeTxt(ACCESS_CODE_DEFAULT);
-    } else {
-        m_ykConfig->setNewAccessCodeTxt(ui->advNewAccessCodeTxt->text());
-    }
+    m_ykConfig->setCurrentAccessCodeTxt(
+        ui->advConfigProtectionBox->newAccessCode());
+    m_ykConfig->setNewAccessCodeTxt(
+        ui->advConfigProtectionBox->currentAccessCode());
 
     if(mode == WRITE_CONFIG) {
         //Write

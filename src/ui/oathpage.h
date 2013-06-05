@@ -112,10 +112,6 @@ private slots:
     void on_advProgramMulKeysBox_clicked(bool checked);
     void on_advConfigParamsCombo_currentIndexChanged(int index);
 
-    void on_advConfigProtectionCombo_currentIndexChanged(int index);
-    void on_advCurrentAccessCodeTxt_editingFinished();
-    void on_advNewAccessCodeTxt_editingFinished();
-
     void on_advPubIdFormatCombo_currentIndexChanged(int index);
     void on_advPubIdCheck_stateChanged(int state);
     void updateAdvOMP(int index);
