@@ -78,10 +78,6 @@ private slots:
     void updateConfigWritten(bool written, const QString &msg);
     void swapWritten(bool written, const QString &msg);
 
-    void on_configProtectionCombo_currentIndexChanged(int index);
-    void on_currentAccessCodeTxt_editingFinished();
-    void on_newAccessCodeTxt_editingFinished();
-
     void keyFound(bool found, bool* featuresMatrix);
 
     void custPrefixChanged(int type, QString src);
