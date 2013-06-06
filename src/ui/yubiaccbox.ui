@@ -2,6 +2,10 @@
 <ui version="4.0">
  <class>YubiAccBox</class>
  <widget class="QWidget" name="YubiAccBox">
+   <property name="styleSheet">
+     <string notr="true">font: 11px &quot;Verdana&quot;;
+       color: rgb(0, 0, 0);</string>
+   </property>
   <property name="geometry">
    <rect>
     <x>0</x>
