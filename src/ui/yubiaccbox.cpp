@@ -64,27 +64,39 @@ void YubiAccBox::on_configProtectionCombo_currentIndexChanged(int index) {
       case CONFIG_PROTECTION_DISABLED:
           ui->currentAccessCodeTxt->clear();
           ui->currentAccessCodeTxt->setEnabled(false);
+          ui->currentUseSerial->setChecked(false);
+          ui->currentUseSerial->setEnabled(false);
           ui->newAccessCodeTxt->clear();
           ui->newAccessCodeTxt->setEnabled(false);
+          ui->newUseSerial->setChecked(false);
+          ui->newUseSerial->setEnabled(false);
           break;
       case CONFIG_PROTECTION_ENABLE:
           ui->currentAccessCodeTxt->clear();
           ui->currentAccessCodeTxt->setEnabled(false);
+          ui->currentUseSerial->setChecked(false);
+          ui->currentUseSerial->setEnabled(false);
           on_newAccessCodeTxt_editingFinished();
           ui->newAccessCodeTxt->setEnabled(true);
+          ui->newUseSerial->setEnabled(true);
           break;
       case CONFIG_PROTECTION_DISABLE:
       case CONFIG_PROTECTION_ENABLED:
           on_currentAccessCodeTxt_editingFinished();
           ui->currentAccessCodeTxt->setEnabled(true);
+          ui->currentUseSerial->setEnabled(true);
           ui->newAccessCodeTxt->clear();
           ui->newAccessCodeTxt->setEnabled(false);
+          ui->newUseSerial->setChecked(false);
+          ui->newUseSerial->setEnabled(false);
           break;
       case CONFIG_PROTECTION_CHANGE:
           on_currentAccessCodeTxt_editingFinished();
           ui->currentAccessCodeTxt->setEnabled(true);
+          ui->currentUseSerial->setEnabled(true);
           on_newAccessCodeTxt_editingFinished();
           ui->newAccessCodeTxt->setEnabled(true);
+          ui->newUseSerial->setEnabled(true);
           break;
       }
 
