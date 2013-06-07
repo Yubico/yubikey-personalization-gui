@@ -125,13 +125,13 @@ void YubiAccBox::keyFound(bool found, bool* featuresMatrix) {
 }
 
 void YubiAccBox::on_currentUseSerial_clicked(bool checked) {
-    if(!m_serial.isEmpty() && checked) {
+    if(checked) {
         setSerial(ui->currentAccessCodeTxt);
     }
 }
 
 void YubiAccBox::on_newUseSerial_clicked(bool checked) {
-    if(!m_serial.isEmpty() && checked) {
+    if(checked) {
         setSerial(ui->newAccessCodeTxt);
     }
 }
