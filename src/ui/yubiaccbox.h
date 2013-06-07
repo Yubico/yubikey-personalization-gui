@@ -50,8 +50,13 @@ public:
 
 private:
     Ui::YubiAccBox *ui;
+    QString m_serial;
+    void setSerial(QLineEdit* line);
 
 private slots:
+    void keyFound(bool found, bool* featuresMatrix);
+    void on_currentUseSerial_clicked(bool checked);
+    void on_newUseSerial_clicked(bool checked);
     void on_configProtectionCombo_currentIndexChanged(int index);
     void on_currentAccessCodeTxt_editingFinished();
     void on_newAccessCodeTxt_editingFinished();

@@ -42,6 +42,9 @@ YubiAccBox::YubiAccBox(QWidget *parent) :
     connect(ui->configProtectionHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     mapper->setMapping(ui->configProtectionHelpBtn, HelpBox::Help_ConfigurationProtection);
     connect(mapper, SIGNAL(mapped(int)), this, SLOT(helpBtn_pressed(int)));
+
+    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
+            this, SLOT(keyFound(bool, bool*)));
 }
 
 void YubiAccBox::helpBtn_pressed(int helpIndex) {
@@ -99,7 +102,42 @@ void YubiAccBox::on_configProtectionCombo_currentIndexChanged(int index) {
           ui->newUseSerial->setEnabled(true);
           break;
       }
+}
 
+void YubiAccBox::keyFound(bool found, bool* featuresMatrix) {
+    if(found) {
+        m_serial = QString::number(YubiKeyFinder::getInstance()->serial());
+        int num = 12 - m_serial.length();
+        for(int i = 0; i < num; i++) {
+            m_serial.prepend("0");
+        }
+        if(!m_serial.isEmpty()) {
+            if(ui->currentUseSerial->isChecked()) {
+                setSerial(ui->currentAccessCodeTxt);
+            }
+            if(ui->newUseSerial->isChecked()) {
+                setSerial(ui->newAccessCodeTxt);
+            }
+        }
+    } else {
+        m_serial.clear();
+    }
+}
+
+void YubiAccBox::on_currentUseSerial_clicked(bool checked) {
+    if(!m_serial.isEmpty() && checked) {
+        setSerial(ui->currentAccessCodeTxt);
+    }
+}
+
+void YubiAccBox::on_newUseSerial_clicked(bool checked) {
+    if(!m_serial.isEmpty() && checked) {
+        setSerial(ui->newAccessCodeTxt);
+    }
+}
+
+void YubiAccBox::setSerial(QLineEdit* line) {
+    line->setText(m_serial);
 }
 
 void YubiAccBox::on_currentAccessCodeTxt_editingFinished() {
