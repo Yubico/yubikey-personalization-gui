@@ -398,9 +398,11 @@ void ToolPage::ndefWritten(bool written, const QString &msg) {
 void ToolPage::on_ndefTextRadio_toggled(bool checked) {
     if(checked) {
         ui->ndefTextLangEdit->setEnabled(true);
+        ui->ndefEdit->setPlaceholderText("");
     } else {
         ui->ndefTextLangEdit->setText("en-US");
         ui->ndefTextLangEdit->setEnabled(false);
+        ui->ndefEdit->setPlaceholderText("http://example.com/?otp=");
     }
 }
 

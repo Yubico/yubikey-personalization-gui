@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>5</number>
+   <number>3</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -1142,7 +1142,7 @@ color: rgb(118, 116, 108);</string>
       <rect>
        <x>10</x>
        <y>85</y>
-       <width>151</width>
+       <width>221</width>
        <height>17</height>
       </rect>
      </property>
@@ -1150,7 +1150,7 @@ color: rgb(118, 116, 108);</string>
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="text">
-      <string>URI (http://...)</string>
+      <string>URI</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -1184,8 +1184,14 @@ color: rgb(118, 116, 108);</string>
        <height>20</height>
       </rect>
      </property>
+     <property name="text">
+      <string/>
+     </property>
      <property name="maxLength">
       <number>80</number>
+     </property>
+     <property name="placeholderText">
+      <string>http://example.com/?otp=</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="ndefTextLangEdit">
