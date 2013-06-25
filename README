@@ -47,7 +47,7 @@ directory:
 Dependencies
 ------------
 
-yubikey-personalization-gui depends on version 1.13.0 or higher of
+yubikey-personalization-gui depends on version 1.14.0 or higher of
 libykpers.
 
 When building on Windows and mac you will need a binary buikd of libykpers,
