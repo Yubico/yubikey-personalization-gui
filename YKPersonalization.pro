@@ -248,7 +248,7 @@ win32 {
 #
 # *nix specific configuration
 #
-unix:!macx {
+unix:!macx|force_pkgconfig {
     message("Unix build")
 
     LIBS += -lyubikey
@@ -263,7 +263,7 @@ unix:!macx {
 #
 # MacOS X specific configuration
 #
-macx {
+macx:!force_pkgconfig {
     message("Mac build")
 
     INCLUDEPATH += libs/macx/include libs/macx/include/ykpers-1
