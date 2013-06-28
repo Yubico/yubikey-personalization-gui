@@ -409,6 +409,14 @@ void ToolPage::on_ndefTextRadio_toggled(bool checked) {
 void ToolPage::on_ndefAccCodeCheckbox_toggled(bool checked) {
     ui->ndefAccCodeEdit->setText("00 00 00 00 00 00");
     ui->ndefAccCodeEdit->setEnabled(checked);
+    ui->ndefUseSerial->setChecked(false);
+    ui->ndefUseSerial->setEnabled(checked);
+}
+
+void ToolPage::on_ndefUseSerial_toggled(bool checked) {
+    if(checked) {
+        setSerial(ui->ndefAccCodeEdit);
+    }
 }
 
 void ToolPage::on_zapPerformBtn_clicked() {
@@ -439,6 +447,14 @@ void ToolPage::zapDone(bool written, __attribute__((unused)) const QString &msg)
 void ToolPage::on_zapAccCodeCheckbox_toggled(bool checked) {
     ui->zapAccCodeEdit->setText("00 00 00 00 00 00");
     ui->zapAccCodeEdit->setEnabled(checked);
+    ui->zapUseSerial->setChecked(false);
+    ui->zapUseSerial->setEnabled(checked);
+}
+
+void ToolPage::on_zapUseSerial_toggled(bool checked) {
+    if(checked) {
+        setSerial(ui->zapAccCodeEdit);
+    }
 }
 
 void ToolPage::on_importPerformBtn_clicked() {
@@ -552,6 +568,24 @@ void ToolPage::keyFound(bool found, bool* featuresMatrix) {
         ui->ndefSlot2Radio->setEnabled(false);
     }
     ui->zapPerformBtn->setEnabled(found);
+
+    if(found) {
+        m_serial = QString::number(YubiKeyFinder::getInstance()->serial());
+        int num = 12 - m_serial.length();
+        for(int i = 0; i < num; i++) {
+            m_serial.prepend("0");
+        }
+        if(!m_serial.isEmpty()) {
+            if(ui->ndefUseSerial->isChecked()) {
+                setSerial(ui->ndefAccCodeEdit);
+            }
+            if(ui->zapUseSerial->isChecked()) {
+                setSerial(ui->zapAccCodeEdit);
+            }
+        }
+    } else {
+        m_serial.clear();
+    }
 }
 
 void ToolPage::setImportFilename(QString filename) {
@@ -560,4 +594,10 @@ void ToolPage::setImportFilename(QString filename) {
 
 QString ToolPage::defaultImportFilename() {
     return QDir::homePath() + "/" + IMPORT_FILENAME_DEF;
+}
+
+void ToolPage::setSerial(QLineEdit *line) {
+    if(!m_serial.isEmpty()) {
+        line->setText(m_serial);
+    }
 }

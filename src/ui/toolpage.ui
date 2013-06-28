@@ -1250,7 +1250,7 @@ color: rgb(118, 116, 108);</string>
        <x>530</x>
        <y>10</y>
        <width>150</width>
-       <height>75</height>
+       <height>100</height>
       </rect>
      </property>
      <widget class="QCheckBox" name="ndefAccCodeCheckbox">
@@ -1280,6 +1280,26 @@ color: rgb(118, 116, 108);</string>
       </property>
       <property name="text">
        <string>00 00 00 00 00 00</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="ndefUseSerial">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>65</y>
+        <width>150</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 11px &quot;Verdana&quot;;
+       color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Use Serial Number</string>
       </property>
      </widget>
     </widget>
@@ -1482,7 +1502,7 @@ color: rgb(140, 192, 65);</string>
       <x>500</x>
       <y>50</y>
       <width>150</width>
-      <height>75</height>
+      <height>100</height>
      </rect>
     </property>
     <widget class="QCheckBox" name="zapAccCodeCheckbox">
@@ -1512,6 +1532,26 @@ color: rgb(140, 192, 65);</string>
      </property>
      <property name="text">
       <string>00 00 00 00 00 00</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="zapUseSerial">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>65</y>
+       <width>150</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 11px &quot;Verdana&quot;;
+       color: rgb(0, 0, 0);</string>
+     </property>
+     <property name="text">
+      <string>Use Serial Number</string>
      </property>
     </widget>
    </widget>

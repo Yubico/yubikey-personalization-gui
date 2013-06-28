@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TOOLPAGE_H
 
 #include <QStackedWidget>
+#include <QLineEdit>
 
 namespace Ui {
     class ToolPage;
@@ -57,8 +58,11 @@ private:
     Ui::ToolPage *ui;
 
     int m_currentPage;
+    QString m_serial;
 
     static QString m_filename;
+
+    void setSerial(QLineEdit *line);
 
 public slots:
     void loadSettings();
@@ -92,11 +96,13 @@ private slots:
     void programNdef();
     void on_ndefTextRadio_toggled(bool checked);
     void ndefWritten(bool written, const QString &msg);
-    void on_ndefAccCodeCheckbox_toggled(bool checkd);
+    void on_ndefAccCodeCheckbox_toggled(bool checked);
+    void on_ndefUseSerial_toggled(bool checked);
 
     // zap page
     void on_zapPerformBtn_clicked();
     void on_zapAccCodeCheckbox_toggled(bool checked);
+    void on_zapUseSerial_toggled(bool checked);
     void zapDone(bool written, const QString &msg);
 
     // import page
