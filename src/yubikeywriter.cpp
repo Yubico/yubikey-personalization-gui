@@ -653,7 +653,7 @@ void YubiKeyWriter::writeNdef(bool uri, const QString language,
 
 void YubiKeyWriter::deleteConfig(int slot, const QString accCode) {
     bool error = false;
-    YK_KEY *yk;
+    YK_KEY *yk = NULL;
     YKP_CONFIG *cfg = ykp_alloc();
 
     YubiKeyFinder::getInstance()->stop();
