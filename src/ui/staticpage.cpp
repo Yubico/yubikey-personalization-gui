@@ -673,7 +673,7 @@ void StaticPage::on_advProgramMulKeysBox_clicked(bool checked) {
     }
 }
 
-void StaticPage::on_advConfigParamsCombo_currentIndexChanged(int index) {
+void StaticPage::on_advConfigParamsCombo_currentIndexChanged(__attribute__((unused)) int index) {
     changeAdvConfigParams();
 }
 
@@ -698,7 +698,7 @@ void StaticPage::on_advStaticLen16Radio_clicked(bool checked) {
     enablePubId(!checked);
 }
 
-void StaticPage::on_advStaticLen32Radio_clicked(bool checked) {
+void StaticPage::on_advStaticLen32Radio_clicked(__attribute__((unused)) bool checked) {
     ui->advStaticLenBox->setEnabled(true);
     on_advStaticLenBox_valueChanged(ui->advStaticLenBox->value());
 }

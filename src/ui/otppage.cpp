@@ -410,7 +410,7 @@ void OtpPage::writeQuickConfig() {
     YubiKeyWriter::getInstance()->writeConfig(m_ykConfig);
 }
 
-void OtpPage::quickConfigWritten(bool written, const QString &msg) {
+void OtpPage::quickConfigWritten(bool written, __attribute__((unused)) const QString &msg) {
     disconnect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
                this, SLOT(quickConfigWritten(bool, const QString &)));
 

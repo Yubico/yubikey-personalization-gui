@@ -538,7 +538,7 @@ void OathPage::writeQuickConfig() {
     YubiKeyWriter::getInstance()->writeConfig(m_ykConfig);
 }
 
-void OathPage::quickConfigWritten(bool written, const QString &msg) {
+void OathPage::quickConfigWritten(bool written, __attribute__((unused)) const QString &msg) {
 
     disconnect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
                this, SLOT(quickConfigWritten(bool, const QString &)));
@@ -624,7 +624,7 @@ void OathPage::on_advProgramMulKeysBox_clicked(bool checked) {
     }
 }
 
-void OathPage::on_advConfigParamsCombo_currentIndexChanged(int index) {
+void OathPage::on_advConfigParamsCombo_currentIndexChanged(__attribute__((unused)) int index) {
     changeAdvConfigParams();
 }
 
@@ -641,7 +641,7 @@ void OathPage::on_advPubIdCheck_stateChanged(int state) {
     ui->advMUIGenerateBtn->setEnabled(disable);
 }
 
-void OathPage::on_advPubIdFormatCombo_currentIndexChanged(int index) {
+void OathPage::on_advPubIdFormatCombo_currentIndexChanged(__attribute__((unused)) int index) {
     updatePrefix();
 }
 

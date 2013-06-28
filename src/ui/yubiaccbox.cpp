@@ -104,7 +104,7 @@ void YubiAccBox::on_configProtectionCombo_currentIndexChanged(int index) {
       }
 }
 
-void YubiAccBox::keyFound(bool found, bool* featuresMatrix) {
+void YubiAccBox::keyFound(bool found, __attribute__((unused)) bool* featuresMatrix) {
     if(found) {
         m_serial = QString::number(YubiKeyFinder::getInstance()->serial());
         int num = 12 - m_serial.length();

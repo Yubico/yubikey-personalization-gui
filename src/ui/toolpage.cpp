@@ -387,7 +387,7 @@ void ToolPage::programNdef() {
     writer->writeNdef(uri, language, payload, ui->ndefAccCodeEdit->text().remove(" "), slot);
 }
 
-void ToolPage::ndefWritten(bool written, const QString &msg) {
+void ToolPage::ndefWritten(bool written, __attribute__((unused)) const QString &msg) {
     disconnect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
             this, SLOT(ndefWritten(bool, const QString &)));
     if(written) {
@@ -428,7 +428,7 @@ void ToolPage::on_zapPerformBtn_clicked() {
     writer->deleteConfig(slot, ui->zapAccCodeEdit->text().remove(" "));
 }
 
-void ToolPage::zapDone(bool written, const QString &msg) {
+void ToolPage::zapDone(bool written, __attribute__((unused)) const QString &msg) {
     disconnect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),
             this, SLOT(zapDone(bool, const QString &)));
     if(written) {

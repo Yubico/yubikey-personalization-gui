@@ -327,7 +327,7 @@ void ChalRespPage::on_quickProgramMulKeysBox_clicked(bool checked) {
     }
 }
 
-void ChalRespPage::on_quickConfigParamsCombo_currentIndexChanged(int index) {
+void ChalRespPage::on_quickConfigParamsCombo_currentIndexChanged(__attribute__((unused)) int index) {
     changeQuickConfigParams();
 }
 
@@ -691,7 +691,7 @@ void ChalRespPage::on_advProgramMulKeysBox_clicked(bool checked) {
     }
 }
 
-void ChalRespPage::on_advConfigParamsCombo_currentIndexChanged(int index) {
+void ChalRespPage::on_advConfigParamsCombo_currentIndexChanged(__attribute__((unused)) int index) {
     changeAdvConfigParams();
 }
 
