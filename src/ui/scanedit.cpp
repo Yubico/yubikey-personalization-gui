@@ -318,7 +318,7 @@ QString ScanEdit::scanCodesToText(const QString scanCode) {
     QString text;
     for(int i = 0; i < scanCode.length(); i += 2) {
         bool ok;
-        int code = scanCode.mid(i, 2).toInt(&ok, 16);
+        unsigned int code = scanCode.mid(i, 2).toUInt(&ok, 16);
         if(ok == true) {
             if(code < SHIFT) {
                 if(code < sizeof(usb2key1) / sizeof(char*)) {
