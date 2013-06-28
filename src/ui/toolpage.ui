@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>3</number>
+   <number>5</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -1632,6 +1632,23 @@ color: rgb(118, 116, 108);</string>
     </property>
     <property name="text">
      <string>When you import and select a file all settings will be overwritten</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="importInfoLbl">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>115</y>
+      <width>600</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-weight: normal;
+color: rgb(118, 116, 108);</string>
+    </property>
+    <property name="text">
+     <string>Import is only available with a YubiKey inserted</string>
     </property>
    </widget>
   </widget>

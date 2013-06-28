@@ -568,6 +568,7 @@ void ToolPage::keyFound(bool found, bool* featuresMatrix) {
         ui->ndefSlot2Radio->setEnabled(false);
     }
     ui->zapPerformBtn->setEnabled(found);
+    ui->importPerformBtn->setEnabled(found);
 
     if(found) {
         m_serial = QString::number(YubiKeyFinder::getInstance()->serial());
