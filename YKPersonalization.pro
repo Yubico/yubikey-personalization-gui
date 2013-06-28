@@ -75,6 +75,7 @@ HEADERS += \
     src/ui/confirmbox.h \
     src/ui/chalresppage.h \
     src/ui/aboutpage.h \
+    src/ui/yubiaccbox.h \
     src/yubikeywriter.h \
     src/yubikeyutil.h \
     src/yubikeylogger.h \
@@ -82,8 +83,7 @@ HEADERS += \
     src/yubikeyconfig.h \
     src/version.h \
     src/otpdef.h \
-    src/common.h \
-    src/ui/yubiaccbox.h
+    src/common.h
 
 SOURCES += \
     src/main.cpp \
@@ -98,12 +98,12 @@ SOURCES += \
     src/ui/confirmbox.cpp \
     src/ui/chalresppage.cpp \
     src/ui/aboutpage.cpp \
+    src/ui/yubiaccbox.cpp \
     src/yubikeywriter.cpp \
     src/yubikeyutil.cpp \
     src/yubikeylogger.cpp \
     src/yubikeyfinder.cpp \
-    src/yubikeyconfig.cpp \
-    src/ui/yubiaccbox.cpp
+    src/yubikeyconfig.cpp
 
 RESOURCES += \
     resources/resources.qrc
