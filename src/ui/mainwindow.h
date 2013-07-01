@@ -30,14 +30,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "ui/otppage.h"
-#include "ui/oathpage.h"
-#include "ui/staticpage.h"
-#include "ui/chalresppage.h"
-#include "ui/settingpage.h"
-#include "ui/toolpage.h"
-#include "ui/aboutpage.h"
 #include "qtimer.h"
+
+class ToolPage;
+class OtpPage;
+class OathPage;
+class StaticPage;
+class ChalRespPage;
+class SettingPage;
+class AboutPage;
 
 class QStackedWidget;
 
