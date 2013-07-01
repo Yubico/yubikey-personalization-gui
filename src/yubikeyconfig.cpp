@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 YubiKeyConfig::YubiKeyConfig() {
     m_mode = Mode_YubicoOtp;
+    m_accMode = Acc_None;
     m_configSlot = 1;
     m_pubIdInHex = false;
     m_pubIdTxt.clear();
@@ -111,7 +112,8 @@ void YubiKeyConfig::setCurrentAccessCodeTxt(const QString &currentAccessCodeTxt)
     YubiKeyUtil::qstrClean(&m_currentAccessCodeTxt, 0);
 }
 
-void YubiKeyConfig::setNewAccessCodeTxt(const QString &newAccessCodeTxt) {
+void YubiKeyConfig::setNewAccessCodeTxt(const QString &newAccessCodeTxt, AccMode accMode) {
     m_newAccessCodeTxt = newAccessCodeTxt;
     YubiKeyUtil::qstrClean(&m_newAccessCodeTxt, 0);
+    m_accMode = accMode;
 }

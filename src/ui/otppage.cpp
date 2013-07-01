@@ -803,7 +803,8 @@ void OtpPage::writeAdvConfig(int mode) {
     m_ykConfig->setCurrentAccessCodeTxt(
         ui->advConfigProtectionBox->currentAccessCode());
     m_ykConfig->setNewAccessCodeTxt(
-        ui->advConfigProtectionBox->newAccessCode());
+        ui->advConfigProtectionBox->newAccessCode(),
+        ui->advConfigProtectionBox->newAccMode());
 
     if(mode == WRITE_CONFIG) {
         //Write

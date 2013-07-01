@@ -540,7 +540,8 @@ void ChalRespPage::writeQuickConfig(int mode) {
     m_ykConfig->setCurrentAccessCodeTxt(
             ui->quickConfigProtectionBox->currentAccessCode());
     m_ykConfig->setNewAccessCodeTxt(
-            ui->quickConfigProtectionBox->newAccessCode());
+            ui->quickConfigProtectionBox->newAccessCode(),
+            ui->quickConfigProtectionBox->newAccMode());
 
     //Challenge-Response Options...
     m_ykConfig->setChalYubico(true);
@@ -858,7 +859,8 @@ void ChalRespPage::writeAdvConfig(int mode) {
     m_ykConfig->setCurrentAccessCodeTxt(
             ui->advConfigProtectionBox->currentAccessCode());
     m_ykConfig->setNewAccessCodeTxt(
-            ui->advConfigProtectionBox->newAccessCode());
+            ui->advConfigProtectionBox->newAccessCode(),
+            ui->advConfigProtectionBox->newAccMode());
 
     //Challenge-Response Options...
     m_ykConfig->setChalHmac(true);

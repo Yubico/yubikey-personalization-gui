@@ -188,3 +188,18 @@ QString YubiAccBox::newAccessCode() {
 QString YubiAccBox::currentAccessCode() {
     return ui->currentAccessCodeTxt->text();
 }
+
+AccMode YubiAccBox::newAccMode() {
+    if(ui->configProtectionCombo->currentIndex() == CONFIG_PROTECTION_DISABLE ||
+            ui->configProtectionCombo->currentIndex() == CONFIG_PROTECTION_DISABLED) {
+        return Acc_None;
+    }
+    QCheckBox *lookat = ui->newUseSerial;
+    if(ui->configProtectionCombo->currentIndex() == CONFIG_PROTECTION_ENABLED) {
+        lookat = ui->currentUseSerial;
+    }
+    if(lookat->isChecked() == true) {
+        return Acc_Serial;
+    }
+    return Acc_Random;
+}

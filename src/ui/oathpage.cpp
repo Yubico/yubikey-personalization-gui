@@ -1003,9 +1003,10 @@ void OathPage::writeAdvConfig(int mode) {
 
     //Configuration protection...
     m_ykConfig->setCurrentAccessCodeTxt(
-        ui->advConfigProtectionBox->newAccessCode());
-    m_ykConfig->setNewAccessCodeTxt(
         ui->advConfigProtectionBox->currentAccessCode());
+    m_ykConfig->setNewAccessCodeTxt(
+        ui->advConfigProtectionBox->newAccessCode(),
+        ui->advConfigProtectionBox->newAccMode());
 
     if(mode == WRITE_CONFIG) {
         //Write

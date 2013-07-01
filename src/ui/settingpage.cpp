@@ -468,7 +468,8 @@ void SettingPage::on_doUpdateBtn_clicked() {
     m_ykConfig->setCurrentAccessCodeTxt(
         ui->configProtectionBox->currentAccessCode());
     m_ykConfig->setNewAccessCodeTxt(
-        ui->configProtectionBox->newAccessCode());
+        ui->configProtectionBox->newAccessCode(),
+        ui->configProtectionBox->newAccMode());
 
     if(ui->updateDormantCheck->isChecked()) {
         m_ykConfig->setDormant(true);
@@ -510,7 +511,8 @@ void SettingPage::on_swapBtn_clicked() {
     m_ykConfig->setCurrentAccessCodeTxt(
         ui->configProtectionBox->currentAccessCode());
     m_ykConfig->setNewAccessCodeTxt(
-        ui->configProtectionBox->newAccessCode());
+        ui->configProtectionBox->newAccessCode(),
+        ui->configProtectionBox->newAccMode());
 
     //Write
     connect(YubiKeyWriter::getInstance(), SIGNAL(configWritten(bool, const QString &)),

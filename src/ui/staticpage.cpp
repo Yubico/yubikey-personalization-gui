@@ -539,7 +539,8 @@ void StaticPage::writeQuickConfig() {
     m_ykConfig->setCurrentAccessCodeTxt(
             ui->quickConfigProtectionBox->currentAccessCode());
     m_ykConfig->setNewAccessCodeTxt(
-            ui->quickConfigProtectionBox->newAccessCode());
+            ui->quickConfigProtectionBox->newAccessCode(),
+            ui->quickConfigProtectionBox->newAccMode());
 
     //Static Options...
     m_ykConfig->setShortTicket(true);
@@ -952,7 +953,8 @@ void StaticPage::writeAdvConfig() {
     m_ykConfig->setCurrentAccessCodeTxt(
             ui->advConfigProtectionBox->currentAccessCode());
     m_ykConfig->setNewAccessCodeTxt(
-            ui->advConfigProtectionBox->newAccessCode());
+            ui->advConfigProtectionBox->newAccessCode(),
+            ui->advConfigProtectionBox->newAccMode());
 
     //Static Options...
     m_ykConfig->setStaticTicket(true);

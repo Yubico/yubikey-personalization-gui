@@ -47,6 +47,7 @@ public:
     bool checkConfirm();
     QString newAccessCode();
     QString currentAccessCode();
+    AccMode newAccMode();
 
 private:
     Ui::YubiAccBox *ui;

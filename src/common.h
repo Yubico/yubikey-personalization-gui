@@ -35,6 +35,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 typedef std::vector<int>::size_type size_t;
 
+enum AccMode {
+  Acc_None,
+  Acc_Serial,
+  Acc_Random,
+};
+
 #define MAX_SIZE                    256
 
 #define SCHEME_INCR_ID_RAND_SECRET  0
