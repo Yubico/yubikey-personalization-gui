@@ -312,6 +312,17 @@ int YubiKeyWriter::assembleConfig(YubiKeyConfig *ykConfig, YKP_CONFIG *cfg, bool
             qDebug() << "Invalid new access code: " << ykConfig->newAccessCodeTxt();
             return 0;
         }
+        if(ykConfig->accMode() > 0) {
+            int accMode = 0;
+            if(ykConfig->accMode() == Acc_None) {
+                accMode = YKP_ACCCODE_NONE;
+            } else if(ykConfig->accMode() == Acc_Serial) {
+                accMode = YKP_ACCCODE_SERIAL;
+            } else if(ykConfig->accMode() == Acc_Random) {
+                accMode = YKP_ACCCODE_RANDOM;
+            }
+            ykp_set_acccode_type(cfg, accMode);
+        }
     }
 
     if(accessCodeLen > 0) {
