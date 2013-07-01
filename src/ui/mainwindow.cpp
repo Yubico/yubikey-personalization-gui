@@ -28,7 +28,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "ui/mainwindow.h"
 #include "ui/ui_mainwindow.h"
-
+#include "yubikeyfinder.h"
+#include "yubikeywriter.h"
+#include "yubikeyutil.h"
 #include "ui/otppage.h"
 #include "ui/oathpage.h"
 #include "ui/staticpage.h"

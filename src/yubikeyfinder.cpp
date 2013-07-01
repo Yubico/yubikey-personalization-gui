@@ -28,6 +28,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "yubikeyfinder.h"
 
+#include <ykcore.h>
+#include <ykdef.h>
+
+#include <QTimer>
+
 YubiKeyFinder* YubiKeyFinder::_instance = 0;
 
 // first version is inclusive, second is exclusive

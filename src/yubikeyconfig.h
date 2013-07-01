@@ -29,7 +29,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef YUBIKEYCONFIG_H
 #define YUBIKEYCONFIG_H
 
-#include <QtCore/QString>
+#include <QString>
+#include "common.h"
 
 class YubiKeyConfig
 {

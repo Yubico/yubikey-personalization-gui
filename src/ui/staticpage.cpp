@@ -27,6 +27,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "staticpage.h"
+#include "yubikeyfinder.h"
+#include "yubikeyutil.h"
+#include "yubikeywriter.h"
 #include "ui_staticpage.h"
 #include "ui/helpbox.h"
 #include "ui/confirmbox.h"

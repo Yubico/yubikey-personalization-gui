@@ -32,13 +32,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QObject>
 
 extern "C" {
-#include <ykcore.h>
-#include <ykdef.h>
 #include <ykpers.h>
-#include <yubikey.h>
 }
+
 #include "common.h"
-#include "qtimer.h"
 
 #define YK_VERSION(MAJOR, MINOR, BUILD) (MAJOR * 100 + MINOR * 10 + BUILD)
 

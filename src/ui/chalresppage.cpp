@@ -30,7 +30,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui_chalresppage.h"
 #include "ui/helpbox.h"
 #include "ui/confirmbox.h"
-
+#include "yubikeywriter.h"
+#include "yubikeyfinder.h"
+#include "yubikeyutil.h"
 #include "common.h"
 
 ChalRespPage::ChalRespPage(QWidget *parent) :

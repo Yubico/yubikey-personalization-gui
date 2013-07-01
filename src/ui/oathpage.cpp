@@ -27,6 +27,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "oathpage.h"
+#include "yubikeyutil.h"
+#include "yubikeyfinder.h"
+#include "yubikeywriter.h"
 #include "ui_oathpage.h"
 #include "ui/helpbox.h"
 #include "ui/confirmbox.h"

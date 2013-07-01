@@ -27,6 +27,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "settingpage.h"
+#include "yubikeyfinder.h"
+#include "yubikeyutil.h"
+#include "yubikeywriter.h"
+#include "yubikeylogger.h"
 #include "ui_settingpage.h"
 #include "ui/helpbox.h"
 #include "toolpage.h"

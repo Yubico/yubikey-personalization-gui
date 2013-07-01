@@ -29,6 +29,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "yubikeywriter.h"
 #include "yubikeyfinder.h"
 #include "yubikeylogger.h"
+#include "yubikeyutil.h"
+
+#include <ykcore.h>
+#include <ykdef.h>
 
 #include <QFileDialog>
 

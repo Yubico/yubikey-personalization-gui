@@ -29,6 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "aboutpage.h"
 #include "ui_aboutpage.h"
 #include "ui/mainwindow.h"
+#include "yubikeyfinder.h"
 
 #include "common.h"
 #include "version.h"

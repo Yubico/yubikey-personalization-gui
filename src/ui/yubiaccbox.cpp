@@ -31,6 +31,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui_yubiaccbox.h"
 #include "ui/helpbox.h"
 #include "ui/confirmbox.h"
+#include "yubikeyfinder.h"
+#include "yubikeyutil.h"
+#include "yubikeylogger.h"
 
 YubiAccBox::YubiAccBox(QWidget *parent) :
     QWidget(parent),

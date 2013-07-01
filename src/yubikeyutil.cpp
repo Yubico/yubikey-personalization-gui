@@ -27,6 +27,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "yubikeyutil.h"
+#include <yubikey.h>
 #ifdef Q_WS_WIN
 #include "crandom.h"
 #endif

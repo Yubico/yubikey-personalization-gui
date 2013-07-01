@@ -27,6 +27,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "otppage.h"
+#include "yubikeywriter.h"
+#include "yubikeyutil.h"
+#include "yubikeyfinder.h"
 #include "ui_otppage.h"
 #include "ui/helpbox.h"
 #include "ui/confirmbox.h"

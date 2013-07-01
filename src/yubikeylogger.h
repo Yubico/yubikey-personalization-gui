@@ -30,7 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define YUBIKEYLOGGER_H
 
 #include <QObject>
-#include <QtCore/QString>
+#include <QString>
 #include <QTextStream>
 #include <QFile>
 

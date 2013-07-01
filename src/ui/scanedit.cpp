@@ -27,8 +27,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "scanedit.h"
-#include "qevent.h"
-#include "qdebug.h"
+#include "yubikeyutil.h"
 #include "common.h"
 
 #define	TAB     0x2b

@@ -32,10 +32,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QtGui>
 
 #include "otpdef.h"
-#include "yubikeylogger.h"
-#include "yubikeyutil.h"
-#include "yubikeyfinder.h"
-#include "yubikeywriter.h"
 
 typedef std::vector<int>::size_type size_t;
 
