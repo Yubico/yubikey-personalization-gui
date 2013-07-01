@@ -175,6 +175,8 @@ bool YubiAccBox::checkConfirm() {
 QString YubiAccBox::newAccessCode() {
      if(ui->configProtectionCombo->currentIndex() == CONFIG_PROTECTION_DISABLE) {
          return ACCESS_CODE_DEFAULT;
+     } else if(ui->configProtectionCombo->currentIndex() == CONFIG_PROTECTION_ENABLED) {
+         return ui->currentAccessCodeTxt->text();
      } else {
          return ui->newAccessCodeTxt->text();
      }
