@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>1</number>
+   <number>0</number>
   </property>
   <widget class="QWidget" name="basePage">
    <property name="sizePolicy">
@@ -1084,7 +1084,7 @@ border-radius: 10px;
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>331</width>
+       <width>340</width>
        <height>17</height>
       </rect>
      </property>
