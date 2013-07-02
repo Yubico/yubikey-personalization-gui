@@ -52,10 +52,6 @@ if(s) { if (!ykp_set_cfgflag_##f(cfg, s)) { return 0; } }
 if(s) { if (!ykp_set_extflag_##f(cfg, s)) { return 0; } }
 
 
-static int writer(const char *buf, size_t count, void *stream) {
-    return (int)fwrite(buf, 1, count, (FILE *)stream);
-}
-
 YubiKeyWriter::YubiKeyWriter() {
 }
 
@@ -413,7 +409,9 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
         qDebug() << "-------------------------";
         qDebug() << "Config data to be written to key configuration...";
 
-        ykp_write_config(cfg, writer, stderr);
+        char conf_buf[1024];
+        ykp_export_config(cfg, conf_buf, 1024, YKP_FORMAT_LEGACY);
+        qDebug() << conf_buf;
 
         qDebug() << "-------------------------";
 
