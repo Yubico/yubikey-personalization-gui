@@ -49,6 +49,10 @@ YubiKeyLogger::~YubiKeyLogger() {
 QFile *YubiKeyLogger::getLogFile() {
     if(m_logFile == NULL) {
         m_filename = QFileDialog::getSaveFileName(NULL, tr("Select Log File"), m_filename, "Comma-sepparated values (*.csv)", NULL, QFileDialog::DontConfirmOverwrite);
+        if(m_filename.isEmpty()) {
+            qDebug() << "No filename returned for logging";
+            return NULL;
+        }
         m_logFile = new QFile(m_filename);
         if(!m_logFile->open(QIODevice::WriteOnly | QIODevice::Append)) {
             qDebug() << "File could not be opened for writing";
