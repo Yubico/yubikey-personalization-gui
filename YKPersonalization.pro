@@ -15,7 +15,7 @@ DEPLOYMENT_PLUGIN += qmng
 TEMPLATE        = app
 TARGET          = yubikey-personalization-gui
 
-DEFINES        += VERSION_MAJOR=\\\"$${VERSION_MAJOR}\\\" VERSION_MINOR=\\\"$${VERSION_MINOR}\\\" VERSION_BUILD=\\\"$${VERSION_BUILD}\\\"
+DEFINES        += VERSION_MAJOR=\\\"$${VERSION_MAJOR}\\\" VERSION_MINOR=\\\"$${VERSION_MINOR}\\\" VERSION_BUILD=\\\"$${VERSION_BUILD}\\\" VERSION=\\\"$${VERSION}\\\"
 
 CONFIG         += exceptions
 
