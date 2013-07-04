@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>5</number>
+   <number>0</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -264,66 +264,53 @@ font-weight: bold;</string>
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QGroupBox" name="importBox">
+    <widget class="QLabel" name="importDescLbl">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>365</y>
+       <width>671</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Import a configuration in ycfg format</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="importBtn">
      <property name="geometry">
       <rect>
        <x>20</x>
        <y>340</y>
-       <width>650</width>
-       <height>80</height>
+       <width>191</width>
+       <height>25</height>
       </rect>
      </property>
-     <property name="title">
-      <string/>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <widget class="QPushButton" name="importBtn">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>191</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 12px;
+     <property name="styleSheet">
+      <string notr="true">font: 12px;
 font-weight: bold;</string>
-      </property>
-      <property name="text">
-       <string>Import Configuration</string>
-      </property>
-      <property name="autoExclusive">
-       <bool>false</bool>
-      </property>
-      <property name="default">
-       <bool>false</bool>
-      </property>
-      <property name="flat">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="importDescLbl">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>25</y>
-        <width>671</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Import a configuration in ycfg format</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-      </property>
-     </widget>
+     </property>
+     <property name="text">
+      <string>Import Configuration</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
     </widget>
    </widget>
   </widget>
