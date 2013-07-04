@@ -16,7 +16,15 @@ if ! head -3 NEWS  | grep -q "Version $VERSION .released `date -I`"; then
   exit
 fi
 
-if ! head -5 YKPersonalization.pro | grep -q "VERSION.*= \"$VERSION\""; then
+if ! head -10 YKPersonalization.pro | grep -q "VERSION_MAJOR.*= `echo $VERSION | cut -d. -f1`"; then
+  echo "You need to update version in YKPersonalization.pro"
+  exit
+fi
+if ! head -10 YKPersonalization.pro | grep -q "VERSION_MINOR.*= `echo $VERSION | cut -d. -f2`"; then
+  echo "You need to update version in YKPersonalization.pro"
+  exit
+fi
+if ! head -10 YKPersonalization.pro | grep -q "VERSION_BUILD.*= `echo $VERSION | cut -d. -f3`"; then
   echo "You need to update version in YKPersonalization.pro"
   exit
 fi
