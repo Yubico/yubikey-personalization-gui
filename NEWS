@@ -1,6 +1,16 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.10 (unreleased)
+* Version 3.1.10 (released 2013-07-04)
+
+** Add import page under tools for importing ycfg.
+
+** Minor UI fixes.
+
+** Fix for crash on scan-code entry.
+
+** Fix for crash on the number-converter.
+
+** Add serial-number checkbox for access code entry.
 
 * Version 3.1.9 (released 2013-04-22)
 
