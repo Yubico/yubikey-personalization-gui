@@ -343,8 +343,13 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
         }
 
         unsigned int version = finder->version();
-        ui->statusLbl->setText(KEY_FOUND);
-        ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_SUCCESS));
+        if(error == ERR_UNKNOWN_FIRMWARE) {
+            ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_ERROR));
+            ui->statusLbl->setText(UNKNOWN_FIRMWARE);
+        } else {
+            ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_SUCCESS));
+            ui->statusLbl->setText(KEY_FOUND);
+        }
 
         ui->versionLbl->setText(finder->versionStr());
         qDebug() << "version is" << finder->versionStr();

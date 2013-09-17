@@ -75,6 +75,7 @@ enum AccMode {
 #define ERR_OTHER                   1
 #define ERR_NOKEY                   2
 #define ERR_MORETHANONE             3
+#define ERR_UNKNOWN_FIRMWARE        4
 
 //Timeouts
 
@@ -112,6 +113,7 @@ enum AccMode {
 #define NO_KEY_FOUND                tr("No YubiKey inserted")
 #define MORE_THAN_ONE               tr("More than one\nYubiKey inserted")
 #define OTHER_ERROR                 tr("Unknown error occurred")
+#define UNKNOWN_FIRMWARE            tr("Unknown firmware")
 
 #define KEY_CONFIGURED              tr("YubiKey%1 has been successfully configured")
 #define KEY_EXPORTED                tr("YubiKey configuration has been successfully exported")

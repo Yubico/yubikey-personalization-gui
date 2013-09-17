@@ -390,10 +390,6 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             throw 0;
         }
 
-        if (!(yk_check_firmware_version2(ykst))) {
-            throw 0;
-        }
-
         ykp_configure_version(cfg, ykst);
 
         qDebug() << "writer:configuration slot:" << ykConfig->configSlot();
@@ -470,10 +466,6 @@ void YubiKeyWriter::exportConfig(YubiKeyConfig *ykConfig) {
             throw 0;
         }
 
-        if (!(yk_check_firmware_version2(ykst))) {
-            throw 0;
-        }
-
         ykp_configure_version(cfg, ykst);
 
         qDebug() << "writer:configuration slot:" << ykConfig->configSlot();
@@ -547,10 +539,6 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
             throw 0;
         }
 
-        if (!(yk_check_firmware_version(yk))) {
-            throw 0;
-        }
-
         switch(slot) {
           case 1:
             yk_cmd = (hmac == true) ? SLOT_CHAL_HMAC1 : SLOT_CHAL_OTP1;
@@ -621,10 +609,6 @@ void YubiKeyWriter::writeNdef(bool uri, const QString language,
             throw 0;
         }
 
-        if (!(yk_check_firmware_version(yk))) {
-            throw 0;
-        }
-
         if(uri) {
             if(!ykp_construct_ndef_uri(ndef, ndef_payload)) {
                 throw 0;
@@ -673,10 +657,6 @@ void YubiKeyWriter::deleteConfig(int slot, const QString accCode) {
 
     try {
         if (!(yk = yk_open_first_key())) {
-            throw 0;
-        }
-
-        if (!(yk_check_firmware_version(yk))) {
             throw 0;
         }
 

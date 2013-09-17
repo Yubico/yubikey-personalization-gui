@@ -242,7 +242,12 @@ void YubiKeyFinder::findKey() {
                 featuresMatrix[i] = checkFeatureSupport((Feature)i);
             }
 
-            emit keyFound(true, featuresMatrix, ERR_NOERROR);
+            int error = ERR_NOERROR;
+            if(!yk_check_firmware_version2(m_ykds)) {
+                error = ERR_UNKNOWN_FIRMWARE;
+            }
+
+            emit keyFound(true, featuresMatrix, error);
         }
     }
     catch(...) {
