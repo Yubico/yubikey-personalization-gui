@@ -157,9 +157,9 @@ background-color: rgb(255, 255, 255);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
+       <y>5</y>
        <width>151</width>
-       <height>20</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="styleSheet">

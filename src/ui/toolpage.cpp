@@ -76,7 +76,7 @@ ToolPage::ToolPage(QWidget *parent) :
     connect(ui->ndefProgramBtn, SIGNAL(clicked()),
             this, SLOT(programNdef()));
 
-    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
+    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*, int)),
             this, SLOT(keyFound(bool, bool*)));
 
     ui->zapAccCodeEdit->setEnabled(false);

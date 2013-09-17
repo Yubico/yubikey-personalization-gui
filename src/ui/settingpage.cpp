@@ -89,7 +89,7 @@ SettingPage::SettingPage(QWidget *parent) :
     connect(ui->outCharRateCombo, SIGNAL(activated(int)), this, SLOT(save()));
     connect(ui->exportCheck, SIGNAL(clicked()), this, SLOT(save()));
 
-    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
+    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*, int)),
             this, SLOT(keyFound(bool, bool*)));
 
     QRegExp modHexRx("^[cbdefghijklnrtuv]{0,4}$");

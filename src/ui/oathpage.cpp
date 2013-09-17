@@ -63,7 +63,7 @@ OathPage::OathPage(QWidget *parent) :
     connectHelpButtons();
 
     //Connect other signals and slots
-    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
+    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*, int)),
             this, SLOT(keyFound(bool, bool*)));
 
     connect(ui->quickWriteConfigBtn, SIGNAL(clicked()),

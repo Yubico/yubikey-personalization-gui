@@ -71,6 +71,10 @@ enum AccMode {
 #define SUPPORT_EMAIL               tr("mailto:support@yubico.com")
 #define UPLOAD_URL                  tr("<!doctype html><html><title>upload</title></head><body><form action='https://upload.yubico.com/' method='post' id='upload'>serial:<input name='serial' value='%1'/><br/>prefix:<input name='prefix' value='%2'/><br/>uid:<input name='uid' value='%3'/><br/>aeskey:<input name='aeskey' value='%4'/><br/><input type='submit'/><br/></form><script type='text/javascript'>window.onload=function(){document.getElementById('upload').submit();}</script></body></html>")
 
+#define ERR_NOERROR                 0
+#define ERR_OTHER                   1
+#define ERR_NOKEY                   2
+#define ERR_MORETHANONE             3
 
 //Timeouts
 
@@ -106,6 +110,8 @@ enum AccMode {
 
 #define KEY_FOUND                   tr("YubiKey is inserted")
 #define NO_KEY_FOUND                tr("No YubiKey inserted")
+#define MORE_THAN_ONE               tr("More than one\nYubiKey inserted")
+#define OTHER_ERROR                 tr("Unknown error occurred")
 
 #define KEY_CONFIGURED              tr("YubiKey%1 has been successfully configured")
 #define KEY_EXPORTED                tr("YubiKey configuration has been successfully exported")

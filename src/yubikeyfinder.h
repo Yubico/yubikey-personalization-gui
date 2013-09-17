@@ -118,7 +118,7 @@ public slots:
     void stop();
 
 signals:
-    void keyFound(bool found, bool* featuresMatrix);
+    void keyFound(bool found, bool* featuresMatrix, int error);
     void errorOccurred(const QString &text);
 };
 

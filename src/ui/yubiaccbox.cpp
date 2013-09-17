@@ -46,7 +46,7 @@ YubiAccBox::YubiAccBox(QWidget *parent) :
     mapper->setMapping(ui->configProtectionHelpBtn, HelpBox::Help_ConfigurationProtection);
     connect(mapper, SIGNAL(mapped(int)), this, SLOT(helpBtn_pressed(int)));
 
-    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
+    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*, int)),
             this, SLOT(keyFound(bool, bool*)));
 }
 

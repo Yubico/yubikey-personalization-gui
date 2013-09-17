@@ -87,7 +87,7 @@ private slots:
 
     // Device Widget
     void resetDeviceInfo();
-    void keyFound(bool found, bool* featuresMatrix);
+    void keyFound(bool found, bool* featuresMatrix, int error);
 
     // Status Widget
     void showStatusMessage(const QString &text, int status = 1);

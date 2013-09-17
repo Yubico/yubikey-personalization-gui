@@ -61,8 +61,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //Connect other signals and slots
     connect(ui->exitMenuBtn, SIGNAL(clicked()), qApp, SLOT(quit()));
 
-    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*)),
-            this, SLOT(keyFound(bool, bool*)));
+    connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*, int)),
+            this, SLOT(keyFound(bool, bool*, int)));
     connect(YubiKeyWriter::getInstance(), SIGNAL(errorOccurred(QString)),
             this, SLOT(showStatusMessage(QString)));
 
@@ -314,7 +314,7 @@ void MainWindow::resetDeviceInfo() {
     ui->ndefSupportLbl->setText(NA);
 }
 
-void MainWindow::keyFound(bool found, bool* featuresMatrix) {
+void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
     QString disabledMenuBtnSS = QString::fromUtf8(SS_MENU_DISABLED);
     QString checkedMenuBtnSS = QString::fromUtf8(SS_MENU_CHECKED);
     QString uncheckedMenuBtnSS = QString::fromUtf8(SS_MENU_UNCHECKED);
@@ -489,7 +489,13 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix) {
             ui->deviceImage->setPixmap(NULL);
         }
         ui->deviceImage->clear();
-        ui->statusLbl->setText(NO_KEY_FOUND);
+        if(error == ERR_NOKEY) {
+            ui->statusLbl->setText(NO_KEY_FOUND);
+        } else if(error == ERR_MORETHANONE) {
+            ui->statusLbl->setText(MORE_THAN_ONE);
+        } else {
+            ui->statusLbl->setText(OTHER_ERROR);
+        }
         ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_ERROR));
 
         if(m_currentPage == Page_Oath) {
