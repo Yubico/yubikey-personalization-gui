@@ -135,7 +135,7 @@ cross {
 
     win32 {
         QMAKE_LIB = $$(TARGET_ARCH)-ar -ru
-        QMAKE_RC = $$(TARGET_ARCH)-windres
+        QMAKE_RC = $$(TARGET_ARCH)-windres $$quote(-DVERSION_WIN_STR=\'\\\"$${VERSION}\\0\\\"\')
 
         QMAKE_MOC = $$[QT_INSTALL_BINS]/moc
         QMAKE_UIC = $$[QT_INSTALL_BINS]/uic
