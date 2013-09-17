@@ -34,7 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define VER_FILEDESCRIPTION_STR     "YubiKey Personalization Tool"
 #define VER_INTERNALNAME_STR        "YKPersonalization"
-#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2011-2013 Yubico"
+#define VER_LEGALCOPYRIGHT_STR      "Copyright Â© 2011-2013 Yubico"
 #define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
 #define VER_ORIGINALFILENAME_STR    "YKPersonalization.exe"
 #define VER_PRODUCTNAME_STR         "YKPersonalization"
