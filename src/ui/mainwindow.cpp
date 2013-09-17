@@ -296,21 +296,21 @@ void MainWindow::resetDeviceInfo() {
     ui->serialNoHexCopyBtn->setStyleSheet(blankBtnSS);
     ui->serialNoModhexCopyBtn->setStyleSheet(blankBtnSS);
 
-    ui->otpSupportLbl->setPixmap(NULL);
+    ui->otpSupportLbl->setPixmap(QPixmap());
     ui->otpSupportLbl->setText(NA);
-    ui->multiConfigSupportLbl->setPixmap(NULL);
+    ui->multiConfigSupportLbl->setPixmap(QPixmap());
     ui->multiConfigSupportLbl->setText(NA);
-    ui->oathHotpSupportLbl->setPixmap(NULL);
+    ui->oathHotpSupportLbl->setPixmap(QPixmap());
     ui->oathHotpSupportLbl->setText(NA);
-    ui->staticPwdSupportLbl->setPixmap(NULL);
+    ui->staticPwdSupportLbl->setPixmap(QPixmap());
     ui->staticPwdSupportLbl->setText(NA);
-    ui->scanCodeSupportLbl->setPixmap(NULL);
+    ui->scanCodeSupportLbl->setPixmap(QPixmap());
     ui->scanCodeSupportLbl->setText(NA);
-    ui->chalRespSupportLbl->setPixmap(NULL);
+    ui->chalRespSupportLbl->setPixmap(QPixmap());
     ui->chalRespSupportLbl->setText(NA);
-    ui->updatableSupportLbl->setPixmap(NULL);
+    ui->updatableSupportLbl->setPixmap(QPixmap());
     ui->updatableSupportLbl->setText(NA);
-    ui->ndefSupportLbl->setPixmap(NULL);
+    ui->ndefSupportLbl->setPixmap(QPixmap());
     ui->ndefSupportLbl->setText(NA);
 }
 
@@ -486,7 +486,7 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
     } else {
         ui->programLbl->clear();
         if(ui->deviceImage->pixmap()) {
-            ui->deviceImage->setPixmap(NULL);
+            ui->deviceImage->setPixmap(QPixmap());
         }
         ui->deviceImage->clear();
         if(error == ERR_NOKEY) {

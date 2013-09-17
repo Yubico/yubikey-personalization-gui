@@ -29,6 +29,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "confirmbox.h"
 #include "ui_confirmbox.h"
 
+#include <QMessageBox>
+
 #include "common.h"
 
 ConfirmBox::ConfirmBox(QWidget *parent) :

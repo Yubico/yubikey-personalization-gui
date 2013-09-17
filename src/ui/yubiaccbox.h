@@ -30,6 +30,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define YUBIACCBOX_H
 
 #include <QWidget>
+#include <QLineEdit>
+
 #include "common.h"
 
 namespace Ui {

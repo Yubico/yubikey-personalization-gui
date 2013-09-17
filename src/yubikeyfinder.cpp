@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <ykdef.h>
 
 #include <QTimer>
+#include <QApplication>
 
 YubiKeyFinder* YubiKeyFinder::_instance = 0;
 

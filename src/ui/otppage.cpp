@@ -436,7 +436,7 @@ void OtpPage::quickConfigWritten(bool written, __attribute__((unused)) const QSt
 void OtpPage::uploadQuickConfig() {
     m_tempFile.setFileTemplate(QDir::tempPath() + "/ykpers.XXXXXX.html");
     m_tempFile.open();
-    m_tempFile.write(m_uploadUrl.toAscii(), m_uploadUrl.length());
+    m_tempFile.write(m_uploadUrl.toLatin1(), m_uploadUrl.length());
     m_tempFile.close();
     qDebug() << "temporary file for upload is: " << m_tempFile.fileName();
     QDesktopServices::openUrl(QUrl::fromLocalFile(m_tempFile.fileName()));

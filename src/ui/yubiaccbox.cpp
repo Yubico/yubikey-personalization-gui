@@ -26,7 +26,6 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <QSettings>
 #include "yubiaccbox.h"
 #include "ui_yubiaccbox.h"
 #include "ui/helpbox.h"
@@ -34,6 +33,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "yubikeyfinder.h"
 #include "yubikeyutil.h"
 #include "yubikeylogger.h"
+
+#include <QSettings>
+#include <QLineEdit>
 
 YubiAccBox::YubiAccBox(QWidget *parent) :
     QWidget(parent),

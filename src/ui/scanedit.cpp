@@ -288,11 +288,11 @@ static const char *usb2key2[] = {
 QString ScanEdit::textToScanCodes(const QString text) {
     QString scanCode;
     for(int i = 0; i < text.length(); i++) {
-        QChar ch = text.at(i).toAscii();
+        QChar ch = text.at(i).toLatin1();
         unsigned char code = 0;
         if(ch == '\\') {
             if(i + 1 != text.length()) {
-                QChar next = text.at(i + 1).toAscii();
+                QChar next = text.at(i + 1).toLatin1();
                 if(next == '\\') {
                     i++;
                 } else if(next == 't') {
@@ -305,7 +305,7 @@ QString ScanEdit::textToScanCodes(const QString text) {
             }
         }
         if(code == 0) {
-            code = key2usb[(int)ch.toAscii()];
+            code = key2usb[(int)ch.toLatin1()];
         }
         QString hexTxt = YubiKeyUtil::qstrHexEncode(&code, 1);
         scanCode += hexTxt;

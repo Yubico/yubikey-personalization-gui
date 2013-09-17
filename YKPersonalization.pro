@@ -19,6 +19,9 @@ DEFINES        += VERSION_MAJOR=\\\"$${VERSION_MAJOR}\\\" VERSION_MINOR=\\\"$${V
 
 CONFIG         += exceptions
 
+# if this is qt5, add widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 !nosilent {
     CONFIG         += silent
 }

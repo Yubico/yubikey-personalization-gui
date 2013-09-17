@@ -36,6 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "scanedit.h"
 
 #include <QDesktopServices>
+#include <QMessageBox>
 #include "common.h"
 
 StaticPage::StaticPage(QWidget *parent) :

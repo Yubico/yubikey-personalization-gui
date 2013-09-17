@@ -539,7 +539,7 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
 
     try {
         int yk_cmd;
-        QByteArray chal_array = challenge.toAscii();
+        QByteArray chal_array = challenge.toLatin1();
         const unsigned char *chal = reinterpret_cast<const unsigned char*>(chal_array.constData());
         unsigned char resp[64];
         memset(resp, 0, sizeof(resp));
