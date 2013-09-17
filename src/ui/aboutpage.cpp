@@ -66,7 +66,7 @@ AboutPage::AboutPage(QWidget *parent) :
 
     //Set copyright
     QString copyright = tr("%1. %2.").
-                        arg(VER_LEGALCOPYRIGHT_STR).
+                        arg(VER_LEGALCOPYRIGHT).
                         arg(VER_LEGALTRADEMARKS1_STR);
 
     ui->copyrightLbl->setText(copyright);
