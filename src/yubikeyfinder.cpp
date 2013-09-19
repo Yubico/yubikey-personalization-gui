@@ -191,6 +191,7 @@ bool YubiKeyFinder::closeKey() {
 void YubiKeyFinder::findKey() {
     if(QApplication::activeWindow() == 0) {
         //No focus, avoid locking the YubiKey.
+        m_state = State_NoFocus;
         return;
     }
 
@@ -212,7 +213,7 @@ void YubiKeyFinder::findKey() {
         //qDebug() << "Key found";
 
         //Check pervious state
-        if(m_state == State_Absent) {
+        if(m_state == State_Absent || m_state == State_NoFocus) {
 
             m_state = State_Present;
 

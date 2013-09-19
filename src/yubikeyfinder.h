@@ -49,7 +49,8 @@ public:
     enum State {
         State_Absent,
         State_Present,
-        State_Processing
+        State_Processing,
+        State_NoFocus,
     };
 
     enum Feature {
