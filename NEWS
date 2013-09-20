@@ -2,6 +2,16 @@ yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- out
 
 * Version 3.1.11 (unreleased)
 
+** Make sure there is no extra box shown around import on tools page.
+
+** Show correct error when there's more than one key detected.
+
+** Support for building and using qt5.
+
+** Allow writing of a YubiKey with unknown firmware.
+
+** Recheck the key properly after regaining focus, might be a new key.
+
 * Version 3.1.10 (released 2013-07-04)
 
 ** Add import page under tools for importing ycfg.
