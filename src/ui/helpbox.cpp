@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui_helpbox.h"
 
 #include "common.h"
+#include "help.h"
 
 HelpBox::HelpBox(QWidget *parent) :
         QDialog(parent),

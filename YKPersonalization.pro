@@ -86,6 +86,7 @@ HEADERS += \
     src/yubikeyconfig.h \
     src/version.h \
     src/otpdef.h \
+    src/help.h \
     src/common.h
 
 SOURCES += \
