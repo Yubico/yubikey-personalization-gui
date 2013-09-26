@@ -51,7 +51,7 @@ QString YubiKeyLogger::m_flexibleFormat = "";
 
 struct logging_st YubiKeyLogger::logging_map[] = {
     { "eventType", NULL, STRING, YubiKeyLogger::resolve_eventType },
-    { "timestampLocal", NULL, STRING, YubiKeyLogger::resolve_timestampLocal },
+    { "timestampLocal", NULL, STRING, YubiKeyLogger::resolve_timestamp },
     { "configSlot", "configSlot", INT, NULL },
     { "pubIdTxt", "pubIdTxt", STRING, NULL },
     { "pvtIdTxt", "pvtIdTxt", STRING, NULL },
@@ -65,7 +65,7 @@ struct logging_st YubiKeyLogger::logging_map[] = {
     { "sendRef", "sendRef", BOOL, NULL },
     { "chalBtnTrig", "chalBtnTrig", BOOL, NULL },
     { "hmacLT64", "hmacLT64", BOOL, NULL },
-    { "timestampFixed", NULL, STRING, YubiKeyLogger::resolve_timestampFixed },
+    { "timestampFixed", NULL, STRING, YubiKeyLogger::resolve_timestamp },
     { "oathFixedModhex1", "oathFixedModhex1", BOOL, NULL },
     { "oathFixedModhex2", "oathFixedModhex2", BOOL, NULL },
     { "oathFixedModhex", "oathFixedModhex", BOOL, NULL },
@@ -103,7 +103,7 @@ QString YubiKeyLogger::formatLog(YubiKeyConfig *ykConfig, QString format) {
         int type = logging_map[i].returnType;
         const char *configName = logging_map[i].configName;
         if(logging_map[i].resolver != NULL) {
-            out = logging_map[i].resolver(ykConfig);
+            out = logging_map[i].resolver(ykConfig, logging_map[i].name);
         } else if(type == STRING) {
             QMetaObject::invokeMethod(ykConfig, configName,
                     Qt::DirectConnection, Q_RETURN_ARG(QString, out));
@@ -206,7 +206,7 @@ void YubiKeyLogger::setFlexibleFormat(QString format) {
     m_flexibleFormat = format;
 }
 
-QString YubiKeyLogger::resolve_hotpDigits(YubiKeyConfig *ykConfig) {
+QString YubiKeyLogger::resolve_hotpDigits(YubiKeyConfig *ykConfig, QString name __attribute__((unused))) {
     QString ret = "0";
     if(ykConfig->programmingMode() == YubiKeyConfig::Mode_OathHotp) {
         ret = (ykConfig->oathHotp8()? "8": "6");
@@ -214,7 +214,7 @@ QString YubiKeyLogger::resolve_hotpDigits(YubiKeyConfig *ykConfig) {
     return ret;
 }
 
-QString YubiKeyLogger::resolve_eventType(YubiKeyConfig *ykConfig) {
+QString YubiKeyLogger::resolve_eventType(YubiKeyConfig *ykConfig, QString name __attribute__((unused))) {
     int mode = ykConfig->programmingMode();
     if(mode == YubiKeyConfig::Mode_YubicoOtp) {
         return(tr("Yubico OTP"));
@@ -242,15 +242,15 @@ QString YubiKeyLogger::resolve_eventType(YubiKeyConfig *ykConfig) {
     return(tr("Unknown programming mode"));
 }
 
-QString YubiKeyLogger::resolve_timestampLocal(YubiKeyConfig *ykConfig __attribute__((unused))) {
+QString YubiKeyLogger::resolve_timestamp(YubiKeyConfig *ykConfig __attribute__((unused)), QString name) {
         QDateTime ts = QDateTime::currentDateTime();
-        return ts.toString(Qt::SystemLocaleDate);
+        if(name == "timestampLocal") {
+            return ts.toString(Qt::SystemLocaleDate);
+        } else {
+            return ts.toString("yyyy-MM-ddThh:mm:ss");
+        }
 }
 
-QString YubiKeyLogger::resolve_timestampFixed(YubiKeyConfig *ykConfig __attribute__((unused))) {
-    QDateTime timestamp = QDateTime::currentDateTime();
-    return timestamp.toString("yyyy-MM-ddThh:mm:ss");
-}
 
 QStringList YubiKeyLogger::getLogNames() {
     QStringList list;

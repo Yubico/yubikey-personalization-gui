@@ -42,7 +42,7 @@ struct logging_st {
     const char *name;
     const char *configName;
     int returnType;
-    QString (*resolver)(YubiKeyConfig*);
+    QString (*resolver)(YubiKeyConfig*, QString);
 };
 
 class YubiKeyLogger : public QObject {
@@ -81,11 +81,10 @@ private:
     static QFile *m_logFile;
     static QFile *getLogFile(void);
 
-    static QString resolve_eventType(YubiKeyConfig*);
-    static QString resolve_timestampLocal(YubiKeyConfig*);
-    static QString resolve_timestampFixed(YubiKeyConfig*);
-    static QString resolve_hotpDigits(YubiKeyConfig*);
-    static QString resolve_endl(YubiKeyConfig*);
+    static QString resolve_eventType(YubiKeyConfig*, QString);
+    static QString resolve_timestamp(YubiKeyConfig*, QString);
+    static QString resolve_hotpDigits(YubiKeyConfig*, QString);
+    static QString resolve_symbol(YubiKeyConfig*, QString);
 };
 
 #endif // YUBIKEYLOGGER_H
