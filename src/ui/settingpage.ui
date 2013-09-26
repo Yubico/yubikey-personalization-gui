@@ -304,6 +304,27 @@ color: rgb(140, 192, 65);</string>
        <string>Yubico format</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>Flexible format</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLineEdit" name="logFormatEdit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>25</y>
+       <width>350</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
     </widget>
    </widget>
    <widget class="QGroupBox" name="actionsBox">

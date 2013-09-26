@@ -52,6 +52,7 @@ public:
     enum Format {
         Format_Traditional,
         Format_Yubico,
+        Format_Flexible,
     };
     static void logConfig(YubiKeyConfig *ykConfig);
 
@@ -63,12 +64,14 @@ public:
     static QString logFilename();
     static QString defaultLogFilename();
     static void setLogFormat(Format format);
+    static void setFlexibleFormat(QString);
 
 private:
     static bool m_enabled;
     static QString m_filename;
     static bool m_started;
     static Format m_format;
+    static QString m_flexibleFormat;
     static logging_st logging_map[];
 
     static QString formatLog(YubiKeyConfig *ykConfig, QString format);

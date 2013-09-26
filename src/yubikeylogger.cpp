@@ -42,6 +42,7 @@ bool YubiKeyLogger::m_enabled       = true;
 bool YubiKeyLogger::m_started       = true;
 YubiKeyLogger::Format YubiKeyLogger::m_format = Format_Traditional;
 QFile* YubiKeyLogger::m_logFile     = NULL;
+QString YubiKeyLogger::m_flexibleFormat = "";
 
 #define STRING 1
 #define BOOL   2
@@ -150,7 +151,7 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
         }
 
         format += "{eventType},{timestampLocal},{configSlot},{pubIdTxt},{pvtIdTxt},{secretKeyTxt},{currentAccessCodeTxt},{newAccessCodeTxt},{oathFixedModhex1},{oathFixedModhex2},{oathFixedModhex},{hotpDigits},{oathMovingFactorSeed},{strongPw1},{strongPw2},{sendRef},{chalBtnTrig},{hmacLT64}";
-    } else {
+    } else if(m_format == Format_Yubico) {
         format = "{serial},";
         if(ykConfig->programmingMode() == YubiKeyConfig::Mode_YubicoOtp) {
             format += "{pubIdTxt},{pvtIdTxt},";
@@ -162,6 +163,11 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
             format += ",,";
         }
         format += "{secretKeyTxt},{newAccessCodeTxt},{timestampFixed},";
+    } else if(m_format == Format_Flexible) {
+        format = m_flexibleFormat;
+    } else {
+        qDebug() << "unknown format" << m_format;
+        return;
     }
     format = formatLog(ykConfig, format);
     out << format << endl;
@@ -194,6 +200,10 @@ QString YubiKeyLogger::defaultLogFilename() {
 
 void YubiKeyLogger::setLogFormat(Format format) {
     m_format = format;
+}
+
+void YubiKeyLogger::setFlexibleFormat(QString format) {
+    m_flexibleFormat = format;
 }
 
 QString YubiKeyLogger::resolve_hotpDigits(YubiKeyConfig *ykConfig) {

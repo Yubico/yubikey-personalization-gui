@@ -146,6 +146,7 @@ enum AccMode {
 #define SG_LOG_DISABLED             "Log/Disabled"
 #define SG_LOG_FILENAME             "Log/Filename"
 #define SG_LOG_FORMAT               "Log/Format"
+#define SG_LOG_FLEXIBLE             "Log/Flexible"
 
 #define SG_EXPORT_FILENAME          "Export/Filename"
 #define SG_IMPORT_FILENAME          "Import/Filename"

@@ -91,6 +91,7 @@ SettingPage::SettingPage(QWidget *parent) :
     connect(ui->ledInvertCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->useNumericKeypadCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->logFormatCombo, SIGNAL(activated(int)), this, SLOT(save()));
+    connect(ui->logFormatEdit, SIGNAL(textEdited(QString)), this, SLOT(save()));
     connect(ui->outCharRateCombo, SIGNAL(activated(int)), this, SLOT(save()));
     connect(ui->exportCheck, SIGNAL(clicked()), this, SLOT(save()));
 
@@ -296,17 +297,19 @@ void SettingPage::load() {
 
         ui->logOutputCheck->setChecked(false);
         ui->logFormatCombo->setEnabled(false);
+        ui->logFormatEdit->setEnabled(false);
     } else {
         YubiKeyLogger::enableLogging();
 
         ui->logOutputCheck->setChecked(true);
         ui->logFormatCombo->setEnabled(true);
-        if(logFormat == YubiKeyLogger::Format_Yubico) {
-            ui->logFormatCombo->setCurrentIndex(YubiKeyLogger::Format_Yubico);
-            YubiKeyLogger::setLogFormat(YubiKeyLogger::Format_Yubico);
-        } else {
-            ui->logFormatCombo->setCurrentIndex(YubiKeyLogger::Format_Traditional);
-            YubiKeyLogger::setLogFormat(YubiKeyLogger::Format_Traditional);
+        ui->logFormatCombo->setCurrentIndex(logFormat);
+        YubiKeyLogger::setLogFormat((YubiKeyLogger::Format)logFormat);
+        if(logFormat == YubiKeyLogger::Format_Flexible) {
+            QString format = settings.value(SG_LOG_FLEXIBLE).toString();
+            ui->logFormatEdit->setEnabled(true);
+            ui->logFormatEdit->setText(format);
+            YubiKeyLogger::setFlexibleFormat(format);
         }
     }
 
@@ -379,6 +382,9 @@ void SettingPage::save() {
     if(ui->logOutputCheck->isChecked()) {
         settings.setValue(SG_LOG_DISABLED,  false);
         settings.setValue(SG_LOG_FORMAT, ui->logFormatCombo->currentIndex());
+        if(ui->logFormatCombo->currentIndex() == YubiKeyLogger::Format_Flexible) {
+            settings.setValue(SG_LOG_FLEXIBLE, ui->logFormatEdit->text());
+        }
     } else {
         settings.setValue(SG_LOG_DISABLED,  true);
     }
