@@ -54,12 +54,6 @@ enum AccMode {
 #define GEN_SCHEME_RAND             2
 #define GEN_SCHEME_SERIAL           3
 
-#define CONFIG_PROTECTION_DISABLED  0
-#define CONFIG_PROTECTION_ENABLE    1
-#define CONFIG_PROTECTION_DISABLE   2
-#define CONFIG_PROTECTION_ENABLED   3
-#define CONFIG_PROTECTION_CHANGE    4
-
 #define WRITE_CONFIG                0
 #define EXPORT_CONFIG               1
 

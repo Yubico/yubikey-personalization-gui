@@ -37,6 +37,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QSettings>
 #include <QLineEdit>
 
+#define CONFIG_PROTECTION_DISABLED  0
+#define CONFIG_PROTECTION_ENABLE    1
+#define CONFIG_PROTECTION_DISABLE   2
+#define CONFIG_PROTECTION_ENABLED   3
+#define CONFIG_PROTECTION_CHANGE    4
+
 YubiAccBox::YubiAccBox(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::YubiAccBox)
