@@ -60,11 +60,6 @@ enum AccMode {
 #define CONFIG_PROTECTION_ENABLED   3
 #define CONFIG_PROTECTION_CHANGE    4
 
-#define OUT_CHAR_RATE_STD           0
-#define OUT_CHAR_RATE_SLOWDOWN_20   1
-#define OUT_CHAR_RATE_SLOWDOWN_40   2
-#define OUT_CHAR_RATE_SLOWDOWN_60   3
-
 #define WRITE_CONFIG                0
 #define EXPORT_CONFIG               1
 

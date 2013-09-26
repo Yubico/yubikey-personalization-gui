@@ -44,6 +44,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MODHEX 1
 #define HEX 2
 
+#define OUT_CHAR_RATE_STD 0
+#define OUT_CHAR_RATE_SLOWDOWN_20 1
+#define OUT_CHAR_RATE_SLOWDOWN_40 2
+#define OUT_CHAR_RATE_SLOWDOWN_60 3
+
 SettingPage::SettingPage(QWidget *parent) :
         QStackedWidget(parent),
         ui(new Ui::SettingPage)
