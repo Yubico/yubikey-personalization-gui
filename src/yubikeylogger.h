@@ -33,6 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QString>
 #include <QTextStream>
 #include <QFile>
+#include <QStringList>
 
 #include "common.h"
 #include "yubikeyconfig.h"
@@ -65,6 +66,7 @@ public:
     static QString defaultLogFilename();
     static void setLogFormat(Format format);
     static void setFlexibleFormat(QString);
+    static QStringList getLogNames();
 
 private:
     static bool m_enabled;

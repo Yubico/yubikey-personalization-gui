@@ -251,3 +251,11 @@ QString YubiKeyLogger::resolve_timestampFixed(YubiKeyConfig *ykConfig __attribut
     QDateTime timestamp = QDateTime::currentDateTime();
     return timestamp.toString("yyyy-MM-ddThh:mm:ss");
 }
+
+QStringList YubiKeyLogger::getLogNames() {
+    QStringList list;
+    for(unsigned int i = 0; i < (sizeof(logging_map) / sizeof(logging_st)); i++) {
+        list << logging_map[i].name;
+    }
+    return list;
+}
