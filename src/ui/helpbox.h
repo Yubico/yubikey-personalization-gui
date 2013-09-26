@@ -62,6 +62,7 @@ public:
         Help_AllowUpdate,
         Help_Swap,
         Help_ManUpdate,
+        Help_LogFormat,
     };
 
     void setHelpIndex(Help helpIndex);
