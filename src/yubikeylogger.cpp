@@ -70,6 +70,8 @@ struct logging_st YubiKeyLogger::logging_map[] = {
     { "oathFixedModhex2", "oathFixedModhex2", BOOL, NULL },
     { "oathFixedModhex", "oathFixedModhex", BOOL, NULL },
     { "serial", "serial", STRING, NULL },
+    { "endl", NULL, STRING, YubiKeyLogger::resolve_symbol },
+    { "tab", NULL, STRING, YubiKeyLogger::resolve_symbol },
 };
 
 YubiKeyLogger::~YubiKeyLogger() {
@@ -146,7 +148,7 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
     QString format = "";
     if(m_format == Format_Traditional) {
         if(m_started) {
-            format += "LOGGING START,{timestampLocal}\n";
+            format += "LOGGING START,{timestampLocal}{endl}";
             m_started = false;
         }
 
@@ -251,6 +253,14 @@ QString YubiKeyLogger::resolve_timestamp(YubiKeyConfig *ykConfig __attribute__((
         }
 }
 
+QString YubiKeyLogger::resolve_symbol(YubiKeyConfig *ykConfig __attribute__((unused)), QString name) {
+    if(name == "endl") {
+        return "\n";
+    } else if(name == "tab") {
+        return "\t";
+    }
+    return "";
+}
 
 QStringList YubiKeyLogger::getLogNames() {
     QStringList list;

@@ -67,6 +67,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define HELP_MAN_UPDATE_OPTION      tr("<p>The manual update setting is to allow the static password in the YubiKey to be changed without reprogramming the key. If it is set it can be triggered by holding the button for 10 seconds, releasing and then tapping it again, the YubiKey will then generate a new static password.</p>")
 
-#define HELP_LOG_FORMAT             tr("<p>With the flexible logging format the format can be specified manually, this is done by adding a number of variables enclosed in {}, newline can be added with \\n and tab with \\t. Currently supported variables are: ")
+#define HELP_LOG_FORMAT             tr("<p>With the flexible logging format the format can be specified manually, this is done by adding a number of variables enclosed in {}, newline and tab can be added with variables endl and tab. Currently supported variables are: ")
 
 #endif // HELP_H
