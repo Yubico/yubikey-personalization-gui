@@ -12,6 +12,8 @@ yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- out
 
 ** Recheck the key properly after regaining focus, might be a new key.
 
+** Add a "flexible" logging scheme, possible to be configured from the GUI.
+
 * Version 3.1.10 (released 2013-07-04)
 
 ** Add import page under tools for importing ycfg.
