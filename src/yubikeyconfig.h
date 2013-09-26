@@ -32,9 +32,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QString>
 #include "common.h"
 
-class YubiKeyConfig
+class YubiKeyConfig : public QObject
 {
-public:
+  Q_OBJECT
+  public:
     YubiKeyConfig();
 
     enum Mode {
@@ -49,215 +50,215 @@ public:
 
     void setProgrammingMode(Mode mode)
     {m_mode = mode;}
-    Mode programmingMode() const
+    Q_INVOKABLE Mode programmingMode() const
     {return m_mode;}
 
-    AccMode accMode() const
+    Q_INVOKABLE AccMode accMode() const
     {return m_accMode;}
 
     void setConfigSlot(int configSlot)
     {m_configSlot = configSlot;}
-    int configSlot() const
+    Q_INVOKABLE int configSlot() const
     {return m_configSlot;}
 
     void setPubIdInHex(bool pubIdInHex)
     {m_pubIdInHex = pubIdInHex;}
-    bool pubIdInHex() const
+    Q_INVOKABLE bool pubIdInHex() const
     {return m_pubIdInHex;}
 
     void setPubIdTxt(const QString &pubIdTxt);
-    QString pubIdTxt() const
+    Q_INVOKABLE QString pubIdTxt() const
     {return m_pubIdTxt;}
 
     void setPvtIdTxt(const QString &pvtIdTxt);
-    QString pvtIdTxt() const
+    Q_INVOKABLE QString pvtIdTxt() const
     {return m_pvtIdTxt;}
 
     void setSecretKeyTxt(const QString &secretKeyTxt);
-    QString secretKeyTxt() const
+    Q_INVOKABLE QString secretKeyTxt() const
     {return m_secretKeyTxt;}
 
     void setCurrentAccessCodeTxt(const QString &currentAccessCodeTxt);
-    QString currentAccessCodeTxt() const
+    Q_INVOKABLE QString currentAccessCodeTxt() const
     {return m_currentAccessCodeTxt;}
 
     void setNewAccessCodeTxt(const QString &newAccessCodeTxt, AccMode accMode);
-    QString newAccessCodeTxt() const
+    Q_INVOKABLE QString newAccessCodeTxt() const
     {return m_newAccessCodeTxt;}
 
     void setSerial(const QString &serial)
     {m_serial = serial;}
-    QString serial() const
+    Q_INVOKABLE QString serial() const
     {return m_serial;}
 
     void setTabFirst(bool tabFirst)
     {m_tabFirst = tabFirst;}
-    bool tabFirst() const
+    Q_INVOKABLE bool tabFirst() const
     {return m_tabFirst;}
 
     void setAppendTab1(bool appendTab1)
     {m_appendTab1 = appendTab1;}
-    bool appendTab1() const
+    Q_INVOKABLE bool appendTab1() const
     {return m_appendTab1;}
 
     void setAppendTab2(bool appendTab2)
     {m_appendTab2 = appendTab2;}
-    bool appendTab2() const
+    Q_INVOKABLE bool appendTab2() const
     {return m_appendTab2;}
 
     void setAppendCr(bool appendCr)
     {m_appendCr = appendCr;}
-    bool appendCr() const
+    Q_INVOKABLE bool appendCr() const
     {return m_appendCr;}
 
     void setAppendDelay1(bool appendDelay1)
     {m_appendDelay1 = appendDelay1;}
-    bool appendDelay1() const
+    Q_INVOKABLE bool appendDelay1() const
     {return m_appendDelay1;}
 
     void setAppendDelay2(bool appendDelay2)
     {m_appendDelay2 = appendDelay2;}
-    bool appendDelay2() const
+    Q_INVOKABLE bool appendDelay2() const
     {return m_appendDelay2;}
 
     void setProtectCfg2(bool protectCfg2)
     {m_protectCfg2 = protectCfg2;}
-    bool protectCfg2() const
+    Q_INVOKABLE bool protectCfg2() const
     {return m_protectCfg2;}
 
     void setSendRef(bool sendRef)
     {m_sendRef = sendRef;}
-    bool sendRef() const
+    Q_INVOKABLE bool sendRef() const
     {return m_sendRef;}
 
     void setTicketFirst(bool ticketFirst)
     {m_ticketFirst = ticketFirst;}
-    bool ticketFirst() const
+    Q_INVOKABLE bool ticketFirst() const
     {return m_ticketFirst;}
 
     void setPacing10ms(bool pacing10ms)
     {m_pacing10ms = pacing10ms;}
-    bool pacing10ms() const
+    Q_INVOKABLE bool pacing10ms() const
     {return m_pacing10ms;}
 
     void setPacing20ms(bool pacing20ms)
     {m_pacing20ms = pacing20ms;}
-    bool pacing20ms() const
+    Q_INVOKABLE bool pacing20ms() const
     {return m_pacing20ms;}
 
     void setAllowHidtrig(bool allowHidtrig)
     {m_allowHidtrig = allowHidtrig;}
-    bool allowHidtrig() const
+    Q_INVOKABLE bool allowHidtrig() const
     {return m_allowHidtrig;}
 
     void setStaticTicket(bool staticTicket)
     {m_staticTicket = staticTicket;}
-    bool staticTicket() const
+    Q_INVOKABLE bool staticTicket() const
     {return m_staticTicket;}
 
     void setShortTicket(bool shortTicket)
     {m_shortTicket = shortTicket;}
-    bool shortTicket() const
+    Q_INVOKABLE bool shortTicket() const
     {return m_shortTicket;}
 
     void setStrongPw1(bool strongPw1)
     {m_strongPw1 = strongPw1;}
-    bool strongPw1() const
+    Q_INVOKABLE bool strongPw1() const
     {return m_strongPw1;}
 
     void setStrongPw2(bool strongPw2)
     {m_strongPw2 = strongPw2;}
-    bool strongPw2() const
+    Q_INVOKABLE bool strongPw2() const
     {return m_strongPw2;}
 
     void setManUpdate(bool manUpdate)
     {m_manUpdate = manUpdate;}
-    bool manUpdate() const
+    Q_INVOKABLE bool manUpdate() const
     {return m_manUpdate;}
 
     void setOathFixedModhex1(bool oathFixedModhex1)
     {m_oathFixedModhex1 = oathFixedModhex1;}
-    bool oathFixedModhex1() const
+    Q_INVOKABLE bool oathFixedModhex1() const
     {return m_oathFixedModhex1;}
 
     void setOathFixedModhex2(bool oathFixedModhex2)
     {m_oathFixedModhex2 = oathFixedModhex2;}
-    bool oathFixedModhex2() const
+    Q_INVOKABLE bool oathFixedModhex2() const
     {return m_oathFixedModhex2;}
 
     void setOathFixedModhex(bool oathFixedModhex)
     {m_oathFixedModhex = oathFixedModhex;}
-    bool oathFixedModhex() const
+    Q_INVOKABLE bool oathFixedModhex() const
     {return m_oathFixedModhex;}
 
     void setOathHotp8(bool oathHotp8)
     {m_oathHotp8 = oathHotp8;}
-    bool oathHotp8() const
+    Q_INVOKABLE bool oathHotp8() const
     {return m_oathHotp8;}
 
     void setOathMovingFactorSeed(unsigned int oathMovingFactorSeed)
     {m_oathMovingFactorSeed = oathMovingFactorSeed;}
-    unsigned int oathMovingFactorSeed() const
+    Q_INVOKABLE unsigned int oathMovingFactorSeed() const
     {return m_oathMovingFactorSeed;}
 
     void setChalYubico(bool chalYubico)
     {m_chalYubico = chalYubico;}
-    bool chalYubico() const
+    Q_INVOKABLE bool chalYubico() const
     {return m_chalYubico;}
 
     void setChalHmac(bool chalHmac)
     {m_chalHmac = chalHmac;}
-    bool chalHmac() const
+    Q_INVOKABLE bool chalHmac() const
     {return m_chalHmac;}
 
     void setHmacLT64(bool hmacLT64)
     {m_hmacLT64 = hmacLT64;}
-    bool hmacLT64() const
+    Q_INVOKABLE bool hmacLT64() const
     {return m_hmacLT64;}
 
     void setChalBtnTrig(bool chalBtnTrig)
     {m_chalBtnTrig = chalBtnTrig;}
-    bool chalBtnTrig() const
+    Q_INVOKABLE bool chalBtnTrig() const
     {return m_chalBtnTrig;}
 
     void setSerialBtnVisible(bool serialBtnVisible)
     {m_serialBtnVisible = serialBtnVisible;}
-    bool serialBtnVisible() const
+    Q_INVOKABLE bool serialBtnVisible() const
     {return m_serialBtnVisible;}
 
     void setSerialUsbVisible(bool serialUsbVisible)
     {m_serialUsbVisible = serialUsbVisible;}
-    bool serialUsbVisible() const
+    Q_INVOKABLE bool serialUsbVisible() const
     {return m_serialUsbVisible;}
 
     void setSerialApiVisible(bool serialApiVisible)
     {m_serialApiVisible = serialApiVisible;}
-    bool serialApiVisible() const
+    Q_INVOKABLE bool serialApiVisible() const
     {return m_serialApiVisible;}
 
     void setAllowUpdate(bool allowUpdate)
     {m_allowUpdate = allowUpdate;}
-    bool allowUpdate() const
+    Q_INVOKABLE bool allowUpdate() const
     {return m_allowUpdate;}
 
     void setDormant(bool dormant)
     {m_dormant = dormant;}
-    bool dormant() const
+    Q_INVOKABLE bool dormant() const
     {return m_dormant;}
 
     void setFastTrig(bool fastTrig)
     {m_fastTrig = fastTrig;}
-    bool fastTrig() const
+    Q_INVOKABLE bool fastTrig() const
     {return m_fastTrig;}
 
     void setUseNumericKeypad(bool useNumericKeypad)
     {m_useNumericKeypad = useNumericKeypad;}
-    bool useNumericKeypad() const
+    Q_INVOKABLE bool useNumericKeypad() const
     {return m_useNumericKeypad;}
 
     void setLedInvert(bool ledInvert)
     {m_ledInvert = ledInvert;}
-    bool ledInvert() const
+    Q_INVOKABLE bool ledInvert() const
     {return m_ledInvert;}
 
 private:
