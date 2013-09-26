@@ -90,8 +90,7 @@ SettingPage::SettingPage(QWidget *parent) :
     connect(ui->fastTrigCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->ledInvertCheck, SIGNAL(clicked()), this, SLOT(save()));
     connect(ui->useNumericKeypadCheck, SIGNAL(clicked()), this, SLOT(save()));
-    connect(ui->logTraditionalRadio, SIGNAL(clicked()), this, SLOT(save()));
-    connect(ui->logYubicoRadio, SIGNAL(clicked()), this, SLOT(save()));
+    connect(ui->logFormatCombo, SIGNAL(activated(int)), this, SLOT(save()));
     connect(ui->outCharRateCombo, SIGNAL(activated(int)), this, SLOT(save()));
     connect(ui->exportCheck, SIGNAL(clicked()), this, SLOT(save()));
 
@@ -296,19 +295,17 @@ void SettingPage::load() {
         YubiKeyLogger::disableLogging();
 
         ui->logOutputCheck->setChecked(false);
-        ui->logTraditionalRadio->setEnabled(false);
-        ui->logYubicoRadio->setEnabled(false);
+        ui->logFormatCombo->setEnabled(false);
     } else {
         YubiKeyLogger::enableLogging();
 
         ui->logOutputCheck->setChecked(true);
-        ui->logTraditionalRadio->setEnabled(true);
-        ui->logYubicoRadio->setEnabled(true);
+        ui->logFormatCombo->setEnabled(true);
         if(logFormat == YubiKeyLogger::Format_Yubico) {
-            ui->logYubicoRadio->setChecked(true);
+            ui->logFormatCombo->setCurrentIndex(YubiKeyLogger::Format_Yubico);
             YubiKeyLogger::setLogFormat(YubiKeyLogger::Format_Yubico);
         } else {
-            ui->logTraditionalRadio->setChecked(true);
+            ui->logFormatCombo->setCurrentIndex(YubiKeyLogger::Format_Traditional);
             YubiKeyLogger::setLogFormat(YubiKeyLogger::Format_Traditional);
         }
     }
@@ -381,12 +378,7 @@ void SettingPage::save() {
     //Logging settings...
     if(ui->logOutputCheck->isChecked()) {
         settings.setValue(SG_LOG_DISABLED,  false);
-
-        if(ui->logYubicoRadio->isChecked()) {
-            settings.setValue(SG_LOG_FORMAT, YubiKeyLogger::Format_Yubico);
-        } else {
-            settings.setValue(SG_LOG_FORMAT, YubiKeyLogger::Format_Traditional);
-        }
+        settings.setValue(SG_LOG_FORMAT, ui->logFormatCombo->currentIndex());
     } else {
         settings.setValue(SG_LOG_DISABLED,  true);
     }

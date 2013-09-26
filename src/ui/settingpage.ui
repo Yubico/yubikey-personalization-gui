@@ -276,37 +276,34 @@ color: rgb(140, 192, 65);</string>
       <string>Log configuration output</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="logTraditionalRadio">
+    <widget class="QComboBox" name="logFormatCombo">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>200</x>
        <y>25</y>
-       <width>131</width>
-       <height>19</height>
+       <width>125</width>
+       <height>22</height>
       </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
      <property name="styleSheet">
       <string notr="true">font-weight: normal;</string>
      </property>
-     <property name="text">
-      <string>Traditional format</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="logYubicoRadio">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>25</y>
-       <width>120</width>
-       <height>19</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-weight: normal;</string>
-     </property>
-     <property name="text">
-      <string>Yubico format</string>
-     </property>
+     <item>
+      <property name="text">
+       <string>Traditional format</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Yubico format</string>
+      </property>
+     </item>
     </widget>
    </widget>
    <widget class="QGroupBox" name="actionsBox">
