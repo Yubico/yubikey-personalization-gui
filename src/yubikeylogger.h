@@ -37,6 +37,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "common.h"
 #include "yubikeyconfig.h"
 
+struct logging_st {
+    const char *name;
+    const char *configName;
+    int returnType;
+    QString (*resolver)(YubiKeyConfig*);
+};
+
 class YubiKeyLogger : public QObject {
 
 public:
@@ -62,12 +69,18 @@ private:
     static QString m_filename;
     static bool m_started;
     static Format m_format;
+    static logging_st logging_map[];
 
-    static void logConfigTraditional(YubiKeyConfig *ykConfig, QTextStream &out);
-    static void logConfigYubico(YubiKeyConfig *ykConfig, QTextStream &out);
+    static QString formatLog(YubiKeyConfig *ykConfig, QString format);
 
     static QFile *m_logFile;
     static QFile *getLogFile(void);
+
+    static QString resolve_eventType(YubiKeyConfig*);
+    static QString resolve_timestampLocal(YubiKeyConfig*);
+    static QString resolve_timestampFixed(YubiKeyConfig*);
+    static QString resolve_hotpDigits(YubiKeyConfig*);
+    static QString resolve_endl(YubiKeyConfig*);
 };
 
 #endif // YUBIKEYLOGGER_H
