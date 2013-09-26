@@ -312,6 +312,8 @@ void SettingPage::load() {
             ui->logFormatEdit->setEnabled(true);
             ui->logFormatEdit->setText(format);
             YubiKeyLogger::setFlexibleFormat(format);
+        } else {
+            ui->logFormatEdit->setEnabled(false);
         }
     }
 
