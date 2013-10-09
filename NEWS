@@ -1,6 +1,6 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.11 (unreleased)
+* Version 3.1.11 (released 2013-10-09)
 
 ** Make sure there is no extra box shown around import on tools page.
 
