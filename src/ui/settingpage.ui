@@ -970,7 +970,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Static Password Setttings (2.0+)</string>
+     <string>Static Password Settings (2.0+)</string>
     </property>
     <widget class="QCheckBox" name="manUpdateCheck">
      <property name="geometry">
