@@ -140,7 +140,7 @@ font-weight: bold;</string>
 font-weight: bold;</string>
      </property>
      <property name="text">
-      <string>Challenge Response</string>
+      <string>Challenge-Response</string>
      </property>
      <property name="autoExclusive">
       <bool>false</bool>
@@ -751,7 +751,7 @@ font-weight: bold;
 color: rgb(140, 192, 65);</string>
     </property>
     <property name="text">
-     <string>Challenge Response Tester</string>
+     <string>Challenge-Response Tester</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
