@@ -862,7 +862,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Serial # Visibility Settings (2.2+)</string>
+     <string>Serial # Visibility Settings</string>
     </property>
     <widget class="QCheckBox" name="srBtnVisibleCheck">
      <property name="geometry">
@@ -877,7 +877,7 @@ border-radius: 10px;
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="text">
-      <string>Button at startup</string>
+      <string>Button at startup (2.2+)</string>
      </property>
     </widget>
     <widget class="QCheckBox" name="srUsbVisibleCheck">
@@ -893,7 +893,7 @@ border-radius: 10px;
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="text">
-      <string>USB descriptor</string>
+      <string>USB descriptor (2.2+/3.2+)</string>
      </property>
     </widget>
     <widget class="QCheckBox" name="srApiVisibleCheck">
@@ -909,7 +909,7 @@ border-radius: 10px;
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="text">
-      <string>API call</string>
+      <string>API call (2.2+/3.0+)</string>
      </property>
     </widget>
     <widget class="QPushButton" name="srVisibilityHelpBtn">
@@ -970,7 +970,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Static Password Settings (2.0+)</string>
+     <string>Static Password Settings</string>
     </property>
     <widget class="QCheckBox" name="manUpdateCheck">
      <property name="geometry">
@@ -985,7 +985,7 @@ border-radius: 10px;
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="text">
-      <string>Enable manual update using the button</string>
+      <string>Enable manual update using the button (2.0+)</string>
      </property>
     </widget>
     <widget class="QPushButton" name="manUpdateHelpBtn">
@@ -1046,7 +1046,7 @@ border-radius: 10px;
 </string>
     </property>
     <property name="title">
-     <string>Update Settings (2.3+)</string>
+     <string>Update Settings</string>
     </property>
     <widget class="QCheckBox" name="updateCheck">
      <property name="geometry">
@@ -1061,7 +1061,7 @@ border-radius: 10px;
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="text">
-      <string>Enable updating of YubiKey configuration</string>
+      <string>Enable updating of YubiKey configuration (2.3+/3.0+)</string>
      </property>
     </widget>
     <widget class="QPushButton" name="updateHelpBtn">
