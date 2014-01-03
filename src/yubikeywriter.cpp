@@ -422,6 +422,7 @@ void YubiKeyWriter::writeConfig(YubiKeyConfig *ykConfig) {
             throw 0;
         }
         qDebug() << "Success... config written";
+        emit diagnostics(QString("Successfully wrote config to slot %1").arg(ykp_config_num(cfg)));
 
         YubiKeyLogger::logConfig(ykConfig);
         emit configWritten(true, NULL);
@@ -501,6 +502,7 @@ void YubiKeyWriter::exportConfig(YubiKeyConfig *ykConfig) {
         settings.setValue(SG_EXPORT_FILENAME, m_filename);
 
         emit configWritten(true, NULL);
+        emit diagnostics(QString("Exported config to file %1").arg(m_filename));
     }
     catch(...) {
         error = true;
@@ -564,6 +566,7 @@ void YubiKeyWriter::doChallengeResponse(const QString challenge, QString  &respo
         } else {
             response = YubiKeyUtil::qstrModhexEncode(resp, 16);
         }
+        emit diagnostics(QString("Successful challenge response with slot %1").arg(slot));
     } catch(...) {
         error = true;
     }
@@ -629,6 +632,7 @@ void YubiKeyWriter::writeNdef(bool uri, const QString language,
             throw 0;
         }
         emit configWritten(true, NULL);
+        emit diagnostics(QString("Wrote NDEF for slot %1").arg(slot));
     } catch(...) {
         error = true;
     }
@@ -683,6 +687,7 @@ void YubiKeyWriter::deleteConfig(int slot, const QString accCode) {
         }
         emit configWritten(true, NULL);
         qDebug() << "successfully deleted slot " << slot;
+        emit diagnostics(QString("Deleted slot %1").arg(slot));
     } catch(...) {
         error = true;
     }
