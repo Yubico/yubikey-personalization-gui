@@ -58,7 +58,8 @@ Diagnostics::~Diagnostics() {
 }
 
 void Diagnostics::addDiagnostic(QString text) {
-    ui->txtBrowser->append(text);
+    QDateTime ts = QDateTime::currentDateTime();
+    ui->txtBrowser->append(ts.toString("yyyy-MM-ddThh:mm:ss; ") + text);
 }
 
 void Diagnostics::clicked(QAbstractButton *button) {
