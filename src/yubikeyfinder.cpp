@@ -144,6 +144,7 @@ void YubiKeyFinder::init() {
     m_versionMinor = 0;
     m_versionBuild = 0;
     m_serial = 0;
+    m_touchLevel = 0;
 
     m_ykds = ykds_alloc();
 }
