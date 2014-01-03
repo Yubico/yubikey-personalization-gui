@@ -265,6 +265,10 @@ void YubiKeyFinder::findKey() {
             error = ERR_MORETHANONE;
         } else if(yk_errno == YK_ENOKEY) {
             error = ERR_NOKEY;
+        } else if(yk_errno == YK_EUSBERR) {
+            emit diagnostics(yk_usb_strerror());
+        } else if(yk_errno) {
+            emit diagnostics(yk_strerror(yk_errno));
         }
         yk_errno = 0;
         ykp_errno = 0;

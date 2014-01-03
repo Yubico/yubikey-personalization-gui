@@ -121,6 +121,7 @@ public slots:
 signals:
     void keyFound(bool found, bool* featuresMatrix, int error);
     void errorOccurred(const QString &text);
+    void diagnostics(const QString &text);
 };
 
 #endif // YUBIKEYFINDER_H

@@ -73,6 +73,7 @@ QString YubiKeyWriter::reportError(bool chalresp = false) {
 
     if (ykp_errno) {
         qDebug("Yubikey personalization error: %s\n", ykp_strerror(ykp_errno));
+        emit diagnostics(ykp_strerror(ykp_errno));
 
         switch(ykp_errno) {
         case YKP_EYUBIKEYVER:
@@ -87,8 +88,10 @@ QString YubiKeyWriter::reportError(bool chalresp = false) {
     } else if (yk_errno) {
         if (yk_errno == YK_EUSBERR) {
             qDebug("USB error: %s\n", yk_usb_strerror());
+            emit diagnostics(yk_usb_strerror());
         } else {
             qDebug("Yubikey core error: %s\n", yk_strerror(yk_errno));
+            emit diagnostics(yk_strerror(yk_errno));
         }
 
         switch(yk_errno) {

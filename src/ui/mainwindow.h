@@ -40,6 +40,8 @@ class ChalRespPage;
 class SettingPage;
 class AboutPage;
 
+class Diagnostics;
+
 class QStackedWidget;
 
 namespace Ui {
@@ -76,9 +78,12 @@ private:
     ToolPage *m_toolPage;
     AboutPage *m_aboutPage;
 
+    Diagnostics *m_diagnostics;
+
     QTimer *m_timer;
 
     QAction *animationAction;
+    QAction *diagnosticsAction;
 
     void createPages();
 
@@ -99,6 +104,7 @@ private slots:
     void on_serialNoModhexCopyBtn_clicked();
 
     void toggleAnimation(bool checked);
+    void triggerDiagnostics();
 };
 
 #endif // MAINWINDOW_H

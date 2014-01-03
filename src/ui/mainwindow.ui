@@ -515,6 +515,9 @@ background-color: rgb(255, 255, 255);</string>
        <height>60</height>
       </rect>
      </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
      <property name="styleSheet">
       <string notr="true">font-weight: normal;</string>
      </property>

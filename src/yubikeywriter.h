@@ -71,7 +71,7 @@ public slots:
 signals:
     void configWritten(bool written, const QString &msg);
     void errorOccurred(const QString &text);
-
+    void diagnostics(const QString &text);
 };
 
 #endif // YUBIKEYWRITER_H

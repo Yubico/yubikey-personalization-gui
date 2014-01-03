@@ -38,6 +38,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui/toolpage.h"
 #include "ui/settingpage.h"
 #include "ui/aboutpage.h"
+#include "ui/diagnostics.h"
 
 #include "common.h"
 #include "version.h"
@@ -111,6 +112,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(animationAction, SIGNAL(triggered(bool)), this, SLOT(toggleAnimation(bool)));
     ui->deviceImage->addAction(animationAction);
 
+    // add action for diagnostics
+    diagnosticsAction = new QAction(this);
+    diagnosticsAction->setText("Show detailed diagnostics");
+    connect(diagnosticsAction, SIGNAL(triggered()), this, SLOT(triggerDiagnostics()));
+    ui->logoImg->addAction(diagnosticsAction);
+
     QSettings settings;
     if(settings.value(SG_ANIMATIONS_PREFERENCE, true).toBool()) {
         animationAction->setChecked(true);
@@ -132,7 +139,10 @@ MainWindow::~MainWindow()
     delete m_toolPage;
     delete m_aboutPage;
 
+    delete m_diagnostics;
+
     delete animationAction;
+    delete diagnosticsAction;
 
     delete ui;
 }
@@ -150,6 +160,8 @@ void MainWindow::createPages() {
     m_settingPage = new SettingPage(this);
     m_toolPage = new ToolPage(this);
     m_aboutPage = new AboutPage(this);
+
+    m_diagnostics = new Diagnostics(this);
 
     //Add pages to the pages widget
     ui->pagesWidget->addWidget(m_otpPage);
@@ -603,4 +615,8 @@ void MainWindow::toggleAnimation(bool checked) {
             ui->deviceImage->movie()->stop();
         }
     }
+}
+
+void MainWindow::triggerDiagnostics() {
+    m_diagnostics->exec();
 }

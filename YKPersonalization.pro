@@ -64,6 +64,7 @@ FORMS += \
     src/ui/confirmbox.ui \
     src/ui/chalresppage.ui \
     src/ui/aboutpage.ui \
+    src/ui/diagnostics.ui \
     src/ui/yubiaccbox.ui
 
 HEADERS += \
@@ -78,6 +79,7 @@ HEADERS += \
     src/ui/confirmbox.h \
     src/ui/chalresppage.h \
     src/ui/aboutpage.h \
+    src/ui/diagnostics.h \
     src/ui/yubiaccbox.h \
     src/yubikeywriter.h \
     src/yubikeyutil.h \
@@ -103,6 +105,7 @@ SOURCES += \
     src/ui/chalresppage.cpp \
     src/ui/aboutpage.cpp \
     src/ui/yubiaccbox.cpp \
+    src/ui/diagnostics.cpp \
     src/yubikeywriter.cpp \
     src/yubikeyutil.cpp \
     src/yubikeylogger.cpp \
