@@ -267,7 +267,7 @@ void YubiKeyFinder::findKey() {
         } else if(yk_errno == YK_ENOKEY) {
             error = ERR_NOKEY;
         } else if(yk_errno == YK_EUSBERR) {
-            emit diagnostics(yk_usb_strerror());
+            emit diagnostics(QString("USB Error: %1").arg(yk_usb_strerror()));
         } else if(yk_errno) {
             emit diagnostics(yk_strerror(yk_errno));
         }
