@@ -249,6 +249,7 @@ void YubiKeyFinder::findKey() {
             }
 
             emit keyFound(true, featuresMatrix, error);
+            emit diagnostics(QString("Found key with version %1 and serial %2.").arg(versionStr(), m_serial));
         }
     }
     catch(...) {
