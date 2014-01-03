@@ -31,6 +31,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "yubikeywriter.h"
 #include "yubikeyfinder.h"
+#include "version.h"
+
+#include <ykpers-version.h>
+
 
 Diagnostics::Diagnostics(QWidget *parent) :
         QDialog(parent),
@@ -51,6 +55,8 @@ Diagnostics::Diagnostics(QWidget *parent) :
 
     connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)),
         this, SLOT(clicked(QAbstractButton*)));
+
+    setup();
 }
 
 Diagnostics::~Diagnostics() {
@@ -64,6 +70,69 @@ void Diagnostics::addDiagnostic(QString text) {
 
 void Diagnostics::clicked(QAbstractButton *button) {
     if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::ResetRole) {
-        ui->txtBrowser->clear();
+        setup();
     }
 }
+
+void Diagnostics::setup() {
+    ui->txtBrowser->clear();
+    addDiagnostic(QString("App_version: %1; Lib_version: %2; QT_version: %3; OS_version: %4; Word_size: %5")
+        .arg(VER_PRODUCTVERSION_STR, ykpers_check_version(NULL), qVersion(), osVersion(), QString::number(QSysInfo::WordSize)));
+}
+
+QString Diagnostics::osVersion() {
+#ifdef Q_OS_LINUX
+    return "Linux";
+#elif defined(Q_OS_MAC)
+    QString mac = "OS X ";
+    switch(QSysInfo::MacintoshVersion) {
+        case QSysInfo::MV_LEOPARD:
+            mac += "Leopard";
+            break;
+        case QSysInfo::MV_SNOWLEOPAD:
+            mac += "SnowLeopard";
+            break;
+        case QSysInfo::MV_LION:
+            mac += "Lion";
+            break;
+        case QSysInfo::MV_MOUNTAINLION:
+            mac += "MountainLion";
+            break;
+        case QSysInfo::MV_MAVERICKS:
+            mac += "Mavericks";
+            break;
+        default:
+            mac += "unknown";
+            break;
+    }
+    return mac;
+#elif defined(Q_OS_WIN32)
+    QString win = "Windows ";
+    switch(QSysInfo::WindowsVersion) {
+        case QSysInfo::WV_2000:
+            win += "2000";
+            break;
+        case QSysInfo::WV_XP:
+            win += "XP";
+            break;
+        case QSysInfo::WV_2003:
+            win += "2003";
+            break;
+        case QSysInfo::WV_VISTA:
+            win += "Vista";
+            break;
+        case QSysInfo::WV_WINDOWS7:
+            win += "7";
+            break;
+        case QSysInfo::WV_WINDOWS8:
+            win += "8";
+            break;
+        default:
+            win += "unknown";
+            break;
+    }
+    return win;
+#endif
+    return "Unknown OS";
+}
+

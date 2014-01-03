@@ -45,6 +45,8 @@ public:
 
 private:
     Ui::Diagnostics *ui;
+    QString osVersion();
+    void setup();
 
 private slots:
     void addDiagnostic(QString text);
