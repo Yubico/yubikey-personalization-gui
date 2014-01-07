@@ -169,13 +169,8 @@ void OtpPage::connectHelpButtons() {
     mapper->setMapping(ui->advSecretKeyHelpBtn, HelpBox::Help_SecretKey);
 
     //Connect the mapper
-    connect(mapper, SIGNAL(mapped(int)), this, SLOT(helpBtn_pressed(int)));
-}
-
-void OtpPage::helpBtn_pressed(int helpIndex) {
-    HelpBox help(this);
-    help.setHelpIndex((HelpBox::Help)helpIndex);
-    help.exec();
+    connect(mapper, SIGNAL(mapped(int)), this, SIGNAL(showHelp(int)));
+    connect(ui->advConfigProtectionBox, SIGNAL(showHelp(int)), this, SIGNAL(showHelp(int)));
 }
 
 void OtpPage::keyFound(bool found, bool* featuresMatrix) {

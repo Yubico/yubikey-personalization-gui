@@ -52,16 +52,10 @@ YubiAccBox::YubiAccBox(QWidget *parent) :
     QSignalMapper *mapper = new QSignalMapper(this);
     connect(ui->configProtectionHelpBtn, SIGNAL(clicked()), mapper, SLOT(map()));
     mapper->setMapping(ui->configProtectionHelpBtn, HelpBox::Help_ConfigurationProtection);
-    connect(mapper, SIGNAL(mapped(int)), this, SLOT(helpBtn_pressed(int)));
+    connect(mapper, SIGNAL(mapped(int)), this, SIGNAL(showHelp(int)));
 
     connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*, int)),
             this, SLOT(keyFound(bool, bool*)));
-}
-
-void YubiAccBox::helpBtn_pressed(int helpIndex) {
-    HelpBox help(this);
-    help.setHelpIndex((HelpBox::Help)helpIndex);
-    help.exec();
 }
 
 YubiAccBox::~YubiAccBox()

@@ -165,7 +165,9 @@ void StaticPage::connectHelpButtons() {
     mapper->setMapping(ui->advSecretKeyHelpBtn, HelpBox::Help_SecretKey);
 
     //Connect the mapper
-    connect(mapper, SIGNAL(mapped(int)), this, SLOT(helpBtn_pressed(int)));
+    connect(mapper, SIGNAL(mapped(int)), this, SIGNAL(showHelp(int)));
+    connect(ui->quickConfigProtectionBox, SIGNAL(showHelp(int)), this, SIGNAL(showHelp(int)));
+    connect(ui->advConfigProtectionBox, SIGNAL(showHelp(int)), this, SIGNAL(showHelp(int)));
 }
 
 void StaticPage::loadSettings() {
@@ -173,12 +175,6 @@ void StaticPage::loadSettings() {
     ui->advStrongPw1Check->setChecked(settings.value(SG_STRONG_PW1).toBool());
     ui->advStrongPw2Check->setChecked(settings.value(SG_STRONG_PW2).toBool());
     ui->advStrongPw3Check->setChecked(settings.value(SG_STRONG_PW3).toBool());
-}
-
-void StaticPage::helpBtn_pressed(int helpIndex) {
-    HelpBox help(this);
-    help.setHelpIndex((HelpBox::Help)helpIndex);
-    help.exec();
 }
 
 void StaticPage::keyFound(bool found, bool* featuresMatrix) {

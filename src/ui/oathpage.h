@@ -82,7 +82,6 @@ public slots:
 private slots:
     void connectPages();
     void connectHelpButtons();
-    void helpBtn_pressed(int helpIndex);
     void keyFound(bool found, bool* featuresMatrix);
 
     void updatePrefix();
@@ -145,6 +144,7 @@ private slots:
 
 signals:
     void showStatusMessage(const QString &text, int status = 0);
+    void showHelp(int helpIndex);
 };
 
 #endif // OATHPAGE_H

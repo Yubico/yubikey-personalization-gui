@@ -41,6 +41,7 @@ class SettingPage;
 class AboutPage;
 
 class Diagnostics;
+class HelpBox;
 
 class QStackedWidget;
 
@@ -79,6 +80,7 @@ private:
     AboutPage *m_aboutPage;
 
     Diagnostics *m_diagnostics;
+    HelpBox *m_help;
 
     QTimer *m_timer;
 
@@ -105,6 +107,7 @@ private slots:
 
     void toggleAnimation(bool checked);
     void triggerDiagnostics();
+    void triggerHelp(int index);
 };
 
 #endif // MAINWINDOW_H

@@ -62,7 +62,6 @@ public slots:
 
 private slots:
     void connectHelpButtons();
-    void helpBtn_pressed(int helpIndex);
     void restoreDefaults();
     void load();
     void save();
@@ -84,6 +83,7 @@ private slots:
 signals:
     void settingsChanged();
     void showStatusMessage(const QString &text, int status = 0);
+    void showHelp(int helpIndex);
 };
 
 #endif // SETTINGPAGE_H

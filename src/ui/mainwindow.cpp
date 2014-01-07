@@ -39,6 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui/settingpage.h"
 #include "ui/aboutpage.h"
 #include "ui/diagnostics.h"
+#include "ui/helpbox.h"
 
 #include "common.h"
 #include "version.h"
@@ -81,6 +82,13 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(showStatusMessage(const QString &,int)));
     connect(m_aboutPage, SIGNAL(changePage(int)),
             this, SLOT(setCurrentPage(int)));
+
+    connect(m_otpPage, SIGNAL(showHelp(int)), this, SLOT(triggerHelp(int)));
+    connect(m_oathPage, SIGNAL(showHelp(int)), this, SLOT(triggerHelp(int)));
+    connect(m_staticPage, SIGNAL(showHelp(int)), this, SLOT(triggerHelp(int)));
+    connect(m_chalRespPage, SIGNAL(showHelp(int)), this, SLOT(triggerHelp(int)));
+    connect(m_settingPage, SIGNAL(showHelp(int)), this, SLOT(triggerHelp(int)));
+    connect(m_toolPage, SIGNAL(showHelp(int)), this, SLOT(triggerHelp(int)));
 
     connect(m_settingPage, SIGNAL(settingsChanged()),
             m_otpPage, SLOT(loadSettings()));
@@ -140,6 +148,7 @@ MainWindow::~MainWindow()
     delete m_aboutPage;
 
     delete m_diagnostics;
+    delete m_help;
 
     delete animationAction;
     delete diagnosticsAction;
@@ -162,6 +171,7 @@ void MainWindow::createPages() {
     m_aboutPage = new AboutPage(this);
 
     m_diagnostics = new Diagnostics(this);
+    m_help = new HelpBox(this);
 
     //Add pages to the pages widget
     ui->pagesWidget->addWidget(m_otpPage);
@@ -619,4 +629,9 @@ void MainWindow::toggleAnimation(bool checked) {
 
 void MainWindow::triggerDiagnostics() {
     m_diagnostics->show();
+}
+
+void MainWindow::triggerHelp(int index) {
+    m_help->setHelpIndex((HelpBox::Help)index);
+    m_help->show();
 }

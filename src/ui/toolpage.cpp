@@ -167,12 +167,6 @@ void ToolPage::setCurrentPage(int pageIndex) {
 void ToolPage::connectHelpButtons() {
 }
 
-void ToolPage::helpBtn_pressed(int helpIndex) {
-    HelpBox help(this);
-    help.setHelpIndex((HelpBox::Help)helpIndex);
-    help.exec();
-}
-
 void ToolPage::resetChalRespPage() {
     ui->chalRespChallenge->clear();
     ui->chalRespResponse->clear();

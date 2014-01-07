@@ -63,7 +63,8 @@ private slots:
     void on_configProtectionCombo_currentIndexChanged(int index);
     void on_currentAccessCodeTxt_editingFinished();
     void on_newAccessCodeTxt_editingFinished();
-    void helpBtn_pressed(int helpIndex);
+signals:
+    void showHelp(int helpIndex);
 };
 
 #endif // YUBIACCBOX_H

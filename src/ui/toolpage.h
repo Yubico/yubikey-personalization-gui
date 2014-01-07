@@ -71,7 +71,6 @@ public slots:
 private slots:
     void connectPages();
     void connectHelpButtons();
-    void helpBtn_pressed(int helpIndex);
 
     // Converter Page
     void resetConverterPage();
@@ -113,6 +112,7 @@ signals:
     void showStatusMessage(const QString &text, int status = 0);
     void reloadSettings();
     void switchPage(int page, int tab, int slot);
+    void showHelp(int helpIndex);
 };
 
 #endif // TOOLPAGE_H

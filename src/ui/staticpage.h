@@ -76,7 +76,6 @@ public slots:
 private slots:
     void connectPages();
     void connectHelpButtons();
-    void helpBtn_pressed(int helpIndex);
     void keyFound(bool found, bool* featuresMatrix);
 
     void clearState();
@@ -143,6 +142,7 @@ private slots:
 
 signals:
     void showStatusMessage(const QString &text, int status = 0);
+    void showHelp(int helpIndex);
 };
 
 #endif // STATICPAGE_H
