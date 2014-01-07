@@ -14,7 +14,7 @@ BEGIN
             VALUE "FileDescription",    VER_FILEDESCRIPTION_STR
             VALUE "FileVersion",        VERSION_WIN_STR
             VALUE "InternalName",       VER_INTERNALNAME_STR
-            VALUE "LegalCopyright",     "Copyright © 2011-2013 Yubico"
+            VALUE "LegalCopyright",     "Copyright © 2011-2014 Yubico"
             VALUE "OriginalFilename",   VER_ORIGINALFILENAME_STR
             VALUE "ProductName",        VER_PRODUCTNAME_STR
             VALUE "ProductVersion",     VERSION_WIN_STR
