@@ -618,5 +618,5 @@ void MainWindow::toggleAnimation(bool checked) {
 }
 
 void MainWindow::triggerDiagnostics() {
-    m_diagnostics->exec();
+    m_diagnostics->show();
 }
