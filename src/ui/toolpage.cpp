@@ -399,7 +399,7 @@ void ToolPage::on_ndefTextRadio_toggled(bool checked) {
     } else {
         ui->ndefTextLangEdit->setText("en-US");
         ui->ndefTextLangEdit->setEnabled(false);
-        ui->ndefEdit->setPlaceholderText("http://example.com/?otp=");
+        ui->ndefEdit->setPlaceholderText("https://my.yubico.com/neo/");
     }
 }
 

@@ -1188,7 +1188,7 @@ color: rgb(118, 116, 108);</string>
       <number>80</number>
      </property>
      <property name="placeholderText">
-      <string>http://example.com/?otp=</string>
+       <string>https://my.yubico.com/neo/</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="ndefTextLangEdit">
