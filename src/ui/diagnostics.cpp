@@ -89,7 +89,7 @@ QString Diagnostics::osVersion() {
         case QSysInfo::MV_LEOPARD:
             mac += "Leopard";
             break;
-        case QSysInfo::MV_SNOWLEOPAD:
+        case QSysInfo::MV_SNOWLEOPARD:
             mac += "SnowLeopard";
             break;
         case QSysInfo::MV_LION:
@@ -97,9 +97,6 @@ QString Diagnostics::osVersion() {
             break;
         case QSysInfo::MV_MOUNTAINLION:
             mac += "MountainLion";
-            break;
-        case QSysInfo::MV_MAVERICKS:
-            mac += "Mavericks";
             break;
         default:
             mac += "unknown";
