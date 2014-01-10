@@ -1187,9 +1187,6 @@ color: rgb(118, 116, 108);</string>
      <property name="maxLength">
       <number>80</number>
      </property>
-     <property name="placeholderText">
-      <string/>
-     </property>
     </widget>
     <widget class="QLineEdit" name="ndefTextLangEdit">
      <property name="enabled">
