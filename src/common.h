@@ -122,7 +122,7 @@ enum AccMode {
 //Warnings
 
 #define OVERWRITE_CONF_SLOT1        tr("Overwrite configuration slot 1?")
-#define WARN_OVERWRITE_CONF_SLOT1   tr("By re-programming Slot 1 of your YubiKey, you will lose ALL abilities to authenticate against Yubico online severs, forum, Wiki, etc. (unless you upload your new configuration to Yubico server)\n\nAre you sure you want to overwrite the configuration slot 1?")
+#define WARN_OVERWRITE_CONF_SLOT1   tr("If you have a YubiKey VIP, this slot should contain a Symantec VIP credential by default. You should refrain from rewriting this Slot as a Symantec VIP credential can only be programmed during manufacture - you will thus not be able to get a new one.\n\nIf you have any other YubiKey, this slot should contain a Yubico OTP credential by default. This credential is required for using the YubiKey with many of our services and that of our partners. If you overwrite this and want to use it again later, you will need to reprogram it and upload the new one to our YubiCloud validation service.\n\nAre you sure you want to overwrite the configuration slot 1?")
 
 #define RESTORE_SETTING             tr("Restore default settings?")
 #define WARN_RESTORE_SETTING        tr("Are you sure you want to restore the default settings?")
