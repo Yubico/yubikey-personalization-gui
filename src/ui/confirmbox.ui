@@ -76,7 +76,7 @@ color: rgb(0, 0, 0);</string>
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>430</width>
          <height>0</height>
         </size>
        </property>
