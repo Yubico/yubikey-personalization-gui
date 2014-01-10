@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>5</number>
+   <number>3</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -264,7 +264,7 @@ font-weight: bold;</string>
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QWidget" name="importBox">
+    <widget class="QWidget" name="importBox" native="true">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -380,7 +380,7 @@ color: rgb(140, 192, 65);</string>
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="inputMask">
-      <string>nn nn nn nn nn nn nn nn nn nn nn nn nn nn nn nn; </string>
+      <string>nn nn nn nn nn nn nn nn nn nn nn nn nn nn nn nn</string>
      </property>
      <property name="text">
       <string>               </string>
@@ -443,7 +443,7 @@ color: rgb(140, 192, 65);</string>
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="inputMask">
-      <string>nn nn nn nn nn nn nn nn nn nn nn nn nn nn nn nn; </string>
+      <string>nn nn nn nn nn nn nn nn nn nn nn nn nn nn nn nn</string>
      </property>
      <property name="text">
       <string>               </string>
@@ -548,7 +548,7 @@ font-weight: bold;</string>
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="inputMask">
-      <string>00000000000000000000; </string>
+      <string>00000000000000000000</string>
      </property>
      <property name="text">
       <string>0</string>
@@ -1182,13 +1182,13 @@ color: rgb(118, 116, 108);</string>
       </rect>
      </property>
      <property name="text">
-      <string/>
+      <string>https://my.yubico.com/neo/</string>
      </property>
      <property name="maxLength">
       <number>80</number>
      </property>
      <property name="placeholderText">
-       <string>https://my.yubico.com/neo/</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="ndefTextLangEdit">
@@ -1273,7 +1273,7 @@ color: rgb(118, 116, 108);</string>
        </rect>
       </property>
       <property name="inputMask">
-       <string>hh hh hh hh hh hh; </string>
+       <string>hh hh hh hh hh hh</string>
       </property>
       <property name="text">
        <string>00 00 00 00 00 00</string>
@@ -1525,7 +1525,7 @@ color: rgb(140, 192, 65);</string>
       </rect>
      </property>
      <property name="inputMask">
-      <string>hh hh hh hh hh hh; </string>
+      <string>hh hh hh hh hh hh</string>
      </property>
      <property name="text">
       <string>00 00 00 00 00 00</string>

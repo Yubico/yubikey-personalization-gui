@@ -336,9 +336,12 @@ void ToolPage::on_converterDecCopyBtn_clicked() {
 }
 
 void ToolPage::resetNdefPage() {
-    ui->ndefEdit->clear();
+    ui->ndefEdit->setText("https://my.yubico.com/neo/");
     ui->ndefTextLangEdit->setText("en-US");
     ui->ndefUriRadio->setChecked(true);
+    ui->ndefAccCodeCheckbox->setChecked(false);
+    ui->ndefSlot1Radio->setChecked(false);
+    ui->ndefSlot2Radio->setChecked(false);
 }
 
 void ToolPage::programNdef() {
@@ -395,11 +398,11 @@ void ToolPage::ndefWritten(bool written, __attribute__((unused)) const QString &
 void ToolPage::on_ndefTextRadio_toggled(bool checked) {
     if(checked) {
         ui->ndefTextLangEdit->setEnabled(true);
-        ui->ndefEdit->setPlaceholderText("");
+        ui->ndefEdit->setText("");
     } else {
         ui->ndefTextLangEdit->setText("en-US");
         ui->ndefTextLangEdit->setEnabled(false);
-        ui->ndefEdit->setPlaceholderText("https://my.yubico.com/neo/");
+        ui->ndefEdit->setText("https://my.yubico.com/neo/");
     }
 }
 
