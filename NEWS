@@ -1,6 +1,8 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.14 (unreleased)
+* Version 3.1.14 (released 2014-01-10)
+
+** Fix layout of the confirmbox window.
 
 * Version 3.1.13 (released 2014-01-10)
 
