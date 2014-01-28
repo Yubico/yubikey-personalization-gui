@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011-2013 Yubico AB.  All rights reserved.
+Copyright (C) 2011-2014 Yubico AB.  All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -84,7 +84,7 @@ QString YubiKeyUtil::qstrHexEncode(const unsigned char *str, size_t strLen) {
     int rc = hexModhexEncode(result, &resultLen, str, strLen, false);
 
     if(rc > 0) {
-        qDebug("hex encoded string: -%s- (%lu)", result, sizeof(result));
+        qDebug() << "hex encoded string: " << QString(result) << sizeof(result);
         return QString::fromLocal8Bit(result);
     }
 
@@ -117,7 +117,7 @@ QString YubiKeyUtil::qstrModhexEncode(const unsigned char *str, size_t strLen) {
     int rc = hexModhexEncode(result, &resultLen, str, strLen, true);
 
     if(rc > 0) {
-        qDebug("modhex encoded string: -%s- (%lu)", result, sizeof(result));
+        qDebug() << "modhex encoded string: " << QString(result) << sizeof(result);
         return QString::fromLocal8Bit(result);
     }
 
