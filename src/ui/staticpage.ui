@@ -140,7 +140,7 @@ font-weight: bold;</string>
       </rect>
      </property>
      <property name="text">
-      <string>Quicky program a YubiKey to emit your desired static password</string>
+      <string>Quickly program a YubiKey to emit your desired static password</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
