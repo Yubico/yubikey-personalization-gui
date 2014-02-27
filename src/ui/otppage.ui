@@ -140,7 +140,7 @@ font-weight: bold;</string>
       </rect>
      </property>
      <property name="text">
-      <string>Quicky program a YubiKey for use with Yubico Validation Server</string>
+      <string>Quickly program a YubiKey for use with Yubico Validation Server</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

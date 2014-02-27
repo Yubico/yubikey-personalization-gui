@@ -140,7 +140,7 @@ font-weight: bold;</string>
       </rect>
      </property>
      <property name="text">
-      <string>Quicky program a YubiKey in OATH-HOTP mode</string>
+      <string>Quickly program a YubiKey in OATH-HOTP mode</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
