@@ -59,7 +59,7 @@ For building on linux pkg-config is used to find these dependencies.
 
 -----------
   $ sudo apt-get install libusb-1.0-0-dev qt4-qmake libykpers-1-dev \
-      libyubikey-dev
+      libyubikey-dev libqt4-dev
 -----------
 
 Command-line build
