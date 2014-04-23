@@ -150,9 +150,8 @@ void YubiKeyUtil::qstrDecDecode(unsigned char *result, size_t *resultLen,
 
     *resultLen = str.size() / 2;
 
-    unsigned char val = 0;
     for(size_t i = 0; i < *resultLen; i++) {
-        val = str.mid(i * 2, 2).toInt();
+        unsigned char val = str.mid(i * 2, 2).toInt();
         result[i] = ((val / 10) << 4) | (val % 10);
     }
 }
