@@ -217,29 +217,31 @@ QString YubiKeyLogger::resolve_hotpDigits(YubiKeyConfig *ykConfig, QString name 
 }
 
 QString YubiKeyLogger::resolve_eventType(YubiKeyConfig *ykConfig, QString name __attribute__((unused))) {
-    int mode = ykConfig->programmingMode();
-    if(mode == YubiKeyConfig::Mode_YubicoOtp) {
-        return(tr("Yubico OTP"));
-    } else if(mode == YubiKeyConfig::Mode_Static) {
-        QString eventType = tr("Static Password");
-        if(ykConfig->shortTicket()) {
-            if(ykConfig->staticTicket()) {
-                eventType.append(tr(": Short"));
-            } else {
-                eventType.append(tr(": Scan Code"));
+    switch(ykConfig->programmingMode()) {
+        case YubiKeyConfig::Mode_YubicoOtp:
+            return(tr("Yubico OTP"));
+        case YubiKeyConfig::Mode_Static:
+            {
+                QString eventType = tr("Static Password");
+                if(ykConfig->shortTicket()) {
+                    if(ykConfig->staticTicket()) {
+                        eventType.append(tr(": Short"));
+                    } else {
+                        eventType.append(tr(": Scan Code"));
+                    }
+                }
+                return eventType;
             }
-        }
-        return eventType;
-    } else if(mode == YubiKeyConfig::Mode_OathHotp) {
-        return(tr("OATH-HOTP"));
-    } else if(mode == YubiKeyConfig::Mode_ChalRespHmac) {
-        return(tr("Challenge-Response: Yubico OTP"));
-    } else if(mode == YubiKeyConfig::Mode_ChalRespHmac) {
-        return(tr("Challenge-Response: HMAC-SHA1"));
-    } else if(mode == YubiKeyConfig::Mode_Update) {
-        return(tr("Configuration Update"));
-    } else if(mode == YubiKeyConfig::Mode_Swap) {
-        return(tr("Configuration Swap"));
+        case YubiKeyConfig::Mode_OathHotp:
+            return(tr("OATH-HOTP"));
+        case YubiKeyConfig::Mode_ChalRespYubico:
+            return(tr("Challenge-Response: Yubico OTP"));
+        case YubiKeyConfig::Mode_ChalRespHmac:
+            return(tr("Challenge-Response: HMAC-SHA1"));
+        case YubiKeyConfig::Mode_Update:
+            return(tr("Configuration Update"));
+        case YubiKeyConfig::Mode_Swap:
+            return(tr("Configuration Swap"));
     }
     return(tr("Unknown programming mode"));
 }
