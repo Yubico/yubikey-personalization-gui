@@ -71,6 +71,7 @@ YubiKeyConfig::YubiKeyConfig() {
     m_chalYubico = false;
     m_chalHmac = false;
     m_chalBtnTrig = false;
+    m_hmacLT64 = false;
     m_serialBtnVisible = settings.value(SG_SR_BTN_VISIBLE).toBool();
     m_serialUsbVisible = settings.value(SG_SR_USB_VISIBLE).toBool();
     m_serialApiVisible = settings.value(SG_SR_API_VISIBLE).toBool();
