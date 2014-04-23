@@ -129,7 +129,8 @@ QString Diagnostics::osVersion() {
             break;
     }
     return win;
-#endif
+#else
     return "Unknown OS";
+#endif
 }
 
