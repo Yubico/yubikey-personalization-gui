@@ -295,6 +295,7 @@ void StaticPage::resetQuickPage() {
     ui->quickScanCodesTxt->clear();
     ui->quickInsertTabBtn->setEnabled(true);
     ui->quickClearBtn->setEnabled(true);
+    ui->quickKeymapCmb->setCurrentIndex(0);
 
     ui->quickStopBtn->setEnabled(false);
     ui->quickResetBtn->setEnabled(false);
@@ -1107,4 +1108,12 @@ void StaticPage::setCurrentSlot(int slot) {
         ui->quickConfigSlot1Radio->setChecked(slot == 1);
         ui->quickConfigSlot2Radio->setChecked(slot == 2);
     }
+}
+
+void StaticPage::on_quickKeymapCmb_currentIndexChanged(int index)
+{
+    if (index == 0)
+        ui->quickScanCodesTxt->setEnabled(false);
+    else
+        ui->quickScanCodesTxt->setEnabled(true);
 }

@@ -140,6 +140,8 @@ private slots:
 
     void on_quickScanCodesTxt_textEdited(const QString &text);
 
+    void on_quickKeymapCmb_currentIndexChanged(int index);
+
 signals:
     void showStatusMessage(const QString &text, int status = 0);
     void showHelp(int helpIndex);

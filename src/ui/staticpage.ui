@@ -30,7 +30,7 @@
 color: rgb(0, 0, 0);</string>
   </property>
   <property name="currentIndex">
-   <number>2</number>
+   <number>1</number>
   </property>
   <widget class="QWidget" name="basePage">
    <widget class="QLabel" name="baseHeadingLbl">
@@ -622,6 +622,9 @@ font-weight: bold;</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="quickScanCodesTxt">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>490</x>
@@ -630,6 +633,63 @@ font-weight: bold;</string>
        <height>20</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Verdana</family>
+       <pointsize>-1</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="quickKeymapLbl">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>105</y>
+       <width>51</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight:normal;</string>
+     </property>
+     <property name="text">
+      <string>Keyboard</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="quickKeymapCmb">
+     <property name="geometry">
+      <rect>
+       <x>549</x>
+       <y>101</y>
+       <width>141</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-weight: normal;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Choose a layout ...</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>US Keyboard</string>
+      </property>
+     </item>
     </widget>
    </widget>
    <widget class="QGroupBox" name="quickActionsBox">
@@ -1130,7 +1190,7 @@ border-radius: 10px;
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="inputMask">
-      <string>hh hh hh hh hh hh hh hh hh hh hh hh hh hh hh hh; </string>
+      <string>hh hh hh hh hh hh hh hh hh hh hh hh hh hh hh hh</string>
      </property>
      <property name="text">
       <string>00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</string>
@@ -1221,7 +1281,7 @@ font-weight: bold;</string>
       <string notr="true">font-weight: normal;</string>
      </property>
      <property name="inputMask">
-      <string>hh hh hh hh hh hh; </string>
+      <string>hh hh hh hh hh hh</string>
      </property>
      <property name="text">
       <string>00 00 00 00 00 00</string>
