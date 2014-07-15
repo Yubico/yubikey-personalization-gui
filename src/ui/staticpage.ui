@@ -362,9 +362,6 @@ border-radius: 10px;
      </property>
     </widget>
     <widget class="QLineEdit" name="quickStaticTxt">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -555,9 +552,6 @@ font-weight: bold;</string>
      </property>
     </widget>
     <widget class="QPushButton" name="quickClearBtn">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
      <property name="geometry">
       <rect>
        <x>270</x>
@@ -622,9 +616,6 @@ font-weight: bold;</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="quickScanCodesTxt">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
      <property name="geometry">
       <rect>
        <x>490</x>

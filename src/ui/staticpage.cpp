@@ -292,9 +292,11 @@ void StaticPage::resetQuickPage() {
 
     ui->quickStaticLenTxt->setText("0");
     ui->quickStaticTxt->clear();
+    ui->quickStaticTxt->setEnabled(false);
     ui->quickScanCodesTxt->clear();
-    ui->quickInsertTabBtn->setEnabled(true);
-    ui->quickClearBtn->setEnabled(true);
+    ui->quickScanCodesTxt->setEnabled(false);
+    ui->quickInsertTabBtn->setEnabled(false);
+    ui->quickClearBtn->setEnabled(false);
     ui->quickKeymapCmb->setCurrentIndex(0);
 
     ui->quickStopBtn->setEnabled(false);
@@ -1112,8 +1114,21 @@ void StaticPage::setCurrentSlot(int slot) {
 
 void StaticPage::on_quickKeymapCmb_currentIndexChanged(int index)
 {
-    if (index == 0)
+    // Reset these, independent of the chosen layout
+    ui->quickStaticLenTxt->setText("0");
+    ui->quickStaticTxt->clear();
+    ui->quickScanCodesTxt->clear();
+
+    if (index == 0) {
+        ui->quickStaticTxt->setEnabled(false);
         ui->quickScanCodesTxt->setEnabled(false);
-    else
+        ui->quickInsertTabBtn->setEnabled(false);
+        ui->quickClearBtn->setEnabled(false);
+    }
+    else {
+        ui->quickStaticTxt->setEnabled(true);
         ui->quickScanCodesTxt->setEnabled(true);
+        ui->quickInsertTabBtn->setEnabled(true);
+        ui->quickClearBtn->setEnabled(true);
+    }
 }
