@@ -177,7 +177,8 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
             format += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>{endl}<KeyContainer Version=\"1.0\" xmlns=\"urn:ietf:params:xml:ns:keyprov:pskc\">{endl}";
             m_started = false;
         }
-        format += "<KeyPackage><DeviceInfo><Manufacturer>Yubico</Manufacturer><SerialNo>{serial}</SerialNo></DeviceInfo><Key Id=\"{serial}:{configSlot}\"";
+        format += "<KeyPackage><DeviceInfo><Manufacturer>Yubico</Manufacturer><SerialNo>{serial}</SerialNo></DeviceInfo>";
+        format += "<CryptoModuleInfo><Id>{configSlot}</Id></CryptoModuleInfo><Key Id=\"{serial}:{configSlot}\"";
         if(ykConfig->programmingMode() == YubiKeyConfig::Mode_YubicoOtp) {
             format += "Algorithm=\"http://www.yubico.com/#yubikey-aes\"><AlgorithmParameters><ResponseFormat Length=\"{tokenLength}\" Encoding=\"ALPHANUMERIC\"/></AlgorithmParameters>";
         } else if(ykConfig->programmingMode() == YubiKeyConfig::Mode_OathHotp) {
