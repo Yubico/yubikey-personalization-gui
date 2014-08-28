@@ -68,6 +68,7 @@ public:
     static void setLogFormat(Format format);
     static void setFlexibleFormat(QString);
     static QStringList getLogNames();
+    static void closeLogFile(void);
 
 private:
     static bool m_enabled;
@@ -81,7 +82,6 @@ private:
 
     static QFile *m_logFile;
     static QFile *getLogFile(void);
-    static void closeLogFile(void);
 
     static QString resolve_eventType(YubiKeyConfig*, QString);
     static QString resolve_timestamp(YubiKeyConfig*, QString);

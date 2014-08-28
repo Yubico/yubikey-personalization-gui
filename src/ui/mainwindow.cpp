@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "yubikeyfinder.h"
 #include "yubikeywriter.h"
 #include "yubikeyutil.h"
+#include "yubikeylogger.h"
 #include "ui/otppage.h"
 #include "ui/oathpage.h"
 #include "ui/staticpage.h"
@@ -62,6 +63,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Connect other signals and slots
     connect(ui->exitMenuBtn, SIGNAL(clicked()), qApp, SLOT(quit()));
+
+    connect(qApp, SIGNAL(aboutToQuit()), this, SLOT(aboutToQuit()));
 
     connect(YubiKeyFinder::getInstance(), SIGNAL(keyFound(bool, bool*, int)),
             this, SLOT(keyFound(bool, bool*, int)));
@@ -634,4 +637,8 @@ void MainWindow::triggerDiagnostics() {
 void MainWindow::triggerHelp(int index) {
     m_help->setHelpIndex((HelpBox::Help)index);
     m_help->show();
+}
+
+void MainWindow::aboutToQuit() {
+    YubiKeyLogger::closeLogFile();
 }

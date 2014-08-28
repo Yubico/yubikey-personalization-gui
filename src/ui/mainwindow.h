@@ -108,6 +108,8 @@ private slots:
     void toggleAnimation(bool checked);
     void triggerDiagnostics();
     void triggerHelp(int index);
+
+    void aboutToQuit();
 };
 
 #endif // MAINWINDOW_H
