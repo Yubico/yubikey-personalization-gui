@@ -83,6 +83,9 @@ private:
     static QFile *m_logFile;
     static QFile *getLogFile(void);
 
+    static void endPSKC();
+    static void logString(QString);
+
     static QString resolve_eventType(YubiKeyConfig*, QString);
     static QString resolve_timestamp(YubiKeyConfig*, QString);
     static QString resolve_hotpDigits(YubiKeyConfig*, QString);

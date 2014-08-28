@@ -98,6 +98,9 @@ QFile *YubiKeyLogger::getLogFile() {
 
 void YubiKeyLogger::closeLogFile() {
     if(m_logFile != NULL) {
+        if(m_format == Format_PSKC) {
+            endPSKC();
+        }
         m_logFile->close();
         delete(m_logFile);
         m_logFile = NULL;
@@ -148,13 +151,6 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
         return;
     }
 
-    QFile *file = getLogFile();
-    if(file == NULL) {
-        return;
-    }
-
-    QTextStream out(file);
-
     QString format = "";
     if(m_format == Format_Traditional) {
         if(m_started) {
@@ -176,6 +172,10 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
         }
         format += "{secretKeyTxt},{newAccessCodeTxt},{timestampFixed},";
     } else if(m_format == Format_PSKC) {
+        if(m_started) {
+            format += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>{endl}<KeyContainer Version=\"1.0\" xmlns=\"urn:ietf:params:xml:ns:keyprov:pskc\">{endl}";
+            m_started = false;
+        }
         format += "<KeyPackage><DeviceInfo><Manufacturer>Yubico</Manufacturer><SerialNo>{serial}</SerialNo></DeviceInfo><Key Id=\"{serial}\"";
         if(ykConfig->programmingMode() == YubiKeyConfig::Mode_YubicoOtp) {
             // TODO: add pubIdLen or something like that instead of hardcoded 44
@@ -201,8 +201,7 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
         return;
     }
     format = formatLog(ykConfig, format);
-    out << format << endl;
-    file->flush();
+    logString(format);
 }
 
 void YubiKeyLogger::enableLogging() {
@@ -306,4 +305,20 @@ QStringList YubiKeyLogger::getLogNames() {
         list << logging_map[i].name;
     }
     return list;
+}
+
+void YubiKeyLogger::endPSKC() {
+    logString("</KeyContainer>");
+}
+
+void YubiKeyLogger::logString(QString string) {
+    QFile *file = getLogFile();
+    if(file == NULL) {
+        qDebug() << "Failed to get logfile";
+        return;
+    }
+
+    QTextStream out(file);
+    out << string << endl;
+    file->flush();
 }
