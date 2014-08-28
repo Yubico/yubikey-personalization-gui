@@ -86,6 +86,7 @@ private:
     static QString resolve_timestamp(YubiKeyConfig*, QString);
     static QString resolve_hotpDigits(YubiKeyConfig*, QString);
     static QString resolve_symbol(YubiKeyConfig*, QString);
+    static QString resolve_secretKeyB64(YubiKeyConfig*, QString);
 };
 
 #endif // YUBIKEYLOGGER_H

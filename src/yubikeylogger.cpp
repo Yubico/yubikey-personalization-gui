@@ -56,6 +56,7 @@ struct logging_st YubiKeyLogger::logging_map[] = {
     { "pubIdTxt", "pubIdTxt", STRING, NULL },
     { "pvtIdTxt", "pvtIdTxt", STRING, NULL },
     { "secretKeyTxt", "secretKeyTxt", STRING, NULL },
+    { "secretKeyB64", NULL, STRING, YubiKeyLogger::resolve_secretKeyB64 },
     { "currentAccessCodeTxt", "currentAccessCodeTxt", STRING, NULL },
     { "newAccessCodeTxt", "newAccessCodeTxt", STRING, NULL },
     { "hotpDigits", NULL, STRING, YubiKeyLogger::resolve_hotpDigits },
@@ -175,8 +176,7 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
         } else {
             format += ">";
         }
-        // replace secretKeyTxt with base64 encoded..
-        format += "<Data><Secret><PlainValue>{secretKeyTxt}</PlainValue></Secret>";
+        format += "<Data><Secret><PlainValue>{secretKeyB64}</PlainValue></Secret>";
         if(ykConfig->programmingMode() == YubiKeyConfig::Mode_OathHotp) {
             format += "<Counter><PlainValue>{oathMovingFactorSeed}</PlainValue></Counter>";
         }
@@ -282,6 +282,11 @@ QString YubiKeyLogger::resolve_symbol(YubiKeyConfig *ykConfig __attribute__((unu
         return "\t";
     }
     return "";
+}
+
+QString YubiKeyLogger::resolve_secretKeyB64(YubiKeyConfig *ykConfig, QString name __attribute__((unused))) {
+    QByteArray decodedSecret = QByteArray::fromHex(ykConfig->secretKeyTxt().toLatin1());
+    return decodedSecret.toBase64();
 }
 
 QStringList YubiKeyLogger::getLogNames() {
