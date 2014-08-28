@@ -176,13 +176,14 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
             format += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>{endl}<KeyContainer Version=\"1.0\" xmlns=\"urn:ietf:params:xml:ns:keyprov:pskc\">{endl}";
             m_started = false;
         }
-        format += "<KeyPackage><DeviceInfo><Manufacturer>Yubico</Manufacturer><SerialNo>{serial}</SerialNo></DeviceInfo><Key Id=\"{serial}\"";
+        format += "<KeyPackage><DeviceInfo><Manufacturer>Yubico</Manufacturer><SerialNo>{serial}</SerialNo></DeviceInfo><Key Id=\"{serial}:{configSlot}\"";
         if(ykConfig->programmingMode() == YubiKeyConfig::Mode_YubicoOtp) {
             // TODO: add pubIdLen or something like that instead of hardcoded 44
-            format += " Algorithm=\"http://www.yubico.com/#yubikey-aes\"><AlgorithmParameters><ResponseFormat Length=\"44\" Encoding=\"ALPHANUMERIC\"/></AlgorithmParameters>";
+            format += "Algorithm=\"http://www.yubico.com/#yubikey-aes\"><AlgorithmParameters><ResponseFormat Length=\"44\" Encoding=\"ALPHANUMERIC\"/></AlgorithmParameters>";
         } else if(ykConfig->programmingMode() == YubiKeyConfig::Mode_OathHotp) {
-            format += " Algorithm=\"urn:ietf:params:xml:ns:keyprov:pskc:hotp\"><AlgorithmParameters><ResponseFormat Length=\"{hotpDigits}\" Encoding=\"DECIMAL\"/></AlgorithmParameters>";
+            format += "Algorithm=\"urn:ietf:params:xml:ns:keyprov:pskc:hotp\"><AlgorithmParameters><ResponseFormat Length=\"{hotpDigits}\" Encoding=\"DECIMAL\"/></AlgorithmParameters>";
         } else {
+            qDebug() << "PSKC is primarily for Oath-HOTP and Yubico-OTP";
             format += ">";
         }
         format += "<Data><Secret><PlainValue>{secretKeyB64}</PlainValue></Secret>";
