@@ -180,9 +180,9 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
         format += "<KeyPackage><DeviceInfo><Manufacturer>Yubico</Manufacturer><SerialNo>{serial}</SerialNo></DeviceInfo>";
         format += "<CryptoModuleInfo><Id>{configSlot}</Id></CryptoModuleInfo><Key Id=\"{serial}:{configSlot}\"";
         if(ykConfig->programmingMode() == YubiKeyConfig::Mode_YubicoOtp) {
-            format += "Algorithm=\"http://www.yubico.com/#yubikey-aes\"><AlgorithmParameters><ResponseFormat Length=\"{tokenLength}\" Encoding=\"ALPHANUMERIC\"/></AlgorithmParameters>";
+            format += " Algorithm=\"http://www.yubico.com/#yubikey-aes\"><AlgorithmParameters><ResponseFormat Length=\"{tokenLength}\" Encoding=\"ALPHANUMERIC\"/></AlgorithmParameters>";
         } else if(ykConfig->programmingMode() == YubiKeyConfig::Mode_OathHotp) {
-            format += "Algorithm=\"urn:ietf:params:xml:ns:keyprov:pskc:hotp\"><AlgorithmParameters><ResponseFormat Length=\"{tokenLength}\" Encoding=\"DECIMAL\"/></AlgorithmParameters>";
+            format += " Algorithm=\"urn:ietf:params:xml:ns:keyprov:pskc:hotp\"><AlgorithmParameters><ResponseFormat Length=\"{tokenLength}\" Encoding=\"DECIMAL\"/></AlgorithmParameters>";
         } else {
             qDebug() << "PSKC is primarily for Oath-HOTP and Yubico-OTP";
             format += ">";
