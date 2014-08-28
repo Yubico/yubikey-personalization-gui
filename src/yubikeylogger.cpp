@@ -165,6 +165,26 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
             format += ",,";
         }
         format += "{secretKeyTxt},{newAccessCodeTxt},{timestampFixed},";
+    } else if(m_format == Format_PSKC) {
+        format += "<KeyPackage><DeviceInfo><Manufacturer>Yubico</Manufacturer><SerialNo>{serial}</SerialNo></DeviceInfo><Key Id=\"{serial}\"";
+        if(ykConfig->programmingMode() == YubiKeyConfig::Mode_YubicoOtp) {
+            // TODO: add pubIdLen or something like that instead of hardcoded 44
+            format += " Algorithm=\"http://www.yubico.com/#yubikey-aes\"><AlgorithmParameters><ResponseFormat Length=\"44\" Encoding=\"ALPHANUMERIC\"/></AlgorithmParameters>";
+        } else if(ykConfig->programmingMode() == YubiKeyConfig::Mode_OathHotp) {
+            format += " Algorithm=\"urn:ietf:params:xml:ns:keyprov:pskc:hotp\"><AlgorithmParameters><ResponseFormat Length=\"{hotpDigits}\" Encoding=\"DECIMAL\"/></AlgorithmParameters>";
+        } else {
+            format += ">";
+        }
+        // replace secretKeyTxt with base64 encoded..
+        format += "<Data><Secret><PlainValue>{secretKeyTxt}</PlainValue></Secret>";
+        if(ykConfig->programmingMode() == YubiKeyConfig::Mode_OathHotp) {
+            format += "<Counter><PlainValue>{oathMovingFactorSeed}</PlainValue></Counter>";
+        }
+        format += "</Data>";
+        if(ykConfig->programmingMode() == YubiKeyConfig::Mode_YubicoOtp) {
+            format += "<UserId>CN={pubIdTxt}, UID={pvtIdTxt}</UserId>";
+        }
+        format += "</Key></KeyPackage>";
     } else if(m_format == Format_Flexible) {
         format = m_flexibleFormat;
     } else {

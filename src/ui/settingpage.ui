@@ -309,6 +309,11 @@ color: rgb(140, 192, 65);</string>
        <string>Flexible format</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>PSKC format</string>
+      </property>
+     </item>
     </widget>
     <widget class="QLineEdit" name="logFormatEdit">
      <property name="enabled">

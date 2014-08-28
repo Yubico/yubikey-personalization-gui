@@ -54,6 +54,7 @@ public:
         Format_Traditional,
         Format_Yubico,
         Format_Flexible,
+        Format_PSKC,
     };
     static void logConfig(YubiKeyConfig *ykConfig);
 
