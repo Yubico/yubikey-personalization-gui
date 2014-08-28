@@ -96,6 +96,15 @@ QFile *YubiKeyLogger::getLogFile() {
     return m_logFile;
 }
 
+void YubiKeyLogger::closeLogFile() {
+    if(m_logFile != NULL) {
+        m_logFile->close();
+        delete(m_logFile);
+        m_logFile = NULL;
+        m_started = true;
+    }
+}
+
 QString YubiKeyLogger::formatLog(YubiKeyConfig *ykConfig, QString format) {
     for(unsigned long i = 0; i < (sizeof(logging_map) / sizeof(logging_st)); i++) {
         QString token = QString("{") + logging_map[i].name + QString("}");
@@ -209,6 +218,7 @@ bool YubiKeyLogger::isLogging() {
 }
 
 void YubiKeyLogger::setLogFilename(const QString &filename) {
+    closeLogFile();
     m_filename = filename;
 }
 
@@ -221,6 +231,7 @@ QString YubiKeyLogger::defaultLogFilename() {
 }
 
 void YubiKeyLogger::setLogFormat(Format format) {
+    closeLogFile();
     m_format = format;
 }
 

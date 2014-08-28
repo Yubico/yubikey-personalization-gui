@@ -81,6 +81,7 @@ private:
 
     static QFile *m_logFile;
     static QFile *getLogFile(void);
+    static void closeLogFile(void);
 
     static QString resolve_eventType(YubiKeyConfig*, QString);
     static QString resolve_timestamp(YubiKeyConfig*, QString);
