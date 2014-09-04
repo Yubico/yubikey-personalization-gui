@@ -458,7 +458,7 @@ color: rgb(118, 116, 108);</string>
      </rect>
     </property>
     <property name="text">
-     <string>For bug reports or suggestions, please head to the</string>
+     <string>If you have any questions or suggestions, please send an email to</string>
     </property>
    </widget>
    <widget class="QPushButton" name="supportBtn">
@@ -494,7 +494,7 @@ text-decoration: underline;
 color: rgb(5, 67, 168);</string>
     </property>
     <property name="text">
-     <string><a href="https://github.com/Yubico/yubikey-personalization-gui/issues">GitHub page</a>.</string>
+     <string>support@yubico.com</string>
     </property>
     <property name="autoDefault">
      <bool>false</bool>
