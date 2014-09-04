@@ -453,19 +453,19 @@ color: rgb(118, 116, 108);</string>
      <rect>
       <x>20</x>
       <y>290</y>
-      <width>385</width>
+      <width>191</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>If you have any questions or suggestions, please send an email to</string>
+     <string>For help and discussion, head to</string>
     </property>
    </widget>
    <widget class="QPushButton" name="supportBtn">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>289</y>
+      <x>210</x>
+      <y>290</y>
       <width>131</width>
       <height>20</height>
      </rect>
@@ -494,7 +494,7 @@ text-decoration: underline;
 color: rgb(5, 67, 168);</string>
     </property>
     <property name="text">
-     <string>support@yubico.com</string>
+     <string>http://yubi.co/forum</string>
     </property>
     <property name="autoDefault">
      <bool>false</bool>
