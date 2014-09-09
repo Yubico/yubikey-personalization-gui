@@ -151,5 +151,5 @@ void AboutPage::btn_pressed(int pageIndex) {
 }
 
 void AboutPage::on_supportBtn_clicked() {
-    QDesktopServices::openUrl(QUrl(SUPPORT_EMAIL));
+    QDesktopServices::openUrl(QUrl(SUPPORT_LINK));
 }
