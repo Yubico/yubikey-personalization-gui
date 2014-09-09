@@ -464,8 +464,8 @@ color: rgb(118, 116, 108);</string>
    <widget class="QPushButton" name="supportBtn">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>290</y>
+      <x>20</x>
+      <y>310</y>
       <width>131</width>
       <height>20</height>
      </rect>
