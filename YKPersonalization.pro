@@ -333,6 +333,8 @@ macx:!force_pkgconfig {
         rm -rf $$_FRAMEWORKDIR/QtCore.framework/Versions/4/Headers && \
         cp -R $$_QT_LIBDIR/QtGui.framework $$_FRAMEWORKDIR/QtGui.framework && \
         rm -rf $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Headers && \
+        rm -rf $$_FRAMEWORKDIR/QtGui.framework/QtGui_debug.dSYM && \
+        rm -rf $$_FRAMEWORKDIR/QtGui.framework/QtGui_debug.prl && \
         find $$_FRAMEWORKDIR -type l -print0 | xargs -0 rm -f  && \
         test -d $$_BASEDIR/Resources/qt_menu.nib || \
         mv $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
