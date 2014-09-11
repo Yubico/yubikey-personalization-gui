@@ -63,14 +63,21 @@ Section "YubiKey Personalization Tool"
   FILE ../../build/release/libjson-c-2.dll
   FILE ../../build/release/libyubikey-0.dll
   FILE ../../build/release/libykpers-1-1.dll
-  FILE ../../build/release/QtCore4.dll
-  FILE ../../build/release/QtGui4.dll
+  FILE ../../build/release/Qt5Core.dll
+  FILE ../../build/release/Qt5Gui.dll
+  FILE ../../build/release/Qt5Widgets.dll
   FILE ../../build/release/libgcc_s_dw2-1.dll
-  FILE ../../build/release/mingwm10.dll
+  FILE ../../build/release/libwinpthread-1.dll
+  FILE ../../build/release/libstdc++-6.dll
+  FILE ../../build/release/icuin52.dll
+  FILE ../../build/release/icuuc52.dll
+  FILE ../../build/release/icudt52.dll
   SetOutPath $INSTDIR\licenses
   FILE /r ../../build/release/licenses/
   SetOutPath $INSTDIR\imageformats
-  FILE ../../build/release/qmng4.dll
+  FILE ../../build/release/qmng.dll
+  SetOutPath $INSTDIR\platforms
+  FILE ../../build/release/qwindows.dll
 SectionEnd
 
 Var MYTMP
@@ -118,17 +125,22 @@ Section "Uninstall"
   DELETE "$INSTDIR\libjson-c-2.dll"
   DELETE "$INSTDIR\libyubikey-0.dll"
   DELETE "$INSTDIR\libykpers-1-1.dll"
-  DELETE "$INSTDIR\QtCore4.dll"
-  DELETE "$INSTDIR\QtGui4.dll"
+  DELETE "$INSTDIR\Qt5Core.dll"
+  DELETE "$INSTDIR\Qt5Gui.dll"
+  DELETE "$INSTDIR\Qt5Widgets.dll"
   DELETE "$INSTDIR\libgcc_s_dw2-1.dll"
-  DELETE "$INSTDIR\libgcc_s_sjlj-1.dll"
+  DELETE "$INSTDIR\libwinpthread-1.dll"
   DELETE "$INSTDIR\libstdc++-6.dll"
-  DELETE "$INSTDIR\mingwm10.dll"
+  DELETE "$INSTDIR\icuin52.dll"
+  DELETE "$INSTDIR\icuuc52.dll"
+  DELETE "$INSTDIR\icudt52.dll"
   DELETE "$INSTDIR\licenses\*"
-  DELETE "$INSTDIR\imageformats\qmng4.dll"
+  DELETE "$INSTDIR\imageformats\qmng.dll"
+  DELETE "$INSTDIR\platforms\qwindows.dll"
 
   RMDir "$INSTDIR\licenses"
   RMDir "$INSTDIR\imageformats"
+  RMDir "$INSTDIR\platforms"
 
   ; Remove uninstaller
   Delete $INSTDIR\uninstall.exe
