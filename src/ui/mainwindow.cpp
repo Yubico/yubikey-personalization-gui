@@ -394,8 +394,10 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
             movie->setFileName(":/res/images/v2-2-animated.mng");
         } else if(version < YK_VERSION(3,0,0)){
             movie->setFileName(":/res/images/v2-3-animated.mng");
-        } else { // only case left should be version over 3, that is neo
+        } else if(version < YK_VERSION(3,3,0)){
             pixmap.load(":/res/images/neo_production.png");
+        } else { // only case left should be version over 3.3, that is neo + u2f
+            pixmap.load(":/res/images/neo_production_33.png");
         }
         if(pixmap.isNull()) {
             ui->deviceImage->setMovie(movie);
