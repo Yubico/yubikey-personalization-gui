@@ -326,18 +326,13 @@ macx:!force_pkgconfig {
 
     # copy the QT libraries into our bundle
     _BASEDIR = $${DESTDIR}/$${TARGET_MAC}.app/Contents
-    _FRAMEWORKDIR = $${_BASEDIR}/Frameworks
+    _LIBDIR = $${_BASEDIR}/lib
     _PLUGINDIR = $${_BASEDIR}/PlugIns
-    QMAKE_POST_LINK += $$quote( && mkdir -p $$_FRAMEWORKDIR && \
-        cp -R $$_QT_LIBDIR/QtCore.framework $$_FRAMEWORKDIR/QtCore.framework && \
-        rm -rf $$_FRAMEWORKDIR/QtCore.framework/Versions/4/Headers && \
-        cp -R $$_QT_LIBDIR/QtGui.framework $$_FRAMEWORKDIR/QtGui.framework && \
-        rm -rf $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Headers && \
-        find $$_FRAMEWORKDIR -type l -print0 | xargs -0 rm -f  && \
+    QMAKE_POST_LINK += $$quote( && mkdir -p $$_LIBDIR && \
+        cp $$_QT_LIBDIR/QtCore.framework/Versions/4/QtCore $$_LIBDIR && \
+        cp $$_QT_LIBDIR/QtGui.framework/Versions/4/QtGui $$_LIBDIR && \
         test -d $$_BASEDIR/Resources/qt_menu.nib || \
-        mv $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
-        test ! -d $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources || \
-        rmdir $$_FRAMEWORKDIR/QtGui.framework/Versions/4/Resources && \
+        cp -R $$_QT_LIBDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
         mkdir -p $$_PLUGINDIR/imageformats && \
         cp -R $$_QT_PLUGINDIR/imageformats/libqmng.dylib $$_PLUGINDIR/imageformats)
 
@@ -357,7 +352,7 @@ macx:!force_pkgconfig {
 
 
     # fixup all library paths..
-    _BASE = $$quote(@executable_path/../Frameworks)
+    _BASE = $$quote(@executable_path/../lib)
     _QTCORE = $$quote(QtCore.framework/Versions/4/QtCore)
     _QTGUI = $$quote(QtGui.framework/Versions/4/QtGui)
     isEmpty(_TARGET_ARCH) {
@@ -365,12 +360,11 @@ macx:!force_pkgconfig {
     } else {
         _INSTALL_NAME_TOOL = $$(TARGET_ARCH)-install_name_tool
     }
-    QMAKE_POST_LINK += $$quote( && $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_BASEDIR/MacOS/$$TARGET_MAC && \
-        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/$$_QTGUI $$_BASEDIR/MacOS/$$TARGET_MAC && \
-        chmod +w $$_FRAMEWORKDIR/$$_QTGUI && \
-        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_FRAMEWORKDIR/$$_QTGUI && \
-        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/$$_QTCORE $$_PLUGINDIR/imageformats/libqmng.dylib && \
-        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/$$_QTGUI $$_PLUGINDIR/imageformats/libqmng.dylib)
+    QMAKE_POST_LINK += $$quote( && $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_LIBDIR/QtGui && \
+        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_PLUGINDIR/imageformats/libqmng.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_PLUGINDIR/imageformats/libqmng.dylib)
 
     build_installer {
         # the productbuild path doesn't work pre 10.8
@@ -382,7 +376,19 @@ macx:!force_pkgconfig {
                 cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp && \
                 pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --root ${DESTDIR}/temp/ --component-plist resources/mac/installer.plist --install-location '/Applications/' $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg"
         }
-        QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app \
+        QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/lib/libykpers-1.1.dylib \
+            --entitlements resources/mac/Entitlements.plist && \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/lib/libyubikey.0.dylib \
+            --entitlements resources/mac/Entitlements.plist && \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/lib/libjson-c.2.dylib \
+            --entitlements resources/mac/Entitlements.plist && \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/lib/QtCore \
+            --entitlements resources/mac/Entitlements.plist && \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/lib/QtGui \
+            --entitlements resources/mac/Entitlements.plist && \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/PlugIns/imageformats/libqmng.dylib \
+            --entitlements resources/mac/Entitlements.plist && \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app \
             --entitlements resources/mac/Entitlements.plist && \
             $$_INSTALLER_CMD)
     }
