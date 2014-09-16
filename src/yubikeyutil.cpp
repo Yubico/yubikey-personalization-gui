@@ -28,7 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "yubikeyutil.h"
 #include <yubikey.h>
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
 #include "crandom.h"
 #endif
 
@@ -205,7 +205,7 @@ int YubiKeyUtil::generateRandom(unsigned char *result, size_t resultLen) {
 
     size_t bufLen = 0;
 
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
     CRandom random;
     random.getRand(buf, bufSize);
 
