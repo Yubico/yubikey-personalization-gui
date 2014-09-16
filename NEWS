@@ -1,6 +1,8 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.16 (unreleased)
+* Version 3.1.16 (released 2014-09-16)
+
+** Fix bug where no random numbers where generated on windows.
 
 * Version 3.1.15 (released 2014-09-11)
 
