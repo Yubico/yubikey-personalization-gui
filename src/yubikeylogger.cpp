@@ -58,7 +58,9 @@ struct logging_st YubiKeyLogger::logging_map[] = {
     { "secretKeyTxt", "secretKeyTxt", STRING, NULL },
     { "secretKeyB64", NULL, STRING, YubiKeyLogger::resolve_secretKeyB64 },
     { "currentAccessCodeTxt", "currentAccessCodeTxt", STRING, NULL },
+    { "currentAccessCodeTxtPadded", NULL, STRING, YubiKeyLogger::resolve_accessCode },
     { "newAccessCodeTxt", "newAccessCodeTxt", STRING, NULL },
+    { "newAccessCodeTxtPadded", NULL, STRING, YubiKeyLogger::resolve_accessCode },
     { "hotpDigits", NULL, STRING, YubiKeyLogger::resolve_hotpDigits },
     { "oathMovingFactorSeed", "oathMovingFactorSeed", UINT, NULL },
     { "strongPw1", "strongPw1", BOOL, NULL },
@@ -171,7 +173,7 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
         } else {
             format += ",,";
         }
-        format += "{secretKeyTxt},{newAccessCodeTxt},{timestampFixed},";
+        format += "{secretKeyTxt},{newAccessCodeTxtPadded},{timestampFixed},";
     } else if(m_format == Format_PSKC) {
         if(m_started) {
             format += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>{endl}<KeyContainer Version=\"1.0\" xmlns=\"urn:ietf:params:xml:ns:keyprov:pskc\">{endl}";
@@ -310,6 +312,16 @@ QString YubiKeyLogger::resolve_tokenLength(YubiKeyConfig *ykConfig, QString name
         len += ykConfig->oathHotp8() ? 8 : 6;
     }
     return QString::number(len);
+}
+
+QString YubiKeyLogger::resolve_accessCode(YubiKeyConfig *ykConfig, QString name) {
+    QString code;
+    if(name == "currentAccessCodeTxtPadded") {
+        code = ykConfig->currentAccessCodeTxt();
+    } else {
+        code = ykConfig->newAccessCodeTxt();
+    }
+    return code.rightJustified(12, '0');
 }
 
 QStringList YubiKeyLogger::getLogNames() {
