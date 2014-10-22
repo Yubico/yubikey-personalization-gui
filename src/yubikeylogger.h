@@ -48,6 +48,7 @@ struct logging_st {
 class YubiKeyLogger : public QObject {
 
 public:
+    Q_OBJECT
     ~YubiKeyLogger();
 
     enum Format {
