@@ -76,6 +76,8 @@ Section "YubiKey Personalization Tool"
   FILE /r ../../build/release/licenses/
   SetOutPath $INSTDIR\imageformats
   FILE ../../build/release/qmng.dll
+  SetOutPath $INSTDIR\accessible
+  FILE ../../build/release/qtaccessiblewidgets.dll
   SetOutPath $INSTDIR\platforms
   FILE ../../build/release/qwindows.dll
 SectionEnd
@@ -136,10 +138,12 @@ Section "Uninstall"
   DELETE "$INSTDIR\icudt52.dll"
   DELETE "$INSTDIR\licenses\*"
   DELETE "$INSTDIR\imageformats\qmng.dll"
+  DELETE "$INSTDIR\accessible\qtaccessiblewidgets.dll"
   DELETE "$INSTDIR\platforms\qwindows.dll"
 
   RMDir "$INSTDIR\licenses"
   RMDir "$INSTDIR\imageformats"
+  RMDir "$INSTDIR\accessible"
   RMDir "$INSTDIR\platforms"
 
   ; Remove uninstaller

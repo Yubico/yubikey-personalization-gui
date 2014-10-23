@@ -11,7 +11,6 @@ APP_NAME        = $$quote(YubiKey Personalization Tool)
 # common configuration
 #
 QT             += core gui
-DEPLOYMENT_PLUGIN += qmng
 TEMPLATE        = app
 TARGET          = yubikey-personalization-gui
 
@@ -200,14 +199,16 @@ win32 {
              $$_QT_BINDIR$${DIR_SEPARATOR}Qt5Widgetsd.dll \
              $$_QT_BINDIR$${DIR_SEPARATOR}Qt5Testd.dll \
              $$_QT_PLUGINDIR$${DIR_SEPARATOR}platforms$${DIR_SEPARATOR}qwindowsd.dll \
-             $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmngd.dll
+             $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmngd.dll \
+             $$_QT_PLUGINDIR$${DIR_SEPARATOR}accessible$${DIR_SEPARATOR}qtaccessiblewidgetsd.dll
     } else {
         LIB_FILES += \
              $$_QT_BINDIR$${DIR_SEPARATOR}Qt5Core.dll \
              $$_QT_BINDIR$${DIR_SEPARATOR}Qt5Gui.dll \
              $$_QT_BINDIR$${DIR_SEPARATOR}Qt5Widgets.dll \
              $$_QT_PLUGINDIR$${DIR_SEPARATOR}platforms$${DIR_SEPARATOR}qwindows.dll \
-             $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmng.dll
+             $$_QT_PLUGINDIR$${DIR_SEPARATOR}imageformats$${DIR_SEPARATOR}qmng.dll \
+             $$_QT_PLUGINDIR$${DIR_SEPARATOR}accessible$${DIR_SEPARATOR}qtaccessiblewidgets.dll
     }
 
     LIB_FILES += \
@@ -334,7 +335,9 @@ macx:!force_pkgconfig {
         test -d $$_BASEDIR/Resources/qt_menu.nib || \
         cp -R $$_QT_LIBDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
         mkdir -p $$_PLUGINDIR/imageformats && \
-        cp -R $$_QT_PLUGINDIR/imageformats/libqmng.dylib $$_PLUGINDIR/imageformats)
+        cp -R $$_QT_PLUGINDIR/imageformats/libqmng.dylib $$_PLUGINDIR/imageformats && \
+        mkdir -p $$_PLUGINDIR/accessible && \
+        cp -R $$_QT_PLUGINDIR/accessible/libqtaccessiblewidgets.dylib $$_PLUGINDR/accessible)
 
     # copy libykpers and friends
     _LIBDIR = $${_BASEDIR}/lib
@@ -364,7 +367,9 @@ macx:!force_pkgconfig {
         $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_BASEDIR/MacOS/$$TARGET_MAC && \
         $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_LIBDIR/QtGui && \
         $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_PLUGINDIR/imageformats/libqmng.dylib && \
-        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_PLUGINDIR/imageformats/libqmng.dylib)
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_PLUGINDIR/imageformats/libqmng.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_PLUGINDIR/accessible/libqtaccessiblewidgets.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_PLUGINDIR/accessible/libqtaccessiblewidgets.dylib)
 
     build_installer {
         # the productbuild path doesn't work pre 10.8
@@ -387,6 +392,8 @@ macx:!force_pkgconfig {
             codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/lib/QtGui \
             --entitlements resources/mac/Entitlements.plist && \
             codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/PlugIns/imageformats/libqmng.dylib \
+            --entitlements resources/mac/Entitlements.plist && \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/PlugIns/accessible/libqtaccessiblewidgets.dylib \
             --entitlements resources/mac/Entitlements.plist && \
             codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app \
             --entitlements resources/mac/Entitlements.plist && \
