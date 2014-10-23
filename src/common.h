@@ -57,8 +57,8 @@ enum AccMode {
 #define WRITE_CONFIG                0
 #define EXPORT_CONFIG               1
 
-#define SUPPORT_LINK                tr("http://yubi.co/forum")
-#define UPLOAD_URL                  tr("<!doctype html><html><head><title>upload</title></head><body><form action='https://upload.yubico.com/' method='post' id='upload'>serial:<input name='serial' value='%1'/><br/>prefix:<input name='prefix' value='%2'/><br/>uid:<input name='uid' value='%3'/><br/>aeskey:<input name='aeskey' value='%4'/><br/><input type='submit'/><br/></form><script type='text/javascript'>window.onload=function(){document.getElementById('upload').submit();}</script></body></html>")
+#define SUPPORT_LINK                "http://yubi.co/forum"
+#define UPLOAD_URL                  "<!doctype html><html><head><title>upload</title></head><body><form action='https://upload.yubico.com/' method='post' id='upload'>serial:<input name='serial' value='%1'/><br/>prefix:<input name='prefix' value='%2'/><br/>uid:<input name='uid' value='%3'/><br/>aeskey:<input name='aeskey' value='%4'/><br/><input type='submit'/><br/></form><script type='text/javascript'>window.onload=function(){document.getElementById('upload').submit();}</script></body></html>"
 
 #define ERR_NOERROR                 0
 #define ERR_OTHER                   1
@@ -93,50 +93,49 @@ enum AccMode {
 
 //Messages
 
-#define SUCCESS                     tr("Success")
-#define ERR                         tr("Error")
-#define NA                          tr("N/A")
-#define TOVERFLOW                   tr("Overflow")
+#define ERR                         "Error"
+#define NA                          "N/A"
+#define TOVERFLOW                   "Overflow"
 
-#define KEY_FOUND                   tr("YubiKey is inserted")
-#define NO_KEY_FOUND                tr("No YubiKey inserted")
-#define MORE_THAN_ONE               tr("More than one\nYubiKey inserted")
-#define OTHER_ERROR                 tr("Unknown error occurred")
-#define UNKNOWN_FIRMWARE            tr("Unknown firmware")
+#define KEY_FOUND                   "YubiKey is inserted"
+#define NO_KEY_FOUND                "No YubiKey inserted"
+#define MORE_THAN_ONE               "More than one\nYubiKey inserted"
+#define OTHER_ERROR                 "Unknown error occurred"
+#define UNKNOWN_FIRMWARE            "Unknown firmware"
 
-#define KEY_CONFIGURED              tr("YubiKey%1 has been successfully configured")
-#define KEY_EXPORTED                tr("YubiKey configuration has been successfully exported")
-#define REMOVE_KEY                  tr("Please remove this YubiKey")
-#define SETTINGS_SAVED              tr("Settings have been successfully saved")
-#define SETTINGS_RESTORED           tr("Default settings have been restored")
-#define VALUE_COPIED                tr("Value copied to clipboard")
+#define KEY_CONFIGURED              "YubiKey%1 has been successfully configured"
+#define KEY_EXPORTED                "YubiKey configuration has been successfully exported"
+#define REMOVE_KEY                  "Please remove this YubiKey"
+#define SETTINGS_SAVED              "Settings have been successfully saved"
+#define SETTINGS_RESTORED           "Default settings have been restored"
+#define VALUE_COPIED                "Value copied to clipboard"
 
-#define ERR_KEY_NOT_FOUND           tr("YubiKey not found. Please insert YubiKey in USB port")
-#define ERR_FEATURE_NOT_SUPPORTED   tr("Selected configuration is not supported by the YubiKey being programmed")
-#define ERR_FIRMWARE_NOT_SUPPORTED  tr("This YubiKey firmware version is not supported")
-#define ERR_PROCESSING              tr("YubiKey could not be configured. Perhaps protected with configuration protection access code?")
-#define ERR_PROCESSING_CHALRESP     tr("Challenge response could not be performed. Perhaps the YubiKey is not configured for challenge-response?")
-#define ERR_CONF_SLOT_NOT_SELECTED  tr("No configuration slot selected. Please select the configuration slot to be programmed")
-#define ERR_CHAL_TYPE_NOT_SELECTED  tr("No Challenge-Response Type selected. Please select the one to use")
+#define ERR_KEY_NOT_FOUND           "YubiKey not found. Please insert YubiKey in USB port"
+#define ERR_FEATURE_NOT_SUPPORTED   "Selected configuration is not supported by the YubiKey being programmed"
+#define ERR_FIRMWARE_NOT_SUPPORTED  "This YubiKey firmware version is not supported"
+#define ERR_PROCESSING              "YubiKey could not be configured. Perhaps protected with configuration protection access code?"
+#define ERR_PROCESSING_CHALRESP     "Challenge response could not be performed. Perhaps the YubiKey is not configured for challenge-response?"
+#define ERR_CONF_SLOT_NOT_SELECTED  "No configuration slot selected. Please select the configuration slot to be programmed"
+#define ERR_CHAL_TYPE_NOT_SELECTED  "No Challenge-Response Type selected. Please select the one to use"
 
 //Warnings
 
-#define OVERWRITE_CONF_SLOT1        tr("Overwrite configuration slot 1?")
-#define WARN_OVERWRITE_CONF_SLOT1   tr("If you have a YubiKey VIP, this slot should contain a Symantec VIP credential by default. You should refrain from rewriting this Slot as a Symantec VIP credential can only be programmed during manufacture - you will thus not be able to get a new one.\n\nIf you have any other YubiKey, this slot should contain a Yubico OTP credential by default. This credential is required for using the YubiKey with many of our services and that of our partners. If you overwrite this and want to use it again later, you will need to reprogram it and upload the new one to our YubiCloud validation service.\n\nAre you sure you want to overwrite the configuration slot 1?")
+#define OVERWRITE_CONF_SLOT1        "Overwrite configuration slot 1?"
+#define WARN_OVERWRITE_CONF_SLOT1   "If you have a YubiKey VIP, this slot should contain a Symantec VIP credential by default. You should refrain from rewriting this Slot as a Symantec VIP credential can only be programmed during manufacture - you will thus not be able to get a new one.\n\nIf you have any other YubiKey, this slot should contain a Yubico OTP credential by default. This credential is required for using the YubiKey with many of our services and that of our partners. If you overwrite this and want to use it again later, you will need to reprogram it and upload the new one to our YubiCloud validation service.\n\nAre you sure you want to overwrite the configuration slot 1?"
 
-#define RESTORE_SETTING             tr("Restore default settings?")
-#define WARN_RESTORE_SETTING        tr("Are you sure you want to restore the default settings?")
+#define RESTORE_SETTING             "Restore default settings?"
+#define WARN_RESTORE_SETTING        "Are you sure you want to restore the default settings?"
 
-#define WARN_EMPTY_PASS             tr("No password set. Please set the password")
+#define WARN_EMPTY_PASS             "No password set. Please set the password"
 
-#define DIFF_PUBLIC_ID_LEN          tr("Change Public Identity length?")
-#define WARN_DIFF_PUBLIC_ID_LEN     tr("Yubico OTP validation server requires Public Identity to be of 12 characters (6 bytes) in order to correctly extract the Secret Key. If you change the Public Identity to any other length, the Yubico OTP validation server won't be able to extract the Secret Key and the OTP validation will fail.\n\nAre you sure you want to change the default Public Idenity length?")
+#define DIFF_PUBLIC_ID_LEN          "Change Public Identity length?"
+#define WARN_DIFF_PUBLIC_ID_LEN     "Yubico OTP validation server requires Public Identity to be of 12 characters (6 bytes) in order to correctly extract the Secret Key. If you change the Public Identity to any other length, the Yubico OTP validation server won't be able to extract the Secret Key and the OTP validation will fail.\n\nAre you sure you want to change the default Public Idenity length?"
 
-#define ENABLE_CONF_PROTECTION      tr("Enable configuration protection?")
-#define WARN_ENABLE_CONF_PROTECTION tr("YubiKey Personalization Tool logging is currently disabled. It is not possible to retrieve the configuration protection access code from the YubiKey. If protection access code is forgotten, you may not be able to program the YubiKey again. Yubico highly recommends to enable logging and archive the relevant log records. \n\nAre you sure you still want to enable the configuration protection?")
+#define ENABLE_CONF_PROTECTION      "Enable configuration protection?"
+#define WARN_ENABLE_CONF_PROTECTION "YubiKey Personalization Tool logging is currently disabled. It is not possible to retrieve the configuration protection access code from the YubiKey. If protection access code is forgotten, you may not be able to program the YubiKey again. Yubico highly recommends to enable logging and archive the relevant log records. \n\nAre you sure you still want to enable the configuration protection?"
 
-#define NDEF_WITHOUT_HTTP           tr("Write NDEF without HTTP?")
-#define WARN_NDEF_WITHOUT_HTTP      tr("The NDEF URI entered does not start with http, are you sure that is what you want?")
+#define NDEF_WITHOUT_HTTP           "Write NDEF without HTTP?"
+#define WARN_NDEF_WITHOUT_HTTP      "The NDEF URI entered does not start with http, are you sure that is what you want?"
 
 //Settings
 

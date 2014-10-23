@@ -323,7 +323,7 @@ void OtpPage::on_quickSecretKeyTxt_editingFinished() {
 bool OtpPage::validateQuickSettings() {
     if(!(ui->quickConfigSlot1Radio->isChecked() ||
          ui->quickConfigSlot2Radio->isChecked())) {
-        emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+        emit showStatusMessage(tr(ERR_CONF_SLOT_NOT_SELECTED), 1);
         return false;
     }
 
@@ -395,7 +395,7 @@ void OtpPage::writeQuickConfig() {
     //Prepare upload url
     m_uploadUrl.clear();
     unsigned int serial = YubiKeyFinder::getInstance()->serial();
-    m_uploadUrl = UPLOAD_URL.
+    m_uploadUrl = tr(UPLOAD_URL).
                   arg(serial == 0? "": QString::number(serial)).
                   arg(m_ykConfig->pubIdTxt()).
                   arg(m_ykConfig->pvtIdTxt()).
@@ -419,7 +419,7 @@ void OtpPage::quickConfigWritten(bool written, __attribute__((unused)) const QSt
         ui->quickUploadBtn->setEnabled(true);
 
         QString keyDetail = tr(" (Public ID: %1)").arg(m_ykConfig->pubIdTxt());
-        showStatusMessage(KEY_CONFIGURED.arg(keyDetail), 0);
+        showStatusMessage(tr(KEY_CONFIGURED).arg(keyDetail), 0);
     } else {
         m_uploadUrl.clear();
         ui->quickUploadBtn->setEnabled(false);
@@ -706,7 +706,7 @@ void OtpPage::changeAdvConfigParams() {
 bool OtpPage::validateAdvSettings() {
     if(!(ui->advConfigSlot1Radio->isChecked() ||
          ui->advConfigSlot2Radio->isChecked())) {
-        emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+        emit showStatusMessage(tr(ERR_CONF_SLOT_NOT_SELECTED), 1);
         return false;
     }
 
@@ -832,14 +832,14 @@ void OtpPage::advConfigWritten(bool written, const QString &msg) {
         }
 
         if(m_state == State_Programming){
-            message = KEY_CONFIGURED.arg(keyDetail);
+            message = tr(KEY_CONFIGURED).arg(keyDetail);
         } else {
-            message = tr("%1. %2").arg(KEY_CONFIGURED.arg(keyDetail)).arg(REMOVE_KEY);
+            message = tr("%1. %2").arg(tr(KEY_CONFIGURED).arg(keyDetail)).arg(tr(REMOVE_KEY));
         }
 
         showStatusMessage(message, 0);
 
-        message = KEY_CONFIGURED.arg("");
+        message = tr(KEY_CONFIGURED).arg("");
     } else {
         qDebug() << "Configuration could not be written....";
 
@@ -866,7 +866,7 @@ void OtpPage::advConfigExported(bool written, const QString &msg) {
             keyDetail = tr(" (Public ID: %1)").arg(m_ykConfig->pubIdTxt());
         }
 
-        message = KEY_EXPORTED;
+        message = tr(KEY_EXPORTED);
 
         showStatusMessage(message, 0);
     } else {

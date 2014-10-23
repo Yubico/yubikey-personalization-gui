@@ -50,23 +50,23 @@ void ConfirmBox::setConfirmIndex(Confirm confirmIndex) {
 
     switch(confirmIndex) {
     case Confirm_ConfigurationSlot:
-        title = OVERWRITE_CONF_SLOT1;
-        confirmMsg = WARN_OVERWRITE_CONF_SLOT1;
+        title = tr(OVERWRITE_CONF_SLOT1);
+        confirmMsg = tr(WARN_OVERWRITE_CONF_SLOT1);
         break;
 
     case Confirm_PublicID:
-        title = DIFF_PUBLIC_ID_LEN;
-        confirmMsg = WARN_DIFF_PUBLIC_ID_LEN;
+        title = tr(DIFF_PUBLIC_ID_LEN);
+        confirmMsg = tr(WARN_DIFF_PUBLIC_ID_LEN);
         break;
 
     case Confirm_ConfigurationProtection:
-        title = ENABLE_CONF_PROTECTION;
-        confirmMsg = WARN_ENABLE_CONF_PROTECTION;
+        title = tr(ENABLE_CONF_PROTECTION);
+        confirmMsg = tr(WARN_ENABLE_CONF_PROTECTION);
         break;
 
     case Confirm_NdefWithoutHttp:
-        title = NDEF_WITHOUT_HTTP;
-        confirmMsg = WARN_NDEF_WITHOUT_HTTP;
+        title = tr(NDEF_WITHOUT_HTTP);
+        confirmMsg = tr(WARN_NDEF_WITHOUT_HTTP);
         break;
     default:
         confirmMsg = tr("");

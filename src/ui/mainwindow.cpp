@@ -45,10 +45,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "common.h"
 #include "version.h"
 
-#define TICKMAP         QPixmap(tr(":/res/images/tick.png"))
-#define CROSSMAP        QPixmap(tr(":/res/images/cross.png"))
-#define BLANKMAP        QPixmap(tr(":/res/images/blank.png"))
-#define COPYMAP         QPixmap(tr(":/res/images/clipboard.png"))
+#define TICKMAP         QPixmap(":/res/images/tick.png")
+#define CROSSMAP        QPixmap(":/res/images/cross.png")
+#define BLANKMAP        QPixmap(":/res/images/blank.png")
+#define COPYMAP         QPixmap(":/res/images/clipboard.png")
 
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent),
@@ -311,32 +311,32 @@ void MainWindow::setCurrentPage(int pageIndex, int tab, int slot) {
 
 void MainWindow::resetDeviceInfo() {
     ui->statusLbl->clear();
-    ui->versionLbl->setText(NA);
+    ui->versionLbl->setText(tr(NA));
 
     QString blankBtnSS = QString::fromUtf8(SS_BLANK_BTN);
-    ui->serialNoDecLbl->setText(NA);
-    ui->serialNoHexLbl->setText(NA);
-    ui->serialNoModhexLbl->setText(NA);
+    ui->serialNoDecLbl->setText(tr(NA));
+    ui->serialNoHexLbl->setText(tr(NA));
+    ui->serialNoModhexLbl->setText(tr(NA));
     ui->serialNoDecCopyBtn->setStyleSheet(blankBtnSS);
     ui->serialNoHexCopyBtn->setStyleSheet(blankBtnSS);
     ui->serialNoModhexCopyBtn->setStyleSheet(blankBtnSS);
 
     ui->otpSupportLbl->setPixmap(QPixmap());
-    ui->otpSupportLbl->setText(NA);
+    ui->otpSupportLbl->setText(tr(NA));
     ui->multiConfigSupportLbl->setPixmap(QPixmap());
-    ui->multiConfigSupportLbl->setText(NA);
+    ui->multiConfigSupportLbl->setText(tr(NA));
     ui->oathHotpSupportLbl->setPixmap(QPixmap());
-    ui->oathHotpSupportLbl->setText(NA);
+    ui->oathHotpSupportLbl->setText(tr(NA));
     ui->staticPwdSupportLbl->setPixmap(QPixmap());
-    ui->staticPwdSupportLbl->setText(NA);
+    ui->staticPwdSupportLbl->setText(tr(NA));
     ui->scanCodeSupportLbl->setPixmap(QPixmap());
-    ui->scanCodeSupportLbl->setText(NA);
+    ui->scanCodeSupportLbl->setText(tr(NA));
     ui->chalRespSupportLbl->setPixmap(QPixmap());
-    ui->chalRespSupportLbl->setText(NA);
+    ui->chalRespSupportLbl->setText(tr(NA));
     ui->updatableSupportLbl->setPixmap(QPixmap());
-    ui->updatableSupportLbl->setText(NA);
+    ui->updatableSupportLbl->setText(tr(NA));
     ui->ndefSupportLbl->setPixmap(QPixmap());
-    ui->ndefSupportLbl->setText(NA);
+    ui->ndefSupportLbl->setText(tr(NA));
 }
 
 void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
@@ -370,10 +370,10 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
         unsigned int version = finder->version();
         if(error == ERR_UNKNOWN_FIRMWARE) {
             ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_ERROR));
-            ui->statusLbl->setText(UNKNOWN_FIRMWARE);
+            ui->statusLbl->setText(tr(UNKNOWN_FIRMWARE));
         } else {
             ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_SUCCESS));
-            ui->statusLbl->setText(KEY_FOUND);
+            ui->statusLbl->setText(tr(KEY_FOUND));
         }
 
         ui->versionLbl->setText(finder->versionStr());
@@ -440,9 +440,9 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
             ui->serialNoHexCopyBtn->setStyleSheet(copyBtnSS);
             ui->serialNoModhexCopyBtn->setStyleSheet(copyBtnSS);
         } else {
-            ui->serialNoDecLbl->setText(NA);
-            ui->serialNoHexLbl->setText(NA);
-            ui->serialNoModhexLbl->setText(NA);
+            ui->serialNoDecLbl->setText(tr(NA));
+            ui->serialNoHexLbl->setText(tr(NA));
+            ui->serialNoModhexLbl->setText(tr(NA));
             ui->serialNoDecCopyBtn->setStyleSheet(blankBtnSS);
             ui->serialNoHexCopyBtn->setStyleSheet(blankBtnSS);
             ui->serialNoModhexCopyBtn->setStyleSheet(blankBtnSS);
@@ -522,11 +522,11 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
         }
         ui->deviceImage->clear();
         if(error == ERR_NOKEY) {
-            ui->statusLbl->setText(NO_KEY_FOUND);
+            ui->statusLbl->setText(tr(NO_KEY_FOUND));
         } else if(error == ERR_MORETHANONE) {
-            ui->statusLbl->setText(MORE_THAN_ONE);
+            ui->statusLbl->setText(tr(MORE_THAN_ONE));
         } else {
-            ui->statusLbl->setText(OTHER_ERROR);
+            ui->statusLbl->setText(tr(OTHER_ERROR));
         }
         ui->statusLbl->setStyleSheet(QString::fromUtf8(SS_YKSTATUS_ERROR));
 
@@ -604,7 +604,7 @@ void MainWindow::copyToClipboard(const QString &str) {
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(str);
 
-    showStatusMessage(VALUE_COPIED, 0);
+    showStatusMessage(tr(VALUE_COPIED), 0);
 }
 
 void MainWindow::on_serialNoDecCopyBtn_clicked() {

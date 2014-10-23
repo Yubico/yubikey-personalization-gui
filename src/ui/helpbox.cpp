@@ -51,84 +51,84 @@ void HelpBox::setHelpIndex(Help helpIndex) {
     switch(helpIndex) {
     case Help_ConfigurationSlot:
         title = tr("Configuration Slots");
-        helpMsg = HELP_CONFIG_SLOT;
+        helpMsg = tr(HELP_CONFIG_SLOT);
         break;
     case Help_PublicID:
         title = tr("Public Identity");
-        helpMsg = HELP_PUBLIC_ID;
+        helpMsg = tr(HELP_PUBLIC_ID);
         break;
     case Help_PrivateID:
         title = tr("Private Identity");
-        helpMsg = HELP_PRIVATE_ID;
+        helpMsg = tr(HELP_PRIVATE_ID);
         break;
     case Help_SecretKey:
         title = tr("Secret Key");
-        helpMsg = HELP_SECRET_KEY;
+        helpMsg = tr(HELP_SECRET_KEY);
         break;
     case Help_ParameterGeneration:
         title = tr("Parameter Generation Scheme");
-        helpMsg = HELP_PARAM_GENERATION;
+        helpMsg = tr(HELP_PARAM_GENERATION);
         break;
     case Help_ConfigurationProtection:
         title = tr("Configuration Protection");
-        helpMsg = HELP_CONFIG_PROTECTION;
+        helpMsg = tr(HELP_CONFIG_PROTECTION);
         break;
     case Help_OutputFormat:
         title = tr("Output Format");
-        helpMsg = HELP_OUTPUT_FORMAT;
+        helpMsg = tr(HELP_OUTPUT_FORMAT);
         break;
     case Help_OutputSpeed:
         title = tr("Output Speed Throttling");
-        helpMsg = HELP_OUTPUT_SPEED;
+        helpMsg = tr(HELP_OUTPUT_SPEED);
         break;
     case Help_SrNoVisibility:
         title = tr("Serial # Visibility");
-        helpMsg = HELP_SR_NO_VISIBILITY;
+        helpMsg = tr(HELP_SR_NO_VISIBILITY);
         break;
     case Help_OathPublicID:
         title = tr("OATH Token Identifier");
-        helpMsg = HELP_OATH_PUBLIC_ID;
+        helpMsg = tr(HELP_OATH_PUBLIC_ID);
         break;
     case Help_HotpLen:
         title = tr("HOTP Length");
-        helpMsg = HELP_HOTP_LEN;
+        helpMsg = tr(HELP_HOTP_LEN);
         break;
     case Help_HotpParam:
         title = tr("HOTP Moving Factor Seed");
-        helpMsg = HELP_HOTP_PARAM;
+        helpMsg = tr(HELP_HOTP_PARAM);
         break;
     case Help_StaticScanCode:
         title = tr("Static Password Scan Code Mode");
-        helpMsg = HELP_STATIC_SCAN_CODE;
+        helpMsg = tr(HELP_STATIC_SCAN_CODE);
         break;
     case Help_ChalRespYubico:
         title = tr("Challenge-Response Yubico OTP Mode");
-        helpMsg = HELP_CHALRESP_YUBICO;
+        helpMsg = tr(HELP_CHALRESP_YUBICO);
         break;
     case Help_ChalRespHmac:
         title = tr("Challenge-Response HMAC-SHA1 Mode");
-        helpMsg = HELP_CHALRESP_HMAC;
+        helpMsg = tr(HELP_CHALRESP_HMAC);
         break;
     case Help_ChalRespOption:
         title = tr("Challenge-Response Options");
-        helpMsg = HELP_CHALRESP_OPTION;
+        helpMsg = tr(HELP_CHALRESP_OPTION);
         break;
     case Help_AllowUpdate:
         title = tr("Allow Update");
-        helpMsg = HELP_ALLOW_UPDATE_OPTION;
+        helpMsg = tr(HELP_ALLOW_UPDATE_OPTION);
         break;
     case Help_Swap:
         title = tr("Swap");
-        helpMsg = HELP_SWAP_OPTION;
+        helpMsg = tr(HELP_SWAP_OPTION);
         break;
     case Help_ManUpdate:
         title = tr("Manual Update");
-        helpMsg = HELP_MAN_UPDATE_OPTION;
+        helpMsg = tr(HELP_MAN_UPDATE_OPTION);
         break;
     case Help_LogFormat:
         {
             title = tr("Flexible Log Format");
-            helpMsg = HELP_LOG_FORMAT;
+            helpMsg = tr(HELP_LOG_FORMAT);
             QStringList names = YubiKeyLogger::getLogNames();
             helpMsg.append(names.join(", "));
             helpMsg.append("</p>");

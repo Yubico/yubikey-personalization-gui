@@ -78,10 +78,10 @@ QString YubiKeyWriter::reportError(bool chalresp = false) {
         switch(ykp_errno) {
         case YKP_EYUBIKEYVER:
         case YKP_EOLDYUBIKEY:
-            errMsg = ERR_FEATURE_NOT_SUPPORTED;
+            errMsg = tr(ERR_FEATURE_NOT_SUPPORTED);
             break;
         default:
-            errMsg = ERR_PROCESSING;
+            errMsg = tr(ERR_PROCESSING);
             break;
         }
         ykp_errno = 0;
@@ -96,16 +96,16 @@ QString YubiKeyWriter::reportError(bool chalresp = false) {
 
         switch(yk_errno) {
         case YK_ENOKEY:
-            errMsg = ERR_KEY_NOT_FOUND;
+            errMsg = tr(ERR_KEY_NOT_FOUND);
             break;
         case YK_EFIRMWARE:
-            errMsg = ERR_FIRMWARE_NOT_SUPPORTED;
+            errMsg = tr(ERR_FIRMWARE_NOT_SUPPORTED);
             break;
         default:
             if(chalresp) {
-                errMsg = ERR_PROCESSING_CHALRESP;
+                errMsg = tr(ERR_PROCESSING_CHALRESP);
             } else {
-                errMsg = ERR_PROCESSING;
+                errMsg = tr(ERR_PROCESSING);
             }
             break;
         }

@@ -66,7 +66,7 @@ AboutPage::AboutPage(QWidget *parent) :
 
     //Set copyright
     QString copyright = tr("%1. %2.").
-                        arg(VER_LEGALCOPYRIGHT).
+                        arg(trUtf8(VER_LEGALCOPYRIGHT)).
                         arg(VER_LEGALTRADEMARKS1_STR);
 
     ui->copyrightLbl->setText(copyright);
@@ -151,5 +151,5 @@ void AboutPage::btn_pressed(int pageIndex) {
 }
 
 void AboutPage::on_supportBtn_clicked() {
-    QDesktopServices::openUrl(QUrl(SUPPORT_LINK));
+    QDesktopServices::openUrl(QUrl(tr(SUPPORT_LINK)));
 }

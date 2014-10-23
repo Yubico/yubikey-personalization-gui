@@ -420,13 +420,13 @@ void StaticPage::changeQuickConfigParams() {
 bool StaticPage::validateQuickSettings() {
     if(!(ui->quickConfigSlot1Radio->isChecked() ||
          ui->quickConfigSlot2Radio->isChecked())) {
-        emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+        emit showStatusMessage(tr(ERR_CONF_SLOT_NOT_SELECTED), 1);
         return false;
     }
 
     //Check if configuration slot 1 is being programmed
     if (ui->quickStaticLenTxt->text().toInt() == 0) {
-        QMessageBox::critical(this, ERR, WARN_EMPTY_PASS);
+        QMessageBox::critical(this, tr(ERR), tr(WARN_EMPTY_PASS));
         return false;
     }
 
@@ -564,14 +564,14 @@ void StaticPage::quickConfigWritten(bool written, const QString &msg) {
         QString keyDetail = tr(" (Password Length: %1 chars)").arg(staticLen);
 
         if(m_state == State_Programming){
-            message = KEY_CONFIGURED.arg(keyDetail);
+            message = tr(KEY_CONFIGURED).arg(keyDetail);
         } else {
-            message = tr("%1. %2").arg(KEY_CONFIGURED.arg(keyDetail)).arg(REMOVE_KEY);
+            message = tr("%1. %2").arg(tr(KEY_CONFIGURED).arg(keyDetail)).arg(tr(REMOVE_KEY));
         }
 
         showStatusMessage(message, 0);
 
-        message = KEY_CONFIGURED.arg("");
+        message = tr(KEY_CONFIGURED).arg("");
     } else {
         qDebug() << "Configuration could not be written....";
 
@@ -883,7 +883,7 @@ void StaticPage::changeAdvConfigParams() {
 bool StaticPage::validateAdvSettings() {
     if(!(ui->advConfigSlot1Radio->isChecked() ||
          ui->advConfigSlot2Radio->isChecked())) {
-        emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+        emit showStatusMessage(tr(ERR_CONF_SLOT_NOT_SELECTED), 1);
         return false;
     }
 
@@ -1007,14 +1007,14 @@ void StaticPage::advConfigWritten(bool written, const QString &msg) {
         QString keyDetail = tr(" (Password Length: %1 chars)").arg(staticLen);
 
         if(m_state == State_Programming){
-            message = KEY_CONFIGURED.arg(keyDetail);
+            message = tr(KEY_CONFIGURED).arg(keyDetail);
         } else {
-            message = tr("%1. %2").arg(KEY_CONFIGURED.arg(keyDetail)).arg(REMOVE_KEY);
+            message = tr("%1. %2").arg(tr(KEY_CONFIGURED).arg(keyDetail)).arg(tr(REMOVE_KEY));
         }
 
         showStatusMessage(message, 0);
 
-        message = KEY_CONFIGURED.arg("");
+        message = tr(KEY_CONFIGURED).arg("");
     } else {
         qDebug() << "Configuration could not be written....";
 

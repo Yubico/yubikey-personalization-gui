@@ -393,7 +393,7 @@ void SettingPage::save() {
     //Reload settings
     load();
 
-    showStatusMessage(SETTINGS_SAVED, 0);
+    showStatusMessage(tr(SETTINGS_SAVED), 0);
 }
 
 void SettingPage::restore() {
@@ -401,15 +401,15 @@ void SettingPage::restore() {
     //Confirm from client
     switch (
             QMessageBox::question(
-                    this, RESTORE_SETTING,
-                    WARN_RESTORE_SETTING,
-                    "&Yes", "&No", QString::null, 1, 1 ))
+                    this, tr(RESTORE_SETTING),
+                    tr(WARN_RESTORE_SETTING),
+                    tr("&Yes"), tr("&No"), QString::null, 1, 1 ))
     {
     case 0:
         restoreDefaults();
         //Reload settings
         load();
-        showStatusMessage(SETTINGS_RESTORED, 0);
+        showStatusMessage(tr(SETTINGS_RESTORED), 0);
 
         break;
     default:
@@ -452,7 +452,7 @@ void SettingPage::on_doUpdateBtn_clicked() {
     } else if(ui->updateSlot2Radio->isChecked()) {
         slot = 2;
     } else {
-      emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+      emit showStatusMessage(tr(ERR_CONF_SLOT_NOT_SELECTED), 1);
       return;
     }
 

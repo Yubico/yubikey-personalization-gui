@@ -452,7 +452,7 @@ void OathPage::on_quickSecretKeyTxt_editingFinished() {
 bool OathPage::validateQuickSettings() {
     if(!(ui->quickConfigSlot1Radio->isChecked() ||
          ui->quickConfigSlot2Radio->isChecked())) {
-        emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+        emit showStatusMessage(tr(ERR_CONF_SLOT_NOT_SELECTED), 1);
         return false;
     }
 
@@ -554,7 +554,7 @@ void OathPage::quickConfigWritten(bool written, __attribute__((unused)) const QS
             keyDetail = tr(" (OATH ID: %1)").arg(pubIdTxt);
         }
 
-        showStatusMessage(KEY_CONFIGURED.arg(keyDetail), 0);
+        showStatusMessage(tr(KEY_CONFIGURED).arg(keyDetail), 0);
     }
 
     clearState();
@@ -882,7 +882,7 @@ void OathPage::changeAdvConfigParams() {
 bool OathPage::validateAdvSettings() {
     if(!(ui->advConfigSlot1Radio->isChecked() ||
          ui->advConfigSlot2Radio->isChecked())) {
-        emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+        emit showStatusMessage(tr(ERR_CONF_SLOT_NOT_SELECTED), 1);
         return false;
     }
 
@@ -1039,14 +1039,14 @@ void OathPage::advConfigWritten(bool written, const QString &msg) {
         }
 
         if(m_state == State_Programming){
-            message = KEY_CONFIGURED.arg(keyDetail);
+            message = tr(KEY_CONFIGURED).arg(keyDetail);
         } else {
-            message = tr("%1. %2").arg(KEY_CONFIGURED.arg(keyDetail)).arg(REMOVE_KEY);
+            message = tr("%1. %2").arg(tr(KEY_CONFIGURED).arg(keyDetail)).arg(tr(REMOVE_KEY));
         }
 
         showStatusMessage(message, 0);
 
-        message = KEY_CONFIGURED.arg("");
+        message = tr(KEY_CONFIGURED).arg("");
     } else {
         qDebug() << "Configuration could not be written....";
 
@@ -1068,7 +1068,7 @@ void OathPage::advConfigExported(bool written, const QString &msg) {
     if(written && m_ykConfig != 0) {
         qDebug() << "Configuration exported....";
 
-        message = KEY_EXPORTED;
+        message = tr(KEY_EXPORTED);
 
         showStatusMessage(message, 0);
     } else {

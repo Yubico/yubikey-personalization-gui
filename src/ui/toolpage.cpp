@@ -187,7 +187,7 @@ void ToolPage::performChallengeResponse() {
     } else if(ui->chalRespYubicoRadio->isChecked()) {
         hmac = false;
     } else {
-      emit showStatusMessage(ERR_CHAL_TYPE_NOT_SELECTED, 1);
+      emit showStatusMessage(tr(ERR_CHAL_TYPE_NOT_SELECTED), 1);
       return;
     }
     if(ui->chalRespSlot1Radio->isChecked()) {
@@ -195,7 +195,7 @@ void ToolPage::performChallengeResponse() {
     } else if(ui->chalRespSlot2Radio->isChecked()) {
         slot = 2;
     } else {
-      emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+      emit showStatusMessage(tr(ERR_CONF_SLOT_NOT_SELECTED), 1);
       return;
     }
     YubiKeyWriter::getInstance()->doChallengeResponse(challenge, response, slot, hmac);
@@ -257,7 +257,7 @@ void ToolPage::convert(int updatedIndex, QString txt) {
     ui->converterModhexLenLbl->setText(tr("(%1 chars)").arg(modhexLen));
 
     if(hexLen != 0 && !ok) {
-        ui->converterDecErrLbl->setText(TOVERFLOW);
+        ui->converterDecErrLbl->setText(tr(TOVERFLOW));
     } else {
         ui->converterDecErrLbl->setText(tr(""));
     }
@@ -305,7 +305,7 @@ void ToolPage::on_converterDecTxt_editingFinished() {
             ui->converterDecTxt->setCursorPosition(len);
         }
     } else {
-        ui->converterDecErrLbl->setText(TOVERFLOW);
+        ui->converterDecErrLbl->setText(tr(TOVERFLOW));
     }
 
 }
@@ -314,7 +314,7 @@ void ToolPage::copyToClipboard(const QString &str) {
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(str);
 
-    showStatusMessage(VALUE_COPIED, 0);
+    showStatusMessage(tr(VALUE_COPIED), 0);
 }
 
 void ToolPage::on_converterHexCopyBtn_clicked() {
@@ -378,7 +378,7 @@ void ToolPage::programNdef() {
     } else if(ui->ndefSlot2Radio->isChecked()) {
         slot = 2;
     } else {
-        emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+        emit showStatusMessage(tr(ERR_CONF_SLOT_NOT_SELECTED), 1);
         return;
     }
 
@@ -426,7 +426,7 @@ void ToolPage::on_zapPerformBtn_clicked() {
     } else if(ui->zapSlot2Radio->isChecked()) {
         slot = 2;
     } else {
-      emit showStatusMessage(ERR_CONF_SLOT_NOT_SELECTED, 1);
+      emit showStatusMessage(tr(ERR_CONF_SLOT_NOT_SELECTED), 1);
       return;
     }
 
