@@ -68,6 +68,7 @@ public:
         Feature_Updatable,
         Feature_Ndef,
         Feature_LedInvert,
+        Feature_U2F,
     };
 
     State state() const

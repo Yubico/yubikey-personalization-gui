@@ -337,6 +337,8 @@ void MainWindow::resetDeviceInfo() {
     ui->updatableSupportLbl->setText(tr(NA));
     ui->ndefSupportLbl->setPixmap(QPixmap());
     ui->ndefSupportLbl->setText(tr(NA));
+    ui->u2fSupportLbl->setPixmap(QPixmap());
+    ui->u2fSupportLbl->setText(tr(NA));
 }
 
 void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
@@ -514,6 +516,11 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
             ui->ndefSupportLbl->setPixmap(TICKMAP);
         } else {
             ui->ndefSupportLbl->setPixmap(CROSSMAP);
+        }
+        if(featuresMatrix[YubiKeyFinder::Feature_U2F]) {
+            ui->u2fSupportLbl->setPixmap(TICKMAP);
+        } else {
+            ui->u2fSupportLbl->setPixmap(CROSSMAP);
         }
     } else {
         ui->programLbl->clear();

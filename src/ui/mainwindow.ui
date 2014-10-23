@@ -505,6 +505,44 @@ background-color: rgb(255, 255, 255);</string>
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
+     <widget class="QLabel" name="u2fSupportDescLbl">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>185</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-weight: normal;</string>
+      </property>
+      <property name="lineWidth">
+       <number>2</number>
+      </property>
+      <property name="text">
+       <string>Universal 2nd Factor </string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="u2fSupportLbl">
+      <property name="geometry">
+       <rect>
+        <x>128</x>
+        <y>185</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-weight: normal;</string>
+      </property>
+      <property name="text">
+       <string>N/A</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
     </widget>
     <widget class="QLabel" name="logoImg">
      <property name="geometry">
