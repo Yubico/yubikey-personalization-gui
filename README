@@ -74,12 +74,11 @@ Run these commands:
 Cross Compiling from Linux
 --------------------------
 
-The project can be cross compiled from linux for osX and windows. As
+The project can be cross compiled from linux for OS X and Windows. As
 a first step you need a cross-compiler chain for that OS, for windows
 you want mingw-w64.
 
-Then you need unpacked qt binaries for that platform, fetchable
-from http://qt-project.org/.
+Then you need unpacked http://qt-project.org[Qt binaries] for that platform.
 
 You can then do (for Windows):
 TARGET_ARCH=i686-w64-mingw32 QTDIR=<qt location> qmake \
