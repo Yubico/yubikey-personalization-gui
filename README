@@ -50,8 +50,8 @@ Dependencies
 yubikey-personalization-gui depends on version 1.14.0 or higher of
 libykpers.
 
-When building on Windows and mac you will need a binary buikd of libykpers,
-that can be downloaded from http://code.google.com/p/yubikey-personalization/,
+When building on Windows and mac you will need a binary buikd of
+https://developers.yubico.com/yubikey-personalization[yubikey-personalization],
 the contents should then be places in libs/win32, libs/win64 and libs/macx
 respectively.
 
@@ -81,13 +81,13 @@ you want mingw-w64.
 Then you need unpacked qt binaries for that platform, fetchable
 from http://qt-project.org/.
 
-You can then do (for windows):
+You can then do (for Windows):
 TARGET_ARCH=i686-w64-mingw32 QTDIR=<qt location> qmake \
   -spec win32-g++-4.6 "CONFIG+=cross"
 
 To build installers you can add build_installer to the CONFIG variable
 for qmake. This requires makensis to be in path for windows and
-genisoimage and dmg (from libhfs-dmg) for mac.
+genisoimage and dmg (from libhfs-dmg) for Mac.
 
 
 Opening the project in Qt designer
@@ -96,40 +96,35 @@ Opening the project in Qt designer
 Locate the qtcreator executable file and click on it to open the Qt
 Designer.
 
-To open the project in Qt Designer, select "File" > "Open File or
-Project" from the tool bar, navigate to the project folder, select
-YKPersonalisation.pro file and click on the "Open" button.
+To open the project in Qt Designer, select 'File' > 'Open File or
+Project' from the tool bar, navigate to the project folder, select
+YKPersonalisation.pro file and click on the 'Open' button.
 
-To set the path of the "Build" diractory select "Projects" > "Build
-Settings" Browse project folder path.
+To set the path of the 'Build' diractory select 'Projects' > 'Build
+Settings' Browse project folder path.
 
 
 Building 
-~~~~~~~~
+--------
 
-To generate the build system, select "Build" > "Clean Project
-YKPersonalization" option from the tool bar. Then select "Build" >
-"Run qmake" option from the tool bar.
+To generate the build system, select 'Build' > "Clean Project
+YKPersonalization" option from the tool bar. Then select 'Build' >
+'Run qmake' option from the tool bar.
 
-To build the project, select "Build" > "Build Project
-YKPersonalization" option from the tool bar.
+To build the project, select 'Build' > 'Build Project
+YKPersonalization' option from the tool bar.
 
-Based on your platform, the successful build will create a "YubiKey
-Personalization Tool" executable file into the respective build
-folder. The build creates a "YKPersonalization.exe" file on Windows,
-"YubiKey Personalization Tool.sh" file on Linux and "YubiKey
-Personalization Tool.app" file on MAC.
+Based on your platform, the successful build will create a 'YubiKey
+Personalization Tool' executable file into the respective build
+folder. The build creates a `YKPersonalization.exe` file on Windows,
+`YubiKey Personalization Tool.sh` file on Linux and `YubiKey
+Personalization Tool.app` file on Mac.
 
 Example on Linux:
 To run the YubiKey Personalization Tool, open the command shell and
 execute the following command:
 
+[source, sh]
 -----------
   $ build/release/yubikey-personalization-gui
 -----------
-
-
-Questions?
-----------
-
-Talk to <yubico-devel@googlegroups.com>.
