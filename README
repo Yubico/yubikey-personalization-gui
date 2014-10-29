@@ -7,7 +7,7 @@ Introduction
 
 The YubiKey Personalization Tool is a Qt based Cross-Platform utility
 designed to facilitate re-configuration of YubiKeys on Windows, Linux
-and MAC platforms. The tool provides a same simple step-by-step
+and Mac platforms. The tool provides a same simple step-by-step
 approach to make configuration of YubiKeys easy to follow and
 understand, while still being powerful enough to exploit all
 functionality both of the YubiKey 1 and YubiKey 2 generation of
