@@ -11,6 +11,7 @@ APP_NAME        = $$quote(YubiKey Personalization Tool)
 # common configuration
 #
 QT             += core gui
+QTPLUGIN       += qtaccessiblewidgets qmng
 TEMPLATE        = app
 TARGET          = yubikey-personalization-gui
 
@@ -19,7 +20,13 @@ DEFINES        += VERSION_MAJOR=\\\"$${VERSION_MAJOR}\\\" VERSION_MINOR=\\\"$${V
 CONFIG         += exceptions
 
 # if this is qt5, add widgets
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4) {
+    QT += widgets
+    macx {
+        QT += printsupport
+        QTPLUGIN.platforms = qcocoa
+    }
+}
 
 !nosilent {
     CONFIG         += silent
@@ -327,14 +334,13 @@ macx:!force_pkgconfig {
 
     # copy the QT libraries into our bundle
     _BASEDIR = $${DESTDIR}/$${TARGET_MAC}.app/Contents
-    _LIBDIR = $${_BASEDIR}/lib
+    _LIBDIR = $${_BASEDIR}/Frameworks
     _PLUGINDIR = $${_BASEDIR}/PlugIns
     QMAKE_POST_LINK += $$quote( && mkdir -p $$_LIBDIR && \
         cp $$_QT_LIBDIR/QtCore.framework/Versions/5/QtCore $$_LIBDIR && \
         cp $$_QT_LIBDIR/QtGui.framework/Versions/5/QtGui $$_LIBDIR && \
         cp $$_QT_LIBDIR/QtWidgets.framework/Versions/5/QtWidgets $$_LIBDIR && \
 	cp $$_QT_LIBDIR/QtPrintSupport.framework/Versions/5/QtPrintSupport $$_LIBDIR && \
-        test -d $$_BASEDIR/Resources/qt_menu.nib || \
         mkdir -p $$_PLUGINDIR/imageformats && \
         cp -R $$_QT_PLUGINDIR/imageformats/libqmng.dylib $$_PLUGINDIR/imageformats && \
         mkdir -p $$_PLUGINDIR/accessible && \
@@ -343,7 +349,6 @@ macx:!force_pkgconfig {
 	cp -R $$_QT_PLUGINDIR/platforms/libqcocoa.dylib $$_PLUGINDIR/platforms)
 
     # copy libykpers and friends
-    _LIBDIR = $${_BASEDIR}/lib
     QMAKE_POST_LINK += $$quote( && mkdir -p $$_LIBDIR && \
         cp libs/macx/lib/libyubikey.0.dylib $$_LIBDIR && \
         cp libs/macx/lib/libykpers-1.1.dylib $$_LIBDIR && \
@@ -357,7 +362,8 @@ macx:!force_pkgconfig {
     }
 
     # fixup all library paths..
-    _BASE = $$quote(@executable_path/../lib)
+    _BASE = $$quote(@executable_path/../Frameworks)
+    _LIBBASE = $$quote(@executable_path/../lib)
     _QTCORE = $$quote($${_QT_LIBDIR}/QtCore.framework/Versions/5/QtCore)
     _QTGUI = $$quote($${_QT_LIBDIR}/QtGui.framework/Versions/5/QtGui)
     _QTWIDGETS = $$quote($${_QT_LIBDIR}/QtWidgets.framework/Versions/5/QtWidgets)
@@ -370,6 +376,11 @@ macx:!force_pkgconfig {
     QMAKE_POST_LINK += $$quote( && $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_BASEDIR/MacOS/$$TARGET_MAC && \
         $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_BASEDIR/MacOS/$$TARGET_MAC && \
         $$_INSTALL_NAME_TOOL -change $$_QTWIDGETS $$_BASE/QtWidgets $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -change $$_QTPRINTSUPPORT $$_BASE/QtPrintSupport $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -change $$_LIBBASE/libykpers-1.1.dylib $$_BASE/libykpers-1.1.dylib $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -change $$_LIBBASE/libyubikey.0.dylib $$_BASE/libyubikey.0.dylib $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -change $$_LIBBASE/libyubikey.0.dylib $$_BASE/libyubikey.0.dylib $$_LIBDIR/libykpers-1.1.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_LIBBASE/libjson-c.2.dylib $$_BASE/libjson-c.2.dylib $$_LIBDIR/libykpers-1.1.dylib && \
         $$_INSTALL_NAME_TOOL -id $$_BASE/QtCore $$_LIBDIR/QtCore && \
         $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_LIBDIR/QtGui && \
         $$_INSTALL_NAME_TOOL -id $$_BASE/QtGui $$_LIBDIR/QtGui && \
@@ -400,19 +411,23 @@ macx:!force_pkgconfig {
                 cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp && \
                 pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --root ${DESTDIR}/temp/ --component-plist resources/mac/installer.plist --install-location '/Applications/' $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg"
         }
-        QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/lib/libykpers-1.1.dylib \
+        QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/libykpers-1.1.dylib \
             --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/lib/libyubikey.0.dylib \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/libyubikey.0.dylib \
             --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/lib/libjson-c.2.dylib \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/libjson-c.2.dylib \
             --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/lib/QtCore \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/QtCore \
             --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/lib/QtGui \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/QtGui \
             --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/PlugIns/imageformats/libqmng.dylib \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/QtPrintSupport \
             --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app/Contents/PlugIns/accessible/libqtaccessiblewidgets.dylib \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_PLUGINDIR}/imageformats/libqmng.dylib \
+            --entitlements resources/mac/Entitlements.plist && \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_PLUGINDIR}/accessible/libqtaccessiblewidgets.dylib \
+            --entitlements resources/mac/Entitlements.plist && \
+            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_PLUGINDIR}/platforms/libqcocoa.dylib \
             --entitlements resources/mac/Entitlements.plist && \
             codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app \
             --entitlements resources/mac/Entitlements.plist && \
