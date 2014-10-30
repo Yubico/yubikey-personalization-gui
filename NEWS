@@ -1,6 +1,16 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.17 (unreleased)
+* Version 3.1.17 (released 2014-10-30)
+
+** Fixup the Yubico logformat so accesscode is padded out with 0
+
+** Make texts translatable.
+
+** Include the accessibility plugin in bundles.
+
+** Show U2F as a feature.
+
+** Switch the mac bundle to qt5.
 
 * Version 3.1.16 (released 2014-09-16)
 
