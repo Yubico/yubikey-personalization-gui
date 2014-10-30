@@ -411,25 +411,8 @@ macx:!force_pkgconfig {
                 cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp && \
                 pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --root ${DESTDIR}/temp/ --component-plist resources/mac/installer.plist --install-location '/Applications/' $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg"
         }
-        QMAKE_POST_LINK += $$quote( && codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/libykpers-1.1.dylib \
-            --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/libyubikey.0.dylib \
-            --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/libjson-c.2.dylib \
-            --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/QtCore \
-            --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/QtGui \
-            --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_LIBDIR}/QtPrintSupport \
-            --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_PLUGINDIR}/imageformats/libqmng.dylib \
-            --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_PLUGINDIR}/accessible/libqtaccessiblewidgets.dylib \
-            --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${_PLUGINDIR}/platforms/libqcocoa.dylib \
-            --entitlements resources/mac/Entitlements.plist && \
-            codesign -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app \
+        QMAKE_POST_LINK += $$quote( && \
+            codesign --deep -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app \
             --entitlements resources/mac/Entitlements.plist && \
             $$_INSTALLER_CMD)
     }
