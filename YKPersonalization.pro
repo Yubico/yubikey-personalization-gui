@@ -291,7 +291,7 @@ macx:!force_pkgconfig {
 
     DEFINES += QT_MAC_USE_COCOA
 
-    _QT_LIBDIR = $$QMAKE_LIBDIR_QT
+    _QT_LIBDIR = $$[QT_INSTALL_LIBS]
     _QT_PLUGINDIR = $$[QT_INSTALL_PLUGINS]
 
     for_store {
@@ -330,14 +330,17 @@ macx:!force_pkgconfig {
     _LIBDIR = $${_BASEDIR}/lib
     _PLUGINDIR = $${_BASEDIR}/PlugIns
     QMAKE_POST_LINK += $$quote( && mkdir -p $$_LIBDIR && \
-        cp $$_QT_LIBDIR/QtCore.framework/Versions/4/QtCore $$_LIBDIR && \
-        cp $$_QT_LIBDIR/QtGui.framework/Versions/4/QtGui $$_LIBDIR && \
+        cp $$_QT_LIBDIR/QtCore.framework/Versions/5/QtCore $$_LIBDIR && \
+        cp $$_QT_LIBDIR/QtGui.framework/Versions/5/QtGui $$_LIBDIR && \
+        cp $$_QT_LIBDIR/QtWidgets.framework/Versions/5/QtWidgets $$_LIBDIR && \
+	cp $$_QT_LIBDIR/QtPrintSupport.framework/Versions/5/QtPrintSupport $$_LIBDIR && \
         test -d $$_BASEDIR/Resources/qt_menu.nib || \
-        cp -R $$_QT_LIBDIR/QtGui.framework/Versions/4/Resources/qt_menu.nib $$_BASEDIR/Resources/qt_menu.nib && \
         mkdir -p $$_PLUGINDIR/imageformats && \
         cp -R $$_QT_PLUGINDIR/imageformats/libqmng.dylib $$_PLUGINDIR/imageformats && \
         mkdir -p $$_PLUGINDIR/accessible && \
-        cp -R $$_QT_PLUGINDIR/accessible/libqtaccessiblewidgets.dylib $$_PLUGINDR/accessible)
+        cp -R $$_QT_PLUGINDIR/accessible/libqtaccessiblewidgets.dylib $$_PLUGINDIR/accessible && \
+	mkdir -p $$_PLUGINDIR/platforms && \
+	cp -R $$_QT_PLUGINDIR/platforms/libqcocoa.dylib $$_PLUGINDIR/platforms)
 
     # copy libykpers and friends
     _LIBDIR = $${_BASEDIR}/lib
@@ -353,11 +356,12 @@ macx:!force_pkgconfig {
         QMAKE_POST_LINK += $$quote(&& cp libs/macx/licenses/$${FILE} $$_LICENSEDIR)
     }
 
-
     # fixup all library paths..
     _BASE = $$quote(@executable_path/../lib)
-    _QTCORE = $$quote(QtCore.framework/Versions/4/QtCore)
-    _QTGUI = $$quote(QtGui.framework/Versions/4/QtGui)
+    _QTCORE = $$quote($${_QT_LIBDIR}/QtCore.framework/Versions/5/QtCore)
+    _QTGUI = $$quote($${_QT_LIBDIR}/QtGui.framework/Versions/5/QtGui)
+    _QTWIDGETS = $$quote($${_QT_LIBDIR}/QtWidgets.framework/Versions/5/QtWidgets)
+    _QTPRINTSUPPORT = $$quote($${_QT_LIBDIR}/QtPrintSupport.framework/Versions/5/QtPrintSupport)
     isEmpty(_TARGET_ARCH) {
         _INSTALL_NAME_TOOL = install_name_tool
     } else {
@@ -365,11 +369,26 @@ macx:!force_pkgconfig {
     }
     QMAKE_POST_LINK += $$quote( && $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_BASEDIR/MacOS/$$TARGET_MAC && \
         $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -change $$_QTWIDGETS $$_BASE/QtWidgets $$_BASEDIR/MacOS/$$TARGET_MAC && \
+        $$_INSTALL_NAME_TOOL -id $$_BASE/QtCore $$_LIBDIR/QtCore && \
         $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_LIBDIR/QtGui && \
+        $$_INSTALL_NAME_TOOL -id $$_BASE/QtGui $$_LIBDIR/QtGui && \
+        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_LIBDIR/QtWidgets && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_LIBDIR/QtWidgets && \
+        $$_INSTALL_NAME_TOOL -id $$_BASE/QtWidgets $$_LIBDIR/QtWidgets && \
+        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_LIBDIR/QtPrintSupport && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_LIBDIR/QtPrintSupport && \
+        $$_INSTALL_NAME_TOOL -change $$_QTWIDGETS $$_BASE/QtWidgets $$_LIBDIR/QtPrintSupport && \
+        $$_INSTALL_NAME_TOOL -id $$_BASE/QtPrintSupport $$_LIBDIR/QtPrintSupport && \
         $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_PLUGINDIR/imageformats/libqmng.dylib && \
         $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_PLUGINDIR/imageformats/libqmng.dylib && \
         $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_PLUGINDIR/accessible/libqtaccessiblewidgets.dylib && \
-        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_PLUGINDIR/accessible/libqtaccessiblewidgets.dylib)
+        $$_INSTALL_NAME_TOOL -change $$_QTWIDGETS $$_BASE/QtWidgets $$_PLUGINDIR/accessible/libqtaccessiblewidgets.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_PLUGINDIR/accessible/libqtaccessiblewidgets.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_QTCORE $$_BASE/QtCore $$_PLUGINDIR/platforms/libqcocoa.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_QTWIDGETS $$_BASE/QtWidgets $$_PLUGINDIR/platforms/libqcocoa.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_QTGUI $$_BASE/QtGui $$_PLUGINDIR/platforms/libqcocoa.dylib && \
+        $$_INSTALL_NAME_TOOL -change $$_QTPRINTSUPPORT $$_BASE/QtPrintSupport $$_PLUGINDIR/platforms/libqcocoa.dylib)
 
     build_installer {
         # the productbuild path doesn't work pre 10.8
