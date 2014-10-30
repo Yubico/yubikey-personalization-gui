@@ -324,12 +324,17 @@ macx:!force_pkgconfig {
     # The application icon
     ICON = resources/mac/Yubico.icns
 
+    BUILD = $$(BUILD)
+    isEmpty(BUILD) {
+        BUILD = 1
+    }
+
     # Copy required resources into the final app bundle and
     # put the current version number into Info.plist
     QMAKE_POST_LINK += $$quote(mkdir -p $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources && \
         cp -R resources/mac/Yubico.icns $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources/. && \
         cp resources/mac/qt.conf $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources/. && \
-        sed -e \'s|@@version@@|$$VERSION|g\' \
+        sed -e \'s|@@version@@|$$VERSION|g\' -e \'s|@@build@@|$$BUILD|g\' \
         < resources/mac/Info.plist.in  > $${DESTDIR}/$${TARGET_MAC}.app/Contents/Info.plist)
 
     # copy the QT libraries into our bundle

@@ -17,7 +17,7 @@
         <key>CFBundleVersion</key>
         <string>@@version@@</string>
         <key>CFBundleShortVersionString</key>
-        <string>@@version@@</string>
+        <string>@@version@@-@@build@@</string>
         <key>LSApplicationCategoryType</key>
         <string>public.app-category.utilities</string>
 </dict>
