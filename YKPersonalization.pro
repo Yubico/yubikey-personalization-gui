@@ -11,7 +11,6 @@ APP_NAME        = $$quote(YubiKey Personalization Tool)
 # common configuration
 #
 QT             += core gui
-QTPLUGIN       += qtaccessiblewidgets qmng
 TEMPLATE        = app
 TARGET          = yubikey-personalization-gui
 
