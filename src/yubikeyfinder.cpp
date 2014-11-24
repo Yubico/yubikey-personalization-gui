@@ -56,22 +56,22 @@ const unsigned int YubiKeyFinder::FEATURE_MATRIX[][2] = {
 };
 
 // when a featureset should be excluded from versions (NEO, I'm looking at you.)
-const unsigned int YubiKeyFinder::FEATURE_MATRIX_EXCLUDE[][2] = {
-    { YK_VERSION(2,1,4), YK_VERSION(2,2,0) }, //Feature_MultipleConfigurations
-    { YK_VERSION(2,1,4), YK_VERSION(2,2,0) }, //Feature_ProtectConfiguration2
-    { YK_VERSION(2,1,4), YK_VERSION(2,1,8) }, //Feature_StaticPassword
-    { YK_VERSION(2,1,4), YK_VERSION(2,1,8) }, //Feature_ScanCodeMode
-    { 0, 0 },                                 //Feature_ShortTicket
-    { YK_VERSION(2,1,4), YK_VERSION(2,1,8) }, //Feature_StrongPwd
-    { 0, 0 },                                 //Feature_OathHotp
-    { 0, 0 },                                 //Feature_ChallengeResponse
-    { 0, 0 },                                 //Feature_SerialNumber
-    { 0, 0 },                                 //Feature_MovingFactor
-    { 0, 0 },                                 //Feature_ChallengeResponseFixed
-    { 0, 0 },                                 //Feature_Updatable
-    { YK_VERSION(2,2,0), YK_VERSION(3,0,0) }, //Feature_Ndef
-    { YK_VERSION(3,0,0), YK_VERSION(3,1,0) }, //Feature_LedInvert
-    { 0, 0 },                                 //Feature_U2F
+const unsigned int YubiKeyFinder::FEATURE_MATRIX_EXCLUDE[][4] = {
+    { YK_VERSION(2,1,4), YK_VERSION(2,2,0), 0, 0 }, //Feature_MultipleConfigurations
+    { YK_VERSION(2,1,4), YK_VERSION(2,2,0), 0, 0 }, //Feature_ProtectConfiguration2
+    { YK_VERSION(2,1,4), YK_VERSION(2,1,8), 0, 0 }, //Feature_StaticPassword
+    { YK_VERSION(2,1,4), YK_VERSION(2,1,8), 0, 0 }, //Feature_ScanCodeMode
+    { 0, 0, 0, 0 },                                 //Feature_ShortTicket
+    { YK_VERSION(2,1,4), YK_VERSION(2,1,8), 0, 0 }, //Feature_StrongPwd
+    { 0, 0, 0, 0 },                                 //Feature_OathHotp
+    { 0, 0, 0, 0 },                                 //Feature_ChallengeResponse
+    { 0, 0, 0, 0 },                                 //Feature_SerialNumber
+    { 0, 0, 0, 0 },                                 //Feature_MovingFactor
+    { 0, 0, 0, 0 },                                 //Feature_ChallengeResponseFixed
+    { 0, 0, 0, 0 },                                 //Feature_Updatable
+    { YK_VERSION(2,2,0), YK_VERSION(3,0,0), YK_VERSION(4,0,0), YK_VERSION(4,1,0) }, //Feature_Ndef
+    { YK_VERSION(3,0,0), YK_VERSION(3,1,0), 0, 0 }, //Feature_LedInvert
+    { 0, 0, 0, 0 },                                 //Feature_U2F
 };
 
 YubiKeyFinder::YubiKeyFinder() {
@@ -128,11 +128,17 @@ bool YubiKeyFinder::checkFeatureSupport(Feature feature) {
                 m_version >= FEATURE_MATRIX[feature][0] &&
                 (FEATURE_MATRIX[feature][1] == 0 || m_version < FEATURE_MATRIX[feature][1])
                 );
-        if(supported)
+        if(supported) {
             if(FEATURE_MATRIX_EXCLUDE[feature][0] != 0)
                 if(m_version >= FEATURE_MATRIX_EXCLUDE[feature][0])
                     if(m_version < FEATURE_MATRIX_EXCLUDE[feature][1])
                         return false;
+            if(FEATURE_MATRIX_EXCLUDE[feature][2] != 0)
+                if(m_version >= FEATURE_MATRIX_EXCLUDE[feature][2])
+                    if(m_version < FEATURE_MATRIX_EXCLUDE[feature][3])
+                        return false;
+        }
+
         return supported;
     }
     return false;
