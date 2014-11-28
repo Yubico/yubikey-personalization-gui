@@ -17,5 +17,6 @@
         <file>images/yubikey_devel.png</file>
         <file>images/neo_production.png</file>
         <file>images/neo_production_33.png</file>
+        <file>images/plus.mng</file>
     </qresource>
 </RCC>
