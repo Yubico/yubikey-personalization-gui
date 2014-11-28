@@ -1,7 +1,7 @@
-This is a short walkthrough for creating mng files compatible with the libmng
-shipped with Qt (jng turned off). Export the mng from gimp, then run convert
-from imagemagick on it, like:
+Getting the MNG files in correct format can be a bit of work. Currently the
+method that seems to work best is to build with the convert tool from
+Imagemagick like:
 
-$ convert foo.mng bar.mng
+$ convert -delay 200 first.png second.png output.mng
 
-This strips the jng information from it and it'll work with bundled libmng.
+The trick is that the resulting image must be without JNG formatting.
