@@ -399,7 +399,7 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
         } else if(version < YK_VERSION(3,3,0)){
             pixmap.load(":/res/images/neo_production.png");
         } else if(version < YK_VERSION(4,0,0)) {
-            pixmap.load(":/res/images/neo_production_33.png");
+            movie->setFileName(":/res/images/neo_production_33.mng");
         } else if(version < YK_VERSION(4,1,0)) {
             movie->setFileName(":/res/images/plus.mng");
         } else {
