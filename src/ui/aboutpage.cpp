@@ -56,14 +56,6 @@ AboutPage::AboutPage(QWidget *parent) :
 
     ui->libVersionLbl->setText(libVersion);
 
-    //Set build timestamp
-    QString buildTS = tr("%1 %2 %3").
-                      arg(ui->buildTimestampLbl->text()).
-                      arg(__DATE__).
-                      arg(__TIME__);
-
-    ui->buildTimestampLbl->setText(buildTS);
-
     //Set copyright
     QString copyright = tr("%1. %2.").
                         arg(trUtf8(VER_LEGALCOPYRIGHT)).

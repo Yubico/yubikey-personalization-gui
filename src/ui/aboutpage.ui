@@ -242,7 +242,7 @@ color: rgb(5, 67, 168);</string>
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>330</y>
+      <y>355</y>
       <width>240</width>
       <height>20</height>
      </rect>
@@ -271,25 +271,6 @@ color: rgb(5, 67, 168);</string>
     </property>
     <property name="textFormat">
      <enum>Qt::RichText</enum>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="buildTimestampLbl">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>380</y>
-      <width>240</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>Build Timestamp:</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -575,7 +556,7 @@ color: rgb(5, 67, 168);</string>
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>355</y>
+      <y>380</y>
       <width>240</width>
       <height>20</height>
      </rect>
