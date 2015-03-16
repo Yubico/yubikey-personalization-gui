@@ -228,7 +228,7 @@ win32 {
         libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}bin$${DIR_SEPARATOR}libyubikey-0.dll \
         libs$${DIR_SEPARATOR}win32$${DIR_SEPARATOR}bin$${DIR_SEPARATOR}libykpers-1-1.dll
 
-    isEmpty(TIMESTAMP_URL):TIMESTAMP_URL = 'http://timestamp.verisign.com/scripts/timstamp.dll'
+    isEmpty(TIMESTAMP_URL):TIMESTAMP_URL = 'http://tsa.starfieldtech.com'
 
     LIB_FILES_WIN = $${LIB_FILES}
     TARGET_DIR_WIN = $${DESTDIR}
