@@ -12,3 +12,6 @@ object_script.yubikey-personalization-gui.Release
 yubikey-personalization-gui-*.tar.gz
 yubikey-personalization-gui-*.tar.gz.sig
 .DS_Store
+lib/debug/
+lib/release/
+tests/tests.pro.user
