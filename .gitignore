@@ -15,3 +15,8 @@ yubikey-personalization-gui-*.tar.gz.sig
 lib/debug/
 lib/release/
 tests/tests.pro.user
+lib/scanedit.o
+lib/yubikeyutil.o
+tests/moc_scanedittest.cpp
+tests/moc_scanedittest.o
+tests/scanedittest.o
