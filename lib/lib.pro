@@ -6,7 +6,7 @@ CONFIG         += exceptions staticlib
 
 CONFIG(debug, debug|release) {
     message("Debug build")
-    CONFIG     += console no_lflags_merge
+    CONFIG     += console no_lflags_merge warn_on
     DESTDIR = debug/
 } else {
     message("Release build")

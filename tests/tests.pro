@@ -7,6 +7,10 @@ CONFIG += console
 CONFIG -= app_bundle
 INCLUDEPATH += ../lib
 
+!nosilent {
+    CONFIG         += silent
+}
+
 CONFIG(debug, debug|release) {
     TARGET_DIR  = ..$${DIR_SEPARATOR}build$${DIR_SEPARATOR}debug
     CONFIG     += console no_lflags_merge

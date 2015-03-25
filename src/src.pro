@@ -28,14 +28,14 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 }
 
 !nosilent {
- #   CONFIG         += silent
+    CONFIG         += silent
 }
 
 CONFIG(debug, debug|release) {
     message("Debug build")
     TARGET_DIR  = ..$${DIR_SEPARATOR}build$${DIR_SEPARATOR}debug
 
-    CONFIG     += console no_lflags_merge
+    CONFIG     += console no_lflags_merge warn_on
     LIBS += $$quote(-L../lib/debug) -llib
 } else {
     message("Release build")
