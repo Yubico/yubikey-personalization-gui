@@ -44,6 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QSettings>
 #include <QSignalMapper>
 #include <QClipboard>
+#include <QApplication>
 
 #include <ykpers.h>
 #include <ykdef.h>

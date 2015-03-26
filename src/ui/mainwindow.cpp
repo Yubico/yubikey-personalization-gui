@@ -47,6 +47,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QDebug>
 #include <QSignalMapper>
 #include <QSettings>
+#include <QAction>
+#include <QApplication>
 
 #include "common.h"
 #include "version.h"

@@ -39,6 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QDateTime>
 #include <QDebug>
 #include <QSignalMapper>
+#include <QTableWidgetItem>
 
 ChalRespPage::ChalRespPage(QWidget *parent) :
         QStackedWidget(parent),

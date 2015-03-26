@@ -40,6 +40,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QDebug>
 #include <QSettings>
 #include <QSignalMapper>
+#include <QRegExpValidator>
 
 #include "common.h"
 
