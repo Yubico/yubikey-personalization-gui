@@ -29,6 +29,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "yubikeyconfig.h"
 #include "yubikeyutil.h"
 
+#include <QSettings>
+
 YubiKeyConfig::YubiKeyConfig() {
     m_mode = Mode_YubicoOtp;
     m_accMode = Acc_None;

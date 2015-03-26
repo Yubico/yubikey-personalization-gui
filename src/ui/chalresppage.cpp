@@ -35,6 +35,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "yubikeyutil.h"
 #include "common.h"
 
+#include <QSettings>
+#include <QDateTime>
+#include <QDebug>
+#include <QSignalMapper>
+
 ChalRespPage::ChalRespPage(QWidget *parent) :
         QStackedWidget(parent),
         ui(new Ui::ChalRespPage)

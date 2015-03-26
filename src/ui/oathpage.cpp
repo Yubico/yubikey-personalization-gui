@@ -34,6 +34,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui/helpbox.h"
 #include "ui/confirmbox.h"
 
+#include <QDebug>
+#include <QSignalMapper>
+#include <QSettings>
+#include <QDateTime>
+
 #define OATH_FIXED_NUMERIC      0
 #define OATH_FIXED_MODHEX1      1
 #define OATH_FIXED_MODHEX2      2

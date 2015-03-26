@@ -42,6 +42,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui/diagnostics.h"
 #include "ui/helpbox.h"
 
+#include <QMovie>
+#include <QClipboard>
+#include <QDebug>
+#include <QSignalMapper>
+#include <QSettings>
+
 #include "common.h"
 #include "version.h"
 

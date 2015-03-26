@@ -36,6 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <QSettings>
 #include <QLineEdit>
+#include <QSignalMapper>
 
 #define CONFIG_PROTECTION_DISABLED  0
 #define CONFIG_PROTECTION_ENABLE    1

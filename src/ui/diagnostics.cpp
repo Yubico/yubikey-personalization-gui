@@ -35,6 +35,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <ykpers-version.h>
 
+#include <QDateTime>
+
 
 Diagnostics::Diagnostics(QWidget *parent) :
         QDialog(parent),

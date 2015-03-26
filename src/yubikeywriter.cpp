@@ -35,6 +35,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <ykdef.h>
 
 #include <QFileDialog>
+#include <QDebug>
+#include <QSettings>
 
 #define EXPORT_FILENAME_DEF "export.ycfg"
 

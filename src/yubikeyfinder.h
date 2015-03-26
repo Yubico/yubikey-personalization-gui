@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define YUBIKEYFINDER_H
 
 #include <QObject>
+#include <QTimer>
 
 extern "C" {
 #include <ykpers.h>

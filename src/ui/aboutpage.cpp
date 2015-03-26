@@ -36,6 +36,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <ykpers-version.h>
 
+#include <QUrl>
+#include <QDesktopServices>
+#include <QSignalMapper>
+
 AboutPage::AboutPage(QWidget *parent) :
         QWidget(parent),
         ui(new Ui::AboutPage)

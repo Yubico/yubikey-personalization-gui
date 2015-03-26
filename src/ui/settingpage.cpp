@@ -37,6 +37,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <QFile>
 #include <QMessageBox>
+#include <QDebug>
+#include <QSettings>
+#include <QSignalMapper>
 
 #include "common.h"
 

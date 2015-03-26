@@ -29,11 +29,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef COMMON_H
 #define COMMON_H
 
-#include <QtGui>
-
 #include "otpdef.h"
 
-typedef std::vector<int>::size_type size_t;
+//typedef std::vector<int>::size_type size_t;
 
 enum AccMode {
   Acc_None,

@@ -40,6 +40,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "staticpage.h"
 
 #include <QFileDialog>
+#include <QDebug>
+#include <QSettings>
+#include <QSignalMapper>
+#include <QClipboard>
 
 #include <ykpers.h>
 #include <ykdef.h>

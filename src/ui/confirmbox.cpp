@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui_confirmbox.h"
 
 #include <QMessageBox>
+#include <QSettings>
 
 #include "common.h"
 
