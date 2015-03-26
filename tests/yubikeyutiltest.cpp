@@ -26,19 +26,38 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "scanedittest.h"
-#include "scanedit.h"
+#include "yubikeyutiltest.h"
+#include "yubikeyutil.h"
 
-void TestScanEdit::testCharacters() {
-  QString characters = "abcdefghijklmnopqrstuvwxyz1234567890\\n\\t -=[]\\\\;'`,./";
-  QString scancodes = ScanEdit::textToScanCodes(characters);
-  QString result = ScanEdit::scanCodesToText(scancodes);
-  QCOMPARE(result, characters);
+
+void TestYubikeyUtil::testHexDecode() {
+   QString hex = "666f6f";
+   unsigned char result[3];
+   size_t len = 3;
+   unsigned char expect[] = "foo";
+   YubiKeyUtil::qstrHexDecode(result, &len, hex);
+   QVERIFY(memcmp(expect, result, 3) == 0);
 }
 
-void TestScanEdit::testCharacters2() {
-  QString characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:\"~<>?";
-  QString scancodes = ScanEdit::textToScanCodes(characters);
-  QString result = ScanEdit::scanCodesToText(scancodes);
-  QCOMPARE(result, characters);
+void TestYubikeyUtil::testHexEncode() {
+   unsigned char string[] = "foo";
+   QString expect = "666f6f";
+   QString result = YubiKeyUtil::qstrHexEncode(string, 3);
+   QCOMPARE(expect, result);
+}
+
+void TestYubikeyUtil::testModhexDecode() {
+   QString modhex = "hhhvhv";
+   unsigned char result[3];
+   size_t len = 3;
+   unsigned char expect[] = "foo";
+   YubiKeyUtil::qstrModhexDecode(result, &len, modhex);
+   QVERIFY(memcmp(expect, result, 3) == 0);
+}
+
+void TestYubikeyUtil::testModhexEncode() {
+   unsigned char string[] = "foo";
+   QString expect = "hhhvhv";
+   QString result = YubiKeyUtil::qstrModhexEncode(string, 3);
+   QCOMPARE(expect, result);
 }

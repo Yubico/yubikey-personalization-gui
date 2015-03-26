@@ -20,3 +20,7 @@ lib/yubikeyutil.o
 tests/moc_scanedittest.cpp
 tests/moc_scanedittest.o
 tests/scanedittest.o
+tests/moc_yubikeyutiltest.cpp
+tests/moc_yubikeyutiltest.o
+tests/test.o
+tests/yubikeyutiltest.o

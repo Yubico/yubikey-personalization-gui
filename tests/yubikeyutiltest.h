@@ -26,19 +26,14 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "scanedittest.h"
-#include "scanedit.h"
+#include <QtTest/QtTest>
 
-void TestScanEdit::testCharacters() {
-  QString characters = "abcdefghijklmnopqrstuvwxyz1234567890\\n\\t -=[]\\\\;'`,./";
-  QString scancodes = ScanEdit::textToScanCodes(characters);
-  QString result = ScanEdit::scanCodesToText(scancodes);
-  QCOMPARE(result, characters);
-}
+class TestYubikeyUtil : public QObject {
+  Q_OBJECT
 
-void TestScanEdit::testCharacters2() {
-  QString characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:\"~<>?";
-  QString scancodes = ScanEdit::textToScanCodes(characters);
-  QString result = ScanEdit::scanCodesToText(scancodes);
-  QCOMPARE(result, characters);
-}
+private slots:
+  void testHexDecode();
+  void testHexEncode();
+  void testModhexDecode();
+  void testModhexEncode();
+};
