@@ -29,6 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "yubikeyutil.h"
 #include <yubikey.h>
 #include <QDebug>
+#include <QRegExp>
 #ifdef Q_OS_WIN
 #include "crandom.h"
 #endif
