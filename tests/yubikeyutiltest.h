@@ -36,4 +36,10 @@ private slots:
   void testHexEncode();
   void testModhexDecode();
   void testModhexEncode();
+  void testGetNextHex1();
+  void testGetNextHex2();
+  void testGetNextHex3();
+  void testGetNextModhex1();
+  void testGetNextModhex2();
+  void testGetNextModhex3();
 };

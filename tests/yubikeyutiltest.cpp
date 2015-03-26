@@ -31,33 +31,59 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 void TestYubikeyUtil::testHexDecode() {
-   QString hex = "666f6f";
    unsigned char result[3];
    size_t len = 3;
    unsigned char expect[] = "foo";
-   YubiKeyUtil::qstrHexDecode(result, &len, hex);
+   YubiKeyUtil::qstrHexDecode(result, &len, QString("666f6f"));
    QVERIFY(memcmp(expect, result, 3) == 0);
 }
 
 void TestYubikeyUtil::testHexEncode() {
    unsigned char string[] = "foo";
-   QString expect = "666f6f";
    QString result = YubiKeyUtil::qstrHexEncode(string, 3);
-   QCOMPARE(expect, result);
+   QCOMPARE(result, QString("666f6f"));
 }
 
 void TestYubikeyUtil::testModhexDecode() {
-   QString modhex = "hhhvhv";
    unsigned char result[3];
    size_t len = 3;
    unsigned char expect[] = "foo";
-   YubiKeyUtil::qstrModhexDecode(result, &len, modhex);
+   YubiKeyUtil::qstrModhexDecode(result, &len, QString("hhhvhv"));
    QVERIFY(memcmp(expect, result, 3) == 0);
 }
 
 void TestYubikeyUtil::testModhexEncode() {
    unsigned char string[] = "foo";
-   QString expect = "hhhvhv";
    QString result = YubiKeyUtil::qstrModhexEncode(string, 3);
-   QCOMPARE(expect, result);
+   QCOMPARE(result, QString("hhhvhv"));
+}
+
+void TestYubikeyUtil::testGetNextHex1() {
+   QString result = YubiKeyUtil::getNextHex(6, "000000", GEN_SCHEME_INCR);
+   QCOMPARE(result, QString("000001"));
+}
+
+void TestYubikeyUtil::testGetNextHex2() {
+   QString result = YubiKeyUtil::getNextHex(6, "0fffff", GEN_SCHEME_INCR);
+   QCOMPARE(result, QString("100000"));
+}
+
+void TestYubikeyUtil::testGetNextHex3() {
+   QString result = YubiKeyUtil::getNextHex(6, "ffffff", GEN_SCHEME_INCR);
+   QCOMPARE(result, QString("000000"));
+}
+
+void TestYubikeyUtil::testGetNextModhex1() {
+   QString result = YubiKeyUtil::getNextModhex(6, "cccccc", GEN_SCHEME_INCR);
+   QCOMPARE(result, QString("cccccb"));
+}
+
+void TestYubikeyUtil::testGetNextModhex2() {
+   QString result = YubiKeyUtil::getNextModhex(6, "cvvvvv", GEN_SCHEME_INCR);
+   QCOMPARE(result, QString("bccccc"));
+}
+
+void TestYubikeyUtil::testGetNextModhex3() {
+   QString result = YubiKeyUtil::getNextModhex(6, "vvvvvv", GEN_SCHEME_INCR);
+   QCOMPARE(result, QString("cccccc"));
 }
