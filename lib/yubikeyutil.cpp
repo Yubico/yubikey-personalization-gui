@@ -343,56 +343,14 @@ QString YubiKeyUtil::getNextHex(size_t resultLen,
 
 QString YubiKeyUtil::getNextModhex(size_t resultLen,
                                    const QString &str, int scheme) {
-    QString result("");
-
-    qDebug() << "str = " << str
-            << " len = " << str.length();
-
-    switch(scheme) {
-    case GEN_SCHEME_FIXED:
-        result = str;
-        break;
-
-    case GEN_SCHEME_INCR:
-        {
-            //Modhex clean
-            QString modhexStr(str);
-            qstrModhexClean(&modhexStr, resultLen);
-
-            //Modhex decode
-            unsigned char modhexDecoded[MAX_SIZE];
-            size_t modhexDecodedLen = 0;
-            memset(&modhexDecoded, 0, sizeof(modhexDecoded));
-
-            qstrModhexDecode(modhexDecoded, &modhexDecodedLen, modhexStr);
-            if(modhexDecodedLen <= 0) {
-                break;
-            }
-
-            qDebug() << "modhexDecoded = " << QString((char*)modhexDecoded)
-                    << " len = " << modhexDecodedLen;
-
-            //Increment
-            for (int i = modhexDecodedLen; i--; ) {
-                if (++modhexDecoded[i]) {
-                    break;
-                }
-            }
-
-            //Modhex encode
-            result = qstrModhexEncode(modhexDecoded, modhexDecodedLen);
-
-            qDebug() << "modhexEncoded = " << result
-                    << " len = " << result.size();
-        }
-        break;
-
-    case GEN_SCHEME_RAND:
-        result = generateRandomModhex(resultLen);
-        break;
-    }
-
-    return result;
+    unsigned char result[resultLen];
+    size_t len;
+    QString hex;
+    qstrModhexDecode(result, &len, str);
+    hex = qstrHexEncode(result, len);
+    hex = getNextHex(resultLen, hex, scheme);
+    qstrHexDecode(result, &len, hex);
+    return qstrModhexEncode(result, len);
 }
 
 void YubiKeyUtil::hexdump(void *buffer, int size) {
