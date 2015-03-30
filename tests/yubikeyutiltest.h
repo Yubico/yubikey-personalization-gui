@@ -42,4 +42,6 @@ private slots:
   void testGetNextModhex1();
   void testGetNextModhex2();
   void testGetNextModhex3();
+  void testGenerateRandomHex();
+  void testGenerateRandomModhex();
 };

@@ -87,3 +87,15 @@ void TestYubikeyUtil::testGetNextModhex3() {
    QString result = YubiKeyUtil::getNextModhex(6, "vvvvvv", GEN_SCHEME_INCR);
    QCOMPARE(result, QString("cccccc"));
 }
+
+void TestYubikeyUtil::testGenerateRandomHex() {
+   QString first = YubiKeyUtil::generateRandomHex(16);
+   QString second = YubiKeyUtil::generateRandomHex(16);
+   QVERIFY(first != second);
+}
+
+void TestYubikeyUtil::testGenerateRandomModhex() {
+   QString first = YubiKeyUtil::generateRandomModhex(16);
+   QString second = YubiKeyUtil::generateRandomModhex(16);
+   QVERIFY(first != second);
+}
