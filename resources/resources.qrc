@@ -18,5 +18,6 @@
         <file>images/neo_production.png</file>
         <file>images/neo_production_33.mng</file>
         <file>images/plus.mng</file>
+        <file>images/edge.mng</file>
     </qresource>
 </RCC>
