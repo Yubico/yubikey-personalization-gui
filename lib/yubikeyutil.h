@@ -92,9 +92,6 @@ public:
     static QString getNextModhex(
             size_t resultLen,
             const QString &str, int scheme);
-
-    static void hexdump
-            (void *buffer, int size);
 };
 
 #endif // YUBIKEYUTIL_H

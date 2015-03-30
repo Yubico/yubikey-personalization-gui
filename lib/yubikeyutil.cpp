@@ -352,14 +352,3 @@ QString YubiKeyUtil::getNextModhex(size_t resultLen,
     qstrHexDecode(result, &len, hex);
     return qstrModhexEncode(result, len);
 }
-
-void YubiKeyUtil::hexdump(void *buffer, int size) {
-    unsigned char *p = (unsigned char *)buffer;
-    int i;
-    for (i = 0; i < size; i++) {
-        fprintf(stderr, "\\x%02x", *p);
-        p++;
-    }
-    fprintf(stderr, "\n");
-    fflush(stderr);
-}
