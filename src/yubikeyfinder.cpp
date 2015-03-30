@@ -69,7 +69,7 @@ const unsigned int YubiKeyFinder::FEATURE_MATRIX_EXCLUDE[][4] = {
     { 0, 0, 0, 0 },                                 //Feature_MovingFactor
     { 0, 0, 0, 0 },                                 //Feature_ChallengeResponseFixed
     { 0, 0, 0, 0 },                                 //Feature_Updatable
-    { YK_VERSION(2,2,0), YK_VERSION(3,0,0), YK_VERSION(4,0,0), YK_VERSION(4,1,0) }, //Feature_Ndef
+    { YK_VERSION(2,2,0), YK_VERSION(3,0,0), YK_VERSION(4,0,0), YK_VERSION(4,9,0) }, //Feature_Ndef
     { YK_VERSION(3,0,0), YK_VERSION(3,1,0), 0, 0 }, //Feature_LedInvert
     { 0, 0, 0, 0 },                                 //Feature_U2F
 };
