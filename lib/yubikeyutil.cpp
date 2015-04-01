@@ -49,12 +49,12 @@ int YubiKeyUtil::hexModhexDecode(unsigned char *result, size_t *resultLen,
     *resultLen = strLen / 2;
     if (modhex) {
         if (yubikey_modhex_p(str)) {
-            yubikey_modhex_decode((char *)result, str, strLen);
+            yubikey_modhex_decode((char *)result, str, *resultLen);
             return 1;
         }
     } else {
         if (yubikey_hex_p(str)) {
-            yubikey_hex_decode((char *)result, str, strLen);
+            yubikey_hex_decode((char *)result, str, *resultLen);
             return 1;
         }
     }
