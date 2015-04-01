@@ -1,6 +1,12 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.20 (unreleased)
+* Version 3.1.20 (released 2015-04-01)
+
+** Some new pictures.
+
+** Add some simplistic unit tests.
+
+** Fix bug with translation of | in scancode to text.
 
 * Version 3.1.19 (released 2015-03-13)
 
