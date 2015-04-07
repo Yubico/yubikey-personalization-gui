@@ -120,10 +120,11 @@ OTHER_FILES += \
     ../resources/mac/Info.plist.in \
     ../resources/mac/qt.conf
 
+QMAKE_CXXFLAGS += $$(CXXFLAGS) $$(CPPFLAGS)
+QMAKE_LFLAGS += $$(LDFLAGS)
+
 cross {
     message("Doing a cross platform build..")
-    QMAKE_CXXFLAGS += $$(CXXFLAGS)
-    QMAKE_LFLAGS += $$(LDFLAGS)
 
     # pickup compiler from environment
     isEmpty(TARGET_ARCH) {
@@ -267,9 +268,6 @@ unix:!macx|force_pkgconfig {
 
     CONFIG += link_pkgconfig
     PKGCONFIG += ykpers-1
-
-    QMAKE_CXXFLAGS += $$(CXXFLAGS)
-    QMAKE_LFLAGS += $$(LDFLAGS)
 }
 
 #

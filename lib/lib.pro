@@ -24,10 +24,11 @@ SOURCES += \
     scanedit.cpp \
     yubikeyutil.cpp
 
+QMAKE_CXXFLAGS += $$(CXXFLAGS) $$(CPPFLAGS)
+QMAKE_LFLAGS += $$(LDFLAGS)
+
 cross {
     message("Doing a cross platform build..")
-    QMAKE_CXXFLAGS += $$(CXXFLAGS)
-    QMAKE_LFLAGS += $$(LDFLAGS)
 
     # pickup compiler from environment
     isEmpty(TARGET_ARCH) {
