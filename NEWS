@@ -1,6 +1,12 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.21 (unreleased)
+* Version 3.1.21 (released 2015-05-29)
+
+** Fix a bug where decode functions where given src length instead of result.
+
+** Fix an issue where test cases where installed by default.
+
+** Update pictures.
 
 * Version 3.1.20 (released 2015-04-01)
 
