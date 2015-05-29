@@ -23,8 +23,8 @@ CONFIG(debug, debug|release) {
 
 DESTDIR         = "$$TARGET_DIR"
 
-QMAKE_CXXFLAGS += $$(CXXFLAGS) $$(CPPFLAGS)
-QMAKE_LFLAGS += $$(LDFLAGS)
+QMAKE_CXXFLAGS += $$CXXFLAGS $$CPPFLAGS
+QMAKE_LFLAGS += $$LDFLAGS
 
 cross {
     message("Doing a cross platform build..")

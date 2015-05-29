@@ -120,8 +120,8 @@ OTHER_FILES += \
     ../resources/mac/Info.plist.in \
     ../resources/mac/qt.conf
 
-QMAKE_CXXFLAGS += $$(CXXFLAGS) $$(CPPFLAGS)
-QMAKE_LFLAGS += $$(LDFLAGS)
+QMAKE_CXXFLAGS += $$CXXFLAGS $$CPPFLAGS
+QMAKE_LFLAGS += $$LDFLAGS
 
 cross {
     message("Doing a cross platform build..")
