@@ -50,7 +50,7 @@ Dependencies
 yubikey-personalization-gui depends on version 1.14.0 or higher of
 libykpers.
 
-When building on Windows and mac you will need a binary buikd of
+When building on Windows and mac you will need a binary build of
 https://developers.yubico.com/yubikey-personalization[yubikey-personalization],
 the contents should then be places in libs/win32, libs/win64 and libs/macx
 respectively.
