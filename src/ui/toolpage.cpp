@@ -219,7 +219,7 @@ void ToolPage::resetConverterPage() {
 void ToolPage::convert(int updatedIndex, QString txt) {
     unsigned char buf[32];
     memset(buf, 0, sizeof(buf));
-    size_t bufLen = 0;
+    size_t bufLen;
 
     switch(updatedIndex) {
     case 0: //Hex

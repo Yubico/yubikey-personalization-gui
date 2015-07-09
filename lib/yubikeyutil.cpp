@@ -43,6 +43,7 @@ int YubiKeyUtil::hexModhexDecode(unsigned char *result, size_t *resultLen,
                                  bool modhex)
 {
     if ((strLen % 2 != 0) || (strLen < minSize) || (strLen > maxSize)) {
+        *resultLen = 0;
         return -1;
     }
 
@@ -80,7 +81,7 @@ int YubiKeyUtil::hexModhexEncode(char *result, size_t *resultLen,
 
 QString YubiKeyUtil::qstrHexEncode(const unsigned char *str, size_t strLen) {
     char result[strLen * 2 + 1];
-    size_t resultLen = 0;
+    size_t resultLen;
     memset(&result, 0, sizeof(result));
 
     int rc = hexModhexEncode(result, &resultLen, str, strLen, false);
@@ -113,7 +114,7 @@ void YubiKeyUtil::qstrHexDecode(unsigned char *result, size_t *resultLen,
 
 QString YubiKeyUtil::qstrModhexEncode(const unsigned char *str, size_t strLen) {
     char result[strLen * 2 + 1];
-    size_t resultLen = 0;
+    size_t resultLen;
     memset(&result, 0, sizeof(result));
 
     int rc = hexModhexEncode(result, &resultLen, str, strLen, true);
@@ -130,6 +131,7 @@ void YubiKeyUtil::qstrModhexDecode(unsigned char *result, size_t *resultLen,
                                    const QString &str) {
 
     if(str.size() % 2 != 0) {
+        *resultLen = 0;
         return;
     }
 
@@ -147,6 +149,7 @@ void YubiKeyUtil::qstrModhexDecode(unsigned char *result, size_t *resultLen,
 void YubiKeyUtil::qstrDecDecode(unsigned char *result, size_t *resultLen,
                                 const QString &str) {
     if(str.size() % 2 != 0) {
+        *resultLen = 0;
         return;
     }
 
@@ -347,6 +350,9 @@ QString YubiKeyUtil::getNextModhex(size_t resultLen,
     size_t len;
     QString hex;
     qstrModhexDecode(result, &len, str);
+    if(len == 0) {
+        return "";
+    }
     hex = qstrHexEncode(result, len);
     hex = getNextHex(resultLen, hex, scheme);
     qstrHexDecode(result, &len, hex);
