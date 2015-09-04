@@ -38,7 +38,7 @@ extern "C" {
 
 #include "common.h"
 
-#define YK_VERSION(MAJOR, MINOR, BUILD) (MAJOR * 100 + MINOR * 10 + BUILD)
+#define YK_VERSION(MAJOR, MINOR, BUILD) (MAJOR * 10000 + MINOR * 1000 + BUILD)
 
 class YubiKeyFinder : public QObject {
     Q_OBJECT
