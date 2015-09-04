@@ -1,7 +1,7 @@
 QT += testlib
 QT -= gui
-SOURCES += test.cpp scanedittest.cpp yubikeyutiltest.cpp
-HEADERS += scanedittest.h yubikeyutiltest.h
+SOURCES += test.cpp scanedittest.cpp yubikeyutiltest.cpp versiontest.cpp
+HEADERS += scanedittest.h yubikeyutiltest.h versiontest.h
 CONFIG += testcase no_testcase_installs
 CONFIG += console
 CONFIG -= app_bundle

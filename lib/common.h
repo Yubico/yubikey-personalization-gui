@@ -31,6 +31,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "otpdef.h"
 
+#define YK_VERSION(MAJOR, MINOR, BUILD) (MAJOR * 10000 + MINOR * 100 + BUILD)
+
 //typedef std::vector<int>::size_type size_t;
 
 enum AccMode {

@@ -24,3 +24,6 @@ tests/moc_yubikeyutiltest.cpp
 tests/moc_yubikeyutiltest.o
 tests/test.o
 tests/yubikeyutiltest.o
+tests/versiontest.o
+tests/moc_versiontest.cpp
+tests/moc_versiontest.o
