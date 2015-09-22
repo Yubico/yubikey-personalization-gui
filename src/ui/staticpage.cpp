@@ -77,8 +77,6 @@ StaticPage::StaticPage(QWidget *parent) :
 
     QRegExp rx("^[a-f0-9]{0,72}$");
     ui->quickScanCodesTxt->setValidator(new QRegExpValidator(rx, this));
-
-    scanedit = new UsScanEdit();
 }
 
 StaticPage::~StaticPage() {
@@ -88,7 +86,10 @@ StaticPage::~StaticPage() {
     }
 
     delete ui;
-    delete scanedit;
+
+    if(scanedit) {
+        delete scanedit;
+    }
 }
 
 /*
@@ -1131,13 +1132,20 @@ void StaticPage::on_quickKeymapCmb_currentIndexChanged(int index)
     ui->quickStaticTxt->clear();
     ui->quickScanCodesTxt->clear();
 
-    if (index == 0) {
+    if(scanedit) {
+        delete scanedit;
+        scanedit = NULL;
+    }
+    if (index == KEYMAP_NONE) {
         ui->quickStaticTxt->setEnabled(false);
         ui->quickScanCodesTxt->setEnabled(false);
         ui->quickInsertTabBtn->setEnabled(false);
         ui->quickClearBtn->setEnabled(false);
     }
     else {
+        if(index == KEYMAP_US) {
+            scanedit = new UsScanEdit();
+        }
         ui->quickStaticTxt->setEnabled(true);
         ui->quickScanCodesTxt->setEnabled(true);
         ui->quickInsertTabBtn->setEnabled(true);

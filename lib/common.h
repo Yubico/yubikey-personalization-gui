@@ -66,6 +66,9 @@ enum AccMode {
 #define ERR_MORETHANONE             3
 #define ERR_UNKNOWN_FIRMWARE        4
 
+#define KEYMAP_NONE                 0
+#define KEYMAP_US                   1
+
 //Timeouts
 
 #define TIMEOUT_STATUS              10000
