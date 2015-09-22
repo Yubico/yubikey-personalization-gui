@@ -43,6 +43,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QRegExpValidator>
 #include <QTableWidgetItem>
 
+#include "us-scanedit.h"
+
 #include "common.h"
 
 StaticPage::StaticPage(QWidget *parent) :
@@ -76,7 +78,7 @@ StaticPage::StaticPage(QWidget *parent) :
     QRegExp rx("^[a-f0-9]{0,72}$");
     ui->quickScanCodesTxt->setValidator(new QRegExpValidator(rx, this));
 
-    scanedit = new ScanEdit();
+    scanedit = new UsScanEdit();
 }
 
 StaticPage::~StaticPage() {

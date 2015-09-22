@@ -16,12 +16,14 @@ CONFIG(debug, debug|release) {
 
 HEADERS += \
     scanedit.h \
+    us-scanedit.h \
     common.h \
     otpdef.h \
     yubikeyutil.h
 
 SOURCES += \
     scanedit.cpp \
+    us-scanedit.cpp \
     yubikeyutil.cpp
 
 QMAKE_CXXFLAGS += $$CXXFLAGS $$CPPFLAGS

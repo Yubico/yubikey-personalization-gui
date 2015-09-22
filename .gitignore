@@ -16,6 +16,7 @@ lib/debug/
 lib/release/
 tests/tests.pro.user
 lib/scanedit.o
+lib/us-scanedit.o
 lib/yubikeyutil.o
 tests/moc_scanedittest.cpp
 tests/moc_scanedittest.o

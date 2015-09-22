@@ -26,20 +26,15 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SCANEDIT_H
-#define SCANEDIT_H
+#ifndef US_SCANEDIT_H
+#define US_SCANEDIT_H
 
-#include <QString>
-#include <QMap>
+#include "scanedit.h"
 
-class ScanEdit
+class UsScanEdit : public ScanEdit
 {
-protected:
-    QMap<int, int> keyMap;
-    ScanEdit();
 public:
-    QString textToScanCodes(const QString text);
-    QString scanCodesToText(const QString scanCode);
+    UsScanEdit();
 };
 
-#endif // SCANEDIT_H
+#endif // US_SCANEDIT_H
