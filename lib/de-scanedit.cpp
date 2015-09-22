@@ -62,9 +62,9 @@ DeScanEdit::DeScanEdit() {
     keyMap[0x39] = 0x26; /* 9 */
     keyMap[0x3a] = 0x37 | SHIFT; /* : */
     keyMap[0x3b] = 0x36 | SHIFT; /* ; */
-    keyMap[0x3c] = 0; /* < */
+    keyMap[0x3c] = 0x64; /* < */
     keyMap[0x3d] = 0x27 | SHIFT; /* = */
-    keyMap[0x3e] = 0; /* > */
+    keyMap[0x3e] = 0x64 | SHIFT; /* > */
     keyMap[0x3f] = 0x2d | SHIFT; /* ? */
     keyMap[0x40] = 0; /* @ */
     keyMap[0x41] = 0x04 | SHIFT; /* A */
