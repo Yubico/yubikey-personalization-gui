@@ -54,9 +54,9 @@ QString ScanEdit::textToScanCodes(const QString text) {
                 }
             }
         }
+        code = keyMap.value(ch.toLatin1() & 0xff, 0);
         if(code == 0) {
-            qDebug() << "evaluating" << ch << (int)ch.toLatin1();
-            code = keyMap.value(ch.toLatin1() & 0xff, 0);
+            qDebug() << "no mapping for" << ch;
         }
         QString hexTxt = YubiKeyUtil::qstrHexEncode(&code, 1);
         scanCode += hexTxt;
