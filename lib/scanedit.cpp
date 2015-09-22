@@ -30,6 +30,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "yubikeyutil.h"
 #include "common.h"
 
+#include <QDebug>
+
 ScanEdit::ScanEdit() {
 }
 
@@ -53,7 +55,8 @@ QString ScanEdit::textToScanCodes(const QString text) {
             }
         }
         if(code == 0) {
-            code = keyMap.value(ch.toLatin1(), 0);
+            qDebug() << "evaluating" << ch << (int)ch.toLatin1();
+            code = keyMap.value(ch.toLatin1() & 0xff, 0);
         }
         QString hexTxt = YubiKeyUtil::qstrHexEncode(&code, 1);
         scanCode += hexTxt;

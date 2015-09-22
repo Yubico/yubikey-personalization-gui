@@ -44,6 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QTableWidgetItem>
 
 #include "us-scanedit.h"
+#include "de-scanedit.h"
 
 #include "common.h"
 
@@ -1145,6 +1146,8 @@ void StaticPage::on_quickKeymapCmb_currentIndexChanged(int index)
     else {
         if(index == KEYMAP_US) {
             scanedit = new UsScanEdit();
+        } else if(index == KEYMAP_DE) {
+            scanedit = new DeScanEdit();
         }
         ui->quickStaticTxt->setEnabled(true);
         ui->quickScanCodesTxt->setEnabled(true);
