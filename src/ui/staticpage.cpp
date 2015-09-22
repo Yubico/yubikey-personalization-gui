@@ -33,7 +33,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ui_staticpage.h"
 #include "ui/helpbox.h"
 #include "ui/confirmbox.h"
-#include "scanedit.h"
 
 #include <QDesktopServices>
 #include <QMessageBox>
@@ -76,6 +75,8 @@ StaticPage::StaticPage(QWidget *parent) :
 
     QRegExp rx("^[a-f0-9]{0,72}$");
     ui->quickScanCodesTxt->setValidator(new QRegExpValidator(rx, this));
+
+    scanedit = new ScanEdit();
 }
 
 StaticPage::~StaticPage() {
@@ -83,7 +84,9 @@ StaticPage::~StaticPage() {
         delete m_ykConfig;
         m_ykConfig = 0;
     }
+
     delete ui;
+    delete scanedit;
 }
 
 /*
@@ -335,7 +338,7 @@ void StaticPage::on_quickHideParams_clicked(bool checked) {
 }
 
 void StaticPage::on_quickStaticTxt_textEdited(const QString &txt) {
-    QString scanCodes = ScanEdit::textToScanCodes(txt);
+    QString scanCodes = scanedit->textToScanCodes(txt);
     ui->quickScanCodesTxt->setText(scanCodes);
 
     int len = scanCodes.length() / 2;
@@ -1096,7 +1099,7 @@ void StaticPage::advUpdateResults(bool written, const QString &msg) {
 }
 
 void StaticPage::on_quickScanCodesTxt_textEdited(const QString &scanCodes) {
-    QString text = ScanEdit::scanCodesToText(scanCodes);
+    QString text = scanedit->scanCodesToText(scanCodes);
     ui->quickStaticTxt->setText(text);
 
     int len = scanCodes.length() / 2;

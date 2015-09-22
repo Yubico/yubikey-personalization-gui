@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <QStackedWidget>
 #include "yubikeyconfig.h"
+#include "scanedit.h"
 
 namespace Ui {
     class StaticPage;
@@ -67,6 +68,8 @@ private:
     bool m_ready;
 
     bool m_keyPresent;
+
+    ScanEdit *scanedit;
 
 public slots:
     void loadSettings();

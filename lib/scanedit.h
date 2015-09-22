@@ -30,12 +30,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SCANEDIT_H
 
 #include <QString>
+#include <QMap>
 
 class ScanEdit
 {
+private:
+    QMap<int, int> keyMap;
 public:
-    static QString textToScanCodes(const QString text);
-    static QString scanCodesToText(const QString scanCode);
+    ScanEdit();
+    QString textToScanCodes(const QString text);
+    QString scanCodesToText(const QString scanCode);
 };
 
 #endif // SCANEDIT_H
