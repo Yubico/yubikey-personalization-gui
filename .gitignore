@@ -29,3 +29,5 @@ tests/yubikeyutiltest.o
 tests/versiontest.o
 tests/moc_versiontest.cpp
 tests/moc_versiontest.o
+tests/release/
+tests/debug/
