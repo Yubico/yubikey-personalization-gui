@@ -1,6 +1,12 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.22 (unreleased)
+* Version 3.1.22 (released 2015-09-25)
+
+** Fix so version detection works correctly for versions with more than one digit.
+
+** Add german keyboard layout.
+
+** Fixup neo-n picture
 
 * Version 3.1.21 (released 2015-05-29)
 
