@@ -78,6 +78,8 @@ StaticPage::StaticPage(QWidget *parent) :
 
     QRegExp rx("^[a-f0-9]{0,72}$");
     ui->quickScanCodesTxt->setValidator(new QRegExpValidator(rx, this));
+
+    scanedit = NULL;
 }
 
 StaticPage::~StaticPage() {
