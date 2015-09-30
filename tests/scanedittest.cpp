@@ -30,19 +30,17 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "us-scanedit.h"
 
 void TestScanEdit::testCharacters() {
-  ScanEdit *edit = new UsScanEdit();
+  ScanEdit edit = UsScanEdit();
   QString characters = "abcdefghijklmnopqrstuvwxyz1234567890\\n\\t -=[]\\\\;'`,./";
-  QString scancodes = edit->textToScanCodes(characters);
-  QString result = edit->scanCodesToText(scancodes);
-  delete edit;
+  QString scancodes = edit.textToScanCodes(characters);
+  QString result = edit.scanCodesToText(scancodes);
   QCOMPARE(result, characters);
 }
 
 void TestScanEdit::testCharacters2() {
-  ScanEdit *edit = new UsScanEdit();
+  ScanEdit edit = UsScanEdit();
   QString characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:\"~<>?";
-  QString scancodes = edit->textToScanCodes(characters);
-  QString result = edit->scanCodesToText(scancodes);
-  delete edit;
+  QString scancodes = edit.textToScanCodes(characters);
+  QString result = edit.scanCodesToText(scancodes);
   QCOMPARE(result, characters);
 }
