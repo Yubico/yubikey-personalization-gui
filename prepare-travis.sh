@@ -18,4 +18,4 @@ else
   LDFLAGS="-L/usr/local/lib"
 fi
 
-$QMAKE 'CONFIG += debug nosilent force_pkgconfig' "CXXFLAGS=$CXXFLAGS" "LDFLAGS=$LDFLAGS" "QT_CONFIG -= no-pkg-config"
+$QMAKE 'CONFIG += debug nosilent force_pkgconfig' "CXXFLAGS=$CXXFLAGS" "LDFLAGS=$LDFLAGS"

@@ -267,6 +267,7 @@ unix:!macx|force_pkgconfig {
     LIBS += -lyubikey
 
     CONFIG += link_pkgconfig
+    QT_CONFIG -= no-pkg-config
     PKGCONFIG += ykpers-1
 }
 
