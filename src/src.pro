@@ -269,11 +269,17 @@ unix:!macx|force_pkgconfig {
     CONFIG += link_pkgconfig
     QT_CONFIG -= no-pkg-config
     PKGCONFIG += ykpers-1
+    macx {
+        QMAKE_INFO_PLIST = ../resources/mac/Info.plist.in
+    }
 }
 
 #
 # MacOS X specific configuration
 #
+macx {
+    ICON = ../resources/mac/Yubico.icns
+}
 macx:!force_pkgconfig {
     message("Mac build")
 
@@ -306,9 +312,6 @@ macx:!force_pkgconfig {
     TARGET = $$APP_NAME
     TARGET_MAC = $${TARGET}
     TARGET_MAC ~= s, ,\\ ,g
-
-    # The application icon
-    ICON = ../resources/mac/Yubico.icns
 
     BUILD = $$(BUILD)
     isEmpty(BUILD) {
