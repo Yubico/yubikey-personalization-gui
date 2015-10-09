@@ -15,9 +15,9 @@
         <key>CFBundleName</key>
         <string>YubiKey Personalization Tool</string>
         <key>CFBundleVersion</key>
-        <string>@@version@@</string>
+        <string>@FULL_VERSION@</string>
         <key>CFBundleShortVersionString</key>
-        <string>@@version@@</string>
+        <string>@SHORT_VERSION@</string>
         <key>LSApplicationCategoryType</key>
         <string>public.app-category.utilities</string>
 </dict>
