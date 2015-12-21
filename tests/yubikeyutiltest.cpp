@@ -73,6 +73,11 @@ void TestYubikeyUtil::testGetNextHex3() {
    QCOMPARE(result, QString("000000"));
 }
 
+void TestYubikeyUtil::testGetNextHex4() {
+   QString result = YubiKeyUtil::getNextHex(6, "  1 fff f f  ", GEN_SCHEME_INCR);
+   QCOMPARE(result, QString("200000"));
+}
+
 void TestYubikeyUtil::testGetNextModhex1() {
    QString result = YubiKeyUtil::getNextModhex(6, "cccccc", GEN_SCHEME_INCR);
    QCOMPARE(result, QString("cccccb"));
@@ -90,7 +95,12 @@ void TestYubikeyUtil::testGetNextModhex3() {
 
 void TestYubikeyUtil::testGetNextModhex4() {
    QString result = YubiKeyUtil::getNextModhex(6, "vvvvv", GEN_SCHEME_INCR);
-   QCOMPARE(result, QString(""));
+   QCOMPARE(result, QString("vvvvvb"));
+}
+
+void TestYubikeyUtil::testGetNextModhex5() {
+   QString result = YubiKeyUtil::getNextModhex(6, " cc cc cc    ", GEN_SCHEME_INCR);
+   QCOMPARE(result, QString("cccccb"));
 }
 
 void TestYubikeyUtil::testGenerateRandomHex() {

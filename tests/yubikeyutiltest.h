@@ -39,10 +39,12 @@ private slots:
   void testGetNextHex1();
   void testGetNextHex2();
   void testGetNextHex3();
+  void testGetNextHex4();
   void testGetNextModhex1();
   void testGetNextModhex2();
   void testGetNextModhex3();
   void testGetNextModhex4();
+  void testGetNextModhex5();
   void testGenerateRandomHex();
   void testGenerateRandomModhex();
 };
