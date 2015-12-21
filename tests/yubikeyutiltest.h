@@ -40,11 +40,13 @@ private slots:
   void testGetNextHex2();
   void testGetNextHex3();
   void testGetNextHex4();
+  void testGetNextHexRand();
   void testGetNextModhex1();
   void testGetNextModhex2();
   void testGetNextModhex3();
   void testGetNextModhex4();
   void testGetNextModhex5();
+  void testGetNextModhexRand();
   void testGenerateRandomHex();
   void testGenerateRandomModhex();
 };
