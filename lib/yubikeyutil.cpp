@@ -346,10 +346,12 @@ QString YubiKeyUtil::getNextHex(size_t resultLen,
 
 QString YubiKeyUtil::getNextModhex(size_t resultLen,
                                    const QString &str, int scheme) {
+    QString tmpStr(str);
+    qstrModhexClean(&tmpStr, resultLen);
     unsigned char result[resultLen];
     size_t len;
     QString hex;
-    qstrModhexDecode(result, &len, str);
+    qstrModhexDecode(result, &len, tmpStr);
     if(len == 0) {
         return "";
     }
