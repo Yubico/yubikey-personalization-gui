@@ -321,7 +321,7 @@ macx:!force_pkgconfig {
     QMAKE_POST_LINK += $$quote(mkdir -p $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources && \
         cp -R ../resources/mac/Yubico.icns $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources/. && \
         cp ../resources/mac/qt.conf $${DESTDIR}/$${TARGET_MAC}.app/Contents/Resources/. && \
-        sed -e \'s|@SHORT_VERSION@|$$VERSION|g\' -s \'s|@FULL_VERSION@|$$VERSION|g\' \
+        sed -e \'s|@SHORT_VERSION@|$$VERSION|g\' -e \'s|@FULL_VERSION@|$$VERSION|g\' \
         < ../resources/mac/Info.plist.in  > $${DESTDIR}/$${TARGET_MAC}.app/Contents/Info.plist)
 
     # copy the QT libraries into our bundle
