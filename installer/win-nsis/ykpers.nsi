@@ -69,15 +69,13 @@ Section "YubiKey Personalization Tool"
   FILE ../../build/release/libgcc_s_dw2-1.dll
   FILE ../../build/release/libwinpthread-1.dll
   FILE ../../build/release/libstdc++-6.dll
-  FILE ../../build/release/icuin52.dll
-  FILE ../../build/release/icuuc52.dll
-  FILE ../../build/release/icudt52.dll
+  FILE ../../build/release/icuin54.dll
+  FILE ../../build/release/icuuc54.dll
+  FILE ../../build/release/icudt54.dll
   SetOutPath $INSTDIR\licenses
   FILE /r ../../build/release/licenses/
   SetOutPath $INSTDIR\imageformats
   FILE ../../build/release/qmng.dll
-  SetOutPath $INSTDIR\accessible
-  FILE ../../build/release/qtaccessiblewidgets.dll
   SetOutPath $INSTDIR\platforms
   FILE ../../build/release/qwindows.dll
 SectionEnd
@@ -133,12 +131,11 @@ Section "Uninstall"
   DELETE "$INSTDIR\libgcc_s_dw2-1.dll"
   DELETE "$INSTDIR\libwinpthread-1.dll"
   DELETE "$INSTDIR\libstdc++-6.dll"
-  DELETE "$INSTDIR\icuin52.dll"
-  DELETE "$INSTDIR\icuuc52.dll"
-  DELETE "$INSTDIR\icudt52.dll"
+  DELETE "$INSTDIR\icuin54.dll"
+  DELETE "$INSTDIR\icuuc54.dll"
+  DELETE "$INSTDIR\icudt54.dll"
   DELETE "$INSTDIR\licenses\*"
   DELETE "$INSTDIR\imageformats\qmng.dll"
-  DELETE "$INSTDIR\accessible\qtaccessiblewidgets.dll"
   DELETE "$INSTDIR\platforms\qwindows.dll"
 
   RMDir "$INSTDIR\licenses"
