@@ -397,8 +397,6 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
             movie->setFileName(":/res/images/V2-0-2-1-animated.mng");
         } else if(version < YK_VERSION(2,2,0)) { // NEO Beta
             pixmap.load(":/res/images/neo_transparent.png");
-        } else if(version % 10 == 9){
-            pixmap.load(":/res/images/yubikey_devel.png");
         } else if(version < YK_VERSION(2,3,0)){
             movie->setFileName(":/res/images/v2-2-animated.mng");
         } else if(version < YK_VERSION(3,0,0)){
