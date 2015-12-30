@@ -391,7 +391,9 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
 
         QPixmap pixmap;
         QMovie *movie = new QMovie();
-        if(version < YK_VERSION(2,0,0)) {
+        if(version == 0) {
+            pixmap.load(":/res/images/blank.png");
+        } else if(version < YK_VERSION(2,0,0)) {
             pixmap.load(":/res/images/v1-3-not-animated.png");
         } else if(version < YK_VERSION(2,1,4)) {
             movie->setFileName(":/res/images/V2-0-2-1-animated.mng");
