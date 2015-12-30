@@ -405,12 +405,12 @@ macx:!force_pkgconfig {
     build_installer {
         # the productbuild path doesn't work pre 10.8
         for_store {
-            _INSTALLER_CMD = "productbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --component $${DESTDIR}/$${TARGET_MAC}.app /Applications/ $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg"
+            _INSTALLER_CMD = "productbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --component $${DESTDIR}/$${TARGET_MAC}.app /Applications/ $${DESTDIR}/yubikey-personalization-gui-$${VERSION}.pkg"
         } else {
             _INSTALLER_CMD = "rm -rf $${DESTDIR}/temp && \
                 mkdir -p $${DESTDIR}/temp/ && \
                 cp -R $${DESTDIR}/$${TARGET_MAC}.app $${DESTDIR}/temp && \
-                pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --root ${DESTDIR}/temp/ --component-plist ../resources/mac/installer.plist --install-location '/Applications/' $${DESTDIR}/$${TARGET_MAC}-$${VERSION}.pkg"
+                pkgbuild --sign \'$$INSTALLER_SIGN_IDENTITY\' --root ${DESTDIR}/temp/ --component-plist ../resources/mac/installer.plist --install-location '/Applications/' $${DESTDIR}/yubikey-personalization-gui-$${VERSION}.pkg"
         }
         QMAKE_POST_LINK += $$quote( && \
             codesign --deep -s \'$$PACKAGE_SIGN_IDENTITY\' $${DESTDIR}/$${TARGET_MAC}.app \
