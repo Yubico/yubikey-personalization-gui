@@ -1,6 +1,14 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.24 (unreleased)
+* Version 3.1.24 (released 2016-01-04)
+
+** Fix a bug when doing consecutive programming that reset id to 0.
+
+** Fix a case where the image on an old key might be shown momentarily.
+
+** Updated icons and images.
+
+** Updated mac and windows builds to qt 5.5.
 
 * Version 3.1.23 (released 2015-10-01)
 
