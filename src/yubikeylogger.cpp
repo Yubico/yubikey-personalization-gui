@@ -27,6 +27,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "yubikeylogger.h"
+#include "yubikeyutil.h"
 #include <QFile>
 #include <QDir>
 #include <QDebug>
@@ -54,6 +55,7 @@ struct logging_st YubiKeyLogger::logging_map[] = {
     { "timestampLocal", NULL, STRING, YubiKeyLogger::resolve_timestamp },
     { "configSlot", "configSlot", INT, NULL },
     { "pubIdTxt", "pubIdTxt", STRING, NULL },
+    { "oathIdTxt", NULL, STRING, YubiKeyLogger::resolve_oathId },
     { "pvtIdTxt", "pvtIdTxt", STRING, NULL },
     { "secretKeyTxt", "secretKeyTxt", STRING, NULL },
     { "secretKeyB64", NULL, STRING, YubiKeyLogger::resolve_secretKeyB64 },
@@ -180,7 +182,11 @@ void YubiKeyLogger::logConfig(YubiKeyConfig *ykConfig) {
             m_started = false;
         }
         format += "<KeyPackage><DeviceInfo><Manufacturer>Yubico</Manufacturer><SerialNo>{serial}</SerialNo></DeviceInfo>";
-        format += "<CryptoModuleInfo><Id>{configSlot}</Id></CryptoModuleInfo><Key Id=\"{serial}:{configSlot}\"";
+        QString id = "\"{serial}:{configSlot}\"";
+        if(ykConfig->programmingMode() == YubiKeyConfig::Mode_OathHotp && ykConfig->pubIdTxt().length() > 0) {
+            id = "\"{oathIdTxt}\"";
+        }
+        format += "<CryptoModuleInfo><Id>{configSlot}</Id></CryptoModuleInfo><Key Id=" + id;
         if(ykConfig->programmingMode() == YubiKeyConfig::Mode_YubicoOtp) {
             format += " Algorithm=\"http://www.yubico.com/#yubikey-aes\"><AlgorithmParameters><ResponseFormat Length=\"{tokenLength}\" Encoding=\"ALPHANUMERIC\"/></AlgorithmParameters>";
         } else if(ykConfig->programmingMode() == YubiKeyConfig::Mode_OathHotp) {
@@ -322,6 +328,27 @@ QString YubiKeyLogger::resolve_accessCode(YubiKeyConfig *ykConfig, QString name)
         code = ykConfig->newAccessCodeTxt();
     }
     return code.rightJustified(12, '0');
+}
+
+QString YubiKeyLogger::resolve_oathId(YubiKeyConfig *ykConfig, QString name __attribute__((unused))) {
+    QString id;
+    QString pubid = ykConfig->pubIdTxt();
+    int modhex = 0;
+    if(ykConfig->oathFixedModhex()) {
+        modhex = pubid.length();
+    } else if(ykConfig->oathFixedModhex1()) {
+        modhex = 2;
+    } else if(ykConfig->oathFixedModhex2()) {
+        modhex = 4;
+    }
+    id = pubid.left(modhex);
+    if(modhex != pubid.length()) {
+        unsigned char buf[16];
+        size_t len = sizeof(buf);
+        YubiKeyUtil::qstrModhexDecode(buf, &len, pubid.right(pubid.length() - modhex));
+        id += YubiKeyUtil::qstrHexEncode(buf, len);
+    }
+    return id;
 }
 
 QStringList YubiKeyLogger::getLogNames() {

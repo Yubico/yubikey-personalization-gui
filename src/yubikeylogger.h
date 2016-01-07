@@ -93,6 +93,7 @@ private:
     static QString resolve_secretKeyB64(YubiKeyConfig*, QString);
     static QString resolve_tokenLength(YubiKeyConfig*, QString);
     static QString resolve_accessCode(YubiKeyConfig*, QString);
+    static QString resolve_oathId(YubiKeyConfig*, QString);
 };
 
 #endif // YUBIKEYLOGGER_H
