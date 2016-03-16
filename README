@@ -33,7 +33,7 @@ Building from Git
 You may check out the sources using Git with the following command:
 
 -----------
-  $ git clone git://github.com/Yubico/yubikey-personalization-gui.git
+  $ git clone https://github.com/Yubico/yubikey-personalization-gui.git
 -----------
 
 This will create a directory 'yubikey-personalization-gui'. Enter the
