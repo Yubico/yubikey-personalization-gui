@@ -371,6 +371,6 @@ void YubiKeyLogger::logString(QString string) {
     }
 
     QTextStream out(file);
-    out << string << endl;
+    out << string << "\n";
     file->flush();
 }
