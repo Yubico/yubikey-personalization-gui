@@ -409,7 +409,7 @@ void MainWindow::keyFound(bool found, bool* featuresMatrix, int error) {
             movie->setFileName(":/res/images/neo_production_33.mng");
         } else if(version < YK_VERSION(4,1,0)) {
             movie->setFileName(":/res/images/plus.mng");
-        } else if(version < YK_VERSION(4,3,0)) {
+        } else if(version < YK_VERSION(4,9,9)) {
             movie->setFileName(":/res/images/edge.mng");
         } else {
             pixmap.load(":/res/images/blank.png");
