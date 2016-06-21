@@ -1,8 +1,0 @@
-Author: Yubico
-Basename: yubikey-personalization-gui
-Homepage: http://opensource.yubico.com/yubikey-personalization-gui/
-License: BSD-2-Clause
-Name: yubikey-personalization-gui
-Project: yubikey-personalization-gui
-Summary: Qt based Cross-Platform YubiKey Personalization Tool
-Yubico-Category: YubiKey Personalization
