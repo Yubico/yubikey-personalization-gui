@@ -96,7 +96,7 @@ Section
   WriteRegExpandStr HKLM $MYTMP "InstallLocation" "$INSTDIR"
   WriteRegStr       HKLM $MYTMP "DisplayVersion"  "${YKPERS_VERSION}"
   WriteRegStr       HKLM $MYTMP "Publisher"       "Yubico AB"
-  WriteRegStr       HKLM $MYTMP "URLInfoAbout"    "http://www.yubico.com"
+  WriteRegStr       HKLM $MYTMP "URLInfoAbout"    "https://www.yubico.com"
   WriteRegDWORD     HKLM $MYTMP "NoModify"        "1"
   WriteRegDWORD     HKLM $MYTMP "NoRepair"        "1"
 
@@ -108,7 +108,7 @@ Section
   CreateShortCut "YubiKey Personalization Tool.lnk" "$INSTDIR\yubikey-personalization-gui.exe" "" "$INSTDIR\yubikey-personalization-gui.exe" 0
   CreateShortCut "Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 1
   WriteINIStr "$SMPROGRAMS\$STARTMENU_FOLDER\Yubico Web page.url" \
-                   "InternetShortcut" "URL" "http://www.yubico.com/"
+                   "InternetShortcut" "URL" "https://www.yubico.com/"
 !insertmacro MUI_STARTMENU_WRITE_END
 
 SectionEnd

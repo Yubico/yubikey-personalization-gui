@@ -57,7 +57,7 @@ enum AccMode {
 #define WRITE_CONFIG                0
 #define EXPORT_CONFIG               1
 
-#define SUPPORT_LINK                "http://yubi.co/forum"
+#define SUPPORT_LINK                "https://yubi.co/forum"
 #define UPLOAD_URL                  "<!doctype html><html><head><title>upload</title></head><body><form action='https://upload.yubico.com/' method='post' id='upload'>serial:<input name='serial' value='%1'/><br/>prefix:<input name='prefix' value='%2'/><br/>uid:<input name='uid' value='%3'/><br/>aeskey:<input name='aeskey' value='%4'/><br/><input type='submit'/><br/></form><script type='text/javascript'>window.onload=function(){document.getElementById('upload').submit();}</script></body></html>"
 
 #define ERR_NOERROR                 0

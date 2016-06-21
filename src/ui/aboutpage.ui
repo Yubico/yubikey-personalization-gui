@@ -475,7 +475,7 @@ text-decoration: underline;
 color: rgb(5, 67, 168);</string>
     </property>
     <property name="text">
-     <string>http://yubi.co/forum</string>
+     <string>https://yubi.co/forum</string>
     </property>
     <property name="autoDefault">
      <bool>false</bool>
