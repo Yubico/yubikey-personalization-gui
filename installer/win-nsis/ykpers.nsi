@@ -1,4 +1,5 @@
 !include "MUI.nsh"
+!include "LogicLib.nsh"
 
 ; The name of the installer
 Name "YubiKey Personalization Tool"
@@ -20,14 +21,16 @@ Var MUI_TEMP
 Var STARTMENU_FOLDER
 
 Function .onInit
-    # Display splash image.
-    InitPluginsDir
+    # Display splash image it not silent
+    ${IfNot} ${Silent}
+        InitPluginsDir
 
-    File /oname=$PLUGINSDIR\splash.bmp "yubico_logo.bmp"
-    advsplash::show 1000 600 400 0x04025C $PLUGINSDIR\splash
-    Pop $0
+        File /oname=$PLUGINSDIR\splash.bmp "yubico_logo.bmp"
+        advsplash::show 1000 600 400 0x04025C $PLUGINSDIR\splash
+        Pop $0
 
-    Delete $PLUGINSDIR\splash.bmp
+        Delete $PLUGINSDIR\splash.bmp
+    ${EndIf}
 FunctionEnd
 
 ;Interface Settings
