@@ -46,6 +46,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "us-scanedit.h"
 #include "de-scanedit.h"
 #include "bepo-scanedit.h"
+#include "fr-scanedit.h"
 
 #include "common.h"
 
@@ -1159,6 +1160,8 @@ void StaticPage::on_quickKeymapCmb_currentIndexChanged(int index)
             scanedit = new DeScanEdit();
         } else if(index == KEYMAP_BEPO) {
             scanedit = new BepoScanEdit();
+        } else if(index == KEYMAP_FR) {
+            scanedit = new FrScanEdit();
         }
         ui->quickStaticTxt->setEnabled(true);
         ui->quickScanCodesTxt->setEnabled(true);
