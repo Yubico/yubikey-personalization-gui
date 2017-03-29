@@ -69,6 +69,7 @@ enum AccMode {
 #define KEYMAP_NONE                 0
 #define KEYMAP_US                   1
 #define KEYMAP_DE                   2
+#define KEYMAP_BEPO                 3
 
 //Timeouts
 
