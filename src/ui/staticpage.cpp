@@ -77,8 +77,11 @@ StaticPage::StaticPage(QWidget *parent) :
     ui->quickResultsWidget->resizeColumnsToContents();
     ui->advResultsWidget->resizeColumnsToContents();
 
-    QRegExp rx("^[a-f0-9]{0,72}$");
-    ui->quickScanCodesTxt->setValidator(new QRegExpValidator(rx, this));
+    QRegExp rxScan("[A-Fa-f0-9]{,76}");
+    ui->quickScanCodesTxt->setValidator(new QRegExpValidator(rxScan, this));
+
+    QRegExp rxText("(\\\\[tn\\\\]|.){,38}");
+    ui->quickStaticTxt->setValidator(new QRegExpValidator(rxText, this));
 
     scanedit = NULL;
 }
@@ -358,6 +361,9 @@ void StaticPage::on_quickStaticTxt_textEdited(const QString &txt) {
 }
 
 void StaticPage::on_quickStaticTxt_returnPressed() {
+    if (!ui->quickInsertTabBtn->isEnabled())
+        return;
+
     QString text = ui->quickStaticTxt->text() + "\\n";
     ui->quickStaticTxt->setText(text);
     on_quickStaticTxt_textEdited(text);
