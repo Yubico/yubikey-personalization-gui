@@ -691,6 +691,11 @@ font-weight: bold;</string>
        <string>B&#201;PO Keyboard</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>FR Keyboard</string>
+      </property>
+     </item>
    </widget>
    </widget>
    <widget class="QGroupBox" name="quickActionsBox">
