@@ -1,6 +1,14 @@
 yubikey-personalization-gui NEWS -- History of user-visible changes.     -*- outline -*-
 
-* Version 3.1.25 (unreleased)
+* Version 3.1.25 (released 2018-01-16)
+
+** Add oath ID for PSKC output.
+
+** Add french scancode options.
+
+** Improve static password format validation.
+
+** Change about heading.
 
 * Version 3.1.24 (released 2016-01-04)
 
