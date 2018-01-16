@@ -310,7 +310,7 @@ font-weight: bold;
 color: rgb(140, 192, 65);</string>
     </property>
     <property name="text">
-     <string>The Swiss Army Knife for the YubiKey</string>
+     <string>YubiKey Personalization Tool</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
