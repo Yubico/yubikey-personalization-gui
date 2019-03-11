@@ -57,9 +57,15 @@ respectively.
 
 For building on linux pkg-config is used to find these dependencies.
 
+On Debian-based systems (Ubuntu, Linux Mint, etc.):
 -----------
-  $ sudo apt-get install libusb-1.0-0-dev qt4-qmake libykpers-1-dev \
+  $ sudo apt install libusb-1.0-0-dev qt4-qmake libykpers-1-dev \
       libyubikey-dev libqt4-dev
+-----------
+
+On Fedora-based systems (RHEL, CentOS, Scientific Linux, etc.):
+-----------
+  $ sudo dnf install libusb-devel qt-devel libykpers-devel libyubikey-devel
 -----------
 
 Command-line build
@@ -67,8 +73,14 @@ Command-line build
 
 Run these commands:
 
+On Debian-based systems:
 -----------
   $ qmake && make
+-----------
+
+On Fedora-based systems:
+-----------
+  $ qmake-qt4 && make
 -----------
 
 Cross Compiling from Linux
