@@ -20,6 +20,7 @@ HEADERS += \
     de-scanedit.h \
     bepo-scanedit.h \
     fr-scanedit.h \
+    it-scanedit.h \
     common.h \
     otpdef.h \
     yubikeyutil.h
@@ -30,6 +31,7 @@ SOURCES += \
     de-scanedit.cpp \
     bepo-scanedit.cpp \
     fr-scanedit.cpp \
+    it-scanedit.cpp \
     yubikeyutil.cpp
 
 QMAKE_CXXFLAGS += $$CXXFLAGS $$CPPFLAGS
