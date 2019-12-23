@@ -85,7 +85,7 @@ YubiKeyLogger::~YubiKeyLogger() {
 
 QFile *YubiKeyLogger::getLogFile() {
     if(m_logFile == NULL) {
-        m_filename = QFileDialog::getSaveFileName(NULL, tr("Select Log File"), m_filename, tr("Comma-sepparated values (*.csv)"), NULL, QFileDialog::DontConfirmOverwrite);
+        m_filename = QFileDialog::getSaveFileName(NULL, tr("Select Log File"), m_filename, tr("Comma-separated values (*.csv)"), NULL, QFileDialog::DontConfirmOverwrite);
         if(m_filename.isEmpty()) {
             qDebug() << "No filename returned for logging";
             return NULL;
