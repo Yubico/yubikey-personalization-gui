@@ -67,7 +67,7 @@ On Debian-based systems (Ubuntu, Linux Mint, etc.):
 
 On Fedora-based systems (RHEL, CentOS, Scientific Linux, etc.):
 -----------
-  $ sudo dnf install libusb-devel qt-devel libykpers-devel libyubikey-devel
+  $ sudo dnf install libusb-devel qt-devel ykpers-devel libyubikey-devel
 -----------
 
 Command-line build
