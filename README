@@ -2,7 +2,7 @@ Qt based Cross-Platform YubiKey Personalization Tool
 ====================================================
 See the file COPYING for copyright and license statement.
 
-NOTE: This project is no longer under active development. Use YubiKey Manager (https://developers.yubico.com/yubikey-manager-qt/[GUI], https://developers.yubico.com/yubikey-manager/[CLI]) to configure a YubiKey device.
+NOTE: This project is no longer under active development. Use https://github.com/Yubico/yubikey-manager/[YubiKey Manager CLI] or https://github.com/Yubico/yubioath-flutter/[Yubico Authenticator] to configure a YubiKey device.
 
 Introduction
 ------------
